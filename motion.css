@@ -1,0 +1,94 @@
+/* Meristem motion primitives — production-hardened, brand-neutral.
+ *
+ * Rules of the house (docs/motion.md): every animation carries information, runs
+ * exactly once, and ends at rest. All classes are cue-driven via per-element
+ * custom properties (--delay/--dur/…) and land on their final designed frame
+ * under prefers-reduced-motion.
+ *
+ * SVG usage notes:
+ *   .mo-draw needs pathLength="1" on the path.
+ *   .mo-flow needs pathLength="200" on the path (the dash math assumes it).
+ *   A round linecap paints a dot even on a fully retracted dash, and a scale(0)
+ *   circle still paints a speck — so opacity does ALL the hiding here and the
+ *   dash/transform only does the motion. Keep it that way.
+ */
+
+/* -- Draw-on: an SVG path inks itself in ---------------------------------- */
+.mo-draw{fill:none;stroke-dasharray:1;stroke-dashoffset:1;opacity:0;
+  animation:mo-draw var(--dur,1s) cubic-bezier(.4,0,.2,1) var(--delay,0s) forwards}
+@keyframes mo-draw{from{opacity:1}to{stroke-dashoffset:0;opacity:1}}
+
+/* -- Pop: a node scales in with a slight overshoot ------------------------- */
+.mo-pop{transform-box:fill-box;transform-origin:center;transform:scale(0);opacity:0;
+  animation:mo-pop .32s cubic-bezier(.34,1.3,.64,1) var(--delay,0s) forwards}
+@keyframes mo-pop{from{opacity:1}to{transform:scale(1);opacity:1}}
+
+/* -- Fade: plain fade-in at its cue ---------------------------------------- */
+.mo-fade{opacity:0;animation:mo-fade .5s ease var(--delay,0s) forwards}
+@keyframes mo-fade{to{opacity:1}}
+
+/* -- Settle: glide from a scattered offset into the resting position ------- */
+.mo-settle{transform-box:fill-box;transform-origin:center;
+  animation:mo-settle var(--dur,.9s) cubic-bezier(.4,0,.2,1) var(--delay,0s) both}
+@keyframes mo-settle{
+  from{transform:translate(var(--tx,0px),var(--ty,0px)) rotate(var(--rot,0deg))}
+  to{transform:translate(0,0) rotate(0deg)}}
+
+/* -- Flow: a dash of "work" travels the path once (pathLength="200") ------- */
+.mo-flow{fill:none;stroke-dasharray:var(--dash,12) 188;stroke-dashoffset:214;opacity:0;
+  animation:mo-flow var(--dur,1s) var(--ease,linear) var(--delay,0s) forwards}
+@keyframes mo-flow{from{opacity:1}to{stroke-dashoffset:99;opacity:1}}
+
+/* -- Out: staged exit for scaffolding that should leave the scene ---------- */
+.mo-out{animation:mo-fadeout .6s ease var(--exit,2s) forwards}
+@keyframes mo-fadeout{to{opacity:0}}
+
+/* -- Sweep: highlight ink draws under text once and stays ------------------ */
+.mo-sweep{background-image:linear-gradient(var(--sweep-color,var(--accent-highlight,#2DD4BF)),var(--sweep-color,var(--accent-highlight,#2DD4BF)));
+  background-repeat:no-repeat;background-position:0 100%;background-size:0% 0.3em;
+  animation:mo-sweep var(--sweep-dur,1.2s) linear var(--sweep-delay,0s) forwards}
+@keyframes mo-sweep{to{background-size:100% 0.3em}}
+
+/* -- Flip tile: front face flips to a back face on hover/tap/focus --------- */
+.flip-tile{position:relative;min-height:240px;perspective:1200px;outline:none;cursor:default}
+.flip-tile__inner{position:absolute;inset:0;transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.2,.65,.3,1)}
+.flip-tile:hover .flip-tile__inner,.flip-tile:focus-within .flip-tile__inner,
+.flip-tile:focus .flip-tile__inner{transform:rotateY(180deg)}
+.flip-tile__face{position:absolute;inset:0;-webkit-backface-visibility:hidden;
+  backface-visibility:hidden;border-radius:var(--radius-lg,16px);padding:32px;
+  display:flex;flex-direction:column;overflow:hidden}
+.flip-tile__front{background:var(--surface-card,#fff);
+  border:1px solid var(--border-subtle,#E2E8F0);box-shadow:var(--shadow-sm,0 1px 3px rgba(11,18,32,0.08))}
+.flip-tile__back{background:var(--surface-inverse,#0B1220);color:#fff;transform:rotateY(180deg)}
+
+/* -- Logo marquee: edge-masked strip, pauses on hover ----------------------
+ * The one sanctioned "loop": ambient texture, not information — and it wraps
+ * to a static grid under reduced motion. Markup: .logo-marquee > .logo-track
+ * containing the .logo-strip THREE times (one aria-hidden pair) so the -33.333%
+ * translation wraps seamlessly. */
+.logo-marquee{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logo-track{display:flex;width:max-content;animation:logo-scroll 36s linear infinite}
+.logo-marquee:hover .logo-track{animation-play-state:paused}
+.logo-strip{display:flex;flex-wrap:nowrap;align-items:center;
+  gap:clamp(28px,4vw,52px);padding-right:clamp(28px,4vw,52px)}
+.logo-strip img{width:auto;filter:grayscale(1);opacity:.6;transition:opacity .2s}
+.logo-strip img:hover{opacity:.9}
+@keyframes logo-scroll{from{transform:translateX(-33.333%)}to{transform:translateX(0)}}
+
+/* -- Reduced motion: every element rests on its final designed frame ------- */
+@media (prefers-reduced-motion:reduce){
+  .mo-draw{animation:none;stroke-dashoffset:0;opacity:1}
+  .mo-pop{animation:none;transform:scale(1);opacity:1}
+  .mo-fade{animation:none;opacity:1}
+  .mo-settle{animation:none}
+  .mo-flow{animation:none;opacity:0}
+  .mo-out{animation:none;opacity:0}
+  .mo-sweep{animation:none;background-size:100% 0.3em}
+  .flip-tile__inner{transition:none}
+  .logo-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
+  .logo-strip{flex-wrap:wrap;justify-content:center;padding-right:0;row-gap:20px}
+  .logo-strip[aria-hidden]{display:none}
+}

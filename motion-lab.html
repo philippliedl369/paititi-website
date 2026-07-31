@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion lab</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="motion.css">
+<style>
+  body{margin:0;font-family:var(--font-body);color:var(--text-body);background:var(--surface-section)}
+  .lab{max-width:920px;margin:0 auto;padding:48px 24px}
+  h1{font:var(--text-h2);color:var(--text-heading);margin:0 0 8px}
+  .hint{color:var(--text-muted);font-size:15px;margin:0 0 40px}
+  section{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:28px;margin-bottom:24px}
+  h2{font:var(--text-h4);color:var(--text-heading);margin:0 0 6px}
+  p.n{font-size:14px;color:var(--text-muted);margin:0 0 20px}
+  svg{display:block;max-width:100%}
+  button.replay{margin-top:16px;font:inherit;font-size:14px;padding:6px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-subtle);background:var(--surface-section);cursor:pointer}
+</style>
+</head>
+<body>
+<div class="lab">
+  <h1>Motion lab</h1>
+  <p class="hint">One example per primitive in <code>motion.css</code>. Prototype set pieces here,
+     side by side, before anything touches a page — see <code>docs/motion.md</code> for the
+     workflow and the ledger. Everything runs once and ends at rest; replay re-triggers a scene.</p>
+
+  <section>
+    <h2>Set-piece grammar: draw → pop → settle → flow → out</h2>
+    <p class="n">The five SVG primitives composed into one miniature timeline: scaffolding wiring
+       draws in, nodes pop, a scattered tile settles into line, a unit of work flows the route,
+       and the scaffolding exits. Timing is a dependency graph — cue comments live on the values.</p>
+    <svg viewBox="0 0 560 120" width="560" height="120" data-scene>
+      <!-- scaffold wiring: draws 0–0.9s, exits at 2.6s -->
+      <path class="mo-draw mo-out" style="--dur:.9s;--exit:2.6s" pathLength="1"
+            d="M40 90 C 140 20, 240 110, 340 40" stroke="var(--ms-support)" stroke-width="2" stroke-linecap="round"/>
+      <!-- main route: inks 0.9–1.9s, after the scaffold -->
+      <path class="mo-draw" style="--delay:.9s;--dur:1s" pathLength="1"
+            d="M40 60 L 240 60 L 460 60" stroke="var(--ms-ink)" stroke-width="3" stroke-linecap="round"/>
+      <!-- nodes pop as the route reaches them -->
+      <circle class="mo-pop" style="--delay:1.1s" cx="40" cy="60" r="9" fill="var(--ms-ink)"/>
+      <circle class="mo-pop" style="--delay:1.5s" cx="240" cy="60" r="9" fill="var(--ms-ink)"/>
+      <!-- the settling tile arrives from scatter as the route completes -->
+      <g class="mo-settle" style="--delay:1.6s;--tx:70px;--ty:-34px;--rot:14deg">
+        <rect x="440" y="40" width="40" height="40" rx="9" fill="var(--surface-inverse)"/>
+      </g>
+      <!-- highlight ring marks the resolution beat -->
+      <circle class="mo-pop" style="--delay:2.3s" cx="460" cy="60" r="15" fill="none"
+              stroke="var(--ms-highlight)" stroke-width="3"/>
+      <!-- one unit of work runs the finished route -->
+      <path class="mo-flow" style="--delay:2.6s;--dur:1.2s" pathLength="200"
+            d="M40 60 L 240 60 L 460 60" stroke="var(--ms-accent)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <button class="replay" onclick="replay(this)">Replay</button>
+  </section>
+
+  <section>
+    <h2>Sweep: ink that stays</h2>
+    <p class="n">Highlight draws under the phrase once, then rests — ink is never retracted.</p>
+    <p style="font:var(--text-h3);color:var(--text-heading);margin:0" data-scene>
+      The <span class="mo-sweep" style="--sweep-delay:.4s">load-bearing phrase</span> gets the ink.
+    </p>
+    <button class="replay" onclick="replay(this)">Replay</button>
+  </section>
+
+  <section>
+    <h2>Flip tile</h2>
+    <p class="n">Hover, tap, or focus turns the tile over; reduced motion swaps without the turn.</p>
+    <div class="flip-tile" tabindex="0" style="max-width:320px">
+      <div class="flip-tile__inner">
+        <div class="flip-tile__face flip-tile__front">
+          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0">Front: the name</h3>
+        </div>
+        <div class="flip-tile__face flip-tile__back">
+          <p style="margin:0;font-size:15px;line-height:1.6">Back: the description that rewards
+             the reader's own gesture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scroll register (reveal.js)</h2>
+    <p class="n">Not demonstrated here — it belongs to real pages. Tag a whole section container
+       with <code>data-enter</code>; it rises once on first entry and latches. The first section
+       under a hero stays untagged.</p>
+  </section>
+</div>
+<script>
+  // Replay = clone the scene node; cloning restarts every CSS animation in it.
+  function replay(btn){
+    const scene = btn.parentElement.querySelector('[data-scene]');
+    scene.replaceWith(scene.cloneNode(true));
+  }
+</script>
+</body>
+</html>

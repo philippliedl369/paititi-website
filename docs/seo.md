@@ -14,8 +14,6 @@ domain placeholder. Before launch:
 4. **Structured data** — add an `Organization` + `WebSite` JSON-LD block to the
    home page.
 5. **Sitemap** — one `<url>` per public page; submit in Search Console.
-6. **Clean URLs** — `_redirects` covers Netlify/Cloudflare. Other hosts:
-   - **Vercel**: `rewrites` in `vercel.json`
-   - **Nginx/Apache**: `try_files` / `RewriteRule` (see `nginx.conf.template`)
-   - **GitHub Pages**: files serve at their real names; keep `.nojekyll`
-     (without it, Pages' Jekyll step silently drops the `_ds/` folder).
+6. **Clean URLs** — `_redirects` owns every clean path on Cloudflare Workers
+   static assets (keep `html_handling: "none"` in `wrangler.jsonc`). Add one
+   line per new page.

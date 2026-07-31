@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
 
 // Each island builds into a self-contained ES-module bundle (its own React
-// included) in ../islands/, where it is committed and served by nginx as a
-// plain static asset — the static site itself stays zero-build.
+// included) in ../islands/, where it is committed and served by the static
+// host as a plain asset — the static site itself stays zero-build.
 //
 // Islands are built ONE AT A TIME (single entry per Vite run, selected by the
 // ISLAND env var) so Rollup never hoists a shared React chunk across them and

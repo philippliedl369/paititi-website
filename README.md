@@ -33,15 +33,16 @@ meristem/
 ├── SiteFooter.dc.html    # Shared footer
 ├── support.js            # Design Component runtime (do not edit)
 ├── reveal.js             # Enter-once scroll reveals (tag sections with data-enter)
+├── motion.css            # Set-piece animation primitives (draw/pop/settle/flow/sweep…)
+├── motion-lab.html       # Playground for prototyping set pieces (see docs/motion.md)
 ├── anchor-scroll.js      # Smooth anchor handling for client-rendered pages
 ├── image-slot.js         # Drag-and-drop image placeholder helper
 ├── _ds/meristem-design-system/   # ★ Tokens + component bundle (retheme here)
 ├── islands/              # Built, committed island bundles (shader-backdrop)
 ├── islands-src/          # React/Vite source for islands (rebuild: npm run build)
 ├── islands-demo.html     # Working island demo
-├── docs/                 # Page architecture + SEO checklist
+├── docs/                 # Page architecture, motion workflow/doctrine, SEO checklist
 ├── _redirects · _headers · wrangler.jsonc   # Cloudflare Workers static hosting
-├── Dockerfile · nginx.conf.template · railway.json  # Alternative Docker hosting
 └── robots.txt · sitemap.xml · site.webmanifest · .nojekyll
 ```
 
@@ -62,10 +63,16 @@ meristem/
 
 ## Deployment
 
-Any static host works. Cloudflare Workers static assets is preconfigured
-(`wrangler.jsonc` — note `html_handling: "none"` is load-bearing; `_redirects`
-owns all clean-URL rewrites). `_redirects` covers Netlify too; see
-`docs/seo.md` for Vercel/Nginx/Apache, and keep `.nojekyll` on GitHub Pages.
+The site deploys to **Cloudflare Workers static assets** (`wrangler.jsonc`):
+
+```bash
+npx wrangler deploy
+```
+
+Note `html_handling: "none"` is load-bearing — `_redirects` owns all clean-URL
+rewrites, and Cloudflare's automatic .html handling collides with the `.dc.html`
+double extension. `_headers` and `_redirects` in the root are picked up
+automatically; `.assetsignore` keeps the toolchain out of the published assets.
 
 ## Islands
 

@@ -1,3 +1,3 @@
-# Clean URLs -> Design Component pages (Netlify/Cloudflare syntax; see README
-# for Vercel/Apache/Nginx equivalents). Add one line per page.
+# Clean URLs -> Design Component pages (Cloudflare/Netlify syntax).
+# Add one line per page.
 /            /Home.dc.html    200

@@ -52,7 +52,7 @@ bundles. A page opts in with two lines:
 Each island is built in isolation (one Vite run per entry, `ISLAND` env var)
 so every bundle keeps its own React and no shared chunk is hoisted. The built
 bundles are committed; the toolchain is excluded from deploys via
-`.assetsignore`/`.dockerignore`. Add an island: new entry in
+`.assetsignore`. Add an island: new entry in
 `islands-src/src/`, register it in `ENTRIES` in `vite.config.ts`, extend the
 `build` script, then `npm run build`.
 

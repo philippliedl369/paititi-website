@@ -6,8 +6,5 @@ docs/
 .gitignore
 .assetsignore
 wrangler.jsonc
-Dockerfile
-nginx.conf.template
-railway.json
 README.md
 .wrangler/
