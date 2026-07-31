@@ -1,0 +1,14 @@
+{
+	// Cloudflare Workers config: serves the repo as static assets (zero-build).
+	// _redirects and _headers in the root are picked up automatically.
+	"name": "meristem",
+	"compatibility_date": "2026-07-24",
+	"assets": {
+		"directory": ".",
+		// Serve files verbatim (incl. the .dc.html double extension); let _redirects
+		// own all clean-URL rewrites. "auto-trailing-slash" 307-redirected .html paths
+		// and collided with .dc.html, 404-ing pages and their _redirects targets.
+		"html_handling": "none",
+		"not_found_handling": "none"
+	}
+}

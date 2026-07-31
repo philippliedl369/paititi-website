@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/styles.css">
+<script src="_ds/meristem-design-system/_ds_bundle.js"></script>
+</helmet>
+<footer style="background:var(--surface-inverse);color:#fff;font-family:var(--font-body)">
+  <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px;padding-bottom:48px">
+      <div style="max-width:320px">
+        <span style="font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#fff">meristem<span style="color:var(--accent-highlight)">.</span></span>
+        <p style="font-size:15px;line-height:1.6;color:#9DA9BC;margin:14px 0 0">Placeholder tagline — one sentence on what this company does.</p>
+      </div>
+      <nav aria-label="Site" style="display:grid;gap:10px;align-content:start">
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7B8AA0">Explore</span>
+        <a href="/" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Home</a>
+        <a href="/product" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Product</a>
+        <a href="/about" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">About</a>
+        <a href="/contact" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Contact</a>
+      </nav>
+      <div style="display:grid;gap:10px;align-content:start">
+        <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7B8AA0">Get in touch</span>
+        <a href="{{ mailto }}" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">{{ email }}</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.15);padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <span style="font-size:13px;color:#7B8AA0">© 2026 Your Company. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:420},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;hello@example.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const email = this.props.email ?? 'hello@example.com';
+    return { email, mailto: 'mailto:' + email };
+  }
+}
+</script>
+</body>
+</html>

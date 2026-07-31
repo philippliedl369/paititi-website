@@ -1,0 +1,30 @@
+/* Meristem — Typography
+ * Space Grotesk (headings) / Inter (body + UI). Placeholder pairing with a
+ * large, modern scale; swap families for the real brand typefaces.
+ * No weights below 400. */
+
+:root {
+  /* ---- Families ---- */
+  --font-display: 'Space Grotesk', 'Helvetica Neue', sans-serif; /* headings */
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; /* body + UI */
+
+  /* ---- Weights ---- */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold: 700; /* @kind font */
+
+  /* ---- Type scale (web px) ---- */
+  --fs-h1: 56px;   --lh-h1: 1.08; /* @kind other */
+  --fs-h2: 38px;   --lh-h2: 1.15; /* @kind other */
+  --fs-h3: 26px;   --lh-h3: 1.25; /* @kind other */
+  --fs-h4: 20px;   --lh-h4: 1.35; /* @kind other */
+  --fs-body: 17px; --lh-body: 1.6; /* @kind other */
+  --fs-small: 14px;--lh-small: 1.5; /* @kind other */
+
+  /* semantic aliases */
+  --text-h1: var(--fw-semibold) var(--fs-h1)/var(--lh-h1) var(--font-display); /* @kind font */
+  --text-h2: var(--fw-semibold) var(--fs-h2)/var(--lh-h2) var(--font-display); /* @kind font */
+  --text-h3: var(--fw-medium) var(--fs-h3)/var(--lh-h3) var(--font-display); /* @kind font */
+  --text-h4: var(--fw-medium) var(--fs-h4)/var(--lh-h4) var(--font-display); /* @kind font */
+}

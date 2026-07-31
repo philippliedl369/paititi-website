@@ -1,0 +1,28 @@
+server {
+    listen       ${PORT};
+    server_name  _;
+    root         /usr/share/nginx/html;
+    index        index.html;
+
+    # The .dc.html runtime uses new Function() to evaluate component logic,
+    # so 'unsafe-eval' is required. 'unsafe-inline' covers the inline styles
+    # and scripts; https: allows the design-system fonts and the Lucide CDN.
+    add_header Content-Security-Policy "default-src 'self' https: data: blob:; script-src 'self' https: 'unsafe-inline' 'unsafe-eval'; style-src 'self' https: 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self' https: data:; connect-src 'self' https:;" always;
+    add_header X-Content-Type-Options "nosniff" always;
+
+    # Clean URLs. nginx does NOT read the Netlify-style _redirects file, so the
+    # routes that need to work on this host are declared explicitly here.
+    # must resolve to the AI4 event page; /ai4 is kept as an alias.
+    location = /event { try_files /AI4.dc.html =404; }
+    location = /ai4   { try_files /AI4.dc.html =404; }
+
+    # The offering was renamed to "Change Readiness + Acceleration" on
+    # 2026-07-22; the old path 301s so printed material keeps working.
+    location = /change-readiness-acceleration { try_files /Readiness.dc.html =404; }
+    location = /readiness-acceleration { return 301 /change-readiness-acceleration; }
+
+    # Serve real files; fall back to the entry splash (which loads Home).
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

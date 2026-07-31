@@ -1,0 +1,6 @@
+/* Meristem — Fonts
+ * Space Grotesk for headings, Inter for body + UI. Placeholder pairing,
+ * loaded from Google Fonts CDN; swap for the real brand typefaces.
+ * No weights below 400 anywhere. */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');

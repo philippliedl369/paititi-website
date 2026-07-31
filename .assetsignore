@@ -1,0 +1,13 @@
+# Files in the repo that must NOT be uploaded as public site assets.
+# The built /islands/*.js bundles ARE served; their source toolchain is not.
+islands-src/
+docs/
+.git/
+.gitignore
+.assetsignore
+wrangler.jsonc
+Dockerfile
+nginx.conf.template
+railway.json
+README.md
+.wrangler/

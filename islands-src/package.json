@@ -1,0 +1,23 @@
+{
+  "name": "meristem-islands-src",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Source for the dynamic 'island' widgets embedded in the static site. Builds into ../islands/.",
+  "scripts": {
+    "build": "ISLAND=shader-backdrop EMPTY=1 vite build",
+    "dev": "ISLAND=shader-backdrop vite build --watch"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "shaders": "3.0.440"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.7"
+  }
+}

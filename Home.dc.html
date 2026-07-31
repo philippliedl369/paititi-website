@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./anchor-scroll.js" defer></script>
+<script src="./reveal.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Meristem — Placeholder headline</title>
+<meta name="description" content="Placeholder description. One or two sentences on what this company does and for whom.">
+<meta property="og:title" content="Meristem — Placeholder headline">
+<meta property="og:description" content="Placeholder description for social sharing.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Meristem">
+<meta property="og:url" content="https://example.com/">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1220">
+<link rel="canonical" href="https://example.com/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/styles.css">
+<script src="_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  html{scroll-behavior:smooth}
+  [id]{scroll-margin-top:88px}
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+  a:hover{color:var(--accent-primary-hover)}
+  /* Ink that stays (scroll register): the highlight rule under section headings
+     is part of the resting design; reveal.js only makes it draw on first entry. */
+  .ink-rule{position:relative}
+  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:var(--rule-w,64px);height:3px;background:var(--accent-highlight)}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" active="home" style="position:sticky;top:0;z-index:50" hint-size="100%,73px"></dc-import>
+<main>
+
+  <!-- Hero: dark band with the WebGL shader backdrop island behind the headline -->
+  <section style="position:relative;background:var(--surface-inverse);overflow:hidden">
+    <div data-island="shader-backdrop" style="position:absolute;inset:0"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,0.25),rgba(11,18,32,0.65))"></div>
+    <div style="position:relative;max-width:var(--container-wide);margin:0 auto;padding:140px 24px 120px">
+      <span style="display:inline-block;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-highlight);margin-bottom:20px">Eyebrow label</span>
+      <h1 style="font:var(--text-h1);color:#fff;letter-spacing:-0.02em;max-width:16ch;margin:0 0 24px">Placeholder headline that states the value.</h1>
+      <p style="font-size:19px;line-height:1.6;color:rgba(255,255,255,0.82);max-width:52ch;margin:0 0 36px">Placeholder subline. One or two sentences that explain what the product or service does, for whom, and why it matters.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <a href="/contact" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="170px,48px">Primary action</x-import></a>
+        <a href="/product" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="ghost" size="lg" style="color:#fff;border:1px solid rgba(255,255,255,0.4)" hint-size="170px,48px">Secondary action</x-import></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- First content section: deliberately NOT tagged with data-enter (see reveal.js) -->
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container-wide);margin:0 auto;padding:var(--section-y) 24px">
+      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 16px">Section heading</h2>
+      <p style="max-width:60ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 48px;color:var(--text-body)">Supporting copy for this section. Replace with real content.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px">
+        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,220px">
+          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 10px">Feature one</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0">Short description of the first feature or benefit.</p>
+        </x-import>
+        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,220px">
+          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 10px">Feature two</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0">Short description of the second feature or benefit.</p>
+        </x-import>
+        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,220px">
+          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 10px">Feature three</h3>
+          <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0">Short description of the third feature or benefit.</p>
+        </x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats band: tagged with data-enter → rises once on first scroll into view -->
+  <section style="background:var(--surface-section)">
+    <div data-enter style="max-width:var(--container-wide);margin:0 auto;padding:var(--section-y) 24px">
+      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 48px">Proof heading</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:32px">
+        <div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:44px;color:var(--text-heading)">00%</div>
+          <p style="font-size:15px;color:var(--text-muted);margin:8px 0 0">Placeholder stat label</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:44px;color:var(--text-heading)">00×</div>
+          <p style="font-size:15px;color:var(--text-muted);margin:8px 0 0">Placeholder stat label</p>
+        </div>
+        <div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:44px;color:var(--text-heading)">00k</div>
+          <p style="font-size:15px;color:var(--text-muted);margin:8px 0 0">Placeholder stat label</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA band -->
+  <section style="background:var(--surface-inverse)">
+    <div style="max-width:var(--container);margin:0 auto;padding:80px 24px;text-align:center">
+      <h2 style="font:var(--text-h2);color:#fff;letter-spacing:-0.01em;margin:0 0 16px">Closing call to action.</h2>
+      <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.75);max-width:48ch;margin:0 auto 32px">One sentence that removes the last doubt and points at the button.</p>
+      <a href="/contact" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Primary action</x-import></a>
+    </div>
+  </section>
+
+</main>
+<dc-import name="SiteFooter" email="{{ contactEmail }}" hint-size="100%,380px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2000},&quot;contactEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;hello@example.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { contactEmail: this.props.contactEmail ?? 'hello@example.com' };
+  }
+}
+</script>
+<script type="module" src="/islands/shader-backdrop.js" defer></script>
+</body>
+</html>

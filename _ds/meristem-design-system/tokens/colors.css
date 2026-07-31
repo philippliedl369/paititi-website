@@ -1,0 +1,51 @@
+/* Meristem — Color system
+ * Placeholder palette for a modern SaaS-style marketing site: near-black ink
+ * on white, generous light surfaces, one working accent (emerald) plus a
+ * bright mint highlight. Swap the base values for the real brand; the
+ * semantic aliases below are what components and pages consume. */
+
+:root {
+  /* ---- Brand base ---- */
+  --ms-ink: #0B1220;         /* Anchor. Headings, dark bands, secondary buttons, icons. */
+  --ms-support: #94A3B8;     /* Support. Section bands, chart fills, decoration. Never as text. */
+  --ms-surface: #F5F7FA;     /* Background. Page sections, panels, cards. */
+  --ms-text: #1E2A3A;        /* Text. All body copy. */
+  --ms-white: #FFFFFF;       /* Space. Default page background. */
+
+  /* ---- Accents ---- */
+  --ms-highlight: #2DD4BF;   /* Highlight/underline/fill with ink text on top. Not a white-label button. */
+  --ms-accent: #0C7C59;      /* Do-everything. Works as an actual button color. AA on white (~5.2:1). */
+  --ms-accent-soft: #6EE7B7; /* Muted, fresh. Fill with dark text; weak as a primary CTA. */
+
+  /* ---- Tints & shades (derived, for hovers/borders/surfaces) ---- */
+  --ms-ink-hover: #050A14;        /* darker ink — button hover */
+  --ms-ink-tint-12: rgba(11, 18, 32, 0.12);
+  --ms-ink-tint-06: rgba(11, 18, 32, 0.06);
+  --ms-support-tint-20: rgba(148, 163, 184, 0.20);
+  --ms-accent-hover: #095E44;     /* darker accent — button hover */
+  --ms-surface-deep: #E2E8F0;     /* borders on surface, hairlines */
+
+  /* ---- Semantic aliases ---- */
+  --surface-page: var(--ms-white);
+  --surface-section: var(--ms-surface);
+  --surface-card: var(--ms-white);
+  --surface-inverse: var(--ms-ink);
+  --surface-band: var(--ms-support);
+
+  --text-heading: var(--ms-ink);
+  --text-body: var(--ms-text);
+  --text-muted: #5B6B7E;          /* text lightened — captions, meta */
+  --text-inverse: var(--ms-white);
+  --text-on-accent: var(--ms-white);
+
+  --border-subtle: var(--ms-surface-deep);
+  --border-strong: var(--ms-ink);
+  --border-focus: var(--ms-accent);
+
+  --accent-primary: var(--ms-accent);       /* primary CTA */
+  --accent-primary-hover: var(--ms-accent-hover);
+  --accent-highlight: var(--ms-highlight);  /* underlines, marks */
+  --accent-quiet: var(--ms-accent-soft);
+
+  --focus-ring: rgba(12, 124, 89, 0.40);
+}

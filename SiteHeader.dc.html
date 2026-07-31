@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="_ds/meristem-design-system/styles.css">
+<script src="_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  #ms-nav-links{display:flex;align-items:center;gap:24px}
+  #ms-menu-btn{display:none}
+  @media (max-width:900px){
+    #ms-nav-links{display:none}
+    #ms-menu-btn{display:inline-flex}
+  }
+  a button[style*="inline-flex"]{max-width:100%;box-sizing:border-box}
+  @media (max-width:480px){
+    a button[style*="inline-flex"]{white-space:normal !important;text-align:center}
+  }
+</style>
+</helmet>
+<header style="background:rgba(255,255,255,0.92);backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--border-subtle);font-family:var(--font-body)">
+  <div style="max-width:var(--container-wide);margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" style="display:inline-flex;align-items:center;text-decoration:none">
+      <!-- Text wordmark placeholder — swap for the real logo asset when it exists -->
+      <span style="font-family:var(--font-display);font-weight:700;font-size:24px;letter-spacing:-0.02em;color:var(--text-heading)">meristem<span style="color:var(--accent-primary)">.</span></span>
+    </a>
+    <nav id="ms-nav-links" aria-label="Main">
+      <sc-for list="{{ links }}" as="link" hint-placeholder-count="3">
+        <a href="{{ link.href }}" style="font-weight:600;font-size:15px;color:var(--text-heading);text-decoration:none;padding:4px 2px;box-shadow:{{ link.underline }}">{{ link.label }}</a>
+      </sc-for>
+      <a href="{{ ctaHref }}" style="text-decoration:none">
+        <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="sm" hint-size="140px,36px">Get started</x-import>
+      </a>
+    </nav>
+    <button id="ms-menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu" style="width:44px;height:44px;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border-subtle);border-radius:var(--radius-md);color:var(--text-heading);cursor:pointer">
+      <x-import component-from-global-scope="MeristemDS.Icon" name="{{ menuIcon }}" size="22" hint-size="22px,22px"></x-import>
+    </button>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top:1px solid var(--border-subtle);background:#fff;padding:8px 24px 20px">
+      <nav aria-label="Mobile" style="display:grid;gap:2px">
+        <sc-for list="{{ links }}" as="link" hint-placeholder-count="3">
+          <a href="{{ link.href }}" style="font-weight:600;font-size:16px;color:var(--text-heading);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border-subtle)">{{ link.label }}</a>
+        </sc-for>
+        <a href="{{ ctaHref }}" style="text-decoration:none;margin-top:14px;display:block">
+          <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="md" style="width:100%" hint-size="100%,42px">Get started</x-import>
+        </a>
+      </nav>
+    </div>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:220},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;product&quot;,&quot;about&quot;,&quot;contact&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ctaHref&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/contact&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false };
+  renderVals() {
+    const active = this.props.active ?? '';
+    const links = [
+      ['Product', '/product', 'product'],
+      ['About', '/about', 'about'],
+      ['Contact', '/contact', 'contact'],
+    ].map(([label, href, key]) => ({
+      label, href,
+      underline: key === active ? 'inset 0 -2px 0 var(--accent-highlight)' : 'none',
+    }));
+    return {
+      links,
+      ctaHref: this.props.ctaHref ?? '/contact',
+      menuOpen: this.state.open,
+      toggleMenu: () => this.setState(s => ({ open: !s.open })),
+      menuIcon: this.state.open ? 'X' : 'Menu',
+    };
+  }
+}
+</script>
+</body>
+</html>
