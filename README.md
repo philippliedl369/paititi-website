@@ -5,14 +5,34 @@ Squarespace onto the zero-build Meristem architecture: single-file
 Design-Component pages (`.dc.html`) + a Cloudflare Worker that replaces every
 function Squarespace used to provide.
 
+## Where it runs
+
+The same repo deploys to either platform. `api.js` holds the API logic; each
+platform gets a thin adapter around it, so the two can't drift.
+
+| | Cloudflare Workers | Node host (Railway, Render, Fly) |
+|---|---|---|
+| entry | `worker.js` (`wrangler deploy`) | `server.js` (`npm start`) |
+| clean URLs | `_redirects`, read by the platform | `_redirects`, parsed by `server.js` |
+| headers | `_headers`, read by the platform | `_headers`, parsed by `server.js` |
+| newsletter store | KV namespace `NEWSLETTER` | `RESEND_AUDIENCE_ID`, or `NEWSLETTER_FILE` |
+
+On Railway, set the variables under **Variables**: `RESEND_API_KEY`,
+`STRIPE_SECRET_KEY`, `CONTACT_TO`, `SITE_ORIGIN` and `RESEND_AUDIENCE_ID`.
+Railway detects `package.json` and runs `npm start`; `PORT` is injected.
+
+Note that Railway's filesystem is ephemeral — `NEWSLETTER_FILE` only survives
+redeploys if you mount a volume, so prefer a Resend audience in production.
+
 ## Quick start
 
 The pages fetch scripts and the design-system bundle over HTTP, so **serve the
 folder, don't open files with `file://`**:
 
 ```bash
-python3 -m http.server 8000        # static preview (no /api/*)
-npx wrangler dev                   # full preview incl. Worker API routes
+npm start                          # Node server — clean URLs + /api/* (PORT=8080)
+npx wrangler dev                   # same site on the Cloudflare runtime
+python3 -m http.server 8000        # bare static preview: no clean URLs, no /api/*
 ```
 
 Then open http://localhost:8000/Home.dc.html (or `/` under wrangler, which

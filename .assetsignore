@@ -9,3 +9,7 @@ wrangler.jsonc
 README.md
 .wrangler/
 tools/
+server.js
+api.js
+package.json
+package-lock.json

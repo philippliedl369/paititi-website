@@ -1,0 +1,19 @@
+{
+  "name": "paititi-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Paititi Institute website — zero-build Design Component pages with a small API for forms, newsletter and Stripe checkout.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "dev:cloudflare": "wrangler dev",
+    "deploy:cloudflare": "wrangler deploy",
+    "sync-assets": "python3 tools/sync_assets.py",
+    "migrate-blog": "python3 tools/migrate_blog.py"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
