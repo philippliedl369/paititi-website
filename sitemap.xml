@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: replace example.com with the real domain; add one <url> per page -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://example.com/</loc>
-  </url>
+  <url><loc>https://paititi-institute.org/</loc></url>
+  <url><loc>https://paititi-institute.org/about-us</loc></url>
+  <url><loc>https://paititi-institute.org/team</loc></url>
+  <url><loc>https://paititi-institute.org/press-media</loc></url>
+  <url><loc>https://paititi-institute.org/discoverpaititi</loc></url>
+  <url><loc>https://paititi-institute.org/contact</loc></url>
+  <url><loc>https://paititi-institute.org/retreats</loc></url>
+  <url><loc>https://paititi-institute.org/online-courses</loc></url>
+  <url><loc>https://paititi-institute.org/beyond-ayahuasca</loc></url>
+  <url><loc>https://paititi-institute.org/initiatives</loc></url>
+  <url><loc>https://paititi-institute.org/initiatives/yagua-cultural-heritage-center-indigenous-school</loc></url>
+  <url><loc>https://paititi-institute.org/initiatives/qero-nation-emergency-food-supply</loc></url>
+  <url><loc>https://paititi-institute.org/donate</loc></url>
+  <url><loc>https://paititi-institute.org/store</loc></url>
+  <url><loc>https://paititi-institute.org/store/p/us-tour-rsvp-donation</loc></url>
+  <url><loc>https://paititi-institute.org/terms-conditions</loc></url>
+  <url><loc>https://paititi-institute.org/who/privacy-policy</loc></url>
+  <url><loc>https://paititi-institute.org/blog</loc></url>
+  <url><loc>https://paititi-institute.org/blog/how-to-create-sustainable-relationships-for-living-in-community</loc></url>
+  <url><loc>https://paititi-institute.org/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest</loc></url>
+  <url><loc>https://paititi-institute.org/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times</loc></url>
+  <url><loc>https://paititi-institute.org/blog/integration-phenomenal-into-mundane</loc></url>
+  <url><loc>https://paititi-institute.org/blog/makes-life-worth-living-in-a-time-turmoil</loc></url>
+  <url><loc>https://paititi-institute.org/blog/shards-shattered-ego-reflecting-countless-arms-compassion</loc></url>
+  <url><loc>https://paititi-institute.org/blog/embody-true-nature-healing-retreat</loc></url>
+  <url><loc>https://paititi-institute.org/blog/category/health-wellness</loc></url>
+  <url><loc>https://paititi-institute.org/blog/category/indigenous-traditions</loc></url>
+  <url><loc>https://paititi-institute.org/blog/category/plant-medicine</loc></url>
+  <url><loc>https://paititi-institute.org/blog/category/transformation</loc></url>
 </urlset>

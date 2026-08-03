@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
+<script src="/reveal.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Store | Paititi Institute</title>
+<meta name="description" content="Reserve your spot on Paititi Institute retreats and support our initiatives.">
+<meta property="og:title" content="Store | Paititi Institute">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" active="store" style="position:sticky;top:0;z-index:50" hint-size="100%,115px"></dc-import>
+<main>
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px var(--section-y)">
+      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 16px">Store</h1>
+      <nav aria-label="Store categories" style="display:flex;gap:18px;margin:24px 0 40px">
+        <a href="/store" style="font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-heading);text-decoration:none;box-shadow:inset 0 -2px 0 var(--accent-highlight)">All</a>
+        <a href="/store/retreats" style="font-weight:700;font-size:14px;letter-spacing:0.05em;text-transform:uppercase;color:var(--text-muted);text-decoration:none">US Tour</a>
+      </nav>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:32px">
+        <x-import component-from-global-scope="MeristemDS.Card" style="padding:0;overflow:hidden" hint-size="100%,420px">
+          <a href="/store/p/us-tour-rsvp-donation" style="text-decoration:none;display:block">
+            <img src="/assets/retreats/coco-ceremony.webp" alt="Coca ceremony at Paititi Institute, Iquitos, Peru" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+            <div style="padding:20px 22px 24px">
+              <h2 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 8px">US TOUR RSVP DONATION</h2>
+              <p style="font-size:16px;font-weight:700;color:var(--text-body);margin:0 0 16px">$300.00</p>
+              <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="md" hint-size="120px,42px">RSVP</x-import>
+            </div>
+          </a>
+        </x-import>
+      </div>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1400}}">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

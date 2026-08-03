@@ -1,14 +1,26 @@
 {
-	// Cloudflare Workers config: serves the repo as static assets (zero-build).
+	// Cloudflare Workers config: worker.js handles /api/* (forms, newsletter,
+	// Stripe checkout) and falls through to the repo served as static assets.
 	// _redirects and _headers in the root are picked up automatically.
-	"name": "meristem",
+	"name": "paititi-institute",
+	"main": "worker.js",
 	"compatibility_date": "2026-07-24",
 	"assets": {
 		"directory": ".",
+		"binding": "ASSETS",
 		// Serve files verbatim (incl. the .dc.html double extension); let _redirects
 		// own all clean-URL rewrites. "auto-trailing-slash" 307-redirected .html paths
 		// and collided with .dc.html, 404-ing pages and their _redirects targets.
 		"html_handling": "none",
 		"not_found_handling": "none"
+	},
+	"vars": {
+		"CONTACT_TO": "info@paititi-institute.org",
+		"SITE_ORIGIN": "https://paititi-institute.org"
 	}
+	// Secrets to set before the functions go live:
+	//   npx wrangler secret put RESEND_API_KEY     (contact form email)
+	//   npx wrangler secret put STRIPE_SECRET_KEY  (store/donation checkout)
+	// Optional KV for newsletter signups:
+	//   npx wrangler kv namespace create NEWSLETTER  → add "kv_namespaces" here
 }

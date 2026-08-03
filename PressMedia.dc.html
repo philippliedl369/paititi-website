@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Press &amp; Media | Paititi Institute</title>
+<meta name="description" content="Press coverage and media features about Paititi Institute, the Yahua Ancestral School, and our work in the Peruvian Amazon and Andes.">
+<meta property="og:title" content="Press &amp; Media | Paititi Institute">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+  .ink-rule{position:relative}
+  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" style="position:sticky;top:0;z-index:50" hint-size="100%,115px"></dc-import>
+<main>
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container);margin:0 auto;padding:64px 24px var(--section-y)">
+      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);letter-spacing:-0.02em;margin:0 0 56px">Press &amp; Media</h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:32px">
+        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,520px">
+          <a href="https://artisthighlight.com/the-yahua-ancestral-school-healing-a-culture-one-child-at-a-time/" target="_blank" rel="noopener" style="text-decoration:none;display:block">
+            <img src="/assets/about/roman-ancelmo-book.webp" alt="Roman Hanis and Ancelmo with the book Beyond Ayahuasca" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md);margin-bottom:20px" hint-size="500px,375px">
+            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 10px">Yahua Ancestral School: Healing a Culture, One Child at a Time</h2>
+            <p style="font-size:14px;color:var(--text-muted);margin:0 0 16px">Artist Highlight</p>
+            <span style="font-size:15px;font-weight:700;color:var(--accent-primary)">Read the feature &rarr;</span>
+          </a>
+        </x-import>
+      </div>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1500}}">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

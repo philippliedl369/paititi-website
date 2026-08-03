@@ -1,0 +1,1139 @@
+{
+  "https://images.squarespace-cdn.com/content/v1/5ec321c2af33de48734cc929/0a46af00-18be-406f-9603-fefc97e10dda/imgg-demo-hNKPmLKj.png": {
+    "local": "assets/home/discoverpaititi-02.webp",
+    "original_name": "imgg-demo-hNKPmLKj.png",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "",
+    "bytes": 180058,
+    "sha256": "59146e3d91b5f357"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/001f562a-c051-45a8-922e-0093e6cc25ad/Unlock.png": {
+    "local": "assets/initiatives/unlock.webp",
+    "original_name": "Unlock.png",
+    "pages": [
+      "/initiatives"
+    ],
+    "alt": "",
+    "bytes": 6912,
+    "sha256": "daa5af67077acbae"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/0ecf7756-5ed3-40bc-a080-a05aa9c8a8d1/Flower.png": {
+    "local": "assets/initiatives/flower.webp",
+    "original_name": "Flower.png",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 28188,
+    "sha256": "b9d61fa9b3a946e3"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/15767f3a-77ea-4600-b090-50a78e07eb1e/food+drive+3.jpg": {
+    "local": "assets/initiatives/food-drive-3.webp",
+    "original_name": "food+drive+3.jpg",
+    "pages": [
+      "/initiatives/project-one-f5w4d-4nex6"
+    ],
+    "alt": "",
+    "bytes": 151538,
+    "sha256": "4799456be79e188f"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411240840-CSNAP6P52U0KF5R2W1HG/image-asset.jpeg": {
+    "local": "assets/blog/blog-02.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "Can\u2019t Blame the Chaos - A Path Less Traveled in Perilous Times",
+    "bytes": 141078,
+    "sha256": "daa79d834e7af41d"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411245543-PZXBVLT7P3RPZ13BURV4/image-asset.jpeg": {
+    "local": "assets/blog/blog-06.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "What Does it Mean to Embody True Nature?",
+    "bytes": 77268,
+    "sha256": "358c8feea48c89c3"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411255751-BAA2KV5SY8GT1HTM6MYK/image-asset.jpeg": {
+    "local": "assets/blog/blog-03.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "Integration: Phenomenal into Mundane",
+    "bytes": 18108,
+    "sha256": "ee74a6300b27fe89"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411268036-1OS2TKRTM8JPFHBNSCA2/image-asset.jpeg": {
+    "local": "assets/blog/blog-04.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "What Makes Life Worth Living for in This Time of Turmoil?",
+    "bytes": 69152,
+    "sha256": "622c9339c4fb83ad"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411278233-IFVPA8D9MEYGFKOPVQ4V/image-asset.jpeg": {
+    "local": "assets/blog/blog-05.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "Shards of The Shattered Ego Reflecting Countless Arms of Compassion",
+    "bytes": 26464,
+    "sha256": "282d27a3feb75bee"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411465824-HLOAQS0R7UCN7CF6UIOX/TheWindintheMeat.jpg": {
+    "local": "assets/blog/thewindinthemeat.webp",
+    "original_name": "TheWindintheMeat.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 191920,
+    "sha256": "c4685842fd2fa590"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411487923-F1G5V4HC7CW3H711DPSK/Maloka_Interior-Paititi_Institute-Iquitos_Peru-Greg_Goodman-AdventuresofaGoodMan.jpg": {
+    "local": "assets/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman-.webp",
+    "original_name": "Maloka_Interior-Paititi_Institute-Iquitos_Peru-Greg_Goodman-AdventuresofaGoodMan.jpg",
+    "pages": [
+      "/",
+      "/discoverpaititi",
+      "/about-us",
+      "/team",
+      "/press-media",
+      "/contact",
+      "/retreats",
+      "/online-courses",
+      "/beyond-ayahuasca",
+      "/initiatives",
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school",
+      "/initiatives/project-one-f5w4d-4nex6",
+      "/store",
+      "/store/p/us-tour-rsvp-donation",
+      "/blog",
+      "/terms-conditions",
+      "/who/privacy-policy"
+    ],
+    "alt": "",
+    "bytes": 70318,
+    "sha256": "70b925e3a8b385e1"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411573721-S6VRQEIPCGGMIE5SUCAE/healing-retreat-11.jpg": {
+    "local": "assets/blog/healing-retreat-11.webp",
+    "original_name": "healing-retreat-11.jpg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 77268,
+    "sha256": "358c8feea48c89c3"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411574236-1AQDI1V58C1CINXTF4L9/healing-retreat-12.jpeg": {
+    "local": "assets/blog/healing-retreat-12.webp",
+    "original_name": "healing-retreat-12.jpeg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 43704,
+    "sha256": "2a163b92fc692ea9"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411575228-2ELBOSD91BRRTBARS5GN/healing-retreat-19.jpeg": {
+    "local": "assets/blog/healing-retreat-19.webp",
+    "original_name": "healing-retreat-19.jpeg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 71908,
+    "sha256": "19ac82597090975e"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411575836-5983SS25MGABDM2ALBLP/healing-retreat-embody-true-nature-2.jpg": {
+    "local": "assets/blog/healing-retreat-embody-true-nature-2.webp",
+    "original_name": "healing-retreat-embody-true-nature-2.jpg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 43126,
+    "sha256": "fa5e08d2b2ec4fcc"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411577422-0VBPHXEHQIB6C3GIHBMR/healing-retreat-embody-true-nature-7.jpg": {
+    "local": "assets/blog/healing-retreat-embody-true-nature-7.webp",
+    "original_name": "healing-retreat-embody-true-nature-7.jpg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 51568,
+    "sha256": "eb9e7587abb94303"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411599833-NFYL5PD7JDH04AHSHHSI/1.jpg": {
+    "local": "assets/blog/1.webp",
+    "original_name": "1.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 126844,
+    "sha256": "60bc0d51dc0366b4"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411599921-OBAI8QQLW1WOSI2V8VMG/10.jpg": {
+    "local": "assets/blog/10.webp",
+    "original_name": "10.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 133164,
+    "sha256": "0890f8c0a2c67afa"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411600024-TXYS0QK10IQ078CSYTYF/11.jpg": {
+    "local": "assets/blog/11.webp",
+    "original_name": "11.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 138194,
+    "sha256": "d57952d065f59cf6"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411601528-FURU1XJ6OTD9LYYVV10G/4.jpg": {
+    "local": "assets/blog/4.webp",
+    "original_name": "4.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 569058,
+    "sha256": "3e4384468a3f61c3"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411602341-UI4UYLO0J64OMMZJM6OA/5.jpg": {
+    "local": "assets/blog/5.webp",
+    "original_name": "5.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 75732,
+    "sha256": "7c46b13ee7a1d846"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411603138-RP6A8FZ5ET6IITUKG6AE/7.jpg": {
+    "local": "assets/blog/7.webp",
+    "original_name": "7.jpg",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 80524,
+    "sha256": "95b08781cf96b510"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411604435-SDTE78XZ90DKYJA0V6RE/medicine.png": {
+    "local": "assets/blog/medicine.webp",
+    "original_name": "medicine.png",
+    "pages": [
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion"
+    ],
+    "alt": "",
+    "bytes": 338670,
+    "sha256": "f660ef57e8bf88d4"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411637136-QEWSLTGEMCWLQRVYXBQY/32388493706_41acf6b92b_o.jpg": {
+    "local": "assets/blog/blog-makes-life-worth-living-in-a-time-turmoil-01.webp",
+    "original_name": "32388493706_41acf6b92b_o.jpg",
+    "pages": [
+      "/blog/makes-life-worth-living-in-a-time-turmoil"
+    ],
+    "alt": "",
+    "bytes": 527560,
+    "sha256": "b65d77f1c7b3ec05"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411637932-DR7PL15CCTWUPG5G7AYQ/A-life-worth-living.jpg": {
+    "local": "assets/blog/a-life-worth-living.webp",
+    "original_name": "A-life-worth-living.jpg",
+    "pages": [
+      "/blog/makes-life-worth-living-in-a-time-turmoil"
+    ],
+    "alt": "",
+    "bytes": 288538,
+    "sha256": "1a34fd982dd730f8"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411639530-IFHE7ZCJZMG7LP8RYCJA/life-worth-living-3.5.jpg": {
+    "local": "assets/blog/life-worth-living-35.webp",
+    "original_name": "life-worth-living-3.5.jpg",
+    "pages": [
+      "/blog/makes-life-worth-living-in-a-time-turmoil"
+    ],
+    "alt": "",
+    "bytes": 57146,
+    "sha256": "f458716193b2ecc1"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411640958-2XAFXKH53KQVH5HRK65Z/life-worth-living-4.5.jpg": {
+    "local": "assets/blog/life-worth-living-45.webp",
+    "original_name": "life-worth-living-4.5.jpg",
+    "pages": [
+      "/blog/makes-life-worth-living-in-a-time-turmoil"
+    ],
+    "alt": "",
+    "bytes": 139122,
+    "sha256": "ac335623bb97947c"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411641037-ZBAP714HDB50MOJ732GN/life-worth-living-4.jpg": {
+    "local": "assets/blog/life-worth-living-4.webp",
+    "original_name": "life-worth-living-4.jpg",
+    "pages": [
+      "/blog/makes-life-worth-living-in-a-time-turmoil"
+    ],
+    "alt": "",
+    "bytes": 99272,
+    "sha256": "e0b00a4deb368052"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411654227-BNLK0WNFH6335GIH517D/StellaClimbing-small.jpg": {
+    "local": "assets/blog/stellaclimbing-small.webp",
+    "original_name": "StellaClimbing-small.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 137872,
+    "sha256": "1d2bc2162f48b4fd"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411654424-V3P2JD8RDOXQG0G4ZWN7/StellaDoor-small.jpg": {
+    "local": "assets/blog/stelladoor-small.webp",
+    "original_name": "StellaDoor-small.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 199442,
+    "sha256": "17995aa106ae070e"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411654745-469W28DM3PFMFBYNSDR9/StellaGap-small.jpg": {
+    "local": "assets/blog/stellagap-small.webp",
+    "original_name": "StellaGap-small.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 260686,
+    "sha256": "d5579be01174f79c"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411655144-LYRV5RVM96G90F65IMQM/StellaKey-small.jpg": {
+    "local": "assets/blog/stellakey-small.webp",
+    "original_name": "StellaKey-small.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 198184,
+    "sha256": "2834b1525d080d5b"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411658731-K9F5XONS33T64P3EBEDM/paititi_institute-events.jpg": {
+    "local": "assets/blog/paititi-institute-events-2.webp",
+    "original_name": "paititi_institute-events.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane",
+      "/blog/makes-life-worth-living-in-a-time-turmoil",
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion",
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 56204,
+    "sha256": "2bba59488410db92"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411663330-UQI5BPBB54LH6B0SZ7BD/embody-true-nature-ayahuasca-retreat-5.jpg": {
+    "local": "assets/brand/embody-true-nature-ayahuasca-retreat-5.webp",
+    "original_name": "embody-true-nature-ayahuasca-retreat-5.jpg",
+    "pages": [
+      "/who/privacy-policy"
+    ],
+    "alt": "",
+    "bytes": 160794,
+    "sha256": "8a74373478acb3ac"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411668527-1AZWXT4KCBHWWJKKQKDR/Principles-of-integrating-medicine-work-by-Paititi-Insitute.jpg": {
+    "local": "assets/blog/principles-of-integrating-medicine-work-by-paititi-insitute.webp",
+    "original_name": "Principles-of-integrating-medicine-work-by-Paititi-Insitute.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 117616,
+    "sha256": "b502aab627bed8e5"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411669223-67J91PCLOMTBN7WEA7S5/69989014_2367556036662683_3473014429329653760_n.jpg": {
+    "local": "assets/blog/69989014-2367556036662683-3473014429329653760-n.webp",
+    "original_name": "69989014_2367556036662683_3473014429329653760_n.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 162848,
+    "sha256": "f058fbdf6e970dc8"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411669724-2F1A2PNZHCOIZ5OCYYRS/BlackHolemaxresdefault.jpg": {
+    "local": "assets/blog/blackholemaxresdefault.webp",
+    "original_name": "BlackHolemaxresdefault.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 145826,
+    "sha256": "8c248af8e2fcc493"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411672327-41ZHLSXDLRR8VIGWPMCF/paititipath.jpg": {
+    "local": "assets/blog/paititipath.webp",
+    "original_name": "paititipath.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 224128,
+    "sha256": "3f321553f35d4c5f"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1732411706785-OR6PX0M1YK4FDJGOD7PI/covidaid-fbarticleimage.jpg": {
+    "local": "assets/initiatives/covidaid-fbarticleimage.webp",
+    "original_name": "covidaid-fbarticleimage.jpg",
+    "pages": [
+      "/initiatives"
+    ],
+    "alt": "Q'ero Nation Emergency Food Supply During COVID",
+    "bytes": 155086,
+    "sha256": "63064c38f388f86a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1753025106631-AOUT36VYH52S21DQTSMJ/325ab427-08ac-423b-aad0-1e1fdf05fcc4.jpg": {
+    "local": "assets/retreats/beyond-ayahuasca-01.webp",
+    "original_name": "325ab427-08ac-423b-aad0-1e1fdf05fcc4.jpg",
+    "pages": [
+      "/beyond-ayahuasca",
+      "/initiatives",
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school",
+      "/blog"
+    ],
+    "alt": "Yagua Cultural Heritage Center &amp; Indigenous School",
+    "bytes": 190086,
+    "sha256": "3b6af8251a7a3cec"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1754107260602-2QL2B0JHXO8DVV49R9AT/unsplash-image-UO1hwtGi6zE.jpg": {
+    "local": "assets/initiatives/unsplash-image-uo1hwtgi6ze.webp",
+    "original_name": "unsplash-image-UO1hwtGi6zE.jpg",
+    "pages": [
+      "/initiatives/project-one-f5w4d-4nex6"
+    ],
+    "alt": "",
+    "bytes": 651628,
+    "sha256": "308b850f38a67f76"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1764091794976-PB3QWN110SQBRGXVSAX6/IMG_2068.jpg": {
+    "local": "assets/home/discoverpaititi-01.webp",
+    "original_name": "IMG_2068.jpg",
+    "pages": [
+      "/discoverpaititi",
+      "/blog"
+    ],
+    "alt": "Ancient Prophecies, Living Children and the Healing of Remembrance",
+    "bytes": 394510,
+    "sha256": "4505d3d4dfb91969"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1764780594610-YQZNCPT6N5FXT16MTJT0/unsplash-image-jWN0vKRKLvk.jpg": {
+    "local": "assets/blog/unsplash-image-jwn0vkrklvk.webp",
+    "original_name": "unsplash-image-jWN0vKRKLvk.jpg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "",
+    "bytes": 338132,
+    "sha256": "cd081dc1b7a7ea37"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1776219232634-FZP6VQKQ6GPIBAUUTPV1/IMG_8916+2.JPG": {
+    "local": "assets/blog/blog-01.webp",
+    "original_name": "IMG_8916+2.JPG",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "How to Create Sustainable Relationships for Living in a&amp;nbsp;Community",
+    "bytes": 902938,
+    "sha256": "5200902619485a23"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1779814274622-M6ZPVP5GR8YJ7NZXBY26/IMG_9718.webp": {
+    "local": "assets/home/home-01.webp",
+    "original_name": "IMG_9718.webp",
+    "pages": [
+      "/"
+    ],
+    "alt": "Retreats",
+    "bytes": 409664,
+    "sha256": "0026ff6dffa2b4cb"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1779816495764-M5DI3PZFEHL8Q1WOANWK/DreamworkSacredGeometry-SQUARE.jpg": {
+    "local": "assets/home/dreamworksacredgeometry-square.webp",
+    "original_name": "DreamworkSacredGeometry-SQUARE.jpg",
+    "pages": [
+      "/"
+    ],
+    "alt": "Online Courses",
+    "bytes": 90232,
+    "sha256": "5cb0fbff663b4df7"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1784842048338-7Z4LF0XCCARXGU0UYEAP/Yagua+visit+2023.jpeg": {
+    "local": "assets/home/yagua-visit-2023.webp",
+    "original_name": "Yagua+visit+2023.jpeg",
+    "pages": [
+      "/"
+    ],
+    "alt": "Yagua visit 2023.jpeg",
+    "bytes": 110904,
+    "sha256": "ccb5cfd3078ef7a4"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/1e865812-2238-4c1d-87d6-ae4c3afe4246/WhatsApp+Image+2026-01-28+at+18.18.41.jpeg": {
+    "local": "assets/about/whatsapp-image-2026-01-28-at-181841.webp",
+    "original_name": "WhatsApp+Image+2026-01-28+at+18.18.41.jpeg",
+    "pages": [
+      "/team"
+    ],
+    "alt": "",
+    "bytes": 277162,
+    "sha256": "2cc47e3f18507ac9"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/20284bd3-8b27-41db-ae09-687fc1831516/Vision-Purpose-Icon.png": {
+    "local": "assets/brand/icon-vision-purpose.webp",
+    "original_name": "Vision-Purpose-Icon.png",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us",
+      "/blog"
+    ],
+    "alt": "Stylized Buddha eyes over water with lotus petals",
+    "bytes": 11986,
+    "sha256": "9c2ec7a97ccf1257"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/21ec08d1-5442-4944-b27e-2b2b0346e3c0/lovepainting.jpg": {
+    "local": "assets/blog/lovepainting.webp",
+    "original_name": "lovepainting.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 259618,
+    "sha256": "c7454809c968db38"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/229e901f-d7a9-42d5-97eb-3826cc91032a/Distance+healing+.jpg": {
+    "local": "assets/initiatives/distance-healing.webp",
+    "original_name": "Distance+healing+.jpg",
+    "pages": [
+      "/initiatives"
+    ],
+    "alt": "",
+    "bytes": 157994,
+    "sha256": "0871a4a21a85942a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/246e3cc0-7412-48a5-ae45-bf87baff6004/826e5-img_8614.webp": {
+    "local": "assets/blog/826e5-img-8614.webp",
+    "original_name": "826e5-img_8614.webp",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 68248,
+    "sha256": "3b12ebfc29f6ffeb"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/2ff6063b-3424-4e1d-9961-8af21768a3ad/WhatsApp+Image+2024-05-06+at+17.43.28.jpeg": {
+    "local": "assets/home/whatsapp-image-2024-05-06-at-174328.webp",
+    "original_name": "WhatsApp+Image+2024-05-06+at+17.43.28.jpeg",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "Two people hugging outdoors, one wearing a colorful striped sweater and a hat, with green foliage and a rustic building in the background.",
+    "bytes": 436656,
+    "sha256": "1d7a44dcb109a0ff"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/367d6a72-07f7-436f-873c-e0cd95bab927/PHOTO-2025-08-28-16-25-33.jpg": {
+    "local": "assets/initiatives/initiatives-yagua-cultural-heritage-center-indigenous-school-01.webp",
+    "original_name": "PHOTO-2025-08-28-16-25-33.jpg",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 361028,
+    "sha256": "7e04e2c4a88f07a4"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/36e07352-e9c4-4225-bcb4-f249ef2065bd/cbe58-img_0548.webp": {
+    "local": "assets/blog/cbe58-img-0548.webp",
+    "original_name": "cbe58-img_0548.webp",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 53966,
+    "sha256": "b12dc8271193ab99"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/38e27ae5-13fb-4b71-848e-c577046b3a57/Donate-Icon_1.png": {
+    "local": "assets/brand/icon-donate.webp",
+    "original_name": "Donate-Icon_1.png",
+    "pages": [
+      "/",
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "Outline of two hands forming a heart shape",
+    "bytes": 9908,
+    "sha256": "d57aafd69c5d54c1"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/39f0e53c-b074-4c3b-b31e-593db41df706/Paititi-LizPeace+-+63.jpeg": {
+    "local": "assets/home/paititi-lizpeace-63.webp",
+    "original_name": "Paititi-LizPeace+-+63.jpeg",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "",
+    "bytes": 500156,
+    "sha256": "d08050e053015643"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/40489d63-2199-43d8-825f-30e53d6d11a6/beyond_ayahuasca.png": {
+    "local": "assets/home/beyond-ayahuasca.webp",
+    "original_name": "beyond_ayahuasca.png",
+    "pages": [
+      "/",
+      "/beyond-ayahuasca"
+    ],
+    "alt": "Book cover of 'Beyond Ayahuasca' by Roman Hanis, featuring a background of vibrant green leaves and the subtitle 'Unlocking the Evolutionary Science of Indigenous Amazonian Wisdom to Access Your Highest Potential.' Foreword by Nick Polizzi, founder of The Sacred Science.",
+    "bytes": 2101192,
+    "sha256": "eaa6177c15f1a8ce"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/45d5c24a-dc68-4c71-8bdd-9a1834de34be/IMG_0558.jpg": {
+    "local": "assets/retreats/online-courses-01.webp",
+    "original_name": "IMG_0558.jpg",
+    "pages": [
+      "/online-courses"
+    ],
+    "alt": "",
+    "bytes": 430276,
+    "sha256": "4be5ba89e39fdc2c"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/4c646c46-a849-49cc-a5ed-2042c367f2cd/favicon.ico": {
+    "local": "assets/brand/favicon-source.webp",
+    "original_name": "favicon.ico",
+    "pages": [
+      "/",
+      "/discoverpaititi",
+      "/about-us",
+      "/team",
+      "/press-media",
+      "/contact",
+      "/retreats",
+      "/online-courses",
+      "/beyond-ayahuasca",
+      "/initiatives",
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school",
+      "/initiatives/project-one-f5w4d-4nex6",
+      "/store",
+      "/store/p/us-tour-rsvp-donation",
+      "/blog",
+      "/terms-conditions",
+      "/who/privacy-policy"
+    ],
+    "alt": "",
+    "bytes": 3762,
+    "sha256": "0ef4fc020e5e747a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/55bab85a-6f8b-4bf4-ad76-8ff664478a6a/Roman+with+the+Yaguas+and+kids.jpeg": {
+    "local": "assets/blog/roman-with-the-yaguas-and-kids.webp",
+    "original_name": "Roman+with+the+Yaguas+and+kids.jpeg",
+    "pages": [
+      "/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"
+    ],
+    "alt": "",
+    "bytes": 117420,
+    "sha256": "adce3abc3355a462"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/57fefad9-74d7-4bf2-8dcb-7b63dc749b88/Screenshot%2B2025-04-12%2Bat%2B7.02.37%25E2%2580%25AFPM.jpg": {
+    "local": "assets/home/screenshot-2025-04-12-at-70237e280afpm.webp",
+    "original_name": "Screenshot%2B2025-04-12%2Bat%2B7.02.37%25E2%2580%25AFPM.jpg",
+    "pages": [
+      "/"
+    ],
+    "alt": "",
+    "bytes": 66558,
+    "sha256": "e9c6bd31fcdc1b0d"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/61e27e00-542b-4777-8194-97d00ebd8389/96244-p1000372.webp": {
+    "local": "assets/blog/96244-p1000372.webp",
+    "original_name": "96244-p1000372.webp",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 155530,
+    "sha256": "b5b4df289d1c9352"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/6310d4a0-3347-4e56-833b-81c634e6c8ad/paititi_institute-events.jpg": {
+    "local": "assets/blog/paititi-institute-events.webp",
+    "original_name": "paititi_institute-events.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 56204,
+    "sha256": "2bba59488410db92"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/63552962-9f58-484f-b5f9-6f0ff036abd5/signal-2026-07-08-172812.jpeg": {
+    "local": "assets/retreats/signal-2026-07-08-172812.webp",
+    "original_name": "signal-2026-07-08-172812.jpeg",
+    "pages": [
+      "/retreats"
+    ],
+    "alt": "",
+    "bytes": 110330,
+    "sha256": "658894e3c3e22a64"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/64298030-8767-48fa-b0c8-528ebb71592d/roots.jpg": {
+    "local": "assets/blog/roots.webp",
+    "original_name": "roots.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 245848,
+    "sha256": "e653354bc817dd0c"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/663c3c2a-b7a3-4e43-860e-1a2a56086ba7/Illustration2-2.png": {
+    "local": "assets/initiatives/illustration2-2.webp",
+    "original_name": "Illustration2-2.png",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 66806,
+    "sha256": "4611dd4381584cd1"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/7197e8d5-ea12-4dbc-a767-1983ee1f5e86/Screenshot+2025-08-01+at+9.56.12%E2%80%AFPM.png": {
+    "local": "assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp",
+    "original_name": "Screenshot+2025-08-01+at+9.56.12%E2%80%AFPM.png",
+    "pages": [
+      "/initiatives/project-one-f5w4d-4nex6"
+    ],
+    "alt": "",
+    "bytes": 3025612,
+    "sha256": "adf59861c2246862"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/76ae169f-7e50-442f-84e3-ca90a419f9ac/WhatsApp+Image+2025-11-19+at+10.43.24.jpeg": {
+    "local": "assets/home/whatsapp-image-2025-11-19-at-104324.webp",
+    "original_name": "WhatsApp+Image+2025-11-19+at+10.43.24.jpeg",
+    "pages": [
+      "/"
+    ],
+    "alt": "",
+    "bytes": 350272,
+    "sha256": "a08be89f06705ed8"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/7706381a-3cdc-4cc1-8bae-5529dc823901/325ab427-08ac-423b-aad0-1e1fdf05fcc4.jpg": {
+    "local": "assets/home/home-02.webp",
+    "original_name": "325ab427-08ac-423b-aad0-1e1fdf05fcc4.jpg",
+    "pages": [
+      "/"
+    ],
+    "alt": "",
+    "bytes": 190086,
+    "sha256": "3b6af8251a7a3cec"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/7848d715-f066-49ae-b2bf-001da4ce84da/Roman+Ancelmo+Book.jpg": {
+    "local": "assets/about/roman-ancelmo-book.webp",
+    "original_name": "Roman+Ancelmo+Book.jpg",
+    "pages": [
+      "/press-media"
+    ],
+    "alt": "",
+    "bytes": 831344,
+    "sha256": "8fa20ee2a9f8e7b6"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/795780f1-76d2-4154-855b-75f2f21dc42c/WhatsApp+Image+2024-05-06+at+17.44.14.jpeg": {
+    "local": "assets/about/whatsapp-image-2024-05-06-at-174414.webp",
+    "original_name": "WhatsApp+Image+2024-05-06+at+17.44.14.jpeg",
+    "pages": [
+      "/contact"
+    ],
+    "alt": "",
+    "bytes": 302784,
+    "sha256": "55892726935121a6"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/84a27e83-acf4-4218-8783-6bd5578d7e2f/art.png": {
+    "local": "assets/about/art.webp",
+    "original_name": "art.png",
+    "pages": [
+      "/press-media"
+    ],
+    "alt": "",
+    "bytes": 17120,
+    "sha256": "a448a6cab5224e2a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/871d070a-9530-4a39-86a3-d4f961bdd2f1/47170-img_0512.webp": {
+    "local": "assets/blog/47170-img-0512.webp",
+    "original_name": "47170-img_0512.webp",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 43052,
+    "sha256": "ce105df792183bae"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/877f1139-e923-4e9a-8805-dab93ec049a1/Flower-purple.png": {
+    "local": "assets/retreats/flower-purple.webp",
+    "original_name": "Flower-purple.png",
+    "pages": [
+      "/beyond-ayahuasca"
+    ],
+    "alt": "Illustration of purple cherry blossoms on a branch",
+    "bytes": 28188,
+    "sha256": "8321fd1fec2a87d9"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/925a8649-100a-4d34-bf25-0a004ca401ba/Coco-Ceremony.jpg": {
+    "local": "assets/retreats/coco-ceremony.webp",
+    "original_name": "Coco-Ceremony.jpg",
+    "pages": [
+      "/retreats"
+    ],
+    "alt": "",
+    "bytes": 209688,
+    "sha256": "747629a1d130061a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/962b37ed-1ba5-4ebd-929d-e15c73065172/97b25-paititi_institute-events.jpg": {
+    "local": "assets/blog/97b25-paititi-institute-events.webp",
+    "original_name": "97b25-paititi_institute-events.jpg",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 56204,
+    "sha256": "2bba59488410db92"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/9dc1ebe7-bcf0-4036-bba3-9c39a8f897c2/Yahua+school+kids.jpg": {
+    "local": "assets/blog/yahua-school-kids.webp",
+    "original_name": "Yahua+school+kids.jpg",
+    "pages": [
+      "/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"
+    ],
+    "alt": "",
+    "bytes": 155218,
+    "sha256": "785ecfdb14a42b4e"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/b5df5c25-88ad-4a7c-9c93-6a665c54bfba/Screenshot+2026-03-27+at+1.00.11%E2%80%AFAM.png": {
+    "local": "assets/home/screenshot-2026-03-27-at-10011-am.webp",
+    "original_name": "Screenshot+2026-03-27+at+1.00.11%E2%80%AFAM.png",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "Screenshot 2026-03-27 at 1.00.11\u202fAM.png",
+    "bytes": 1673268,
+    "sha256": "8e1a62b0ede9355c"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/b7c9f760-ada3-4bce-8c01-ed953fd5fd23/64e8a812-1baf-4497-bde5-7fdfab7f428b.png": {
+    "local": "assets/retreats/beyond-ayahuasca-02.webp",
+    "original_name": "64e8a812-1baf-4497-bde5-7fdfab7f428b.png",
+    "pages": [
+      "/beyond-ayahuasca"
+    ],
+    "alt": "",
+    "bytes": 1442544,
+    "sha256": "59d81d250b9178ae"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/bb971feb-8d85-4f3e-9833-0e28004ed0eb/Roman+with+Yahua+elder.png": {
+    "local": "assets/blog/roman-with-yahua-elder.webp",
+    "original_name": "Roman+with+Yahua+elder.png",
+    "pages": [
+      "/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"
+    ],
+    "alt": "",
+    "bytes": 365596,
+    "sha256": "4abbcf4de08e71e0"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/bcfdca96-5684-41d9-a0b7-3652ca6334f0/221197022_4320552828031250_1143921062422649047_n.jpg": {
+    "local": "assets/blog/221197022-4320552828031250-1143921062422649047-n.webp",
+    "original_name": "221197022_4320552828031250_1143921062422649047_n.jpg",
+    "pages": [
+      "/blog/integration-phenomenal-into-mundane"
+    ],
+    "alt": "",
+    "bytes": 214326,
+    "sha256": "e6692c70cb1839cf"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/bdaf1d0c-2165-4fb2-b35a-695242e841d7/Paititi-Horizontal-Logo-White.png": {
+    "local": "assets/brand/paititi-logo-white.webp",
+    "original_name": "Paititi-Horizontal-Logo-White.png",
+    "pages": [
+      "/",
+      "/discoverpaititi",
+      "/about-us",
+      "/team",
+      "/press-media",
+      "/contact",
+      "/retreats",
+      "/online-courses",
+      "/beyond-ayahuasca",
+      "/initiatives",
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school",
+      "/initiatives/project-one-f5w4d-4nex6",
+      "/store",
+      "/store/p/us-tour-rsvp-donation",
+      "/blog",
+      "/terms-conditions",
+      "/who/privacy-policy"
+    ],
+    "alt": "",
+    "bytes": 9388,
+    "sha256": "ed675f19404ab050"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/bfd7521d-371f-4dc1-9678-e1da2dd93244/Screenshot+2025-08-01+at+10.01.43%E2%80%AFPM.png": {
+    "local": "assets/initiatives/screenshot-2025-08-01-at-100143-pm.webp",
+    "original_name": "Screenshot+2025-08-01+at+10.01.43%E2%80%AFPM.png",
+    "pages": [
+      "/initiatives/project-one-f5w4d-4nex6"
+    ],
+    "alt": "",
+    "bytes": 2176930,
+    "sha256": "b7fd89b99f28e6fe"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/c6764472-a2e1-4a1b-9d89-e1af6950342d/QuoteMark.png": {
+    "local": "assets/brand/icon-quotemark.webp",
+    "original_name": "QuoteMark.png",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "purple quotation mark symbol",
+    "bytes": 1380,
+    "sha256": "78b8a3c7dce1edb4"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/c6adcdde-1cf0-4f2f-8ba2-ab83e41d040b/2fdce-img_1476.jpg": {
+    "local": "assets/blog/2fdce-img-1476.webp",
+    "original_name": "2fdce-img_1476.jpg",
+    "pages": [
+      "/blog/how-to-create-sustainable-relationships-for-living-in-community"
+    ],
+    "alt": "",
+    "bytes": 201686,
+    "sha256": "ea75629cfd6672ef"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/c95b35aa-b4a9-4e58-a150-3ef6b9d4141e/Screenshot+2025-11-14+at+3.32.58%E2%80%AFPM.png": {
+    "local": "assets/initiatives/screenshot-2025-11-14-at-33258-pm.webp",
+    "original_name": "Screenshot+2025-11-14+at+3.32.58%E2%80%AFPM.png",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 2288970,
+    "sha256": "4a044f543903f259"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/cd1df609-ff23-4742-b359-32607f19b955/464054780_8702127826540373_6933023580014756778_n.jpg": {
+    "local": "assets/blog/464054780-8702127826540373-6933023580014756778-n.webp",
+    "original_name": "464054780_8702127826540373_6933023580014756778_n.jpg",
+    "pages": [
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 108880,
+    "sha256": "e0c516aa5c8db0ff"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/d0d04d40-77ac-4362-ae19-08484519c1ba/FlowerMandala.jpg": {
+    "local": "assets/blog/flowermandala.webp",
+    "original_name": "FlowerMandala.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times"
+    ],
+    "alt": "",
+    "bytes": 145378,
+    "sha256": "ef97d6a66573c56a"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/d6515040-ecfe-4d9e-a39b-07315f3ab7d5/Paititi-LizPeace+-+190.jpeg": {
+    "local": "assets/about/paititi-lizpeace-190.webp",
+    "original_name": "Paititi-LizPeace+-+190.jpeg",
+    "pages": [
+      "/contact"
+    ],
+    "alt": "",
+    "bytes": 688400,
+    "sha256": "1866ef6d18b77f65"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/db5fe3fc-6a75-4a51-86a8-83c0b04129ae/Healing-Philosophy.png": {
+    "local": "assets/retreats/healing-philosophy.webp",
+    "original_name": "Healing-Philosophy.png",
+    "pages": [
+      "/retreats"
+    ],
+    "alt": "",
+    "bytes": 25500,
+    "sha256": "2525e8b6c608975d"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/dbc0103a-0099-4e53-b098-bc98c60c5811/Living-Wisdom-Traditions.png": {
+    "local": "assets/initiatives/living-wisdom-traditions.webp",
+    "original_name": "Living-Wisdom-Traditions.png",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 11644,
+    "sha256": "7daefa4c0987744e"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e1500101-e1f1-431d-a68b-53a153e8d628/9f81c-coca_ceremony-paititi_institute-iquitos_peru-greg_goodman-adventuresofagoodman-2014-04-10-18-44-31.webp": {
+    "local": "assets/store/9f81c-coca-ceremony-paititi-institute-iquitos-peru-greg-good.webp",
+    "original_name": "9f81c-coca_ceremony-paititi_institute-iquitos_peru-greg_goodman-adventuresofagoodman-2014-04-10-18-44-31.webp",
+    "pages": [
+      "/store",
+      "/store/p/us-tour-rsvp-donation"
+    ],
+    "alt": "US TOUR RSVP DONATION",
+    "bytes": 43128,
+    "sha256": "6a9a52eba2862e92"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e2fd13e1-ec9f-4cf7-9ab2-79f14f128581/Screenshot+2025-08-01+at+10.31.13%E2%80%AFPM.png": {
+    "local": "assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp",
+    "original_name": "Screenshot+2025-08-01+at+10.31.13%E2%80%AFPM.png",
+    "pages": [
+      "/initiatives/project-one-f5w4d-4nex6"
+    ],
+    "alt": "",
+    "bytes": 2767926,
+    "sha256": "474398ac99671b18"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e56e1cf7-5773-4357-b09a-50b4e2c10ec2/beyond_ayahuasca.png": {
+    "local": "assets/initiatives/beyond-ayahuasca.webp",
+    "original_name": "beyond_ayahuasca.png",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 2089160,
+    "sha256": "ad8b2e74ce82b778"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e79f4d9d-534e-4aa4-b583-3364fc58eb31/Hummingbird-alt.png": {
+    "local": "assets/brand/icon-hummingbird.webp",
+    "original_name": "Hummingbird-alt.png",
+    "pages": [
+      "/discoverpaititi",
+      "/about-us"
+    ],
+    "alt": "Line drawing of a hummingbird surrounded by ornate floral vines and leaves.",
+    "bytes": 85370,
+    "sha256": "5ce48bf56c44fd8b"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e9b7b6f6-3c09-4cb0-8e39-6bd3ced07328/Radiant+Alchemy+in+the+Jungle.png": {
+    "local": "assets/retreats/radiant-alchemy-in-the-jungle.webp",
+    "original_name": "Radiant+Alchemy+in+the+Jungle.png",
+    "pages": [
+      "/beyond-ayahuasca"
+    ],
+    "alt": "",
+    "bytes": 2185062,
+    "sha256": "fa2599380da7e82b"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/e9c84e6f-7a36-4935-a24c-f28e4dc0cd34/signal-2024-01-27-195101.jpeg": {
+    "local": "assets/brand/signal-2024-01-27-195101.webp",
+    "original_name": "signal-2024-01-27-195101.jpeg",
+    "pages": [
+      "/terms-conditions"
+    ],
+    "alt": "",
+    "bytes": 204724,
+    "sha256": "08355a3b1c148d3b"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/eb68b078-95b3-4264-8cb1-1c4d125d7376/Screenshot+2025-12-03+at+11.54.30%E2%80%AFAM.png": {
+    "local": "assets/blog/screenshot-2025-12-03-at-115430-am.webp",
+    "original_name": "Screenshot+2025-12-03+at+11.54.30%E2%80%AFAM.png",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "",
+    "bytes": 5082,
+    "sha256": "76db5227524fe1bb"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/ecd6868c-90b5-4b8f-95f1-4d604c14e3ba/WhatsApp+Image+2025-08-10+at+13.36.36.jpeg": {
+    "local": "assets/initiatives/whatsapp-image-2025-08-10-at-133636.webp",
+    "original_name": "WhatsApp+Image+2025-08-10+at+13.36.36.jpeg",
+    "pages": [
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school"
+    ],
+    "alt": "",
+    "bytes": 341008,
+    "sha256": "9183b6898132c874"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/edaceaca-2445-4e4d-a526-79f38df9fc08/Paititi-Family-Icon.png": {
+    "local": "assets/brand/paititi-family-icon.webp",
+    "original_name": "Paititi-Family-Icon.png",
+    "pages": [
+      "/",
+      "/discoverpaititi",
+      "/about-us",
+      "/team",
+      "/press-media",
+      "/contact",
+      "/retreats",
+      "/online-courses",
+      "/beyond-ayahuasca",
+      "/initiatives",
+      "/initiatives/yagua-cultural-heritage-center-indigenous-school",
+      "/initiatives/project-one-f5w4d-4nex6",
+      "/store",
+      "/store/p/us-tour-rsvp-donation",
+      "/blog",
+      "/terms-conditions",
+      "/who/privacy-policy"
+    ],
+    "alt": "",
+    "bytes": 14556,
+    "sha256": "7aaa4ff8159300ae"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/f09b8929-4c7c-40a8-ae9b-be5136c7f88b/69265356_2542807292472488_6841856973810434048_n.jpg": {
+    "local": "assets/blog/69265356-2542807292472488-6841856973810434048-n.webp",
+    "original_name": "69265356_2542807292472488_6841856973810434048_n.jpg",
+    "pages": [
+      "/blog"
+    ],
+    "alt": "",
+    "bytes": 258908,
+    "sha256": "875ed471a261f0c8"
+  },
+  "https://images.squarespace-cdn.com/content/v1/66860505b32d032becf1a0fd/fca38174-cf9f-4bb1-9897-c3f184764d03/Foundational-Practices.png": {
+    "local": "assets/retreats/foundational-practices.webp",
+    "original_name": "Foundational-Practices.png",
+    "pages": [
+      "/online-courses"
+    ],
+    "alt": "",
+    "bytes": 23342,
+    "sha256": "b50c765c9edf736f"
+  },
+  "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/5491d1b6e4b05d49be0ab3ab/b21d73c4-21e7-4b4c-a77e-3979a6a010f2/Roman1.jpg": {
+    "local": "assets/blog/roman1.webp",
+    "original_name": "Roman1.jpg",
+    "pages": [
+      "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times",
+      "/blog/integration-phenomenal-into-mundane",
+      "/blog/makes-life-worth-living-in-a-time-turmoil",
+      "/blog/shards-shattered-ego-reflecting-countless-arms-compassion",
+      "/blog/embody-true-nature-healing-retreat"
+    ],
+    "alt": "",
+    "bytes": 74942,
+    "sha256": "527e3f836c7b4136"
+  },
+  "https://images.squarespace-cdn.com/content/v2/namespaces/memberAccountAvatars/libraries/686f12c9d7ed0313766189c2/847c58a6-60dd-45be-98a0-e45c08a52658/thirdPartyMemberAvatar-686f12c9d7ed0313766189c2-da860e1f-0faf-4501-9da2-14f8e49961b4": {
+    "local": "assets/blog/thirdpartymemberavatar-686f12c9d7ed0313766189c2-da860e1f-0fa.webp",
+    "original_name": "thirdPartyMemberAvatar-686f12c9d7ed0313766189c2-da860e1f-0faf-4501-9da2-14f8e49961b4",
+    "pages": [
+      "/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"
+    ],
+    "alt": "",
+    "bytes": 568,
+    "sha256": "92563f4140969ea8"
+  }
+}

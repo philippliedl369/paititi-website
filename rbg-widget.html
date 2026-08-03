@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Program listings</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<style>
+  html,body{margin:0;background:transparent;font-family:'Lato',system-ui,sans-serif}
+</style>
+</head>
+<body>
+<!-- Retreat Guru "RBG Connect" widget, isolated from the DC runtime.
+     Category comes from ?cat= (events,retreat | online-resources). -->
+<div id="rbg-connect"></div>
+<script type="text/javascript">
+  var cat = new URLSearchParams(location.search).get('cat') || 'events,retreat';
+  rbgOptions = { retreatType: "Retreat", customer: "paititi-institute", eventCategory: cat, buttonColor: "", defaultRoute: "" };
+  !function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://s3.amazonaws.com/rbgconnect.retreat.guru/public/rbg-connect.min.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}"complete"===document.readyState?t():window.attachEvent?window.attachEvent("onload",t):window.addEventListener("load",t,!1)}();
+  // Report height to the parent page so the iframe can grow with the listings.
+  setInterval(function () {
+    parent.postMessage({ rbgHeight: document.documentElement.scrollHeight, cat: cat }, location.origin);
+  }, 500);
+</script>
+</body>
+</html>

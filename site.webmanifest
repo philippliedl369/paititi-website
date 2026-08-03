@@ -1,16 +1,21 @@
 {
-  "name": "Meristem",
-  "short_name": "Meristem",
-  "description": "Placeholder description.",
+  "name": "Paititi Institute",
+  "short_name": "Paititi",
+  "description": "Paititi Institute for the Preservation of Ecology and Indigenous Culture \u2014 dedicated to Mother Earth and the infinite human potential.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B1220",
-  "theme_color": "#0B1220",
+  "background_color": "#2A1736",
+  "theme_color": "#2A1736",
   "icons": [
     {
-      "src": "/assets/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "/assets/brand/favicon.png",
+      "sizes": "185x185",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/brand/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ]
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+<script src="/reveal.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Team | Paititi Institute</title>
+<meta name="description" content="Meet the team of Paititi Institute. Roman Hanis is a co-founder of the Paititi Institute, healer, and author with over 20 years of lived apprenticeship in Amazonian and Andean Indigenous traditions.">
+<meta property="og:title" content="Team | Paititi Institute">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+  .ink-rule{position:relative}
+  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
+  .pt-bio p{max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px}
+  .pt-bio p:last-child{margin-bottom:0}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" style="position:sticky;top:0;z-index:50" hint-size="100%,115px"></dc-import>
+<main>
+
+  <!-- First content section: not tagged with data-enter -->
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container);margin:0 auto;padding:64px 24px 0">
+      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);letter-spacing:-0.02em;margin:0 0 56px">Meet the Team</h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:48px;align-items:center">
+        <img src="/assets/about/whatsapp-image-2026-01-28-at-181841.webp" alt="Roman Hanis" style="width:100%;max-height:620px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)" hint-size="600px,600px">
+        <div>
+          <h2 style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 10px">Roman Hanis</h2>
+          <p style="font-size:17px;font-weight:600;color:var(--accent-primary);margin:0 0 28px">Co-founder of Paititi Institute &mdash; Author / Healer</p>
+          <a href="mailto:roman@paititi-institute.org?subject=15%20min%20connection%20call" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="220px,48px">Book a Connection Call</x-import></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio -->
+  <section style="background:var(--surface-page)">
+    <div data-enter class="pt-bio" style="max-width:var(--container-narrow);margin:0 auto;padding:64px 24px var(--section-y)">
+      <p>Roman Hanis is a co-founder of the Paititi Institute, healer, and author with over 20 years of lived apprenticeship in Amazonian and Andean Indigenous traditions. He has worked closely with Indigenous communities in Peru since 2001, cultivating long-term relationships grounded in reciprocity, service, cultural preservation and ecological restoration.</p>
+      <p>Roman was featured in the critically acclaimed documentary The Sacred Science (2010), which documented early cross-cultural healing work in the Amazon.</p>
+      <p>Through Paititi Institute, Roman helps steward ancestral schools, cultural heritage projects, and healing retreats that unite elders and children and support intergenerational transmission of wisdom in the Amazon and the Andes. He is the author of Beyond Ayahuasca, an international bestseller in Shamanism dedicated to the Amazonian Yahua people, with proceeds directly supporting their ancestral school and cultural initiatives.</p>
+      <p>Roman is a certified Traditional Chinese Medicine practitioner in Peru and trained in acupuncture under the direction of Myriam Hacker at the Open International Institute of Oriental Medicine in Iquitos. He also holds a degree in medical massage therapy and Eastern bodywork from the Swedish Institute of Health Sciences in New York.</p>
+      <p>After being healed from severe Crohn&rsquo;s disease in 2002, Roman was formally pledged as a healer-curandero in 2004 by elders of the and Yahua tribe. He has since served an international community through ceremonial work, retreats, and educational programs addressing healing on physical, psychological, emotional, and spiritual levels.</p>
+      <p>At the heart of his work is a commitment to restoring right relationship between human beings, ancestral wisdom, and the living Earth.</p>
+    </div>
+  </section>
+
+</main>
+<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2400}}">
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

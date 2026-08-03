@@ -1,0 +1,33 @@
+{
+  "products": [
+    {
+      "id": "us-tour-rsvp-donation",
+      "name": "US TOUR RSVP DONATION",
+      "priceCents": 30000,
+      "currency": "usd",
+      "category": "US TOUR",
+      "type": "service",
+      "description": "Retreat deposit / RSVP for the US Tour retreats with Roman Hanis. $300 deposit reserves your spot; the balance ($625–$900 sliding scale) is settled at the retreat.",
+      "image": "/assets/store/us-tour-rsvp.webp",
+      "url": "/store/p/us-tour-rsvp-donation"
+    },
+    {
+      "id": "donation-qero",
+      "name": "Q'ero Nation Initiative Donation",
+      "customAmount": true,
+      "minAmountCents": 100,
+      "currency": "usd",
+      "type": "donation",
+      "suggestedAmounts": [5, 10, 25, 50]
+    },
+    {
+      "id": "donation-yagua",
+      "name": "Yagua Initiative Donation",
+      "customAmount": true,
+      "minAmountCents": 100,
+      "currency": "usd",
+      "type": "donation",
+      "suggestedAmounts": [10, 25, 50, 100]
+    }
+  ]
+}

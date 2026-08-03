@@ -8,3 +8,4 @@ docs/
 wrangler.jsonc
 README.md
 .wrangler/
+tools/

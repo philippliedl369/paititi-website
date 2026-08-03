@@ -3,49 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="/support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="_ds/meristem-design-system/tokens/fonts.css">
-<link rel="stylesheet" href="_ds/meristem-design-system/tokens/colors.css">
-<link rel="stylesheet" href="_ds/meristem-design-system/tokens/typography.css">
-<link rel="stylesheet" href="_ds/meristem-design-system/tokens/spacing.css">
-<link rel="stylesheet" href="_ds/meristem-design-system/tokens/effects.css">
-<link rel="stylesheet" href="_ds/meristem-design-system/styles.css">
-<script src="_ds/meristem-design-system/_ds_bundle.js"></script>
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  .pt-social a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid rgba(255,255,255,0.25);border-radius:50%;color:#CBB8D8;text-decoration:none}
+  .pt-social a:hover{color:#fff;border-color:#fff}
+  .pt-news-input{flex:1;min-width:220px;height:46px;padding:0 16px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;color:var(--text-body);background:#fff}
+  .pt-news-input:focus{outline:2px solid var(--focus-ring);border-color:var(--border-focus)}
+</style>
 </helmet>
-<footer style="background:var(--surface-inverse);color:#fff;font-family:var(--font-body)">
-  <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px 0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px;padding-bottom:48px">
-      <div style="max-width:320px">
-        <span style="font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#fff">meristem<span style="color:var(--accent-highlight)">.</span></span>
-        <p style="font-size:15px;line-height:1.6;color:#9DA9BC;margin:14px 0 0">Placeholder tagline — one sentence on what this company does.</p>
+<div style="font-family:var(--font-body)">
+
+  <!-- Pre-footer newsletter band (site-wide on the original) -->
+  <section style="background:var(--surface-section)">
+    <div style="max-width:var(--container);margin:0 auto;padding:72px 24px;text-align:center">
+      <h2 style="font:var(--text-h2);color:var(--text-heading);margin:0 0 12px">Sign up for updates</h2>
+      <p style="font-size:16px;line-height:1.6;color:var(--text-body);max-width:56ch;margin:0 auto 28px">Join the Paititi Institute community and receive inspiring stories, ancient wisdom, and practical guidance directly to your inbox.</p>
+      <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+        <p style="font-size:17px;font-weight:700;color:var(--accent-primary);margin:0">Thank you!</p>
+      </sc-if>
+      <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ subscribe }}" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto">
+          <input class="pt-news-input" type="email" name="email" placeholder="Email Address" required aria-label="Email Address">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="md" type="submit" hint-size="130px,46px">Subscribe</x-import>
+        </form>
+        <p style="font-size:13px;color:var(--text-muted);margin:14px 0 0">We do not share our list.</p>
+        <sc-if value="{{ newsError }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:14px;color:#A33;margin:10px 0 0">{{ newsErrorMsg }}</p>
+        </sc-if>
+      </sc-if>
+    </div>
+  </section>
+
+  <footer style="background:var(--surface-inverse);color:#fff">
+    <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px;padding-bottom:48px">
+        <div style="max-width:340px">
+          <img src="/assets/brand/paititi-logo-white.png" alt="Paititi Institute" width="525" height="245" style="height:52px;width:auto;display:block">
+          <p style="font-size:15px;line-height:1.6;color:#CBB8D8;margin:14px 0 0">Dedicated to mother earth and the infinite human potential.</p>
+          <div class="pt-social" style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+            <!-- Inline SVG rather than MeristemDS.Icon: Lucide dropped its brand
+                 glyphs, so Facebook/Instagram/YouTube rendered as empty <svg>. -->
+            <a href="https://soundcloud.com/life-is-a-ceremony" aria-label="SoundCloud" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 14v-3M6 16V10M9 16.5V8.5M12 16.5V7.5"/><path d="M15 16.5V8a4.6 4.6 0 0 1 4.4 3.6 3 3 0 0 1-.4 4.9"/></svg>
+            </a>
+            <a href="https://open.spotify.com/show/0J2OKdO30oW9Q5Db1T6Km6" aria-label="Spotify" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M7 9.6c3.4-1 7.2-.6 9.6 1"/><path d="M7.6 13c2.9-.8 6-.5 8 .9"/><path d="M8.2 16.1c2.3-.6 4.6-.4 6.2.7"/></svg>
+            </a>
+            <a href="https://www.facebook.com/@Paititi.Institute" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V11H5.5v4H8v6h4v-6h3l.8-4H12V7.6c0-.6.5-1.1 1.1-1.1H15z"/></svg>
+            </a>
+            <a href="https://instagram.com/paititi_institute" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.8" y="2.8" width="18.4" height="18.4" rx="5.2"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@PaititiInstitute" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.4 9.6l4.8 2.9-4.8 2.9z" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <nav aria-label="Explore" style="display:grid;gap:10px;align-content:start">
+          <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#A08FB0">Explore</span>
+          <a href="/initiatives" style="color:#CBB8D8;text-decoration:none;font-size:15px">Initiatives</a>
+          <a href="/about-us" style="color:#CBB8D8;text-decoration:none;font-size:15px">About Us</a>
+          <a href="/team" style="color:#CBB8D8;text-decoration:none;font-size:15px">Team</a>
+          <a href="/retreats" style="color:#CBB8D8;text-decoration:none;font-size:15px">Events &amp; Retreats</a>
+          <a href="/online-courses" style="color:#CBB8D8;text-decoration:none;font-size:15px">Online Courses</a>
+          <a href="/blog" style="color:#CBB8D8;text-decoration:none;font-size:15px">Blog</a>
+        </nav>
+        <nav aria-label="Legal" style="display:grid;gap:10px;align-content:start">
+          <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#A08FB0">Institute</span>
+          <a href="/press-media" style="color:#CBB8D8;text-decoration:none;font-size:15px">Press &amp; Media</a>
+          <a href="/contact" style="color:#CBB8D8;text-decoration:none;font-size:15px">Contact</a>
+          <a href="/donate" style="color:#CBB8D8;text-decoration:none;font-size:15px">Donate</a>
+          <a href="/terms-conditions" style="color:#CBB8D8;text-decoration:none;font-size:15px">Terms &amp; Conditions</a>
+          <a href="/who/privacy-policy" style="color:#CBB8D8;text-decoration:none;font-size:15px">Privacy Policy</a>
+        </nav>
       </div>
-      <nav aria-label="Site" style="display:grid;gap:10px;align-content:start">
-        <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7B8AA0">Explore</span>
-        <a href="/" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Home</a>
-        <a href="/product" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Product</a>
-        <a href="/about" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">About</a>
-        <a href="/contact" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">Contact</a>
-      </nav>
-      <div style="display:grid;gap:10px;align-content:start">
-        <span style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7B8AA0">Get in touch</span>
-        <a href="{{ mailto }}" style="color:#9DA9BC;text-decoration:none;font-size:15px;font-weight:500">{{ email }}</a>
+      <div style="border-top:1px solid rgba(255,255,255,0.15);padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <span style="font-size:13px;color:#A08FB0">© {{ year }} Paititi Institute for the Preservation of Ecology and Indigenous Culture.</span>
+        <span style="font-size:13px;color:#A08FB0">US 501(c)(3) via fiscal sponsorship by Empowerment Works, Inc. EIN 31-1796801</span>
       </div>
     </div>
-    <div style="border-top:1px solid rgba(255,255,255,0.15);padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <span style="font-size:13px;color:#7B8AA0">© 2026 Your Company. All rights reserved.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
+</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:420},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;hello@example.com&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:720}}">
 class Component extends DCLogic {
+  state = { subscribed: false, error: '' };
   renderVals() {
-    const email = this.props.email ?? 'hello@example.com';
-    return { email, mailto: 'mailto:' + email };
+    return {
+      year: String(new Date().getFullYear()),
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+      newsError: !!this.state.error,
+      newsErrorMsg: this.state.error,
+      subscribe: async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value.trim();
+        try {
+          const res = await fetch('/api/newsletter', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ email, website: form.website.value, source: location.pathname }),
+          });
+          if (res.ok) this.setState({ subscribed: true, error: '' });
+          else {
+            const data = await res.json().catch(() => ({}));
+            this.setState({ error: data.error || 'Signup failed, please try again.' });
+          }
+        } catch (err) {
+          this.setState({ error: 'Signup failed, please try again.' });
+        }
+      },
+    };
   }
 }
 </script>

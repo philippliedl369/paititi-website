@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
+<script src="/cart.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>US TOUR RSVP DONATION | Paititi Institute</title>
+<meta name="description" content="Reserve your spot on the US Tour retreats with Roman Hanis. A $300 deposit reserves your place; energy exchange $625–$900 sliding scale.">
+<meta property="og:title" content="US TOUR RSVP DONATION | Paititi Institute">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+  .pt-field{display:grid;gap:6px}
+  .pt-field label{font-size:14px;font-weight:700;color:var(--text-heading)}
+  .pt-field input,.pt-field textarea,.pt-field select{padding:11px 14px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;color:var(--text-body);background:#fff;width:100%;box-sizing:border-box}
+  .pt-field input:focus,.pt-field textarea:focus,.pt-field select:focus{outline:2px solid var(--focus-ring);border-color:var(--border-focus)}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" active="store" style="position:sticky;top:0;z-index:50" hint-size="100%,115px"></dc-import>
+<main>
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px var(--section-y)">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:48px;align-items:start">
+        <img src="/assets/retreats/coco-ceremony.webp" alt="Coca ceremony at Paititi Institute, Iquitos, Peru" style="width:100%;border-radius:var(--radius-lg);display:block">
+        <div>
+          <h1 style="font:var(--text-h2);color:var(--text-heading);margin:0 0 10px">US TOUR RSVP DONATION</h1>
+          <p style="font-size:22px;font-weight:700;color:var(--text-heading);margin:0 0 24px">$300.00</p>
+          <div style="font-size:16px;line-height:1.7;color:var(--text-body)">
+            <p>It is a rare opportunity to have someone with Roman's experience and expertise here locally to offer his work. During this retreat, Roman will not only guide us through Grandmother and Grandfather ceremonies, but will also be sharing Peruvian wisdom teachings, Qigong, and Amazonian based Primordial Breath work to bring us a truly transformational and life-changing experience.</p>
+            <p><em>Is it time for something like this in your life?</em></p>
+            <h2 style="font:var(--text-h4);color:var(--text-heading);margin:24px 0 8px">Upcoming Retreat Dates &amp; Locations</h2>
+            <ul style="padding-left:20px;margin:0 0 16px;display:grid;gap:10px">
+              <li><strong>Victor, Idaho</strong> — May 22–25, 2026 · private residence · Energy Exchange $625–$900 (sliding scale) · $300 deposit reserves your spot</li>
+              <li><strong>Redding, CA</strong> — June 5–8, 2026 · 20 miles west of Redding · $625–$900 sliding scale · $300 deposit</li>
+              <li><strong>Colorado Springs, CO</strong> — June 11–14, 2026 · location TBD · $625–$900 sliding scale · $300 deposit</li>
+              <li><strong>Boulder, CO</strong> — June 18–21, 2026 · location TBD · $625–$900 sliding scale · $300 deposit</li>
+            </ul>
+            <p>More information and how to prepare will be sent once you reserve your spot and fill out the application!</p>
+            <p>Many Blessings,<br>Paititi Team</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width:var(--container-narrow);margin:64px auto 0">
+        <h2 class="ink-rule" style="font:var(--text-h3);color:var(--text-heading);margin:0 0 24px">RSVP US Tour Retreat</h2>
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:17px;font-weight:700;color:var(--accent-primary)">Added! Your application was received — continue to your cart to pay the $300 deposit.</p>
+          <a href="/cart" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Go to cart</x-import></a>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="display:grid;gap:20px">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <div class="pt-field"><label for="f-name">Name *</label><input id="f-name" name="Name" required></div>
+          <div class="pt-field"><label for="f-email">Email *</label><input id="f-email" name="Email" type="email" required></div>
+          <div class="pt-field"><label for="f-birth">Birthdate *</label><input id="f-birth" name="Birthdate" type="date" required></div>
+          <div class="pt-field"><label for="f-phone">Contact Number *</label><input id="f-phone" name="Contact Number" type="tel" required></div>
+          <div class="pt-field"><label for="f-date">Please select a US Tour Date / Location you are interested in attending or wanting more information about. *</label>
+            <select id="f-date" name="US Tour Date" required>
+              <option value="" disabled selected>Select US Tour Date Below</option>
+              <option>Victor, Idaho May 22-25th</option>
+              <option>Redding, CA June 5th-8th</option>
+              <option>Colorado Springs, CO June 11th-14th</option>
+              <option>Boulder, CO June 18th-21st</option>
+            </select>
+          </div>
+          <div class="pt-field"><label for="f-ref">How did you find out about our retreats? Please be specific about who and your relationship to that person. *</label><textarea id="f-ref" name="How did you find out" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-why">Please share why you would like to participate in a retreat and what you hope to receive. *</label><textarea id="f-why" name="Why participate" rows="3" required></textarea></div>
+          <div class="pt-field"><label for="f-exp">Tell us a little about yourself, your transformation journey, and your previous experience (if any) with sacred ceremonies and medicinal plants. *</label><textarea id="f-exp" name="About yourself" rows="3" required></textarea></div>
+          <div class="pt-field"><label for="f-health">Describe all health problems and medical terms. *</label><textarea id="f-health" name="Health problems" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-mental">Do you have a history of mental illness? If yes, please provide a brief history. If no, please indicate. *</label><textarea id="f-mental" name="Mental illness history" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-allergy">Please list all food or medication allergies and/or dietary restrictions. If you have no allergies or dietary restrictions, please indicate this. *</label><textarea id="f-allergy" name="Allergies" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-meds">Please list any medications you are currently taking or have stopped taking in the last year. *</label><textarea id="f-meds" name="Medications" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-hosp">Have you been hospitalized for any reason in the last 5 years? If so, please explain. *</label><textarea id="f-hosp" name="Hospitalized" rows="2" required></textarea></div>
+          <div class="pt-field"><label for="f-more">Do you have any additional information you would like to share with us? *</label><textarea id="f-more" name="Additional info" rows="2" required></textarea></div>
+          <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px;color:#A33;margin:0">{{ errorMsg }}</p>
+          </sc-if>
+          <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" type="submit" hint-size="160px,48px">RSVP</x-import>
+        </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2600}}">
+class Component extends DCLogic {
+  state = { sent: false, error: '' };
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      error: !!this.state.error,
+      errorMsg: this.state.error,
+      submit: async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const fd = new FormData(form);
+        const lines = [];
+        for (const [k, v] of fd.entries()) if (k !== 'website') lines.push(`${k}: ${v}`);
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              name: fd.get('Name'), email: fd.get('Email'),
+              subject: 'RSVP US TOUR RETREAT', message: lines.join('\n'),
+              website: fd.get('website'),
+            }),
+          });
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            this.setState({ error: data.error || 'Submission failed, please try again.' });
+            return;
+          }
+          window.PtCart.add({ id: 'us-tour-rsvp-donation', name: 'US TOUR RSVP DONATION', priceCents: 30000 });
+          this.setState({ sent: true, error: '' });
+        } catch (err) {
+          this.setState({ error: 'Submission failed, please try again.' });
+        }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

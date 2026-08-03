@@ -1,6 +1,6 @@
-/* Meristem — Fonts
- * Space Grotesk for headings, Inter for body + UI. Placeholder pairing,
- * loaded from Google Fonts CDN; swap for the real brand typefaces.
+/* Paititi — Fonts
+ * Philosopher for headings, Lato for body + UI — the pairing used on the
+ * original Squarespace site. Loaded from Google Fonts CDN.
  * No weights below 400 anywhere. */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');

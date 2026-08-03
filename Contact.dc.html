@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Contact | Paititi Institute</title>
+<meta name="description" content="Get in touch with Paititi Institute. Fill out some info and we will be in touch shortly!">
+<meta property="og:title" content="Contact | Paititi Institute">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  body{margin:0;background:var(--surface-page)}
+  a{color:var(--accent-primary)}
+  .pt-field{display:grid;gap:6px}
+  .pt-field label{font-size:14px;font-weight:700;color:var(--text-heading)}
+  .pt-field input,.pt-field textarea{padding:11px 14px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;color:var(--text-body);background:#fff;width:100%;box-sizing:border-box}
+  .pt-field input:focus,.pt-field textarea:focus{outline:2px solid var(--focus-ring);border-color:var(--border-focus)}
+</style>
+</helmet>
+<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
+<dc-import name="SiteHeader" style="position:sticky;top:0;z-index:50" hint-size="100%,115px"></dc-import>
+<main>
+  <section style="background:var(--surface-page)">
+    <div style="max-width:var(--container-narrow);margin:0 auto;padding:64px 24px var(--section-y)">
+      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 32px">Contact Us</h1>
+      <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 8px">Get in touch</h2>
+      <p style="font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 36px">Fill out some info and we will be in touch shortly! We can't wait to hear from you!</p>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <p style="font-size:18px;font-weight:700;color:var(--accent-primary)">Thank you!</p>
+      </sc-if>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" style="display:grid;gap:20px">
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="pt-field"><label for="c-first">First Name *</label><input id="c-first" name="firstName" required autocomplete="given-name"></div>
+          <div class="pt-field"><label for="c-last">Last Name *</label><input id="c-last" name="lastName" required autocomplete="family-name"></div>
+        </div>
+        <div class="pt-field"><label for="c-email">Email *</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+        <div class="pt-field"><label for="c-msg">Message *</label><textarea id="c-msg" name="message" rows="6" required></textarea></div>
+        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:14px;color:#A33;margin:0">{{ errorMsg }}</p>
+        </sc-if>
+        <div><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" type="submit" hint-size="140px,48px">Submit</x-import></div>
+      </form>
+      </sc-if>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1300}}">
+class Component extends DCLogic {
+  state = { sent: false, error: '' };
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      error: !!this.state.error,
+      errorMsg: this.state.error,
+      submit: async (e) => {
+        e.preventDefault();
+        const f = e.target;
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              name: `${f.firstName.value} ${f.lastName.value}`.trim(),
+              email: f.email.value,
+              message: f.message.value,
+              website: f.website.value,
+            }),
+          });
+          if (res.ok) this.setState({ sent: true, error: '' });
+          else {
+            const data = await res.json().catch(() => ({}));
+            this.setState({ error: data.error || 'Could not send message, please email us directly.' });
+          }
+        } catch (err) {
+          this.setState({ error: 'Could not send message, please email us directly.' });
+        }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

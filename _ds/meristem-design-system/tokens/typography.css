@@ -1,17 +1,17 @@
-/* Meristem — Typography
- * Space Grotesk (headings) / Inter (body + UI). Placeholder pairing with a
- * large, modern scale; swap families for the real brand typefaces.
- * No weights below 400. */
+/* Paititi — Typography
+ * Philosopher (headings) / Lato (body + UI), matching the original
+ * Squarespace theme. Philosopher only ships 400/700, so the medium and
+ * semibold aliases resolve to those. */
 
 :root {
   /* ---- Families ---- */
-  --font-display: 'Space Grotesk', 'Helvetica Neue', sans-serif; /* headings */
-  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; /* body + UI */
+  --font-display: 'Philosopher', 'Georgia', serif; /* headings */
+  --font-body: 'Lato', system-ui, -apple-system, 'Segoe UI', sans-serif; /* body + UI */
 
   /* ---- Weights ---- */
   --fw-regular: 400; /* @kind font */
-  --fw-medium: 500; /* @kind font */
-  --fw-semibold: 600; /* @kind font */
+  --fw-medium: 400; /* @kind font */
+  --fw-semibold: 700; /* @kind font */
   --fw-bold: 700; /* @kind font */
 
   /* ---- Type scale (web px) ---- */
