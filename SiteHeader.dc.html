@@ -16,34 +16,103 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  #pt-nav-links{display:flex;align-items:center;gap:22px}
-  #pt-menu-btn{display:none}
-  @media (max-width:1080px){
-    #pt-nav-links{display:none}
-    #pt-menu-btn{display:inline-flex}
+  /* The header floats over the first section of every page — on the original,
+     every page's first section is either a full-bleed photo or the plum band,
+     so white chrome always has something dark underneath. Pages reserve the
+     space with padding-top:var(--pt-header-h) on that first section. */
+  :root{--pt-header-h:209px;--pt-announce-h:49px}
+  .pt-header,.pt-header *,.pt-header *::before,.pt-header *::after{box-sizing:border-box}
+  .pt-header{position:fixed;top:0;left:0;right:0;z-index:50;font-family:var(--font-body);
+    letter-spacing:.08em;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+  .pt-header[data-hidden="1"]{transform:translateY(-100%)}
+  .pt-announce{background:#0B0009;color:#fff;position:relative;
+    display:flex;align-items:center;justify-content:center;min-height:var(--pt-announce-h);padding:0 48px}
+  .pt-announce a.pt-announce-link{color:#fff;text-decoration:none;font-size:14px;font-weight:300;
+    line-height:1.35;text-align:center;padding:7px 0}
+  .pt-announce a.pt-announce-link:hover{text-decoration:underline;color:#fff}
+  .pt-announce-x{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    background:none;border:0;color:rgba(255,255,255,.72);font-size:19px;line-height:1;cursor:pointer;padding:6px 8px}
+  .pt-announce-x:hover{color:#fff}
+
+  .pt-bar{display:flex;align-items:center;gap:24px;padding:0 58px;height:160px}
+  .pt-logo img{height:146px;width:auto;display:block}
+
+  /* No max-width: the original keeps all five items on one row and only breaks
+     to a second when the bar actually runs out of room (one row at >=1680px,
+     two at <=1440). Letting flex decide reproduces that at every width. */
+  /* flex:1 1 auto — the nav absorbs the bar's free space itself, so it stays on
+     one row until its content genuinely exceeds the gap between logo and socials.
+     (With margin-left:auto on .pt-social instead, the socials ate the free space
+     and the nav wrapped at every width.) */
+  .pt-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:24px;row-gap:0;flex:1 1 auto;min-width:0}
+  /* .pt-folder is a wrapper div, so its <a> needs the link styling too — without
+     it "The Institute" falls back to the design system's default anchor colour. */
+  .pt-nav > *,.pt-folder > a{font-size:16px;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;
+    background:none;border:0;padding:0;font-family:var(--font-body);cursor:pointer;line-height:32px}
+  .pt-nav > *:hover,.pt-folder > a:hover{opacity:.78;color:#fff}
+  .pt-nav [data-active="1"]{box-shadow:inset 0 -2px 0 #fff}
+
+  .pt-folder{position:relative}
+  .pt-folder-panel{position:absolute;top:calc(100% + 12px);left:-18px;min-width:216px;background:#fff;
+    border-radius:4px;box-shadow:0 14px 38px rgba(11,0,9,.28);padding:8px;display:none;z-index:60}
+  .pt-folder:hover .pt-folder-panel,.pt-folder:focus-within .pt-folder-panel{display:block}
+  .pt-folder-panel a{display:block;padding:10px 16px;font-size:15px;font-weight:700;color:#584364;text-decoration:none;line-height:1.3}
+  .pt-folder-panel a:hover{background:#F1EAF6}
+
+  /* Scoped to .pt-header: SiteFooter also defines .pt-social, and both
+     components' helmet styles land in the same <head>, so an unscoped rule
+     there would win on source order and re-show these icons on mobile. */
+  .pt-header .pt-social{display:flex;align-items:center;gap:25px;flex:0 0 auto}
+  .pt-header .pt-social a{color:#fff;display:inline-flex;opacity:.92}
+  .pt-header .pt-social a:hover{opacity:1}
+
+  .pt-donate{display:inline-flex;align-items:center;justify-content:center;height:59px;padding:0 21px;
+    background:#fff;color:#584364;border-radius:16px 0;font-size:19px;font-weight:700;letter-spacing:.02em;
+    text-decoration:none;white-space:nowrap}
+  .pt-donate:hover{background:#F1EAF6;color:#584364}
+
+  .pt-burger{display:none;margin-left:auto;width:46px;height:46px;align-items:center;justify-content:center;
+    background:none;border:1px solid rgba(255,255,255,.45);border-radius:16px 0;color:#fff;cursor:pointer}
+  .pt-mobile{background:#0B0009;padding:8px 24px 26px}
+  .pt-mobile a{display:block;color:#fff;text-decoration:none;font-size:17px;font-weight:700;
+    padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  /* Out-specifies .pt-mobile a, which would otherwise paint this white on white. */
+  .pt-mobile a.pt-donate{display:inline-flex;color:#584364;margin-top:20px;padding:0 21px;border-bottom:0}
+
+  @media (max-width:1180px){
+    .pt-bar{gap:20px;padding:0 28px;height:120px}
+    .pt-logo img{height:104px}
+    .pt-nav{column-gap:22px}
+    .pt-nav > *{font-size:15px}
+    .pt-header .pt-social{gap:16px}
   }
-  .pt-dropdown{position:relative}
-  .pt-dropdown-panel{position:absolute;top:calc(100% + 10px);left:-16px;min-width:220px;background:#fff;border:1px solid var(--border-subtle);border-radius:var(--radius-md);box-shadow:0 12px 32px rgba(33,4,22,0.14);padding:8px;display:none;z-index:60}
-  .pt-dropdown:hover .pt-dropdown-panel,.pt-dropdown:focus-within .pt-dropdown-panel{display:block}
-  .pt-dropdown-panel a{display:block;padding:10px 14px;border-radius:var(--radius-sm);font-weight:600;font-size:15px;color:var(--text-heading);text-decoration:none}
-  .pt-dropdown-panel a:hover{background:var(--surface-section);color:var(--accent-primary)}
-  a button[style*="inline-flex"]{max-width:100%;box-sizing:border-box}
+  @media (max-width:1080px){
+    :root{--pt-header-h:150px}
+    .pt-nav,.pt-header .pt-social,.pt-donate{display:none}
+    .pt-burger{display:inline-flex}
+    .pt-bar{height:100px;padding:0 22px}
+    .pt-logo img{height:78px}
+  }
 </style>
 </helmet>
-<a href="https://www.zeffy.com/en-US/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" target="_blank" rel="noopener" style="display:block;background:var(--surface-inverse);color:#fff;text-decoration:none;text-align:center;padding:10px 16px;font-family:var(--font-body);font-size:14px;font-weight:600">🌿 Support the Growth of the Yahua Ancestral School and Living Wisdom Center</a>
-<header style="background:rgba(255,255,255,0.94);backdrop-filter:saturate(1.1) blur(8px);border-bottom:1px solid var(--border-subtle);font-family:var(--font-body)">
-  <div style="max-width:var(--container-wide);margin:0 auto;padding:0 24px;height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <a href="/" style="display:inline-flex;align-items:center;text-decoration:none" aria-label="Paititi Institute — home">
-      <img src="/assets/brand/paititi-logo-purple.png" alt="Paititi Institute" width="525" height="245" style="height:54px;width:auto;display:block">
+<header class="pt-header" data-hidden="{{ hidden }}">
+  <sc-if value="{{ announceOpen }}" hint-placeholder-val="{{ true }}">
+    <div class="pt-announce">
+      <a class="pt-announce-link" href="https://www.zeffy.com/en-US/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" target="_blank" rel="noopener">🌿 Support the Growth of the Yahua Ancestral School and Living Wisdom Center</a>
+      <button class="pt-announce-x" onClick="{{ closeAnnounce }}" aria-label="Dismiss announcement">&times;</button>
+    </div>
+  </sc-if>
+
+  <div class="pt-bar">
+    <a class="pt-logo" href="/" aria-label="Paititi Institute — home">
+      <img src="/assets/brand/paititi-logo-white.png" alt="Paititi Institute" width="525" height="245">
     </a>
-    <nav id="pt-nav-links" aria-label="Main">
-      <div class="pt-dropdown">
-        <button style="display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-heading);padding:4px 2px">The Institute
-          <x-import component-from-global-scope="MeristemDS.Icon" name="ChevronDown" size="16" hint-size="16px,16px"></x-import>
-        </button>
-        <div class="pt-dropdown-panel">
+
+    <nav class="pt-nav" aria-label="Main">
+      <div class="pt-folder">
+        <a href="/the-institute" data-active="{{ activeInstitute }}">The Institute</a>
+        <div class="pt-folder-panel">
           <a href="/initiatives">Initiatives</a>
           <a href="/about-us">About Us</a>
           <a href="/team">Team</a>
@@ -51,56 +120,87 @@
         </div>
       </div>
       <sc-for list="{{ links }}" as="link" hint-placeholder-count="4">
-        <a href="{{ link.href }}" style="font-weight:600;font-size:15px;color:var(--text-heading);text-decoration:none;padding:4px 2px;box-shadow:{{ link.underline }}">{{ link.label }}</a>
+        <a href="{{ link.href }}" data-active="{{ link.active }}">{{ link.label }}</a>
       </sc-for>
-      <a href="/donate" style="text-decoration:none">
-        <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="sm" hint-size="100px,36px">Donate</x-import>
-      </a>
-      <a href="/cart" aria-label="Cart" style="display:inline-flex;align-items:center;gap:6px;color:var(--text-heading);text-decoration:none;font-weight:600;font-size:14px">
-        <x-import component-from-global-scope="MeristemDS.Icon" name="ShoppingBag" size="20" hint-size="20px,20px"></x-import>
-        <span id="pt-cart-count" style="min-width:14px">{{ cartCount }}</span>
-      </a>
     </nav>
-    <button id="pt-menu-btn" onClick="{{ toggleMenu }}" aria-label="Menu" style="width:44px;height:44px;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border-subtle);border-radius:var(--radius-md);color:var(--text-heading);cursor:pointer">
-      <x-import component-from-global-scope="MeristemDS.Icon" name="{{ menuIcon }}" size="22" hint-size="22px,22px"></x-import>
+
+    <!-- Inline SVG rather than MeristemDS.Icon: Lucide dropped its brand glyphs,
+         so Facebook/Instagram/YouTube rendered as empty <svg>. -->
+    <div class="pt-social">
+      <a href="https://soundcloud.com/life-is-a-ceremony" aria-label="SoundCloud" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.2 13.1c-.1 0-.2.1-.2.2l-.2 1.6.2 1.6c0 .1.1.2.2.2s.2-.1.2-.2l.2-1.6-.2-1.6c0-.1-.1-.2-.2-.2zm1.4-.9c-.1 0-.2.1-.2.2l-.3 2.5.3 2.4c0 .1.1.2.2.2.1 0 .2-.1.2-.2l.3-2.4-.3-2.5c0-.1-.1-.2-.2-.2zm1.5-.6c-.1 0-.2.1-.2.2l-.3 3.1.3 3c0 .1.1.2.2.2.1 0 .2-.1.2-.2l.3-3-.3-3.1c0-.1-.1-.2-.2-.2zm1.5-.3c-.2 0-.3.1-.3.3l-.2 3.4.2 3c0 .2.1.3.3.3.2 0 .3-.1.3-.3l.3-3-.3-3.4c0-.2-.1-.3-.3-.3zm1.6-1.1c-.2 0-.3.1-.3.3L7 15.4l.2 3c0 .2.2.3.3.3.2 0 .3-.1.3-.3l.3-3-.3-4.9c0-.2-.2-.3-.3-.3zm1.6-.5c-.2 0-.3.2-.4.3l-.2 5.4.2 3c0 .2.2.3.4.3s.3-.2.4-.3l.2-3-.2-5.4c0-.2-.2-.3-.4-.3zm1.7 0c-.2 0-.4.2-.4.4l-.2 5.3.2 2.9c0 .2.2.4.4.4s.4-.2.4-.4l.2-2.9-.2-5.3c0-.2-.2-.4-.4-.4zm1.7-.9c-.2 0-.4.2-.4.4l-.2 6.2.2 2.9c0 .2.2.4.4.4.2 0 .4-.2.4-.4l.2-2.9-.2-6.2c0-.2-.2-.4-.4-.4zm2.1-.4c-.3 0-.5.2-.5.5l-.1 6.5.1 2.8c0 .3.2.5.5.5s.5-.2.5-.5l.2-2.8-.2-6.5c0-.3-.2-.5-.5-.5zm1.8-.2c-.3 0-.5.2-.5.5l-.1 6.7.1 2.8c0 .3.2.5.5.5s.5-.2.5-.5l.1-2.8-.1-6.7c0-.3-.2-.5-.5-.5zM21 12.6c-.4 0-.8.1-1.1.2-.2-2.7-2.5-4.9-5.3-4.9-.7 0-1.4.1-2 .4-.2.1-.3.2-.3.4v10.1c0 .2.2.4.4.4H21c1.7 0 3-1.3 3-3.1s-1.3-3.5-3-3.5z"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/0J2OKdO30oW9Q5Db1T6Km6" aria-label="Spotify" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.22c3.81-.87 7.08-.5 9.72 1.11.29.18.39.57.21.86zm1.23-2.73a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.36.23.48.71.25 1.07zm.1-2.84C14.71 8.92 9.5 8.74 6.42 9.67a.93.93 0 1 1-.54-1.79c3.54-1.07 9.29-.86 12.95 1.31a.94.94 0 0 1-.95 1.62z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/@Paititi.Institute" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h-2.1V6.8c0-.7.5-.9.8-.9h1.3V3.1L13.6 3c-2.5 0-3.1 1.9-3.1 3.1v2.1H9v2.9h1.5V21h3v-9.9h2.1l.2-2.9z"/></svg>
+      </a>
+      <a href="https://instagram.com/paititi_institute" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4.6c2.4 0 2.7 0 3.6.05.88.04 1.35.19 1.67.31.42.16.72.36 1.03.67.31.31.51.61.67 1.03.12.32.27.79.31 1.67.05.9.05 1.17.05 3.6s0 2.7-.05 3.6c-.04.88-.19 1.35-.31 1.67-.16.42-.36.72-.67 1.03-.31.31-.61.51-1.03.67-.32.12-.79.27-1.67.31-.9.05-1.17.05-3.6.05s-2.7 0-3.6-.05c-.88-.04-1.35-.19-1.67-.31a2.78 2.78 0 0 1-1.03-.67 2.78 2.78 0 0 1-.67-1.03c-.12-.32-.27-.79-.31-1.67C4.6 14.7 4.6 14.43 4.6 12s0-2.7.05-3.6c.04-.88.19-1.35.31-1.67.16-.42.36-.72.67-1.03.31-.31.61-.51 1.03-.67.32-.12.79-.27 1.67-.31.9-.05 1.17-.05 3.6-.05M12 3c-2.44 0-2.75.01-3.71.05-.96.05-1.61.2-2.19.42-.6.23-1.1.54-1.61 1.05-.5.5-.81 1.01-1.05 1.61-.22.57-.37 1.23-.42 2.19C3.01 9.25 3 9.56 3 12s.01 2.75.05 3.71c.05.96.2 1.61.42 2.19.23.6.54 1.1 1.05 1.61.5.5 1.01.81 1.61 1.05.57.22 1.23.37 2.19.42.96.04 1.27.05 3.71.05s2.75-.01 3.71-.05c.96-.05 1.61-.2 2.19-.42.6-.23 1.1-.54 1.61-1.05.5-.5.81-1.01 1.05-1.61.22-.57.37-1.23.42-2.19.04-.96.05-1.27.05-3.71s-.01-2.75-.05-3.71c-.05-.96-.2-1.61-.42-2.19a4.4 4.4 0 0 0-1.05-1.61 4.4 4.4 0 0 0-1.61-1.05c-.57-.22-1.23-.37-2.19-.42C14.75 3.01 14.44 3 12 3zm0 4.38a4.62 4.62 0 1 0 0 9.24 4.62 4.62 0 0 0 0-9.24zm0 7.62a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.88-7.8a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@PaititiInstitute" aria-label="YouTube" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2s-.19-1.36-.78-1.95c-.75-.79-1.58-.79-1.96-.84C16.15 4.2 12 4.2 12 4.2h-.01s-4.14 0-6.85.21c-.38.05-1.22.05-1.96.84-.59.59-.78 1.95-.78 1.95S2.2 8.79 2.2 10.4v1.5c0 1.59.2 3.19.2 3.19s.19 1.36.78 1.95c.75.79 1.73.76 2.17.84 1.58.15 6.7.2 6.7.2s4.15-.01 6.86-.21c.38-.05 1.21-.05 1.96-.84.59-.59.78-1.95.78-1.95s.2-1.59.2-3.19v-1.5c0-1.59-.2-3.19-.2-3.19zM9.94 14.06V8.53l5.33 2.78-5.33 2.75z"/></svg>
+      </a>
+    </div>
+
+    <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Donate</a>
+
+    <!-- Inline SVG, like the social marks above: this component no longer pulls
+         in Lucide, and MeristemDS.Icon rendered an empty <svg> without it. -->
+    <button class="pt-burger" onClick="{{ toggleMenu }}" aria-label="Menu" aria-expanded="{{ menuExpanded }}">
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </sc-if>
+      <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </sc-if>
     </button>
   </div>
+
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="border-top:1px solid var(--border-subtle);background:#fff;padding:8px 24px 20px">
-      <nav aria-label="Mobile" style="display:grid;gap:2px">
-        <sc-for list="{{ mobileLinks }}" as="link" hint-placeholder-count="9">
-          <a href="{{ link.href }}" style="font-weight:600;font-size:16px;color:var(--text-heading);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border-subtle)">{{ link.label }}</a>
+    <div class="pt-mobile">
+      <nav aria-label="Mobile">
+        <sc-for list="{{ mobileLinks }}" as="link" hint-placeholder-count="8">
+          <a href="{{ link.href }}">{{ link.label }}</a>
         </sc-for>
-        <a href="/donate" style="text-decoration:none;margin-top:14px;display:block">
-          <x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="md" style="width:100%" hint-size="100%,42px">Donate</x-import>
-        </a>
+        <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Donate</a>
       </nav>
     </div>
   </sc-if>
 </header>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:220},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;institute&quot;,&quot;retreats&quot;,&quot;courses&quot;,&quot;blog&quot;,&quot;store&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;institute&quot;,&quot;retreats&quot;,&quot;courses&quot;,&quot;healing&quot;,&quot;blog&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { open: false, cartCount: 0 };
+  state = { open: false, announceOpen: true, hidden: false };
+
   componentDidMount() {
     try {
-      const cart = JSON.parse(localStorage.getItem('pt-cart') || '[]');
-      const n = cart.reduce((s, i) => s + (i.qty || 1), 0);
-      if (n !== this.state.cartCount) this.setState({ cartCount: n });
-      window.addEventListener('pt-cart-changed', (e) => this.setState({ cartCount: e.detail.count }));
+      if (localStorage.getItem('pt-announce-dismissed') === '1') this.setState({ announceOpen: false });
     } catch (err) { /* localStorage unavailable */ }
+
+    // The original header is fixed and retracts while you scroll down, returning
+    // the moment you scroll back up. Small movements are ignored so the bar
+    // doesn't flicker, and it always shows again near the top of the page.
+    let last = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (Math.abs(y - last) < 8) return;
+      const hide = y > last && y > 240 && !this.state.open;
+      if (hide !== this.state.hidden) this.setState({ hidden: hide });
+      last = y;
+    }, { passive: true });
   }
+
   renderVals() {
     const active = this.props.active ?? '';
     const links = [
       ['Events & Retreats', '/retreats', 'retreats'],
       ['Online Courses', '/online-courses', 'courses'],
-      ['Distance Healing', 'https://www.paititidistancehealing.com', 'healing'],
+      ['Distance Healing', 'https://www.paititidistancehealing.com/', 'healing'],
       ['Blog', '/blog', 'blog'],
-    ].map(([label, href, key]) => ({
-      label, href,
-      underline: key === active ? 'inset 0 -2px 0 var(--accent-highlight)' : 'none',
-    }));
+    ].map(([label, href, key]) => ({ label, href, active: key === active ? '1' : '0' }));
+
     const mobileLinks = [
       ['Initiatives', '/initiatives'],
       ['About Us', '/about-us'],
@@ -108,16 +208,23 @@ class Component extends DCLogic {
       ['Beyond Ayahuasca', '/beyond-ayahuasca'],
       ['Events & Retreats', '/retreats'],
       ['Online Courses', '/online-courses'],
-      ['Distance Healing', 'https://www.paititidistancehealing.com'],
+      ['Distance Healing', 'https://www.paititidistancehealing.com/'],
       ['Blog', '/blog'],
-      ['Cart', '/cart'],
     ].map(([label, href]) => ({ label, href }));
+
     return {
       links, mobileLinks,
-      cartCount: this.state.cartCount ? String(this.state.cartCount) : '',
+      activeInstitute: active === 'institute' ? '1' : '0',
+      announceOpen: this.state.announceOpen,
+      hidden: this.state.hidden ? '1' : '0',
       menuOpen: this.state.open,
+      menuClosed: !this.state.open,
+      menuExpanded: this.state.open ? 'true' : 'false',
       toggleMenu: () => this.setState(s => ({ open: !s.open })),
-      menuIcon: this.state.open ? 'X' : 'Menu',
+      closeAnnounce: () => {
+        this.setState({ announceOpen: false });
+        try { localStorage.setItem('pt-announce-dismissed', '1'); } catch (err) { /* ignore */ }
+      },
     };
   }
 }

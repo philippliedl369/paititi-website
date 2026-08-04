@@ -1,6 +1,8 @@
 /* Paititi — Fonts
  * Philosopher for headings, Lato for body + UI — the pairing used on the
  * original Squarespace site. Loaded from Google Fonts CDN.
- * No weights below 400 anywhere. */
+ * Lato 300 is load-bearing: the original sets body copy, nav sublines and the
+ * announcement bar in Light, and without it they all snap back to 400 and the
+ * whole page reads noticeably heavier than paititi-institute.org. */
 
-@import url('https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
