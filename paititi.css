@@ -44,12 +44,16 @@ body { margin: 0; background: #F1EAF6 }
 /* The narrow measure Squarespace uses for legal copy and single-column prose. */
 .pt-wrap-narrow { max-width: 996px; margin: 0 auto; padding: 0 24px }
 
+/* Deliberately no `color` here. #210416 is the heading colour almost
+   everywhere, but it comes from .pt-page above by inheritance, exactly as it
+   does for p and li. Setting it on this selector instead makes it (0,1,2),
+   which outranks every `.xx-sec h1 {color:#fff}` a page writes to reverse a
+   dark section out — and the result is #210416 headings on #210416 grounds,
+   invisible rather than merely wrong. Sections set `color` and everything
+   inside them follows. */
 .pt-page main h1, .pt-page main h2, .pt-page main h3, .pt-page main h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  /* Measured across the live pages: #210416 is the heading colour almost
-     everywhere; plum is the exception, not the rule. */
-  color: #210416;
   margin: 0;
   letter-spacing: normal;
   line-height: 1.3;
@@ -250,7 +254,13 @@ body { margin: 0; background: #F1EAF6 }
   min-height: var(--pt-hero-h, 660px);
   text-align: center;
 }
-.pt-hero h1, .pt-hero h2, .pt-hero p { color: #fff }
+/* Hero ink is a per-page decision on the original, not a property of heroes:
+   measured across the live site it is the ordinary dark #210416 on eight pages,
+   white on Home, Team and the Q'ero appeal, and plum on About Us. So there is
+   no sitewide default that is right — a blanket `color:#fff` here silently
+   reverses the eight that shouldn't be. Set it on the section and let it
+   inherit, so a page overriding one heading inside still wins. */
+.pt-hero { color: var(--pt-hero-ink, #210416) }
 
 /* The hero title sits on a translucent plum panel, inset by the text-block
    padding — measured at rgba(88,67,100,.39). */
