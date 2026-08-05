@@ -143,7 +143,7 @@
             <button type="button" data-on="{{ a.active }}" onClick="{{ a.pick }}">{{ a.label }}</button>
           </sc-for>
         </div>
-        <sc-if cond="{{ isCustom }}">
+        <sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
           <input class="qe-custom" type="number" min="1" step="1" placeholder="Custom amount (USD)" onInput="{{ setCustom }}">
         </sc-if>
 
@@ -157,7 +157,7 @@
 
         <label class="qe-fees"><input type="checkbox" onChange="{{ toggleFees }}"> <span>Support us by covering the fees we have to pay</span></label>
 
-        <sc-if cond="{{ error }}"><p class="qe-err">{{ errorMsg }}</p></sc-if>
+        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}"><p class="qe-err">{{ errorMsg }}</p></sc-if>
         <button class="pt-btn qe-donate" type="button" onClick="{{ donate }}">Donate</button>
       </div>
     </div>

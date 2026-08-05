@@ -57,16 +57,47 @@ maps clean URLs via `_redirects`).
 ```bash
 npx wrangler secret put RESEND_API_KEY      # contact form + notifications
 npx wrangler secret put STRIPE_SECRET_KEY   # store + donations
-npx wrangler kv namespace create NEWSLETTER # then add kv_namespaces to wrangler.jsonc
+npx wrangler secret put NEWSLETTER_API_KEY  # email provider (see below)
 npx wrangler deploy
 ```
 
-Until the secrets exist the forms return a friendly "not configured yet"
-error; everything else works statically. Optional: `RESEND_AUDIENCE_ID` to
-push newsletter signups into a Resend audience instead of KV.
+Until the secrets exist the forms tell the visitor the feature is temporarily
+unavailable and log the real reason; everything else works statically. The
+error text a form prints comes straight from `api.js`, so nothing internal —
+missing secrets, provider names, product ids — may appear in it.
 
 Before launch also work through `docs/seo.md` — every page currently ships
 `noindex` on purpose; strip those metas when the domain cuts over.
+
+### The newsletter
+
+Squarespace did four things here, and only the first is irreversible:
+held the list, sent the campaigns, supplied the unsubscribe link and postal
+address every bulk email legally needs, and lent its own sender reputation.
+**Export the list before the Squarespace account lapses** — everything else can
+be rebuilt afterwards, that cannot.
+
+The site itself only ever makes one call, "add this address to that list", so
+the provider is a table entry in `api.js` rather than a branch through it.
+Switching is three values:
+
+```
+NEWSLETTER_PROVIDER   mailchimp | kit | mailerlite | brevo | beehiiv | resend
+NEWSLETTER_API_KEY    that provider's key            (secret)
+NEWSLETTER_LIST_ID    audience / list / form / publication id
+```
+
+Composing and sending stay in the provider's own tooling. New signups double
+opt in by default (`NEWSLETTER_DOUBLE_OPT_IN=false` turns that off), because
+the list is restarting on a cold sending domain and confirmed addresses are
+what keep it out of spam folders. Three things to do in the provider, not here:
+verify the domain with SPF/DKIM/DMARC **while you still control DNS**, set the
+confirmation email, and put the postal address in the campaign footer.
+
+The two migrations are independent, and doing them separately is much safer:
+move the list and repoint the Squarespace form at the new provider first, send
+a campaign or two to warm the domain, then cut the site over against something
+already proven.
 
 ## Assets
 

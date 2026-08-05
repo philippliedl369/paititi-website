@@ -16,11 +16,16 @@
 	},
 	"vars": {
 		"CONTACT_TO": "info@paititi-institute.org",
-		"SITE_ORIGIN": "https://paititi-institute.org"
+		"SITE_ORIGIN": "https://paititi-institute.org",
+		// The email provider that replaces Squarespace campaigns. Set both of
+		// these plus the NEWSLETTER_API_KEY secret; see api.js for the options.
+		// "NEWSLETTER_PROVIDER": "mailchimp",
+		// "NEWSLETTER_LIST_ID": ""
 	}
 	// Secrets to set before the functions go live:
-	//   npx wrangler secret put RESEND_API_KEY     (contact form email)
-	//   npx wrangler secret put STRIPE_SECRET_KEY  (store/donation checkout)
-	// Optional KV for newsletter signups:
+	//   npx wrangler secret put RESEND_API_KEY      (contact form email)
+	//   npx wrangler secret put STRIPE_SECRET_KEY   (store/donation checkout)
+	//   npx wrangler secret put NEWSLETTER_API_KEY  (email provider)
+	// Optional KV, to hold signups until the provider is chosen:
 	//   npx wrangler kv namespace create NEWSLETTER  → add "kv_namespaces" here
 }

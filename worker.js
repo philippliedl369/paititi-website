@@ -7,10 +7,13 @@
  * Secrets (npx wrangler secret put <NAME>):
  *   RESEND_API_KEY     — transactional email for the contact form
  *   STRIPE_SECRET_KEY  — store and donation checkout
+ *   NEWSLETTER_API_KEY — the email provider that replaced Squarespace campaigns
  * Vars (wrangler.jsonc -> "vars"):
  *   CONTACT_TO         — inbox that receives contact-form submissions
  *   SITE_ORIGIN        — canonical origin for Stripe success/cancel URLs
- * Optional: a KV namespace bound as NEWSLETTER stores signups.
+ *   NEWSLETTER_PROVIDER / NEWSLETTER_LIST_ID — see api.js
+ * Optional: a KV namespace bound as NEWSLETTER holds signups until a provider
+ * is chosen, so addresses collected in the meantime are not simply dropped.
  */
 import { handleApi, JSON_HEADERS } from './api.js';
 

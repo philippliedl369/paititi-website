@@ -92,10 +92,10 @@
       </div>
 
       <div style="grid-area:7 / 1 / 21 / 12">
-        <sc-if cond="{{ sent }}">
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
           <p class="pt-lg"><strong>Thank you &mdash; your message is on its way.</strong></p>
         </sc-if>
-        <sc-if cond="{{ notSent }}">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
         <form class="ct-form" onSubmit="{{ submit }}">
           <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
           <div class="ct-row">
@@ -104,7 +104,7 @@
           </div>
           <div class="ct-field"><label for="c-email">Email (required)</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
           <div class="ct-field"><label for="c-msg">Message (required)</label><textarea id="c-msg" name="message" required></textarea></div>
-          <sc-if cond="{{ error }}">
+          <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
             <p class="pt-sm" style="color:#A33">{{ errorMsg }}</p>
           </sc-if>
           <div><button class="pt-btn ct-submit" type="submit">Submit</button></div>

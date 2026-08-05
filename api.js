@@ -17,6 +17,17 @@ export const JSON_HEADERS = { 'content-type': 'application/json' };
 const ok = (data) => ({ status: 200, body: data });
 const fail = (status, message) => ({ status, body: { error: message } });
 
+/**
+ * A failure whose cause is ours, not the visitor's. The reason goes to the
+ * log; the response carries copy written for the person standing in front of
+ * the form. The forms print `error` verbatim, so nothing internal — missing
+ * secrets, provider names, product ids — may travel in it.
+ */
+function unavailable(cause, message) {
+  console.error('[paititi]', cause);
+  return fail(503, message);
+}
+
 export function isEmail(s) {
   return typeof s === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 }
@@ -53,9 +64,12 @@ async function contact(body, env, deps) {
   const { name, email, subject, message } = body;
   if (!name || !email || !message) return fail(400, 'name, email and message are required');
   if (!isEmail(email)) return fail(400, 'Invalid email address');
-  if (!env.RESEND_API_KEY) return fail(503, 'Contact form not configured yet (RESEND_API_KEY)');
-
   const to = env.CONTACT_TO || 'info@paititi-institute.org';
+  if (!env.RESEND_API_KEY) {
+    return unavailable('contact: RESEND_API_KEY is not set',
+      `This form is temporarily unavailable — please email us at ${to}.`);
+  }
+
   const from = env.CONTACT_FROM || 'Website <website@paititi-institute.org>';
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -75,30 +89,111 @@ async function contact(body, env, deps) {
   return ok({ ok: true });
 }
 
-/* ---------------- newsletter ---------------- */
+/* ---------------- newsletter ----------------
+ * Both the list and the sending used to live in Squarespace. Whichever email
+ * provider replaces it, the site itself only ever makes one call — add this
+ * address to that list — so the provider is a table entry rather than a branch
+ * through the handler. Switching is three environment values:
+ *
+ *   NEWSLETTER_PROVIDER   one of the keys below
+ *   NEWSLETTER_API_KEY    that provider's key
+ *   NEWSLETTER_LIST_ID    the audience / list / form / publication to join
+ *
+ * Composing and sending campaigns stays in the provider's own tooling; this
+ * file is only the subscribe hook. Unsubscribe links, the postal address and
+ * the confirmation email are the provider's job too, and are not optional —
+ * Squarespace supplied all three invisibly.
+ *
+ * These are each provider's documented add-subscriber call, but mail APIs
+ * version: check the current docs for whichever you pick, and put one real
+ * signup through it before launch.
+ */
+const NEWSLETTER_PROVIDERS = {
+  // Mailchimp keys carry their datacenter after the final hyphen — abc123…-us21.
+  mailchimp: (email, env, confirm) => ({
+    url: `https://${env.NEWSLETTER_API_KEY.split('-').pop() || 'us1'}.api.mailchimp.com/3.0`
+       + `/lists/${env.NEWSLETTER_LIST_ID}/members`,
+    headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },
+    body: { email_address: email, status: confirm ? 'pending' : 'subscribed' },
+  }),
+  // Kit (formerly ConvertKit): LIST_ID is a form id, and the form's own
+  // setting decides whether it double opts in.
+  kit: (email, env) => ({
+    url: `https://api.kit.com/v4/forms/${env.NEWSLETTER_LIST_ID}/subscribers`,
+    headers: { 'X-Kit-Api-Key': env.NEWSLETTER_API_KEY },
+    body: { email_address: email },
+  }),
+  mailerlite: (email, env) => ({
+    url: 'https://connect.mailerlite.com/api/subscribers',
+    headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}`, accept: 'application/json' },
+    body: { email, groups: [env.NEWSLETTER_LIST_ID] },
+  }),
+  // Brevo confirms through a separate double-opt-in endpoint that needs its own
+  // template id, so set confirmation up in Brevo rather than expecting it here.
+  brevo: (email, env) => ({
+    url: 'https://api.brevo.com/v3/contacts',
+    headers: { 'api-key': env.NEWSLETTER_API_KEY },
+    body: { email, listIds: [Number(env.NEWSLETTER_LIST_ID)], updateEnabled: true },
+  }),
+  beehiiv: (email, env) => ({
+    url: `https://api.beehiiv.com/v2/publications/${env.NEWSLETTER_LIST_ID}/subscriptions`,
+    headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },
+    body: { email, send_welcome_email: true, utm_source: 'paititi-institute.org' },
+  }),
+  resend: (email, env) => ({
+    url: `https://api.resend.com/audiences/${env.NEWSLETTER_LIST_ID}/contacts`,
+    headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },
+    body: { email, unsubscribed: false },
+  }),
+};
+
+// Signing up twice is not an error worth showing anyone.
+const ALREADY_SUBSCRIBED = /already|exists|duplicate/i;
 
 async function newsletter(body, env, deps) {
   const email = (body.email || '').trim().toLowerCase();
   if (!isEmail(email)) return fail(400, 'Invalid email address');
 
-  const meta = { ts: new Date().toISOString(), source: body.source || 'site' };
+  const soon = 'Sign-up is temporarily unavailable — please try again shortly.';
 
+  const name = env.NEWSLETTER_PROVIDER
+    // Carried over from the pre-provider build, where signups went to a Resend
+    // audience under its own variable names.
+    || (env.RESEND_API_KEY && env.RESEND_AUDIENCE_ID ? 'resend' : '');
+  const build = NEWSLETTER_PROVIDERS[name];
+
+  if (build) {
+    const key = env.NEWSLETTER_API_KEY || env.RESEND_API_KEY;
+    const list = env.NEWSLETTER_LIST_ID || env.RESEND_AUDIENCE_ID;
+    if (!key || !list) {
+      return unavailable(`newsletter: ${name} selected but API key or list id is missing`, soon);
+    }
+    // Default to double opt-in: the list is being rebuilt on a cold sending
+    // domain, and confirmed addresses are what keep it out of spam folders.
+    const confirm = env.NEWSLETTER_DOUBLE_OPT_IN !== 'false';
+    const req = build(email, { ...env, NEWSLETTER_API_KEY: key, NEWSLETTER_LIST_ID: list }, confirm);
+    const res = await fetch(req.url, {
+      method: 'POST',
+      headers: { ...JSON_HEADERS, ...req.headers },
+      body: JSON.stringify(req.body),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      if (res.status < 500 && ALREADY_SUBSCRIBED.test(detail)) return ok({ ok: true });
+      console.error('[paititi] newsletter:', name, res.status, detail.slice(0, 300));
+      return fail(502, soon);
+    }
+    return ok({ ok: true });
+  }
+
+  // No provider yet. Keep the address rather than dropping it, but only where
+  // the host offers storage — a bare list with nothing to send from it is not
+  // a newsletter, so this is a stopgap and not a destination.
   if (deps.saveSubscriber) {
-    await deps.saveSubscriber(email, meta);
+    await deps.saveSubscriber(email, { ts: new Date().toISOString(), source: body.source || 'site' });
     return ok({ ok: true });
   }
-  if (env.RESEND_API_KEY && env.RESEND_AUDIENCE_ID) {
-    const res = await fetch(
-      `https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts`,
-      {
-        method: 'POST',
-        headers: { ...JSON_HEADERS, authorization: `Bearer ${env.RESEND_API_KEY}` },
-        body: JSON.stringify({ email, unsubscribed: false }),
-      });
-    if (!res.ok) return fail(502, 'Signup failed, please try again later.');
-    return ok({ ok: true });
-  }
-  return fail(503, 'Newsletter not configured yet (storage or Resend audience)');
+  return unavailable('newsletter: no NEWSLETTER_PROVIDER configured and no storage bound', soon);
 }
 
 /* ---------------- checkout (store, retreats, donations) ---------------- */
@@ -113,7 +208,10 @@ const INTERVALS = {
 };
 
 async function checkout(body, env, origin, deps) {
-  if (!env.STRIPE_SECRET_KEY) return fail(503, 'Checkout not configured yet (STRIPE_SECRET_KEY)');
+  const soon = 'Checkout is temporarily unavailable — please try again shortly.';
+  if (!env.STRIPE_SECRET_KEY) {
+    return unavailable('checkout: STRIPE_SECRET_KEY is not set', soon);
+  }
   const items = Array.isArray(body.items) ? body.items : [];
   if (items.length === 0) return fail(400, 'Cart is empty');
 
@@ -121,8 +219,8 @@ async function checkout(body, env, origin, deps) {
   try {
     catalog = await deps.readCatalog();
   } catch (e) {
-    console.error('catalog unavailable', e);
-    return fail(500, 'Product catalog unavailable');
+    console.error('[paititi] checkout: catalog unavailable', e);
+    return fail(500, soon);
   }
   const byId = Object.fromEntries(catalog.products.map((p) => [p.id, p]));
 
@@ -135,7 +233,10 @@ async function checkout(body, env, origin, deps) {
   let i = 0;
   for (const item of items) {
     const p = byId[item.id];
-    if (!p) return fail(400, `Unknown product: ${item.id}`);
+    if (!p) {
+      console.error('[paititi] checkout: unknown product', item.id);
+      return fail(400, 'One of the items in your cart is no longer available.');
+    }
 
     // Prices always come from the catalog, never from the client — the only
     // client-supplied amount is a donation, and it is floor-checked.
@@ -147,7 +248,10 @@ async function checkout(body, env, origin, deps) {
       }
     } else if (item.variantId) {
       const v = (p.variants || []).find((v) => v.id === item.variantId);
-      if (!v) return fail(400, `Unknown variant for ${p.name}`);
+      if (!v) {
+        console.error('[paititi] checkout: unknown variant', item.variantId, 'of', p.id);
+        return fail(400, `The option you chose for ${p.name} is no longer available.`);
+      }
       amountCents = v.priceCents;
     } else {
       amountCents = p.priceCents;
