@@ -31,17 +31,28 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
-  .qe-hero{--pt-hero-h:1123px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.15);--pt-hero-ink:#fff}
+  .qe-hero{--pt-hero-h:1132px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.15);--pt-hero-ink:#fff}
   .qe-hero h1{text-align:center}
+  /* The live title block carries backdrop-filter:blur(8px) and blends with
+     mix-blend-mode:screen — the soft frosted band behind the heading. */
+  .qe-title{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);mix-blend-mode:screen}
 
   .qe-story{--pt-bg:#584364;color:#fff}
   .qe-story h1,.qe-story p{color:#fff}
 
   .qe-give{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.25)}
 
-  /* Squarespace clips these three photos into different shapes. */
+  /* Squarespace clips these three photos into different shapes. On the live
+     page they are unstretched fluid images: a square whose side is the cell's
+     shorter edge, centred in the cell, the photo cover-cropped into it and
+     the clip drawn on that square — not stretched over the whole cell. */
+  .qe-circle img,.qe-squircle img,.qe-star img{
+    inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:auto;height:auto;max-width:100%;max-height:100%;
+    aspect-ratio:1;object-fit:cover}
   .qe-circle img{clip-path:circle(50% at 50% 50%)}
-  .qe-squircle img{clip-path:polygon(50% 0,76.8% 0,89.4% 5.6%,91.9% 8.1%,94.4% 10.6%,100% 24.2%,100% 50.5%,100% 76.8%,94.7% 89.1%,91.9% 91.9%,89.1% 94.7%,76.8% 100%,50% 100%,20.2% 100%,11% 94.8%,8.1% 91.9%,5.2% 89%,0 76.8%,0 50%,0 23.2%,5.3% 10.9%,8.1% 8.1%,10.9% 5.3%,23.2% 0)}
+  /* The squircle is the live page's bezier superellipse (#qe-squircle below). */
+  .qe-squircle img{clip-path:url(#qe-squircle)}
   .qe-star img{clip-path:polygon(0 33%,16.5% 33%,16.5% 16.5%,33% 16.5%,33% 0,66% 0,66% 16.5%,83.5% 16.5%,83.5% 33%,100% 33%,100% 66%,83.5% 66%,83.5% 83.5%,66% 83.5%,66% 100%,33% 100%,33% 83.5%,16.5% 83.5%,16.5% 66%,0 66%)}
 
   /* Donation panel — the Squarespace donation block, backed by Stripe here.
@@ -79,14 +90,17 @@
 <div class="pt-page">
 <dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <clipPath id="qe-squircle" clipPathUnits="objectBoundingBox"><path d="M0.5,0 C0.768,0,0.894,0.056,0.919,0.081 C0.944,0.106,1,0.242,1,0.505 C1,0.768,0.947,0.891,0.919,0.919 C0.891,0.947,0.768,1,0.5,1 C0.202,1,0.11,0.948,0.081,0.919 C0.052,0.89,0,0.768,0,0.5 C0,0.232,0.053,0.109,0.081,0.081 C0.109,0.053,0.232,0,0.5,0"/></clipPath>
+</defs></svg>
 
   <!-- ===== Hero ===== -->
   <section class="pt-sec pt-sec-flat pt-hero qe-hero">
     <div class="pt-sec-bg">
       <img src="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp" alt="Q'ero community receiving emergency food supplies in the high Andes" loading="eager">
     </div>
-    <div class="pt-fluid" style="--pt-grid-top:223px;--pt-grid-bot:101px;--pt-rows:22">
-      <div class="pt-vc" style="grid-area:8 / 4 / 13 / 22">
+    <div class="pt-fluid" style="--pt-grid-top:228px;--pt-grid-bot:105px;--pt-rows:22">
+      <div class="pt-vc qe-title" style="grid-area:8 / 4 / 13 / 22">
         <h1><strong>Andean Q&rsquo;ero Nation Emergency Food Su</strong>pply</h1>
       </div>
     </div>
@@ -95,7 +109,7 @@
   <!-- ===== Journey ===== -->
   <section class="pt-sec qe-story">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:134px;--pt-rows:45">
+    <div class="pt-fluid" style="--pt-grid-top:63px;--pt-grid-bot:150px;--pt-rows:45">
       <div class="pt-vc" style="grid-area:1 / 1 / 6 / 14">
         <h1>Journey to Q&rsquo;ero Nation</h1>
       </div>
