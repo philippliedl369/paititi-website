@@ -256,9 +256,10 @@ body { margin: 0; background: #F1EAF6 }
 }
 /* Hero ink is a per-page decision on the original, not a property of heroes:
    the live site wraps hero copy in `sqsrte-text-color--white` on Home, Team,
-   the Q'ero appeal, Online Courses, the journal (and its category pages) and
-   Retreats, uses plum on About Us, and leaves the ordinary dark #210416 on
-   the rest. So there is no sitewide default that is right — a blanket
+   the Q'ero appeal, Online Courses, the journal (and its category pages),
+   Retreats, About Us, Beyond Ayahuasca and Initiatives, and leaves the
+   ordinary dark #210416 on the rest. So there is no sitewide default that is
+   right — a blanket
    `color:#fff` here silently reverses the pages that shouldn't be. Set it on
    the section and let it inherit, so a page overriding one heading inside
    still wins. */
