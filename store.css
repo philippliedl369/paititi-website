@@ -13,6 +13,9 @@
 
 /* ---- Product list (/store, /store/retreats) -------------------------------- */
 
+/* Commerce pages are white, so the footer wave must be too. */
+footer.pt-footer { --pt-footer-wave: #fff }
+
 .st-sec { background: #fff; padding-top: var(--pt-header-h, 209px) }
 
 /* Squarespace lays the list out as a named-area grid with five rows — header,

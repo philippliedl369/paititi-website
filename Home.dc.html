@@ -54,8 +54,10 @@
     border-radius:96px 0;overflow:hidden}
   .hm-slide img{width:100%;height:100%;object-fit:contain;display:block}
 
+  /* The caption panel sits above the full-slide link; on live the whole slide
+     (card included) click-throughs, so let clicks fall through to the anchor. */
   .hm-meta{position:absolute;left:20px;bottom:20px;width:719px;max-width:calc(100% - 40px);
-    background:rgba(0,0,0,.6);border-radius:48px 0;color:#fff}
+    background:rgba(0,0,0,.6);border-radius:48px 0;color:#fff;pointer-events:none}
   .hm-meta-inside{padding:25px}
   .hm-meta-title{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:76.8px;
     letter-spacing:normal;color:#fff}
