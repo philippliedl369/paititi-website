@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
-  .ya-hero{--pt-hero-h:969px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41);--pt-hero-ink:#fff}
+  .ya-hero{--pt-hero-h:969px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41);--pt-hero-ink:#fff;--pt-bg-pos:52% 15%}
   .ya-hero .pt-hero-panel{background:rgba(88,67,100,.4)}
   .ya-hero h1,.ya-hero p{text-align:center}
 
@@ -43,7 +43,16 @@
   .ya-dark h2,.ya-dark p{color:#fff}
 
   .ya-circle img{clip-path:circle(50% at 50% 50%)}
-  .ya-arch img{-webkit-mask:var(--ya-arch) center/100% 100% no-repeat;mask:var(--ya-arch) center/100% 100% no-repeat}
+  /* The arch is the live page's clipPath (#ya-arch below). A data-URI SVG
+     mask cannot work here: the DC runtime encodes viewBox/preserveAspectRatio
+     as sc-camel-* everywhere in the source and only decodes real DOM
+     attributes, so the URI's coordinate system stays broken. */
+  .ya-arch>img{width:91%;margin-left:auto;margin-right:auto;clip-path:url(#ya-arch)}
+  /* Live letterboxes this photo at its native ratio with rounded corners. */
+  .ya-photo{display:flex;flex-direction:column;justify-content:center}
+  .ya-photo>img{position:static;height:auto;border-radius:15px}
+  .ya-note{border:15px solid #2A1736;background:#F1EAF6;padding:3%}
+  .ya-plum .ya-note p{color:#584364;text-align:center}
 
   .ya-zeffy{width:100%;height:100%;min-height:541px;border:0;display:block}
 
@@ -54,7 +63,10 @@
   footer.pt-footer{--pt-footer-wave:#210416}
 </style>
 </helmet>
-<div class="pt-page" style="--ya-arch:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M49.5,0 A50.5,33.6,0,0,0,0,32.9 V100 H100 V32.9 A50.5,33.6,0,0,0,49.5,0' fill='%23000'/%3E%3C/svg%3E&quot;)">
+<div class="pt-page">
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+  <clipPath id="ya-arch" clipPathUnits="objectBoundingBox"><path d="M0.495,0 A0.505,0.336,0,0,0,0,0.329 V1 H1 V0.329 A0.505,0.336,0,0,0,0.495,0"/></clipPath>
+</defs></svg>
 <dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
 
@@ -78,10 +90,10 @@
   <section class="pt-sec ya-plum">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:27">
-      <div class="pt-vc" style="grid-area:1 / 4 / 6 / 21">
+      <div style="grid-area:1 / 4 / 6 / 21">
         <h2>Building With Munaychi: <br>The Yahua Ancestral School Is Complete!</h2>
       </div>
-      <div style="grid-area:3 / 3 / 16 / 14">
+      <div class="ya-photo" style="grid-area:3 / 3 / 16 / 14">
         <img src="/assets/initiatives/screenshot-2025-11-14-at-33258-pm.webp" alt="The completed Yahua Ancestral School maloca" loading="lazy">
       </div>
       <div class="ya-circle" style="grid-area:4 / 15 / 14 / 22">
@@ -90,7 +102,7 @@
       <div class="ya-arch" style="grid-area:14 / 17 / 27 / 24">
         <img src="/assets/initiatives/initiatives-yagua-cultural-heritage-center-indigenous-school-01.webp" alt="" loading="lazy">
       </div>
-      <div class="pt-prose pt-vc" style="grid-area:15 / 3 / 24 / 16">
+      <div class="pt-prose ya-note" style="grid-area:15 / 3 / 24 / 16">
         <p><em>A Note of Gratitude</em></p>
         <p><em>Thank you for helping this vision expand. Each contribution is a seed planted in the soil of cultural remembrance. As this school grows, so does the circle of people around the world who stand for the children, the elders, and the living intelligence of the forest.</em></p>
       </div>
