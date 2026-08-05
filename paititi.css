@@ -226,8 +226,9 @@ body { margin: 0; background: #F1EAF6 }
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
-/* A linked image block: the anchor is the whole cell. */
-.pt-fluid > * > a:only-child { position: absolute; inset: 0; display: block }
+/* A linked image block: the anchor is the whole cell. Button anchors are
+   excluded — they must stay inline-flex so their label centres vertically. */
+.pt-fluid > * > a:only-child:not(.pt-btn) { position: absolute; inset: 0; display: block }
 .pt-fluid .pt-fit > img, .pt-fluid .pt-fit > a > img { object-fit: contain }
 
 /* Below the fluid breakpoint the original collapses to a single column in DOM
