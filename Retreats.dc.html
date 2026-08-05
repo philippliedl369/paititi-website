@@ -39,11 +39,17 @@
   });
 </script>
 <style>
-  .rt-hero{--pt-hero-h:1153px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49)}
+  .rt-hero{--pt-hero-h:1153px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49);--pt-hero-ink:#fff}
   .rt-hero .pt-hero-panel{background:rgba(88,67,100,.46)}
   /* Everything on the translucent panel reverses out white. */
   .rt-hero .pt-hero-panel p{text-align:center}
   .rt-hero .rt-claims{text-align:left}
+  /* The live grid puts this panel off-centre (cols 6-23: five columns left,
+     two right); centred here on request. The width is kept at the measured
+     17 columns + 16 gaps so the text wraps on the same words. */
+  @media (min-width:1181px){
+    .rt-hero .pt-hero-panel{justify-self:center;width:calc((100% - 253px)/24*17 + 176px)}
+  }
 
   .rt-listings{--pt-bg:#F1EAF6}
   .rt-white{--pt-bg:#fff}
@@ -60,7 +66,7 @@
       <img src="/assets/retreats/coco-ceremony.webp" alt="Coca leaf ceremony at the Paititi retreat centre" loading="eager">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:20">
-      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 6 / 14 / 23">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 1 / 14 / 25">
         <h1><strong>Retreats</strong></h1>
         <p class="pt-lg">Weaving ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.<br><br>Retreat fees support:</p>
         <p class="rt-claims">&#10004; Indigenous education &#10004; Conservation &#10004; Scholarships &#10004; Community programs</p>

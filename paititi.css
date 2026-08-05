@@ -255,11 +255,13 @@ body { margin: 0; background: #F1EAF6 }
   text-align: center;
 }
 /* Hero ink is a per-page decision on the original, not a property of heroes:
-   measured across the live site it is the ordinary dark #210416 on eight pages,
-   white on Home, Team and the Q'ero appeal, and plum on About Us. So there is
-   no sitewide default that is right — a blanket `color:#fff` here silently
-   reverses the eight that shouldn't be. Set it on the section and let it
-   inherit, so a page overriding one heading inside still wins. */
+   the live site wraps hero copy in `sqsrte-text-color--white` on Home, Team,
+   the Q'ero appeal, Online Courses, the journal (and its category pages) and
+   Retreats, uses plum on About Us, and leaves the ordinary dark #210416 on
+   the rest. So there is no sitewide default that is right — a blanket
+   `color:#fff` here silently reverses the pages that shouldn't be. Set it on
+   the section and let it inherit, so a page overriding one heading inside
+   still wins. */
 .pt-hero { color: var(--pt-hero-ink, #210416) }
 
 /* The hero title sits on a translucent plum panel, inset by the text-block
