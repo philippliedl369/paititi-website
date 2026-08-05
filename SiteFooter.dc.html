@@ -21,48 +21,49 @@
      top edge. --pt-footer-wave must match whatever section colour precedes it
      (lavender on nearly every page) or the wave shows the wrong fill. */
   .pt-footer,.pt-footer *,.pt-footer *::before,.pt-footer *::after{box-sizing:border-box}
-  .pt-footer{position:relative;isolation:isolate;font-family:var(--font-body);color:#fff;letter-spacing:.078em;
+  .pt-footer{position:relative;isolation:isolate;font-family:var(--font-body);color:#fff;
+    font-size:17.6px;letter-spacing:.08em;
     background:#1A0513;overflow:hidden;--pt-footer-wave:#F1EAF6}
   .pt-footer-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
   .pt-footer::before{content:"";position:absolute;inset:0;background:rgba(20,3,14,.46);z-index:-1}
   .pt-wave{position:absolute;top:0;left:0;width:100%;height:28px;display:block}
 
-  .pt-footer-in{max-width:1248px;margin:0 auto;padding:73px 24px 40px;position:relative}
+  .pt-footer-in{max-width:1248px;margin:0 auto;padding:47px 24px 40px;position:relative}
 
   .pt-foot-top{display:grid;grid-template-columns:1fr 594px;gap:40px;align-items:start;position:relative}
-  .pt-foot-links{padding-top:40px}
-  .pt-foot-links a{display:inline-block;color:#fff;font-size:18px;font-weight:300;line-height:1.76;
-    text-decoration:underline;text-underline-offset:5px;margin-bottom:16px}
+  .pt-foot-links{padding-top:38px}
+  .pt-foot-links a{display:inline-block;color:#fff;font-size:17.6px;font-weight:300;line-height:1.8;
+    text-decoration:underline;text-underline-offset:5px;margin-bottom:15px}
   .pt-foot-links a:hover{opacity:.8;color:#fff}
 
   .pt-news{background:rgba(241,234,246,.09);border-radius:40px 0;padding:36px;position:relative}
-  .pt-footer .pt-news h2{font-family:var(--font-display);font-weight:400;font-size:29px;line-height:1.3;color:#fff;
-    margin:0 0 22px;letter-spacing:normal}
-  .pt-footer .pt-news p{font-size:18px;font-weight:300;line-height:1.76;color:rgba(255,255,255,.92);margin:0 0 40px}
+  .pt-footer .pt-news h2{font-family:var(--font-display);font-weight:400;font-size:28.8px;line-height:1.3552;color:#fff;
+    margin:0 0 18px;letter-spacing:normal}
+  .pt-footer .pt-news p{font-size:17.6px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.92);margin:0 0 40px}
   .pt-news form{display:flex;gap:10px;flex-wrap:wrap}
   .pt-news-input{flex:1;min-width:200px;max-width:284px;height:66px;padding:0 32px;border:1px solid rgba(0,0,0,.12);border-radius:0;background:#fff;
-    font-family:var(--font-body);font-size:18px;font-weight:300;color:#210416}
+    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416}
   .pt-news-input::placeholder{color:#8C8290}
   .pt-news-input:focus{outline:2px solid #F1EAF6;outline-offset:2px}
   .pt-news-btn{height:64px;padding:0 32px;border:0;border-radius:16px 0;background:#F1EAF6;color:#2A1736;
-    font-family:var(--font-body);font-size:19px;font-weight:700;letter-spacing:.02em;cursor:pointer}
+    font-family:var(--font-body);font-size:19.2px;font-weight:700;letter-spacing:.02em;cursor:pointer}
   .pt-news-btn:hover{background:#fff}
-  .pt-footer .pt-news p.pt-news-note{font-size:14px;font-weight:300;font-style:italic;color:rgba(255,255,255,.8);margin:26px 0 0}
+  .pt-footer .pt-news p.pt-news-note{font-size:14.272px;font-weight:300;font-style:italic;letter-spacing:.08em;color:rgba(255,255,255,.8);margin:40px 0 0}
   .pt-news-thanks{font-size:19px;font-weight:700;color:#fff;margin:0}
 
   /* The bee-and-flower mark straddles the panel's bottom-right corner. */
   .pt-bee{position:absolute;right:-8px;bottom:-96px;width:191px;height:auto;pointer-events:none}
 
-  .pt-foot-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:24px;margin-top:172px}
+  .pt-foot-bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:24px;margin-top:157px}
   .pt-foot-logo{padding-left:15px}
   .pt-foot-logo img{width:212px;height:auto;display:block}
   .pt-foot-center{display:flex;flex-direction:column;align-items:center;gap:20px}
   .pt-footer .pt-social{display:flex;align-items:center;gap:18px}
   .pt-footer .pt-social a{color:#fff;display:inline-flex;opacity:.95}
   .pt-footer .pt-social a:hover{opacity:1}
-  .pt-tagline{font-size:14px;font-weight:300;color:#fff;margin:0;text-align:center}
-  .pt-legal{text-align:right;font-size:14px;font-weight:300;color:#fff}
-  .pt-legal a{color:#fff;text-decoration:underline;text-underline-offset:4px;font-weight:300}
+  .pt-tagline{font-size:14.272px;font-weight:300;line-height:1.8;color:#fff;margin:0;text-align:center}
+  .pt-legal{text-align:right;font-size:14.272px;font-weight:300;line-height:1.8;color:#fff}
+  .pt-legal a{color:#fff;display:inline-block;line-height:1.8;text-decoration:underline;text-underline-offset:4px;font-weight:300}
   .pt-legal a:hover{opacity:.8;color:#fff}
 
   @media (max-width:1080px){

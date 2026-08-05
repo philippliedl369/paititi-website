@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
-<script src="/reveal.js" defer></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -13,8 +13,10 @@
 <title>About Us | Paititi Institute</title>
 <meta name="description" content="The Paititi Institute for the Preservation of Ecology and Indigenous Culture is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.">
 <meta property="og:title" content="About Us | Paititi Institute">
+<meta property="og:description" content="The Paititi Institute for the Preservation of Ecology and Indigenous Culture is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/home/paititi-lizpeace-63.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
@@ -26,193 +28,216 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  .ink-rule{position:relative}
-  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
-  .pt-prose p{max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px}
-  .pt-tl{list-style:none;margin:0;padding:0;position:relative}
-  .pt-tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--border-subtle)}
-  .pt-tl li{position:relative;padding:0 0 40px 44px}
-  .pt-tl li:last-child{padding-bottom:0}
-  .pt-tl li::before{content:"";position:absolute;left:0;top:4px;width:16px;height:16px;border-radius:50%;background:var(--accent-highlight);box-shadow:0 0 0 3px var(--surface-section)}
-  .pt-tl h3{font:var(--text-h4);color:var(--text-heading);margin:0 0 8px}
-  .pt-tl p{max-width:70ch;font-size:15px;line-height:1.7;margin:0}
+  .ab-hero{--pt-hero-h:825px}
+  .ab-hero h1,.ab-hero p{text-align:center}
+
+  /* Sections 3-5 reverse out: deep plum, then white, then plum. */
+  .ab-dark{--pt-bg:#2A1736;color:#fff}
+  .ab-dark h1,.ab-dark h2,.ab-dark h3,.ab-dark summary{color:#fff}
+  .ab-dark .pt-acc{border-top-color:rgba(255,255,255,.3)}
+  .ab-dark .pt-acc-item{border-bottom-color:rgba(255,255,255,.3)}
+  .ab-dark .pt-acc-item > summary::after{border-color:#fff}
+  .ab-white{--pt-bg:#fff}
+  .ab-plum{--pt-bg:#584364;color:#fff}
+  .ab-plum h3,.ab-plum p{color:#fff}
+  .ab-white h2{color:#210416}
+
+  /* Squarespace clips this photo to a stepped octagon. */
+  .ab-clip img{clip-path:polygon(14% 0,86% 0,86% 14%,100% 14%,100% 86%,86% 86%,86% 100%,14% 100%,14% 86%,0 86%,0 14%,14% 14%)}
+
+  .ab-video{width:100%;height:100%;object-fit:cover;display:block}
+
+  @media (max-width:1180px){
+    .ab-hero h1{font-size:40px}
+    .ab-video{height:auto}
+  }
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- Hero -->
-  <section style="position:relative;background:var(--surface-inverse);overflow:hidden">
-    <img src="/assets/home/paititi-lizpeace-63.webp" alt="Paititi Institute community gathering in the Peruvian Andes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" hint-size="1280px,520px">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,23,54,0.35),rgba(42,23,54,0.72))"></div>
-    <div style="position:relative;max-width:var(--container);margin:0 auto;padding:150px 24px 130px">
-      <h1 style="font:var(--text-h1);color:#fff;letter-spacing:-0.02em;margin:0 0 20px">About Us</h1>
-      <p style="font-size:20px;line-height:1.6;color:rgba(255,255,255,0.9);max-width:46ch;margin:0">We are a non-profit organization founded in 2010, dedicated to Mother Earth and the Infinite Human Potential.</p>
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero ab-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/home/paititi-lizpeace-63.webp" alt="Paititi Institute community gathered outdoors in the Peruvian Amazon" loading="eager">
     </div>
-  </section>
-
-  <!-- Paititi definition: first content section, deliberately not tagged with data-enter -->
-  <section style="background:var(--surface-page)">
-    <div class="pt-prose" style="max-width:var(--container-narrow);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 28px"><strong>&ldquo;Paititi&rdquo;</strong>, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
-      <p>As humans, we are inexorably linked to the earth and each other. The intercultural bridges our organization is dedicated to developing are based on the essential nature of reciprocity and interconnectedness that this planet is sustained by. As part of this magnificent symbiotic organism, we are dedicated to co-creating the possibility of a meaningful life and a beautiful world for our children and future generations.</p>
-      <p style="margin-bottom:0">Dedication to self-realization of highest potential, while humbly sharing it with each other for the greatest benefit of all, reflects the symbiotic quality of Nature&rsquo;s organic intelligence we are all a part of. This is a core value of Paititi and informs the essence of all our projects, such as healing serious health conditions, consciousness transformation, land stewardship, community gardening and permaculture, free natural medicine campaigns for rural communities or social development initiatives. Being a responsible, hearted-centered human being is the key to the blossoming of life on our planet.</p>
-    </div>
-  </section>
-
-  <!-- Mission -->
-  <section style="background:var(--surface-section)">
-    <div data-enter class="pt-prose" style="max-width:var(--container-narrow);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 28px">Our Mission</h2>
-      <p>Through the awakened spirit of the individual comes the greatest potential for the transformation of the planet. The Paititi Institute for the Preservation of Ecology and Indigenous Culture is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.</p>
-      <p style="margin-bottom:0">The founding vision of our organization is to be a conduit for innermost heart values to manifest into material realm. Throughout all our programs and initiatives, our efforts focus on supporting a society rooted in true values. In recognition of timeless, essential human values, ancestral wisdom is translated into practical and relevant modern circumstances</p>
-    </div>
-  </section>
-
-  <!-- Governance -->
-  <section style="background:var(--surface-page)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 24px">Governance</h2>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 48px">Paititi Institute is governed by an experienced leadership team committed to transparency, ethical stewardship, and long-term collaboration with Indigenous communities. Our governance framework supports responsible financial management, legal compliance, and mission-driven decision-making across all of the Institute's conservation, educational, and humanitarian initiatives.</p>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px;margin-bottom:48px">
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,240px">
-          <p style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 14px">Leadership</p>
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 4px">Roman Hanis</h3>
-          <p style="font-size:14px;font-weight:700;color:var(--accent-primary);margin:0 0 12px">Founder &amp; President</p>
-          <p style="font-size:15px;line-height:1.6;margin:0">Roman has worked alongside Amazonian and Andean Indigenous communities since 2001, helping develop conservation, education, healthcare, and cultural preservation initiatives throughout Peru.</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,240px">
-          <p style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 14px">Board of Directors</p>
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 4px">Roman Hanis</h3>
-          <p style="font-size:14px;font-weight:700;color:var(--accent-primary);margin:0 0 18px">Founder &amp; President</p>
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 4px">Carolina Pure Cortez</h3>
-          <p style="font-size:14px;font-weight:700;color:var(--accent-primary);margin:0">Treasurer</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,240px">
-          <p style="font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 14px">Legal Counsel</p>
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 4px">Roland Huilcanina Huarhua</h3>
-          <p style="font-size:14px;font-weight:700;color:var(--accent-primary);margin:0 0 12px">Licensed Peruvian Attorney<br>Social Justice Legal Council</p>
-          <p style="font-size:15px;line-height:1.6;margin:0">Roland provides legal guidance on governance, conservation, institutional compliance, and the protection of the Paititi Biocultural Reserve.</p>
-        </x-import>
+    <div class="pt-fluid" style="--pt-grid-top:calc(var(--pt-header-h,209px) + 95px);--pt-grid-bot:124px;--pt-rows:11;--pt-row-h:26.3906px">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 7 / 8 / 19">
+        <h1><strong>About Us</strong></h1>
+        <p class="pt-lg">We are a non-profit organization founded in 2010, dedicated to Mother Earth and the Infinite Human Potential.</p>
       </div>
-
-      <h3 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 18px">Organizational Accountability</h3>
-      <ul style="max-width:75ch;margin:0 0 48px;padding-left:22px;display:grid;gap:10px">
-        <li style="font-size:15px;line-height:1.7">Registered U.S. 501(c)(3) nonprofit organization via fiscal sponsorship by Empowerment Works, Inc. EIN # 31-1796801.</li>
-        <li style="font-size:15px;line-height:1.7">Registered Peruvian nonprofit organization (NGO).</li>
-        <li style="font-size:15px;line-height:1.7">Accredited by Peru's Agency for International Cooperation (APCI) to receive international technical cooperation.</li>
-        <li style="font-size:15px;line-height:1.7">Committed to responsible financial stewardship, legal compliance, and transparent management of charitable resources.</li>
-        <li style="font-size:15px;line-height:1.7">Dedicated to supporting Indigenous-led conservation, education, healthcare, and cultural preservation through long-term partnerships.</li>
-      </ul>
-
-      <h3 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 14px">Financial Transparency</h3>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0">Paititi Institute is committed to the responsible stewardship of every donation entrusted to our mission. Financial resources are directed toward conservation, Indigenous education, humanitarian initiatives, and organizational sustainability in accordance with applicable nonprofit regulations in both the United States and Peru. The Institute is committed to maintaining transparent governance and accountability to its supporters, partners, and the communities it serves.</p>
-    </div>
-  </section>
-
-  <!-- Timeline -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container-narrow);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 48px">Timeline of Paititi Institute</h2>
-      <ol class="pt-tl">
-        <li>
-          <h3>2010 &ndash; Paititi Institute Founded</h3>
-          <p>Founded in 2010, Paititi Institute was built upon relationships cultivated with Amazonian and Andean Indigenous communities beginning in 2001. In its early years, the organization restored degraded landscapes, installed a clean water purification system for the Yahua Nation in the Peruvian Amazon, established free Natural Medicine clinics that brought together Indigenous healers and licensed Peruvian physicians to serve more than 2,000 people, and helped demonstrate the value of Amazonian Traditional Medicine through participation in the critically acclaimed documentary <em>The Sacred Science</em>.</p>
-        </li>
-        <li>
-          <h3>2014 &ndash; Paititi Biocultural Reserve Established &amp; APCI Recognition</h3>
-          <p>Paititi Institute acquired and began protecting a 1,516-hectare biocultural reserve in the buffer zone of Manu National Park, one of the most biodiverse regions on Earth. That same year, the Institute received official recognition from Peru's Agency for International Cooperation (APCI), strengthening its capacity to develop international partnerships and implement long-term conservation, Indigenous education, and community development initiatives. The reserve safeguards cloud forests, Andean grasslands, critical watersheds, archaeological sites, sections of the ancient Qhapaq &Ntilde;an (Royal Inca Road), and an important ecological corridor adjacent to protected landscapes associated with Indigenous Peoples in Voluntary Isolation.</p>
-        </li>
-        <li>
-          <h3>2021 &ndash; Emergency Community Response</h3>
-          <p>During the COVID-19 pandemic, organized emergency relief efforts that delivered food and essential supplies to more than 600 Indigenous families across remote Amazonian and Andean communities while continuing community health initiatives.</p>
-        </li>
-        <li>
-          <h3>2025 &ndash; <em>Beyond Ayahuasca</em> Published</h3>
-          <p>Published <em>Beyond Ayahuasca</em> through Hay House. The international bestseller shares two decades of apprenticeship with Indigenous elders, with 100% of the author's royalties dedicated to funding the Yahua Ancestral School and preserving Indigenous cultural heritage for future generations.</p>
-        </li>
-        <li>
-          <h3>2026 &ndash; Landmark Legal Victory</h3>
-          <p>After more than a decade of stewardship and legal proceedings, Paititi Institute secured a favorable ruling from the Supreme Court of Lima affirming its ownership of the Paititi Biocultural Reserve. The decision protected 1,516 hectares of globally significant Andean-Amazonian ecosystems from illegal occupation and reinforced the Institute's long-term commitment to conserving biodiversity, safeguarding cultural heritage, and defending the lands entrusted to its care.</p>
-        </li>
-        <li>
-          <h3>2026 &ndash; Yahua Ancestral School Opens</h3>
-          <p>Completed the first phase of the Yahua Ancestral School, creating a permanent space where elders can transmit language, traditional ecological knowledge, medicinal plant wisdom, ceremonies, arts, stories, and cultural identity to future generations, ensuring that a living tradition continues to thrive within the community.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Initiatives key areas -->
-  <section style="background:var(--surface-page)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 48px">Paititi&rsquo;s Initiatives Key Areas:</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:24px">
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,320px">
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 12px">Preserving &amp; Integrating of Ancestral Wisdom</h3>
-          <p style="font-size:15px;line-height:1.7;margin:0">The cumulative wisdom of humanity containing the essential methods and insights necessary to liberate from the worst suffering is available today through the living millennial lineages from around the world. This wisdom is geared towards an awakening of human organism to the unconditional nature of existence beyond all cultural, societal and personal differences and can only be honored through each individual&rsquo;s inner reconciliation. In our organization the living wisdom lineages of Tibet, The Amazon and The Andes are applied in a direct and experiential way encouraging each individual to face themselves, find inner peace and remember what it is to be a happy and healthy human being. These are &ldquo;living wisdom traditions&rdquo; because it is through each individual bringing this wisdom into daily life that we find genuine transformation of our experience beyond conceptual knowledge.</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,320px">
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 12px">Consciousness Transformation &amp; Evolutionary Healing</h3>
-          <p style="font-size:15px;line-height:1.7;margin:0">We provide a supportive environment through retreats, courses and community living where individuals can safely immerse in the evolutionary journey of self-realization. The skillful means and rites of passage cultivated within such an intentional space allow individuals to realize their unique gifts, qualities, and talents, to be embodied in every-day community living. As we collectively move through powerful rites of passage we unearth our creative potential and learn to embody and share our unique gifts in community.</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,320px">
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 12px">Restoring &amp; Maintaining Health through Traditional &amp; Natural Methods</h3>
-          <p style="font-size:15px;line-height:1.7;margin:0">We utilize indigenous medicine practices and natural healing modalities from around the world to address sickness and disease on a variety of levels, from psycho-spiritual to somatic. In our experience, this approach to healing addresses the root cause of diseases and includes the healing of each individual as a whole rather than merely targeting symptoms. Today, more than any other time in history, we believe that the world needs viable models for this type of comprehensive and evolutionary healing.</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,320px">
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 12px">Earth Stewardship via Eco-regenerative Community Living</h3>
-          <p style="font-size:15px;line-height:1.7;margin:0">We are the stewards of a 4000 acre nature reserve and sanctuary where our land based community and retreat center is based. Our center in Peru is a community platform where we can practice to embody a holistic model for the world. We work with Permacutlure and local ancestral wisdom to support us in stewarding this land in the most conscious way possible.</p>
-        </x-import>
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,320px">
-          <h3 style="font:var(--text-h4);color:var(--text-heading);margin:0 0 12px">Conservation &amp; Regeneration of Natural Resources</h3>
-          <p style="font-size:15px;line-height:1.7;margin:0">We are dedicated to the preservation and restoration of our precious natural resources. We work with permaculture and natural farming techniques creating vibrant, local food economies. Our food forests and gardens serve as an educational model and and experiential learning group of how to live in harmonious relationship with Pachamama (Mother Earth). We also work to support local Peruvian communities to find fair trade markets for ecological &amp; regenerative products.</p>
-        </x-import>
+      <div class="pt-fit" style="grid-area:7 / 9 / 12 / 17">
+        <img src="/assets/brand/icon-hummingbird.webp" alt="Line drawing of a hummingbird surrounded by ornate floral vines and leaves." loading="eager">
       </div>
     </div>
   </section>
 
-  <!-- How do we embody -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:48px;align-items:center">
-        <img src="/assets/home/whatsapp-image-2024-05-06-at-174328.webp" alt="Community gathered at the Paititi Institute in the Amazon" style="width:100%;height:100%;max-height:560px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)" hint-size="600px,450px">
-        <div>
-          <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 28px">How do we Embody our highest potential and live in harmony with each other and the planet?</h2>
-          <p style="font-size:18px;line-height:1.6;font-weight:600;color:var(--text-heading);margin:0 0 20px">From the awakened spirit of the individual comes the greatest potential for the transformation of the planet.</p>
-          <p style="font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px">We believe that the only way forward is to be the change. Our work as an institute is rooted in our efforts to embody this and to share tools for others to do the same. Through the practical application of the ancient wisdom of humanity within the modern lives, we build bridges for the physical, emotional, and spiritual healing of our ecology from the inside and out.</p>
-          <p style="font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px">In this natural way, we channel the healing and rejuvenation of the planet herself. Using holistic models based upon our points of focus listed above, we engage as a community to improve social and environmental life via spiritual evolution and maturation on the collective and individual levels. We utilize the planetary wisdom of humanity to become fully conscious and responsible human beings embracing our shared heart.</p>
-          <p style="font-size:var(--fs-body);line-height:var(--lh-body);margin:0">The ancient, unbroken, and living lineages of direct consciousness transmission are here to help all of us fully realize our true nature in the current turbulent times. By sharing our life experiences with each other we create synergistic networks among all the like-hearted people in the world who are motivated by the freedom and liberation from suffering for all beings.</p>
+  <!-- ===== Founding vision ===== -->
+  <section class="pt-sec" style="--pt-bg:#F1EAF6">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:46">
+      <div style="grid-area:1 / 3 / 5 / 23">
+        <h2><strong>&ldquo;Paititi&rdquo;</strong>, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
+      </div>
+      <div class="pt-prose" style="grid-area:5 / 6 / 16 / 20">
+        <p class="pt-lg">Through the awakened spirit of the individual comes the greatest potential for the transformation of the planet. <strong>The Paititi Institute for the Preservation of Ecology and Indigenous Culture</strong> is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.</p>
+        <p>The founding vision of our organization is to be a conduit for innermost heart values to manifest into material realm. Throughout all our programs and initiatives, our efforts focus on supporting a society rooted in true values. In recognition of timeless, essential human values, ancestral wisdom is translated into practical and relevant modern circumstances</p>
+      </div>
+      <div class="pt-fit" style="grid-area:13 / 19 / 18 / 25">
+        <img src="/assets/brand/icon-donate.webp" alt="Outline of two hands forming a heart shape" loading="lazy">
+      </div>
+      <div style="grid-area:17 / 3 / 33 / 23">
+        <div class="pt-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/mAh0kK0JBQM?start=1" title="The Heart of Paititi Institute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="pt-prose" style="grid-area:34 / 4 / 47 / 22">
+        <p>As humans, we are inexorably linked to the earth and each other. The intercultural bridges our organization is dedicated to developing are based on the essential nature of reciprocity and interconnectedness that this planet is sustained by. As part of this magnificent symbiotic organism, we are dedicated to co-creating the possibility of a meaningful life and a beautiful world for our children and future generations.</p>
+        <p>Dedication to self-realization of highest potential, while humbly sharing it with each other for the greatest benefit of all, reflects the symbiotic quality of Nature&rsquo;s organic intelligence we are all a part of. This is a core value of Paititi and informs the essence of all our projects, such as healing serious health conditions, consciousness transformation, land stewardship, community gardening and permaculture, free natural medicine campaigns for rural communities or social development initiatives. <em>Being a responsible, hearted-centered human being is the key to the blossoming of life on our planet.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Full-bleed band ===== -->
+  <section class="pt-sec pt-band" style="--pt-bg:#210416;--pt-band-h:660px">
+    <div class="pt-sec-bg">
+      <img src="/assets/home/screenshot-2026-03-27-at-10011-am.webp" alt="Walkers beneath a giant kapok tree in the Amazon rainforest" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ===== Key areas (accordion) ===== -->
+  <section class="pt-sec ab-dark">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:20">
+      <div style="grid-area:2 / 1 / 4 / 25">
+        <h2>Paititi&rsquo;s Initiatives Key Areas:</h2>
+      </div>
+      <div style="grid-area:4 / 1 / 21 / 25">
+        <div class="pt-acc">
+
+          <details class="pt-acc-item">
+            <summary>Governance</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Paititi Institute is governed by an experienced leadership team committed to transparency, ethical stewardship, and long-term collaboration with Indigenous communities. Our governance framework supports responsible financial management, legal compliance, and mission-driven decision-making across all of the Institute&rsquo;s conservation, educational, and humanitarian initiatives.</p>
+              <p><strong>Leadership</strong></p>
+              <p><strong>Roman Hanis</strong><br><strong>Founder &amp; President</strong><br>Roman has worked alongside Amazonian and Andean Indigenous communities since 2001, helping develop conservation, education, healthcare, and cultural preservation initiatives throughout Peru.</p>
+              <p><strong>Board of Directors</strong></p>
+              <p><strong>Roman Hanis</strong><br>Founder &amp; President</p>
+              <p><strong>Carolina Pure Cortez</strong><br>Treasurer</p>
+              <p><strong>Legal Counsel</strong></p>
+              <p><strong>Roland Huilcanina Huarhua</strong><br>Licensed Peruvian Attorney<br>Social Justice Legal Council</p>
+              <p>Roland provides legal guidance on governance, conservation, institutional compliance, and the protection of the Paititi Biocultural Reserve.</p>
+              <p><strong>Organizational Accountability</strong></p>
+              <ul>
+                <li>Registered U.S. 501(c)(3) nonprofit organization via fiscal sponsorship by Empowerment Works, Inc. EIN # 31-1796801.</li>
+                <li>Registered Peruvian nonprofit organization (NGO).</li>
+                <li>Accredited by Peru&rsquo;s Agency for International Cooperation (APCI) to receive international technical cooperation.</li>
+                <li>Committed to responsible financial stewardship, legal compliance, and transparent management of charitable resources.</li>
+                <li>Dedicated to supporting Indigenous-led conservation, education, healthcare, and cultural preservation through long-term partnerships.</li>
+              </ul>
+              <p><strong>Financial Transparency</strong></p>
+              <p>Paititi Institute is committed to the responsible stewardship of every donation entrusted to our mission. Financial resources are directed toward conservation, Indigenous education, humanitarian initiatives, and organizational sustainability in accordance with applicable nonprofit regulations in both the United States and Peru. The Institute is committed to maintaining transparent governance and accountability to its supporters, partners, and the communities it serves.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Timeline of Paititi Institute</summary>
+            <div class="pt-acc-body pt-prose">
+              <p><strong>2010 &ndash; Paititi Institute Founded</strong><br>Founded in 2010, Paititi Institute was built upon relationships cultivated with Amazonian and Andean Indigenous communities beginning in 2001. In its early years, the organization restored degraded landscapes, installed a clean water purification system for the Yahua Nation in the Peruvian Amazon, established free Natural Medicine clinics that brought together Indigenous healers and licensed Peruvian physicians to serve more than 2,000 people, and helped demonstrate the value of Amazonian Traditional Medicine through participation in the critically acclaimed documentary <em>The Sacred Science</em>.</p>
+              <p><strong>2014 &ndash; Paititi Biocultural Reserve Established &amp; APCI Recognition</strong><br>Paititi Institute acquired and began protecting a 1,516-hectare biocultural reserve in the buffer zone of Manu National Park, one of the most biodiverse regions on Earth. That same year, the Institute received official recognition from Peru&rsquo;s Agency for International Cooperation (APCI), strengthening its capacity to develop international partnerships and implement long-term conservation, Indigenous education, and community development initiatives. The reserve safeguards cloud forests, Andean grasslands, critical watersheds, archaeological sites, sections of the ancient Qhapaq &Ntilde;an (Royal Inca Road), and an important ecological corridor adjacent to protected landscapes associated with Indigenous Peoples in Voluntary Isolation.</p>
+              <p><strong>2021 &ndash; Emergency Community Response</strong><br>During the COVID-19 pandemic, organized emergency relief efforts that delivered food and essential supplies to more than 600 Indigenous families across remote Amazonian and Andean communities while continuing community health initiatives.</p>
+              <p><strong>2025 &ndash; Beyond Ayahuasca Published</strong><br>Published <em>Beyond Ayahuasca</em> through Hay House. The international bestseller shares two decades of apprenticeship with Indigenous elders, with 100% of the author&rsquo;s royalties dedicated to funding the Yahua Ancestral School and preserving Indigenous cultural heritage for future generations.</p>
+              <p><strong>2026 &ndash; Landmark Legal Victory</strong><br>After more than a decade of stewardship and legal proceedings, Paititi Institute secured a favorable ruling from the Supreme Court of Lima affirming its ownership of the Paititi Biocultural Reserve. The decision protected 1,516 hectares of globally significant Andean-Amazonian ecosystems from illegal occupation and reinforced the Institute&rsquo;s long-term commitment to conserving biodiversity, safeguarding cultural heritage, and defending the lands entrusted to its care.</p>
+              <p><strong>2026 &ndash; Yahua Ancestral School Opens</strong><br>Completed the first phase of the Yahua Ancestral School, creating a permanent space where elders can transmit language, traditional ecological knowledge, medicinal plant wisdom, ceremonies, arts, stories, and cultural identity to future generations, ensuring that a living tradition continues to thrive within the community.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Preserving &amp; Integrating of Ancestral Wisdom</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>The cumulative wisdom of humanity containing the essential methods and insights necessary to liberate from the worst suffering is available today through the living millennial lineages from around the world. This wisdom is geared towards an awakening of human organism to the unconditional nature of existence beyond all cultural, societal and personal differences and can only be honored through each individual&rsquo;s inner reconciliation. In our organization the living wisdom lineages of Tibet, The Amazon and The Andes are applied in a direct and experiential way encouraging each individual to face themselves, find inner peace and remember what it is to be a happy and healthy human being. These are &ldquo;living wisdom traditions&rdquo; because it is through each individual bringing this wisdom into daily life that we find genuine transformation of our experience beyond conceptual knowledge.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Consciousness Transformation &amp; Evolutionary Healing</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>We provide a supportive environment through retreats, courses and community living where individuals can safely immerse in the evolutionary journey of self-realization. The skillful means and rites of passage cultivated within such an intentional space allow individuals to realize their unique gifts, qualities, and talents, to be embodied in every-day community living. As we collectively move through powerful rites of passage we unearth our creative potential and learn to embody and share our unique gifts in community.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Restoring &amp; Maintaining Health through Traditional &amp; Natural Methods</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>We utilize indigenous medicine practices and natural healing modalities from around the world to address sickness and disease on a variety of levels, from psycho-spiritual to somatic. In our experience, this approach to healing addresses the root cause of diseases and includes the healing of each individual as a whole rather than merely targeting symptoms. Today, more than any other time in history, we believe that the world needs viable models for this type of comprehensive and evolutionary healing.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Earth Stewardship via Eco-regenerative Community Living</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>We are the stewards of a 4000 acre nature reserve and sanctuary where our land based community and retreat center is based. Our center in Peru is a community platform where we can practice to embody a holistic model for the world. We work with Permacutlure and local ancestral wisdom to support us in stewarding this land in the most conscious way possible.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Conservation &amp; Regeneration of Natural Resources</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>We are dedicated to the preservation and restoration of our precious natural resources. We work with permaculture and natural farming techniques creating vibrant, local food economies. Our food forests and gardens serve as an educational model and and experiential learning group of how to live in harmonious relationship with Pachamama (Mother Earth). We also work to support local Peruvian communities to find fair trade markets for ecological &amp; regenerative products.</p>
+            </div>
+          </details>
+
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Closing quote -->
-  <section style="background:var(--surface-inverse)">
-    <div data-enter style="max-width:var(--container-narrow);margin:0 auto;padding:80px 24px;text-align:center">
-      <blockquote style="margin:0">
-        <p style="font-family:var(--font-display);font-size:24px;line-height:1.6;color:#fff;margin:0 0 24px">&ldquo;We but mirror the world. All the tendencies present in the outer world are to be found in the world of our body. If we could change ourselves, the tendencies in the world would also change. As a man changes his own nature, so does the attitude of the world change towards him. This is the divine mystery supreme. A wonderful thing it is and the source of our happiness. We need not wait to see what others do.&rdquo;</p>
-        <cite style="font-style:normal;font-size:16px;color:var(--accent-highlight)">&ndash; Mahatma Gandhi</cite>
-      </blockquote>
+  <!-- ===== Embodying our highest potential ===== -->
+  <section class="pt-sec ab-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:25">
+      <div style="grid-area:1 / 1 / 5 / 19">
+        <h2>How do we Embody <strong>our highest potential</strong> and live in harmony with each other and the planet?</h2>
+      </div>
+      <div class="pt-prose" style="grid-area:5 / 13 / 26 / 25">
+        <p class="pt-lg"><strong>From the awakened spirit of the individual comes the greatest potential for the transformation of the planet.</strong></p>
+        <p class="pt-lg">We believe that the only way forward is to be the change. Our work as an institute is rooted in our efforts to embody this and to share tools for others to do the same. Through the practical application of the ancient wisdom of humanity within the modern lives, we build bridges for the physical, emotional, and spiritual healing of our ecology from the inside and out.</p>
+        <p>In this natural way, we channel the healing and rejuvenation of the planet herself. Using holistic models based upon our points of focus listed above, we engage as a community to improve social and environmental life via spiritual evolution and maturation on the collective and individual levels. We utilize the planetary wisdom of humanity to become fully conscious and responsible human beings embracing our shared heart.</p>
+        <p>The ancient, unbroken, and living lineages of direct consciousness transmission are here to help all of us fully realize our true nature in the current turbulent times. By sharing our life experiences with each other we create synergistic networks among all the like-hearted people in the world who are motivated by the freedom and liberation from suffering for all beings.</p>
+      </div>
+      <div class="ab-clip" style="grid-area:6 / 1 / 16 / 9">
+        <img src="/assets/home/whatsapp-image-2024-05-06-at-174328.webp" alt="Two people hugging outdoors, one wearing a colorful striped sweater and a hat, with green foliage and a rustic building in the background." loading="lazy">
+      </div>
+      <div class="pt-fit" style="grid-area:15 / 7 / 21 / 13">
+        <img src="/assets/brand/icon-vision-purpose.webp" alt="Stylized Buddha eyes over water with lotus petals" loading="lazy">
+      </div>
+      <div style="grid-area:19 / 4 / 26 / 12">
+        <video class="ab-video" src="/assets/video/about-vision.mp4" poster="/assets/video/about-vision-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Looping footage from the Paititi Biocultural Reserve"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Closing quote ===== -->
+  <section class="pt-sec ab-plum">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:11">
+      <div class="pt-fit" style="grid-area:1 / 4 / 4 / 6">
+        <img src="/assets/brand/icon-quotemark.webp" alt="" loading="lazy">
+      </div>
+      <div class="pt-prose" style="grid-area:2 / 5 / 12 / 21">
+        <h3>&ldquo;We but mirror the world. All the tendencies present in the outer world are to be found in the world of our body. If we could change ourselves, the tendencies in the world would also change. As a man changes his own nature, so does the attitude of the world change towards him. This is the divine mystery supreme. A wonderful thing it is and the source of our happiness. We need not wait to see what others do.&rdquo;</h3>
+        <p>&ndash; Mahatma Gandhi</p>
+      </div>
     </div>
   </section>
 
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:5200}}">
-class Component extends DCLogic {
-  renderVals() { return {}; }
-}
-</script>
 </body>
 </html>

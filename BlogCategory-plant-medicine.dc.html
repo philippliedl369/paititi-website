@@ -5,86 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<title>Plant Medicine — Paititi Institute</title>
-<meta name="description" content="Journal — stories, ancient wisdom and practical guidance from the Paititi Institute.">
-<meta property="og:title" content="Plant Medicine — Paititi Institute">
+<title>Plant Medicine — Journal | Paititi Institute</title>
+<meta name="description" content="A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation.">
+<meta property="og:title" content="Plant Medicine — Journal | Paititi Institute">
+<meta property="og:description" content="A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<style>body{margin:0;background:var(--surface-page)} a{color:var(--accent-primary)}</style>
+<style>
+.bl-hero{--pt-hero-h:1006px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49)}
+  .bl-hero .pt-hero-panel{background:rgba(88,67,100,.39)}
+  .bl-hero h1,.bl-hero p{text-align:center}
+
+  .bl-substack{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.15)}
+
+  .bl-list{--pt-bg:#210416;color:#fff}
+  .bl-list h1,.bl-list h2,.bl-list p{color:#fff}
+
+  .bl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    /* Declared 57.6px on the original, but the cards bleed, so the
+       effective gaps measure 43 above the first row and 73 below the last. */
+    gap:65px 60px;max-width:1200px;margin:0 auto;padding:43px 57.6px 73px}
+  .bl-card{display:flex;flex-direction:column}
+  .bl-image{display:block;overflow:hidden}
+  .bl-image img{width:100%;height:343px;object-fit:cover;display:block;transition:transform .4s ease}
+  .bl-image:hover img{transform:scale(1.03)}
+  /* Squarespace puts a fixed 20px spacer between the image and the text. */
+  .bl-text{margin-top:20px}
+  .pt-page .bl-meta{display:flex;gap:0 12px;margin:0;font-size:14.272px;font-weight:400;
+    line-height:1.2;letter-spacing:normal}
+  .bl-meta time{opacity:.8}
+  .pt-page .bl-title{font-family:var(--font-display);font-weight:400;font-size:28.8px;line-height:1.4;
+    letter-spacing:normal;margin:10px 0 0}
+  .bl-title a{color:#fff;text-decoration:none}
+  .bl-title a:hover{text-decoration:underline}
+  .pt-page .bl-excerpt{margin-top:11px;font-size:14.272px;line-height:1.8;letter-spacing:1.14176px}
+  .pt-page .bl-more{display:inline-block;padding:10.65px 0;font-size:14.272px;line-height:1.8;
+    color:#fff;text-decoration:underline;text-underline-offset:4px}
+  .pt-page .bl-filter{max-width:1200px;margin:0 auto;padding:57.6px 57.6px 0;font-size:17.6px}
+  .bl-filter a{color:#fff}
+
+  @media (max-width:1180px){
+    .bl-hero h1{font-size:40px}
+    .bl-grid{grid-template-columns:1fr;gap:48px;padding:48px 24px}
+    .bl-image img{height:auto;aspect-ratio:3/2}
+    .bl-filter{padding:48px 24px 0}
+  }
+</style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" active="blog" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="blog" hint-size="100%,209px"></dc-import>
 <main>
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container-wide);margin:0 auto;padding:64px 24px var(--section-y)">
-      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 16px">Journal</h1>
-      <p style="font-size:16px;color:var(--text-muted);margin:0">Category: <strong>Plant Medicine</strong></p>
-      <nav aria-label="Categories" style="display:flex;gap:16px;flex-wrap:wrap;margin:24px 0 16px;font-size:14px;font-weight:700">
-        <a href="/blog" style="text-decoration:none">All</a>
-        <a href="/blog/category/transformation" style="text-decoration:none">Transformation</a>
-        <a href="/blog/category/plant-medicine" style="text-decoration:none">Plant Medicine</a>
-        <a href="/blog/category/health-wellness" style="text-decoration:none">Health &amp; Wellness</a>
-        <a href="/blog/category/indigenous-traditions" style="text-decoration:none">Indigenous Traditions</a>
-      </nav>
-      <p style="font-size:15px;color:var(--text-muted);margin:0 0 40px">Look for more articles on <a href="https://substack.com/@romanhanis" target="_blank" rel="noopener">Roman's Substack page</a>.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(380px,100%),1fr));gap:32px">
-        <article style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column">
-          <a href="/blog/integration-phenomenal-into-mundane"><img src="/assets/blog/blog-03.webp" alt="" loading="lazy" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block"></a>
-          <div style="padding:22px 24px 26px;display:flex;flex-direction:column;gap:0;flex:1">
-            <p style="font-size:13px;color:var(--text-muted);margin:0 0 10px">Roman Hanis · 6/8/18</p>
-            <p style="font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin:0 0 8px"><a href="/blog/category/indigenous-traditions" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Indigenous Traditions</a> <a href="/blog/category/plant-medicine" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Plant Medicine</a> <a href="/blog/category/transformation" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Transformation</a></p>
-            <h2 style="font:var(--text-h3);margin:0 0 10px"><a href="/blog/integration-phenomenal-into-mundane" style="color:var(--text-heading);text-decoration:none">Integration: Phenomenal into Mundane</a></h2>
-            <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0 0 14px">This topic has been instrumental in my life and seems relevant for many people today. Discovering how to bring natural well being into the adversity of existence opens the doorway to lasting happiness. We’ve all undergone an array of wonderful and dreadful…</p>
-            <a href="/blog/integration-phenomenal-into-mundane" style="margin-top:auto;font-weight:700;font-size:14px;text-decoration:none">Read More →</a>
-          </div>
-        </article>
-        <article style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column">
-          <a href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion"><img src="/assets/blog/blog-05.webp" alt="" loading="lazy" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block"></a>
-          <div style="padding:22px 24px 26px;display:flex;flex-direction:column;gap:0;flex:1">
-            <p style="font-size:13px;color:var(--text-muted);margin:0 0 10px">Roman Hanis · 8/20/16</p>
-            <p style="font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin:0 0 8px"><a href="/blog/category/plant-medicine" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Plant Medicine</a> <a href="/blog/category/transformation" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Transformation</a></p>
-            <h2 style="font:var(--text-h3);margin:0 0 10px"><a href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion" style="color:var(--text-heading);text-decoration:none">Shards of The Shattered Ego Reflecting Countless Arms of Compassion</a></h2>
-            <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0 0 14px">We recently completed another Embodying True Nature Retreat cycle and we’re inspired to share some reflections on the retreat process while they’re fresh in our hearts and minds. The purpose of the indigenous transformation retreat is not to instantly solve…</p>
-            <a href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion" style="margin-top:auto;font-weight:700;font-size:14px;text-decoration:none">Read More →</a>
-          </div>
-        </article>
-        <article style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column">
-          <a href="/blog/embody-true-nature-healing-retreat"><img src="/assets/blog/blog-06.webp" alt="" loading="lazy" style="width:100%;aspect-ratio:3/2;object-fit:cover;display:block"></a>
-          <div style="padding:22px 24px 26px;display:flex;flex-direction:column;gap:0;flex:1">
-            <p style="font-size:13px;color:var(--text-muted);margin:0 0 10px">Roman Hanis · 5/20/16</p>
-            <p style="font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin:0 0 8px"><a href="/blog/category/health-wellness" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Health &amp; Wellness</a> <a href="/blog/category/indigenous-traditions" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Indigenous Traditions</a> <a href="/blog/category/plant-medicine" style="color:var(--accent-primary);text-decoration:none;margin-right:10px">Plant Medicine</a></p>
-            <h2 style="font:var(--text-h3);margin:0 0 10px"><a href="/blog/embody-true-nature-healing-retreat" style="color:var(--text-heading);text-decoration:none">What Does it Mean to Embody True Nature?</a></h2>
-            <p style="font-size:15px;line-height:1.6;color:var(--text-body);margin:0 0 14px">The profound immersion into the depths of consciousness and purpose of all life that happens in the Embody True Nature healing retreat at Paititi continues to inspire us. As we travel deeper along our own hero’s journeys of evolutionary healing, our shared…</p>
-            <a href="/blog/embody-true-nature-healing-retreat" style="margin-top:auto;font-weight:700;font-size:14px;text-decoration:none">Read More →</a>
-          </div>
-        </article>
+
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero bl-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp" alt="Gathering at the Paititi retreat centre" loading="eager">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:16;--pt-row-h:25.8906px">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 6 / 10 / 20">
+        <h1><strong>Living Transmissions</strong></h1>
+        <p>A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation. Here, we share stories, reflections, and practical guidance rooted in indigenous traditions, ecological stewardship, and conscious living.</p>
+      </div>
+      <div class="pt-fit" style="grid-area:9 / 10 / 15 / 16">
+        <img src="/assets/brand/icon-vision-purpose.webp" alt="Stylized Buddha eyes over water with lotus petals" loading="eager">
       </div>
     </div>
   </section>
+
+  <!-- ===== Substack band ===== -->
+  <section class="pt-sec bl-substack">
+    <div class="pt-sec-bg">
+      <img src="/assets/blog/unsplash-image-jwn0vkrklvk.webp" alt="" loading="lazy">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:58px;--pt-grid-bot:124px;--pt-rows:12">
+      <div class="pt-fit" style="grid-area:1 / 3 / 13 / 9">
+        <img src="/assets/blog/screenshot-2025-12-03-at-115430-am.webp" alt="Substack" loading="lazy">
+      </div>
+      <div class="pt-prose pt-vc" style="grid-area:6 / 15 / 9 / 23">
+        <p><strong>Look for more articles with Romans Substack page </strong><a href="https://substack.com/@romanhanis?utm_source=global-search" target="_blank" rel="noopener"><strong>HERE</strong></a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Entries ===== -->
+  <section class="pt-sec bl-list">
+    <div class="pt-sec-bg"></div>
+    
+    <div class="bl-grid">
+        <article class="bl-card">
+          <a class="bl-image" href="/blog/integration-phenomenal-into-mundane"><img src="/assets/blog/thumb-integration-phenomenal-into-mundane.jpg" alt="" loading="lazy"></a>
+          <div class="bl-text">
+            <p class="bl-meta"><span>Roman Hanis</span><time datetime="2018-06-08">6/8/18</time></p>
+            <h2 class="bl-title"><a href="/blog/integration-phenomenal-into-mundane">Integration: Phenomenal into Mundane</a></h2>
+            <div class="bl-excerpt">This topic has been instrumental in my life and seems relevant for many people today. Discovering how to bring natural well being into the adversity of existence opens the doorway to lasting happiness. We’ve all undergone an array of wonderful and dreadful events in life and I think it’s fair to say that everyone wishes to […]</div>
+            <a class="bl-more" href="/blog/integration-phenomenal-into-mundane">Read More</a>
+          </div>
+        </article>
+        <article class="bl-card">
+          <a class="bl-image" href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion"><img src="/assets/blog/thumb-shards-shattered-ego-reflecting-countless-arms-compassion.jpg" alt="" loading="lazy"></a>
+          <div class="bl-text">
+            <p class="bl-meta"><span>Roman Hanis</span><time datetime="2016-08-20">8/20/16</time></p>
+            <h2 class="bl-title"><a href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion">Shards of The Shattered Ego Reflecting Countless Arms of Compassion</a></h2>
+            <div class="bl-excerpt">We recently completed another Embodying True Nature Retreat cycle and we’re inspired to share some reflections on the retreat process while they’re fresh in our hearts and minds. The purpose of the indigenous transformation retreat is not to instantly solve life’s problems for us, but to change our relationship with those situations we consider to […]</div>
+            <a class="bl-more" href="/blog/shards-shattered-ego-reflecting-countless-arms-compassion">Read More</a>
+          </div>
+        </article>
+        <article class="bl-card">
+          <a class="bl-image" href="/blog/embody-true-nature-healing-retreat"><img src="/assets/blog/thumb-embody-true-nature-healing-retreat.jpg" alt="" loading="lazy"></a>
+          <div class="bl-text">
+            <p class="bl-meta"><span>Roman Hanis</span><time datetime="2016-05-20">5/20/16</time></p>
+            <h2 class="bl-title"><a href="/blog/embody-true-nature-healing-retreat">What Does it Mean to Embody True Nature?</a></h2>
+            <div class="bl-excerpt">The profound immersion into the depths of consciousness and purpose of all life that happens in the Embody True Nature healing retreat at Paititi continues to inspire us. As we travel deeper along our own hero’s journeys of evolutionary healing, our shared hearts awaken to greater extents. But what does it mean to embody true nature? […]</div>
+            <a class="bl-more" href="/blog/embody-true-nature-healing-retreat">Read More</a>
+          </div>
+        </article>
+    </div>
+  </section>
+
+  <section class="pt-sec bl-list" style="height:55px">
+    <div class="pt-sec-bg"></div>
+  </section>
+
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:2200}}">
-class Component extends DCLogic {
-  renderVals() { return {}; }
-}
-</script>
 </body>
 </html>

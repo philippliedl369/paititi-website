@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -12,8 +13,10 @@
 <title>Contact | Paititi Institute</title>
 <meta name="description" content="Get in touch with Paititi Institute. Fill out some info and we will be in touch shortly!">
 <meta property="og:title" content="Contact | Paititi Institute">
+<meta property="og:description" content="Get in touch with Paititi Institute. Fill out some info and we will be in touch shortly!">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/about/paititi-lizpeace-190.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
@@ -25,50 +28,98 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  .pt-field{display:grid;gap:6px}
-  .pt-field label{font-size:14px;font-weight:700;color:var(--text-heading)}
-  .pt-field input,.pt-field textarea{padding:11px 14px;border:1px solid var(--border-subtle);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;color:var(--text-body);background:#fff;width:100%;box-sizing:border-box}
-  .pt-field input:focus,.pt-field textarea:focus{outline:2px solid var(--focus-ring);border-color:var(--border-focus)}
+  .ct-hero{--pt-hero-h:674px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.33)}
+  .ct-hero .pt-hero-panel{background:rgba(88,67,100,.53)}
+  .ct-body{--pt-bg:#F1EAF6}
+
+  /* "Get in touch" is an h1 on the original, not an h2, and sits at 41.6px. */
+  .ct-body h1{font-size:41.6px;line-height:1.3104}
+
+  /* Squarespace's form fields: transparent, pill-radius, no visible border. */
+  .ct-form{display:grid;gap:20px}
+  .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ct-field label{display:block;font-size:17.6px;font-weight:300;color:#210416;margin-bottom:6px}
+  .ct-row .ct-field label{font-size:12px}
+  .ct-field input,.ct-field textarea{width:100%;padding:10px 20px;height:54px;
+    border:1px solid rgba(33,4,22,.25);border-radius:30.9088px;background:transparent;
+    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416}
+  .ct-field textarea{height:100px;resize:vertical}
+  .ct-field input:focus,.ct-field textarea:focus{outline:2px solid #584364;outline-offset:2px}
+  .ct-submit{width:140px}
+
+  /* The photo is clipped to an arched top on the original. */
+  .ct-arch img{clip-path:path("M0,0")}
+  .ct-arch{overflow:hidden}
+  .ct-arch img{clip-path:none;-webkit-mask:var(--ct-arch) center/100% 100% no-repeat;mask:var(--ct-arch) center/100% 100% no-repeat}
+
+  @media (max-width:1180px){
+    .ct-row{grid-template-columns:1fr}
+  }
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page" style="--ct-arch:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M49.5,0 A50.5,33.6,0,0,0,0,32.9 V100 H100 V32.9 A50.5,33.6,0,0,0,49.5,0' fill='%23000'/%3E%3C/svg%3E&quot;)">
+<dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container-narrow);margin:0 auto;padding:64px 24px var(--section-y)">
-      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 32px">Contact Us</h1>
-      <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 8px">Get in touch</h2>
-      <p style="font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 36px">Fill out some info and we will be in touch shortly! We can't wait to hear from you!</p>
-      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-        <p style="font-size:18px;font-weight:700;color:var(--accent-primary)">Thank you!</p>
-      </sc-if>
-      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
-      <form onSubmit="{{ submit }}" style="display:grid;gap:20px">
-        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-          <div class="pt-field"><label for="c-first">First Name *</label><input id="c-first" name="firstName" required autocomplete="given-name"></div>
-          <div class="pt-field"><label for="c-last">Last Name *</label><input id="c-last" name="lastName" required autocomplete="family-name"></div>
-        </div>
-        <div class="pt-field"><label for="c-email">Email *</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
-        <div class="pt-field"><label for="c-msg">Message *</label><textarea id="c-msg" name="message" rows="6" required></textarea></div>
-        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:14px;color:#A33;margin:0">{{ errorMsg }}</p>
-        </sc-if>
-        <div><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" type="submit" hint-size="140px,48px">Submit</x-import></div>
-      </form>
-      </sc-if>
+
+  <section class="pt-sec pt-sec-flat pt-hero ct-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/about/paititi-lizpeace-190.webp" alt="Paititi Institute community in the Peruvian Amazon" loading="eager">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:7">
+      <div class="pt-hero-panel pt-vc" style="grid-area:1 / 9 / 5 / 17">
+        <h1><strong>Contact Us</strong></h1>
+      </div>
     </div>
   </section>
+
+  <section class="pt-sec ct-body">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:21">
+
+      <div class="pt-vc" style="grid-area:1 / 1 / 4 / 12">
+        <h1>Get in touch</h1>
+      </div>
+
+      <div class="ct-arch" style="grid-area:1 / 14 / 22 / 25">
+        <img src="/assets/about/whatsapp-image-2024-05-06-at-174414.webp" alt="Members of the Paititi Institute community outdoors" loading="lazy">
+      </div>
+
+      <div class="pt-vc" style="grid-area:4 / 1 / 6 / 12">
+        <p>Fill out some info and we will be in touch shortly! We can&rsquo;t wait to hear from you!</p>
+      </div>
+
+      <div style="grid-area:7 / 1 / 21 / 12">
+        <sc-if cond="{{ sent }}">
+          <p class="pt-lg"><strong>Thank you &mdash; your message is on its way.</strong></p>
+        </sc-if>
+        <sc-if cond="{{ notSent }}">
+        <form class="ct-form" onSubmit="{{ submit }}">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <div class="ct-row">
+            <div class="ct-field"><label for="c-first">First Name (required)</label><input id="c-first" name="firstName" required autocomplete="given-name"></div>
+            <div class="ct-field"><label for="c-last">Last Name (required)</label><input id="c-last" name="lastName" required autocomplete="family-name"></div>
+          </div>
+          <div class="ct-field"><label for="c-email">Email (required)</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+          <div class="ct-field"><label for="c-msg">Message (required)</label><textarea id="c-msg" name="message" required></textarea></div>
+          <sc-if cond="{{ error }}">
+            <p class="pt-sm" style="color:#A33">{{ errorMsg }}</p>
+          </sc-if>
+          <div><button class="pt-btn ct-submit" type="submit">Submit</button></div>
+        </form>
+        </sc-if>
+      </div>
+
+    </div>
+  </section>
+
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1300}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1700}}">
 class Component extends DCLogic {
   state = { sent: false, error: '' };
   renderVals() {

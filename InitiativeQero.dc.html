@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
-<script src="/reveal.js" defer></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-<title>Andean Q'ero Nation Emergency Food Supply | Paititi Institute</title>
-<meta name="description" content="During the 2021 COVID lockdowns in Peru, Paititi Institute delivered essential food supplies to over 600 families — including Q'ero elders in the high Andes and the Yahua and Bora tribes deep in the Amazon rainforest.">
-<meta property="og:title" content="Andean Q'ero Nation Emergency Food Supply | Paititi Institute">
-<meta property="og:description" content="During the 2021 COVID lockdowns in Peru, Paititi Institute delivered essential food supplies to over 600 families — including Q'ero elders in the high Andes and the Yahua and Bora tribes deep in the Amazon rainforest.">
-<meta property="og:type" content="website">
+<title>Q'ero Nation Emergency Food Supply During COVID | Paititi Institute</title>
+<meta name="description" content="During the 2021 Covid lockdowns in Peru, Paititi Institute delivered essential food supplies to over 600 families across Peru, including the Q'ero elders in the high Andes and the Yahua and Bora tribes in the Amazon.">
+<meta property="og:title" content="Q'ero Nation Emergency Food Supply During COVID | Paititi Institute">
+<meta property="og:description" content="During the 2021 Covid lockdowns in Peru, Paititi Institute delivered essential food supplies to over 600 families across Peru, including the Q'ero elders in the high Andes and the Yahua and Bora tribes in the Amazon.">
+<meta property="og:type" content="article">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp">
 <meta name="robots" content="noindex">
@@ -28,92 +28,195 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  a:hover{color:var(--accent-primary-hover)}
-  .ink-rule{position:relative}
-  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
-  .pt-prose p{font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 16px}
-  .pt-card{display:flex;flex-direction:column;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);text-decoration:none;color:var(--text-body);transition:box-shadow var(--dur-base) var(--ease-standard),transform var(--dur-base) var(--ease-standard)}
-  .pt-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);color:var(--text-body)}
-  .pt-card img{width:100%;height:260px;object-fit:cover;display:block}
-  .pt-card .pt-card-body{padding:24px 24px 28px;display:flex;flex-direction:column;flex:1}
-  .pt-card .pt-card-link{margin-top:auto;padding-top:16px;font-weight:700;color:var(--accent-primary)}
+  .qe-hero{--pt-hero-h:1123px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.15)}
+  .qe-hero h1{text-align:center}
+
+  .qe-story{--pt-bg:#584364;color:#fff}
+  .qe-story h1,.qe-story p{color:#fff}
+
+  .qe-give{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.25)}
+
+  /* Squarespace clips these three photos into different shapes. */
+  .qe-circle img{clip-path:circle(50% at 50% 50%)}
+  .qe-squircle img{clip-path:polygon(50% 0,76.8% 0,89.4% 5.6%,91.9% 8.1%,94.4% 10.6%,100% 24.2%,100% 50.5%,100% 76.8%,94.7% 89.1%,91.9% 91.9%,89.1% 94.7%,76.8% 100%,50% 100%,20.2% 100%,11% 94.8%,8.1% 91.9%,5.2% 89%,0 76.8%,0 50%,0 23.2%,5.3% 10.9%,8.1% 8.1%,10.9% 5.3%,23.2% 0)}
+  .qe-star img{clip-path:polygon(0 33%,16.5% 33%,16.5% 16.5%,33% 16.5%,33% 0,66% 0,66% 16.5%,83.5% 16.5%,83.5% 33%,100% 33%,100% 66%,83.5% 66%,83.5% 83.5%,66% 83.5%,66% 100%,33% 100%,33% 83.5%,16.5% 83.5%,16.5% 66%,0 66%)}
+
+  /* Donation panel — the Squarespace donation block, backed by Stripe here.
+     Translucent over the photo, with the amounts as inline pills. */
+  .qe-panel{background:rgba(241,234,246,.55);padding:36px 32px;min-height:519px;
+    display:flex;flex-direction:column;justify-content:center;gap:28px}
+  .qe-panel select{width:100%;height:34px;border:0;border-radius:0;background:transparent;
+    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416;
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='%23210416' d='M0.44 1.5L1.56.5 9 8.87 16.44.5l1.12 1z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 4px center}
+  .qe-amounts{display:flex;flex-wrap:wrap;gap:10px}
+  .qe-amounts button{padding:7px 18px;border:0;border-radius:999px;background:rgba(255,255,255,.75);
+    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416;cursor:pointer}
+  .qe-amounts button[data-on="1"]{background:#210416;color:#fff}
+  .qe-custom{width:100%;height:44px;padding:0 14px;border:1px solid rgba(33,4,22,.25);background:rgba(255,255,255,.75);
+    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416}
+  .qe-fees{display:flex;align-items:flex-start;gap:10px;font-size:17.6px;font-weight:300;color:#210416}
+  .qe-fees input{margin-top:6px}
+  .qe-donate{width:100%;height:63px}
+  .qe-err{color:#A33;font-size:14.272px;margin:0}
+
+  /* Portfolio pagination below the sections. */
+  .qe-pager{background:#fff;padding:44px 58px}
+  .qe-pager a{display:inline-block;text-decoration:none;color:#210416}
+  .qe-pager .qe-pager-label{font-size:14.272px;display:block;margin-bottom:6px}
+  .qe-pager h2{font-size:28.8px;line-height:1.3552;font-family:var(--font-display);font-weight:400;
+    color:#210416;margin:0;letter-spacing:normal}
+
+  @media (max-width:1180px){
+    .qe-hero h1{font-size:40px}
+  }
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" active="institute" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- Hero -->
-  <section style="position:relative;background:var(--surface-inverse);overflow:hidden">
-    <img src="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp" alt="Q'ero villagers and the Paititi team with emergency food supplies high in the Andes" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" loading="eager">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,23,54,0.4),rgba(42,23,54,0.75))"></div>
-    <div style="position:relative;max-width:var(--container);margin:0 auto;padding:150px 24px 130px;text-align:center">
-      <h1 style="font:var(--text-h1);color:#fff;margin:0;text-shadow:0 2px 24px rgba(0,0,0,0.45)">Andean Q&rsquo;ero Nation Emergency Food Supply</h1>
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero qe-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp" alt="Q'ero community receiving emergency food supplies in the high Andes" loading="eager">
     </div>
-  </section>
-
-  <!-- Journey to Q'ero Nation (first content section: no data-enter) -->
-  <section style="background:var(--surface-page)">
-    <div class="pt-prose" style="max-width:var(--container-narrow);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);margin:0 0 36px">Journey to Q&rsquo;ero Nation</h2>
-      <div style="position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin:0 0 36px"><iframe src="https://www.youtube-nocookie.com/embed/w373klPY7IE" title="&#127758; Honoring Pachamama through Service" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy"></iframe></div>
-      <p>During the 2021 government Covid lockdowns in Peru, when the world felt most isolated, our team at Paititi Institute came together to serve in the spirit of Pachamama. With the support of our global community, we delivered essential food supplies to over 600 families across Peru &mdash; including our dear Q&rsquo;ero elders in the high Andes, and the Yahua and Bora tribes deep in the Amazon rainforest.</p>
-      <p>This video shares a glimpse of our journey to the Q&rsquo;ero nation, where we brought over 1 ton of emergency food supplies to two of the most remote mountain villages, guided by the heartfelt request of Q'ero elder Juan Gabriel Apaza who passed 2 years ago and his son Julian.</p>
-      <p>The Q&rsquo;ero chose the coldest, highest altitudes centuries ago to preserve their freedom and lifeways. Despite harsh conditions, they continue to live with generosity, courage, and profound integrity &mdash; embodying values our modern world is in danger of forgetting.</p>
-      <p>We were welcomed with open arms and shared meals, treated with care, and reminded what it means to live in communion with Earth and one another. To everyone who made this mission possible: thank you. Your offerings became living prayers in action. This is sacred activism &mdash; remembering, responding, and regenerating.</p>
-    </div>
-  </section>
-
-  <!-- Photo gallery -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px">
-        <img src="/assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp" alt="A remote Q'ero mountain village in the high Andes" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:var(--radius-lg)">
-        <img src="/assets/initiatives/food-drive-3.webp" alt="Sacks of emergency food supplies being unloaded for Q'ero families" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:var(--radius-lg)">
-        <img src="/assets/initiatives/covidaid-fbarticleimage.webp" alt="Community members receiving food supplies during the COVID lockdowns" loading="lazy" style="width:100%;height:300px;object-fit:cover;border-radius:var(--radius-lg)">
+    <div class="pt-fluid" style="--pt-grid-top:223px;--pt-grid-bot:101px;--pt-rows:22">
+      <div class="pt-vc" style="grid-area:8 / 4 / 13 / 22">
+        <h1><strong>Andean Q&rsquo;ero Nation Emergency Food Su</strong>pply</h1>
       </div>
     </div>
   </section>
 
-  <!-- Donate CTA -->
-  <section style="position:relative;background:var(--surface-inverse);overflow:hidden">
-    <img src="/assets/initiatives/food-drive-3.webp" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,23,54,0.55),rgba(42,23,54,0.82))"></div>
-    <div data-enter style="position:relative;max-width:var(--container);margin:0 auto;padding:88px 24px;text-align:center">
-      <h2 style="font:var(--text-h2);color:#fff;margin:0 0 14px">Make an impact today</h2>
-      <p style="font-size:18px;line-height:1.65;color:rgba(255,255,255,0.94);max-width:52ch;margin:0 auto 32px">Support our mission by contributing a donation.</p>
-      <a href="/donate" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Donate</x-import></a>
-    </div>
-  </section>
-
-  <!-- Related initiative -->
-  <section style="background:var(--surface-page)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 24px">Previous initiative</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:32px">
-        <a class="pt-card" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
-          <img src="/assets/home/home-02.webp" alt="The completed Yahua Ancestral School maloca in the Amazon rainforest" loading="lazy">
-          <div class="pt-card-body">
-            <h3 style="font:var(--text-h3);color:var(--text-heading);margin:0">Yagua Cultural Heritage Center &amp; Indigenous School</h3>
-            <span class="pt-card-link">Learn more &rarr;</span>
-          </div>
-        </a>
+  <!-- ===== Journey ===== -->
+  <section class="pt-sec qe-story">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:134px;--pt-rows:45">
+      <div class="pt-vc" style="grid-area:1 / 1 / 6 / 14">
+        <h1>Journey to Q&rsquo;ero Nation</h1>
+      </div>
+      <div style="grid-area:4 / 1 / 23 / 19">
+        <div class="pt-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/w373klPY7IE" title="Honoring Pachamama through Service" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="pt-prose" style="grid-area:23 / 1 / 36 / 25">
+        <p>During the 2021 government Covid lockdowns in Peru, when the world felt most isolated, our team at Paititi Institute came together to serve in the spirit of Pachamama. With the support of our global community, we delivered essential food supplies to over 600 families across Peru &mdash; including our dear Q&rsquo;ero elders in the high Andes, and the Yahua and Bora tribes deep in the Amazon rainforest. </p>
+        <p>This video shares a glimpse of our journey to the Q&rsquo;ero nation, where we brought over 1 ton of emergency food supplies to two of the most remote mountain villages, guided by the heartfelt request of Q'ero elder Juan Gabriel Apaza who passed 2 years ago and his son Julian. </p>
+        <p>The Q&rsquo;ero chose the coldest, highest altitudes centuries ago to preserve their freedom and lifeways. Despite harsh conditions, they continue to live with generosity, courage, and profound integrity &mdash; embodying values our modern world is in danger of forgetting. </p>
+        <p>We were welcomed with open arms and shared meals, treated with care, and reminded what it means to live in communion with Earth and one another. To everyone who made this mission possible: thank you. Your offerings became living prayers in action. This is sacred activism &mdash; remembering, responding, and regenerating. </p>
+      </div>
+      <div class="qe-circle" style="grid-area:35 / 18 / 46 / 25">
+        <img src="/assets/initiatives/screenshot-2025-08-01-at-100143-pm.webp" alt="" loading="lazy">
+      </div>
+      <div class="qe-squircle" style="grid-area:36 / 1 / 45 / 9">
+        <img src="/assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp" alt="" loading="lazy">
+      </div>
+      <div class="qe-star" style="grid-area:36 / 8 / 45 / 18">
+        <img src="/assets/initiatives/food-drive-3.webp" alt="" loading="lazy">
       </div>
     </div>
   </section>
+
+  <!-- ===== Donate ===== -->
+  <section class="pt-sec qe-give">
+    <div class="pt-sec-bg">
+      <img src="/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp" alt="" loading="lazy">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:13;--pt-row-h:28.4531px">
+      <div class="pt-prose pt-vc" style="grid-area:1 / 1 / 9 / 13">
+        <h1>Make an <span>impact</span> today</h1>
+        <p>Support our mission by contributing a donation.</p>
+      </div>
+      <div class="qe-panel" style="grid-area:1 / 15 / 13 / 24">
+        <select id="q-fund" aria-label="Choose an initiative" onChange="{{ pickFund }}">
+          <option value="donation-qero">Q'ero Nation Initiative</option>
+          <option value="donation-yagua">YAGUA INITAiTIVE</option>
+        </select>
+
+        <div class="qe-amounts">
+          <sc-for list="{{ amounts }}" as="a" hint-placeholder-count="5">
+            <button type="button" data-on="{{ a.active }}" onClick="{{ a.pick }}">{{ a.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if cond="{{ isCustom }}">
+          <input class="qe-custom" type="number" min="1" step="1" placeholder="Custom amount (USD)" onInput="{{ setCustom }}">
+        </sc-if>
+
+        <select id="q-freq" aria-label="Donation frequency" onChange="{{ pickFreq }}">
+          <option value="one_time">One-Time Donation</option>
+          <option value="weekly">Weekly Donation</option>
+          <option value="monthly" selected>Monthly Donation</option>
+          <option value="quarterly">Quarterly Donation</option>
+          <option value="yearly">Annual Donation</option>
+        </select>
+
+        <label class="qe-fees"><input type="checkbox" onChange="{{ toggleFees }}"> <span>Support us by covering the fees we have to pay</span></label>
+
+        <sc-if cond="{{ error }}"><p class="qe-err">{{ errorMsg }}</p></sc-if>
+        <button class="pt-btn qe-donate" type="button" onClick="{{ donate }}">Donate</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Previous project ===== -->
+  <nav class="qe-pager" aria-label="Other initiatives">
+    <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
+      <span class="qe-pager-label">Previous</span>
+      <h2>Yagua Cultural Heritage Center &amp; Indigenous School</h2>
+    </a>
+  </nav>
 
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:3400}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1400}}">
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  state = { fund: 'donation-qero', amount: 5, custom: false, freq: 'monthly', fees: false, error: '' };
+  renderVals() {
+    const presets = [5, 10, 25, 50];
+    const amounts = presets.map((v) => ({
+      label: '$' + v.toFixed(2) + ' ',
+      active: !this.state.custom && this.state.amount === v ? '1' : '0',
+      pick: () => this.setState({ amount: v, custom: false, error: '' }),
+    }));
+    amounts.push({
+      label: 'Custom Amount',
+      active: this.state.custom ? '1' : '0',
+      pick: () => this.setState({ custom: true, error: '' }),
+    });
+    return {
+      amounts,
+      isCustom: this.state.custom,
+      error: !!this.state.error,
+      errorMsg: this.state.error,
+      pickFund: (e) => this.setState({ fund: e.target.value }),
+      pickFreq: (e) => this.setState({ freq: e.target.value }),
+      toggleFees: (e) => this.setState({ fees: e.target.checked }),
+      setCustom: (e) => this.setState({ amount: Number(e.target.value) || 0 }),
+      donate: async () => {
+        const amount = Number(this.state.amount);
+        if (!amount || amount < 1) { this.setState({ error: 'Please choose a donation amount.' }); return; }
+        try {
+          const res = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ items: [{ id: this.state.fund, qty: 1, amount, frequency: this.state.freq, coverFees: this.state.fees }] }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok && data.url) { location.href = data.url; return; }
+          this.setState({ error: data.error || 'Checkout failed, please try again.' });
+        } catch (err) {
+          this.setState({ error: 'Checkout failed, please try again.' });
+        }
+      },
+    };
+  }
 }
 </script>
 </body>

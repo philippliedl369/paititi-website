@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
-<script src="/reveal.js" defer></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -13,8 +13,10 @@
 <title>Online Courses | Paititi Institute</title>
 <meta name="description" content="Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.">
 <meta property="og:title" content="Online Courses | Paititi Institute">
+<meta property="og:description" content="Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/retreats/online-courses-01.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
@@ -26,139 +28,57 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <script>
   // Grow the Retreat Guru iframe with its content (see rbg-widget.html).
   window.addEventListener('message', function (e) {
     if (e.origin !== location.origin || !e.data || !e.data.rbgHeight) return;
     var f = document.getElementById('rbg-frame');
-    if (f) f.style.height = Math.max(400, e.data.rbgHeight) + 'px';
+    if (f) f.style.height = Math.max(1319, e.data.rbgHeight) + 'px';
   });
 </script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  a:hover{color:var(--accent-primary-hover)}
-  .ink-rule{position:relative}
-  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
-  .pt-course{background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column}
-  .pt-course-body{padding:26px 28px 32px;display:flex;flex-direction:column;flex:1}
-  .pt-course-body ul{margin:0 0 18px;padding-left:20px;font-size:14px;line-height:1.7;color:var(--text-body)}
-  .pt-course-body li{margin:0 0 4px}
+  .oc-hero{--pt-hero-h:932px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41)}
+  .oc-hero .pt-hero-panel{background:rgba(88,67,100,.32)}
+  .oc-hero h1,.oc-hero p{text-align:center}
+  .oc-list{--pt-bg:#F1EAF6}
+  .oc-frame{width:100%;border:0;display:block}
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" active="courses" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="courses" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- Hero image -->
-  <img src="/assets/retreats/online-courses-01.webp" alt="" style="width:100%;max-height:540px;object-fit:cover;display:block">
-
-  <!-- First content section: intentionally NOT tagged with data-enter -->
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container);margin:0 auto;padding:64px 24px 48px">
-      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 28px">Online Courses</h1>
-      <p style="max-width:68ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0">Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.</p>
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero oc-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/retreats/online-courses-01.webp" alt="Morning light over the Paititi retreat centre" loading="eager">
     </div>
-  </section>
-
-  <!-- Course cards -->
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container-wide);margin:0 auto;padding:16px 24px var(--section-y)">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:32px">
-
-        <article class="pt-course">
-          <img src="/assets/retreats/evolutionary-blueprint.jpg" alt="Sacred geometry dreamwork illustration" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
-          <div class="pt-course-body">
-            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 6px">Your Evolutionary Blueprint: Online Home Study Course</h2>
-            <p style="font-size:14px;color:var(--text-muted);margin:0 0 14px">Facilitated by Roman Hanis and Cynthia Robinson · Online · Open Dates</p>
-            <p style="font-size:15px;font-weight:700;color:var(--text-heading);margin:0 0 14px">$40.00 to $200.00 &ndash; We are offering this course on a sliding scale and welcome you to contribute the amount that is accessible for you.</p>
-            <p style="font-size:15px;line-height:1.7;margin:0 0 14px">In this interactive course you will explore your own heroic inner journey through life via video talks, reading materials, self inquiry &amp; reflection homework, guided meditation, Primordial Breathwork, Alchemy QiGong and fun creative expression.</p>
-            <ul>
-              <li>Chapter 1: The Call to Evolve</li>
-              <li>Chapter 2: Crossing the Line of No Return</li>
-              <li>Chapter 3: Remembering The Infinite</li>
-              <li>Chapter 4: Finding the Way Through Patterns of Evolution</li>
-              <li>Chapter 5: Emerging From the Dark Night of the Soul</li>
-              <li>Post Course: Community Forum Engagement</li>
-            </ul>
-            <div style="margin-top:auto"><a href="https://paititi-institute.secure.retreat.guru/program/your-evolutionary-blueprint-online-home-study-course/?form=1&amp;lang=en" target="_blank" rel="noopener" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Enroll</x-import></a></div>
-          </div>
-        </article>
-
-        <article class="pt-course">
-          <img src="/assets/retreats/qigong-stone-tower.jpg" alt="Balanced stone tower" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
-          <div class="pt-course-body">
-            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 6px">Alchemy of Immortality Daoist QiGong / Andean Art Of Being: Online Home Study Course</h2>
-            <p style="font-size:14px;color:var(--text-muted);margin:0 0 14px">Facilitated by Roman Hanis · Online · Open Dates</p>
-            <p style="font-size:15px;font-weight:700;color:var(--text-heading);margin:0 0 14px">$30.00 to $150.00 &ndash; Sliding Scale Contribution</p>
-            <p style="font-size:15px;line-height:1.7;margin:0 0 14px">This course includes 3 virtual qigong sessions you can engage with at your own pace and continue returning to. In addition to these videos, we share theory and philosophy as foundational support to deepen your practice further and integrate it with everyday life.</p>
-            <ul>
-              <li>Session 1: Planting the Seed</li>
-              <li>Session 2: Sprouting</li>
-              <li>Session 3: Blossoming</li>
-            </ul>
-            <div style="margin-top:auto"><a href="https://paititi-institute.secure.retreat.guru/program/alchemy-of-immortality-daoist-qigong-andean-art-of-being-online-home-study-course/?form=1&amp;lang=en" target="_blank" rel="noopener" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Enroll</x-import></a></div>
-          </div>
-        </article>
-
-        <article class="pt-course">
-          <img src="/assets/retreats/primordial-breathwork.jpg" alt="Sacred spiral" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
-          <div class="pt-course-body">
-            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 6px">Primordial Breathwork&trade;: Online Home Study Course Series</h2>
-            <p style="font-size:14px;color:var(--text-muted);margin:0 0 14px">Facilitated by Roman Hanis · Online · Open Dates</p>
-            <p style="font-size:15px;font-weight:700;color:var(--text-heading);margin:0 0 14px">$30.00 to $150.00 &ndash; Sliding Scale Contribution</p>
-            <p style="font-size:15px;line-height:1.7;margin:0 0 14px">This series focuses on the first portion of the Primordial Breathwork&trade; inspired by the Amazonian rainforest tribal culture. The breathwork sessions are guided by Roman Hanis who has facilitated this practice since 2003.</p>
-            <ul>
-              <li>Chapter 1 &ndash; Intro to your True Self via Primordial Breathwork</li>
-              <li>Chapter 2 &ndash; The Interconnectedness Of Your Own Being</li>
-              <li>Chapter 3 &ndash; Breathing Wellness Into Every Moment of Life</li>
-              <li>Chapter 4 &ndash; The Elemental Energy Centers of Your Emotional Wellness</li>
-              <li>Chapter 5 &ndash; Remembering the True Nature of Breath</li>
-            </ul>
-            <div style="margin-top:auto"><a href="https://paititi-institute.secure.retreat.guru/program/primordial-breathwork-online-home-study-course-series/?form=1&amp;lang=en" target="_blank" rel="noopener" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Enroll</x-import></a></div>
-          </div>
-        </article>
-
-        <article class="pt-course">
-          <img src="/assets/retreats/beyond-ayahuasca-course.png" alt="Amazonian shaman in mystical rainforest" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block">
-          <div class="pt-course-body">
-            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 6px">Beyond Ayahuasca book Practical Alchemy Series</h2>
-            <p style="font-size:14px;color:var(--text-muted);margin:0 0 14px">Facilitated by Roman Hanis and Robin Lyons · Online · Open Dates</p>
-            <p style="font-size:15px;font-weight:700;color:var(--text-heading);margin:0 0 6px">Suggested donation &ndash; $0.00 - $100.00</p>
-            <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin:0 0 14px">After registering please send a screenshot of your book purchase proof to our email <a href="mailto:Info@Paititi-Institute.org">Info@Paititi-Institute.org</a></p>
-            <p style="font-size:15px;line-height:1.7;margin:0 0 14px">This experiential course is a living extension of the Beyond Ayahuasca book&mdash;a pathway where ancient wisdom becomes embodied truth. You&rsquo;ll be guided through three core Indigenous practices rooted in the sacred traditions shared in the book:</p>
-            <ul>
-              <li>Primordial Breathwork&trade;</li>
-              <li>Alchemy of Immortality Qigong / Andean Art of Being</li>
-              <li>Ancestral Remembrance Meditation</li>
-              <li>Bonus Practice: Embodied Integration with Robin Lyons</li>
-            </ul>
-            <div style="margin-top:auto"><a href="https://paititi-institute.secure.retreat.guru/program/beyond-ayahuasca-book-practical-alchemy-series/?form=1&amp;lang=en" target="_blank" rel="noopener" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Enroll</x-import></a></div>
-          </div>
-        </article>
-
+    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:14">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 5 / 10 / 21">
+        <h1><strong>Online Courses</strong></h1>
+        <p class="pt-lg">Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.</p>
+      </div>
+      <div class="pt-fit" style="grid-area:9 / 10 / 15 / 16">
+        <img src="/assets/retreats/foundational-practices.webp" alt="" loading="lazy">
       </div>
     </div>
   </section>
 
-  <!-- Live Retreat Guru widget: online courses appear here automatically -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 32px">All online programs</h2>
-      <iframe id="rbg-frame" src="/rbg-widget.html?cat=online-resources" title="Program listings and registration" style="width:100%;height:900px;border:0;display:block" loading="lazy"></iframe>
+  <!-- ===== Course listings (Retreat Guru) ===== -->
+  <section class="pt-sec oc-list">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:1;--pt-row-h:1318.6600px">
+      <div style="grid-area:1 / 1 / 2 / 25">
+        <iframe class="oc-frame" id="rbg-frame" src="/rbg-widget.html?cat=online-resources" title="Online course listings and registration" style="height:1319px" loading="lazy"></iframe>
+      </div>
     </div>
   </section>
 
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:3200}}">
-class Component extends DCLogic {
-  renderVals() { return {}; }
-}
-</script>
 </body>
 </html>

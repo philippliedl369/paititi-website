@@ -5,15 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <title>Press &amp; Media | Paititi Institute</title>
-<meta name="description" content="Press coverage and media features about Paititi Institute, the Yahua Ancestral School, and our work in the Peruvian Amazon and Andes.">
+<meta name="description" content="Press and media coverage of Paititi Institute, including the Yahua Ancestral School: Healing a Culture, One Child at a Time.">
 <meta property="og:title" content="Press &amp; Media | Paititi Institute">
+<meta property="og:description" content="Press and media coverage of Paititi Institute, including the Yahua Ancestral School: Healing a Culture, One Child at a Time.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/about/roman-ancelmo-book.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
@@ -25,41 +28,53 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  .ink-rule{position:relative}
-  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
+  .pm-hero{--pt-hero-h:660px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.5)}
+  .pm-hero .pt-hero-panel{background:rgba(88,67,100,.7)}
+  .pm-body{--pt-bg:#fff}
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="institute" hint-size="100%,209px"></dc-import>
 <main>
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container);margin:0 auto;padding:64px 24px var(--section-y)">
-      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);letter-spacing:-0.02em;margin:0 0 56px">Press &amp; Media</h1>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:32px">
-        <x-import component-from-global-scope="MeristemDS.Card" hint-size="100%,520px">
-          <a href="https://artisthighlight.com/the-yahua-ancestral-school-healing-a-culture-one-child-at-a-time/" target="_blank" rel="noopener" style="text-decoration:none;display:block">
-            <img src="/assets/about/roman-ancelmo-book.webp" alt="Roman Hanis and Ancelmo with the book Beyond Ayahuasca" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius-md);margin-bottom:20px" hint-size="500px,375px">
-            <h2 style="font:var(--text-h3);color:var(--text-heading);margin:0 0 10px">Yahua Ancestral School: Healing a Culture, One Child at a Time</h2>
-            <p style="font-size:14px;color:var(--text-muted);margin:0 0 16px">Artist Highlight</p>
-            <span style="font-size:15px;font-weight:700;color:var(--accent-primary)">Read the feature &rarr;</span>
-          </a>
-        </x-import>
+
+  <section class="pt-sec pt-sec-flat pt-hero pm-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/about/roman-ancelmo-book.webp" alt="Roman Hanis and Ancelmo holding a copy of Beyond Ayahuasca" loading="eager">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:352px;--pt-grid-bot:172px;--pt-rows:4">
+      <div class="pt-hero-panel pt-vc" style="grid-area:1 / 8 / 5 / 18">
+        <h1><strong>Press &amp; Media</strong></h1>
       </div>
     </div>
   </section>
+
+  <section class="pt-sec pm-body">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:14">
+
+      <div class="pt-fit" style="grid-area:1 / 2 / 5 / 8">
+        <img src="/assets/about/art.webp" alt="" loading="lazy">
+      </div>
+
+      <div class="pt-vc" style="grid-area:1 / 8 / 7 / 20">
+        <h2><strong>Yahua Ancestral School: Healing a Culture, One Child at a Time</strong></h2>
+      </div>
+
+      <div style="grid-area:5 / 1 / 11 / 9">
+        <a href="https://artisthighlight.com/the-yahua-ancestral-school-healing-a-culture-one-child-at-a-time/" target="_blank" rel="noopener">
+          <img src="/assets/about/roman-ancelmo-book.webp" alt="The Yahua Ancestral School: ARTIST HIGHLIGHT: Healing a Culture, One Child at a Time" loading="lazy">
+        </a>
+      </div>
+
+    </div>
+  </section>
+
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1500}}">
-class Component extends DCLogic {
-  renderVals() { return {}; }
-}
-</script>
 </body>
 </html>

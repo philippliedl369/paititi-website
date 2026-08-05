@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
-<script src="/reveal.js" defer></script>
+<script src="/anchor-scroll.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -13,8 +13,10 @@
 <title>Events &amp; Retreats | Paititi Institute</title>
 <meta name="description" content="Paititi Institute retreats in Peru offer a rare integration of Indigenous wisdom traditions and modern depth psychology for profound consciousness transformation. Rooted in authentic Indigenous lineages of the Amazon and Andes, these immersive experiences include Ayahuasca and San Pedro ceremonies alongside Indigenous Amazonian-based breathwork, dreamwork practices inspired by Ashuar traditions.">
 <meta property="og:title" content="Events &amp; Retreats | Paititi Institute">
+<meta property="og:description" content="Weaving ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/retreats/coco-ceremony.webp">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
@@ -26,196 +28,101 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <script>
   // Grow the Retreat Guru iframe with its content (see rbg-widget.html).
   window.addEventListener('message', function (e) {
     if (e.origin !== location.origin || !e.data || !e.data.rbgHeight) return;
     var f = document.getElementById('rbg-frame');
-    if (f) f.style.height = Math.max(400, e.data.rbgHeight) + 'px';
+    if (f) f.style.height = Math.max(330, e.data.rbgHeight) + "px";
   });
 </script>
 <style>
-  body{margin:0;background:var(--surface-page)}
-  a{color:var(--accent-primary)}
-  a:hover{color:var(--accent-primary-hover)}
-  .ink-rule{position:relative}
-  .ink-rule::after{content:"";position:absolute;left:0;bottom:-6px;width:64px;height:3px;background:var(--accent-highlight)}
-  .pt-acc{border:1px solid var(--border-subtle);border-radius:var(--radius-md);background:var(--surface-card);margin:0 0 10px}
-  .pt-acc summary{cursor:pointer;font-family:var(--font-body);font-weight:700;font-size:15px;color:var(--text-heading);padding:14px 18px;list-style-position:inside}
-  .pt-acc[open] summary{border-bottom:1px solid var(--border-subtle)}
-  .pt-acc-body{padding:16px 18px;font-size:15px;line-height:1.7}
-  .pt-acc-body p{margin:0 0 14px}
-  .pt-acc-body ul{margin:0 0 14px;padding-left:22px}
-  .pt-acc-body li{margin:0 0 10px}
+  .rt-hero{--pt-hero-h:1153px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49)}
+  .rt-hero .pt-hero-panel{background:rgba(88,67,100,.46)}
+  /* The intro paragraph stays dark on the panel; only the claims line reverses. */
+  .rt-hero h1{color:#fff}
+  .rt-hero .pt-hero-panel p{color:#210416;text-align:center}
+  .rt-hero .rt-claims{color:#fff;text-align:left}
+
+  .rt-listings{--pt-bg:#F1EAF6}
+  .rt-white{--pt-bg:#fff}
+  .rt-frame{width:100%;border:0;display:block}
 </style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" active="retreats" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="retreats" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- Hero image -->
-  <img src="/assets/retreats/coco-ceremony.webp" alt="Coca ceremony at Paititi Institute" style="width:100%;max-height:540px;object-fit:cover;display:block">
-
-  <!-- First content section: intentionally NOT tagged with data-enter -->
-  <section style="background:var(--surface-page)">
-    <div style="max-width:var(--container);margin:0 auto;padding:64px 24px var(--section-y)">
-      <h1 class="ink-rule" style="font:var(--text-h1);color:var(--text-heading);margin:0 0 28px">Retreats</h1>
-      <p style="max-width:68ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px">Weaving ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.</p>
-      <p style="max-width:68ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 6px">Retreat fees support:</p>
-      <p style="max-width:68ch;font-size:var(--fs-body);line-height:var(--lh-body);font-weight:600;color:var(--text-heading);margin:0">✔ Indigenous education ✔ Conservation ✔ Scholarships ✔ Community programs</p>
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero rt-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/retreats/coco-ceremony.webp" alt="Coca leaf ceremony at the Paititi retreat centre" loading="eager">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:20">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 6 / 14 / 23">
+        <h1><strong>Retreats</strong></h1>
+        <p class="pt-lg">Weaving ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.<br><br>Retreat fees support:</p>
+        <p class="rt-claims">&#10004; Indigenous education &#10004; Conservation &#10004; Scholarships &#10004; Community programs</p>
+      </div>
+      <div class="pt-fit" style="grid-area:14 / 10 / 21 / 16">
+        <img src="/assets/retreats/healing-philosophy.webp" alt="" loading="lazy">
+      </div>
     </div>
   </section>
 
-  <!-- Featured retreat (statically rendered from Retreat Guru event 1046) -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <article style="background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);overflow:hidden">
-        <img src="/assets/retreats/etn-circle.jpg" alt="Embodying True Nature retreat circle" loading="lazy" style="width:100%;max-height:420px;object-fit:cover;display:block">
-        <div style="padding:32px 32px 40px">
-          <h2 style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 14px">Amazon: 16-day Embodying True Nature Immersion</h2>
-          <p style="font-size:16px;font-weight:700;color:var(--text-heading);margin:0 0 4px">December 21, 2026 &ndash; January 5, 2027 · Amazon Rainforest (Iquitos, Peru)</p>
-          <p style="font-size:15px;color:var(--text-muted);margin:0 0 18px">Facilitated by Roman Hanis</p>
-          <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 18px">This 16-day Embody True Nature retreat weaves ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.</p>
-          <p style="font-size:16px;font-weight:700;color:var(--text-heading);margin:0 0 8px">$2,333.00 to $2,777.00 &ndash; Sliding Scale - SHARED ROOM or Room with PRIVATE BATHROOM (first come first serve)</p>
-          <p style="max-width:70ch;font-size:14px;line-height:1.7;color:var(--text-muted);margin:0 0 24px">A deposit of 30% is due in full at the time of registration. If we are not able to accept you into the retreat, the deposit will be refunded. Please review the <a href="https://docs.google.com/document/d/1tAfYpR4lDeKafaQoLOj0xmMjQ_S5r1DTh_ynyWJQUHE/edit?usp=sharing" target="_blank" rel="noopener"><strong>Info &amp; Prep document</strong></a> document for more information on our refund policy. Contribution includes all food, instruction, guidance &amp; personal support, ceremonies, plant medicines, lodging. Any profits are devoted to the continuation of this worthy cause for the benefit of all beings.</p>
-
-          <details class="pt-acc">
-            <summary>Overview</summary>
-            <div class="pt-acc-body">
-              <p>After 10 years of holding our retreats in the Andean mountains we are thrilled to be returning to the Amazon Rainforest, our original home! Join us in the jungle for a hero&rsquo;s journey of self discovery into the infinite human potential. Together we will transcend the layers of our individual and collective conditioning in order to know and trust our eternally brilliant and indestructible true nature. In this process we immerse into the magnificent realm of Mother Nature through the native indigenous foundational practices of remembrance, initiation rites and sacred plant ceremonies while establishing intercultural bridges, seeing the emergence of awakened consciousness in all beings everywhere. Our purpose is to create a space where all participants, including ourselves, can continually discover and implement a life of greatest purpose and deepest meaning.</p>
-              <p>Beyond humanity&rsquo;s diverse stories and personalities there&rsquo;s a profound mystery within each of us that the organism is longing to be re-initiated into &ndash; a fully conscious evolutionary journey of return to the source. A resurgence of interest in these beyond-personal states may seem a novelty and yet living wisdom traditions facilitating the rites of passage on this journey are rooted in times immemorial, long before written history. Living examples of real people embodying the evolutionary blueprint of higher consciousness have been at the conception point of all ancient spiritual lineages. A direct metaphysical experience that&rsquo;s skillfully shared may awaken the evolutionary potential necessary for society to transcend the fear-based animalistic survival mode. Few traditions still maintain an uninterrupted stream of embodied living wisdom in the form of an awakened consciousness experience. These lineages of direct transmission have been carried through the sands of time as catalysts of a greater evolutionary purpose embedded in the genetic memory bank of the collective subconsciousness. Yet without a necessary degree of spiritual maturity accompanied by experiential guidance relevant directly to one&rsquo;s current life circumstances, the higher organic intelligence cannot emerge consistently.</p>
-              <p style="margin:0">MORE INFO: <a href="https://docs.google.com/document/d/1Iz2ki_8P0EihfViYT5s6M9HAX22rDdXDZfWYJysG_kY/edit?usp=sharing" target="_blank" rel="noopener">View the Information &amp; Preparation Document &gt;&gt;</a></p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Ceremonies</summary>
-            <div class="pt-acc-body">
-              <p>The sacred plant ceremonies are integral to the Ancestral Indigenous traditions and yet not central to them since there is greater cultural context entailing cosmo-vision, practices and myth creation stories that relate to each individual heroic journey through life. Paititi Institute engages with ceremonies as part of an integral approach to allow practical and long term integration of the retreat experiences in everyday life for all our participants.</p>
-              <p>Ancestral shamanic ceremonies involving sacred entheogenic plant medicines are attracting multitudes of people from all layers of society nowadays. There is something deeply enthralling about a dimension ungoverned by the logical mind and conceptual thinking. Experiencing a rapture in the mystical divine union of direct contact with the raw forces of nature may be an inherent intuitive longing expressed through the many alarming issues of the modern society. While people have many ideas regarding the pursuit of happiness, the underlying state itself is an indescribable, yet deeply familiar blissful wholeness, nurture and safety imprinted in the cellular memory by the unconditional love of mother nature&rsquo;s womb.</p>
-              <p>This retreat begins a profound consciousness transformation and involves a serious self-realization process. The process includes physical, mental, spiritual and emotional detoxification. Participants should be willing and able to face without compromise, personal inhibitions, repressed emotions, fears, habitual patterns and other obscurations of consciousness that often accumulate in the human subconsciousness for many years because of the conditioning of modern society.</p>
-              <p style="margin:0">During the retreat there will be sacred plant ceremonies. The sacred plant medicines we work with include Ayahuasca, San Pedro and Coca all of which can support the the journey through spiritual insight and unraveling the divine intelligence of nature in one&rsquo;s being. We do not have a set number of ceremonies as we find it essential to base this on the process and needs of the group.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Practices</summary>
-            <div class="pt-acc-body">
-              <p>The retreat schedule will depend on the individual process of each participant. The days around the ceremonies are dedicated to creating a deeper understanding of Mother Nature&rsquo;s language with the help of different modalities, such as:</p>
-              <ul>
-                <li>Facilitated by &ndash; Co-founder of Paititi Institute and healer Roman Hanis with over 20 years of experience and thousands of sacred plant ceremonies led to this date also featured in critically acclaimed documentary The Sacred Science filmed in 2010</li>
-                <li>Remembering *foundation &ndash; Release of personal history &ndash; an energetic remembering, dissolution of subconscious limitation and letting-go of emotional tensions held in one&rsquo;s past.</li>
-                <li>Primordial Breathwork *foundation &ndash; Amazonian tribal activation of cellular memory and a Tibetan modality based on the Heart drops of Dharmakaya practices that bring about a cathartic release of deeply-seated emotional obscurations.</li>
-                <li>Individual and collective shamanic transpersonal dreamwork *foundation &ndash; Working with the Ashuar tribal and Jungian transpersonal approach towards recognizing the universal, associative and symbolic communication of human sub-consciousness relating to spiritual evolution of one&rsquo;s being.</li>
-                <li>Symptomatic Dance *foundation &ndash; Communication with the symptomatic language of the organism for the recognition and resolution of the dis-ease origin.</li>
-                <li>Sacred geometry *foundation &ndash; Deepening our archetypal relationship with Nature and the universal flow of energy.</li>
-                <li>Individual plant medicine diets &ndash; The participants will be given specific medicinal plants that help to cultivate essential natural qualities.</li>
-                <li>Sharing circles &ndash; Relating to the universal process of consciousness transformation, expressing itself uniquely through each participant.</li>
-                <li>Qigong, Yoga, eastern meditation practices &ndash; Activating deeper vitality and a realignment of energetic channels of the organism.</li>
-                <li>Traditional Chinese Medicine &ndash; Complementary support for the deeper realignment of energetic meridians and healing on all levels.</li>
-                <li>Processing, reflecting and integrating &ndash; Getting to know the self through the process of being with one&rsquo;s self immersed in nature.</li>
-              </ul>
-              <p>* notates foundational practices</p>
-              <p style="margin:0">The retreat is specifically developed and intended for the participants to face and challenge themselves in the most direct and harmonious way, as observed in many ancient cultures and indigenous spiritual traditions around the world. This approach helps us to become a human being in a human body while recognizing, transforming and letting go of stale concepts, habitual patterns, repressed emotions, inhibitions, fears, traumas and all other energetic limitations on the way to becoming a totally free luminous being overflowing with universal love and compassion.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Retreat Requirements</summary>
-            <div class="pt-acc-body">
-              <p>We ask that anyone applying for this retreat be prepared to face new and unexpected challenges. We are specifically seeking participants who are inspired to approach all situations with a solutions-based attitude grounded in personal responsibility.</p>
-              <p>We can only accept participants who are in stable and good health. It may be possible to join us with minor health conditions &ndash; please inquire with us before applying. For those with more serious health conditions we have found it essential to initiate the process with a 3 month Distance Healing Program. Once the Distance Healing Program is complete we can evaluate what will be the most appropriate next steps.</p>
-              <p>For your well being, all pharmaceuticals, supplements and health conditions MUST be reported to us. If you start any medications or supplements after you register, it&rsquo;s important to let us know right away. Taking ANY pharmaceutical medication will affect your ability to partake in medicinal plant work. Many pharmaceuticals are contraindicated with the Amazonian and Andean plant medicines and must be avoided 3 days to 6 weeks prior, depending on the drug and the duration of use. Every situation is unique and it&rsquo;s IMPORTANT that you contact us as soon as possible so that we can research your specific situation. We do NOT recommend that anyone quit medications without the guidance of their overseeing physician.</p>
-              <p style="margin:0">REGARDING VACCINATIONS: In order to safely participate in this retreat any vaccinations you choose to take must be completed no less than four weeks before the start of the retreat.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Accommodations / Location</summary>
-            <div class="pt-acc-body">
-              <p>We will be based in a jungle center in the Amazon Rainforest about one hour outside of Iquitos Peru, which is only accessed via boat. The center is designed for simplicity. Through this simplicity and by being in the Amazon you will become more in tune with nature inside and out. This environment can stimulate inner growth and this means you may feel ups and downs more strongly and at times it can become uncomfortable. We often use the distractions of the modern world to avoid looking at ourselves. This is not a place to escape reality but rather a place to face ourselves and ground in truth.</p>
-              <p>The center is made up of traditional Amazonian huts on stilts raised above the ground. These structures are made up of wood frames enclosed with mosquito net walls. So even while inside you will feel the nature around you at all times. Rooms will be shared with one or two other participants of the same sex. Each participant will be provided a bed with bedding and a mosquito net. All rooms have an attached bathroom.</p>
-              <p style="margin:0">We can not promise private rooms but if any are available we will offer these on a first come first serve basis in the week before the retreat starts.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Contribution</summary>
-            <div class="pt-acc-body">
-              <p>The contribution for this retreat is based on a sliding scale.</p>
-              <p>16-DAY RETREAT CONTRIBUTION</p>
-              <ul>
-                <li>$2333 &ndash; $2777 USD Sliding Scale: Shared Room or Room with Private Bathroom (first come first serve)</li>
-              </ul>
-              <p>Please note that we must meet our minimum number of participants 4 weeks before in order to move forward with this program. Please register before this date if you can and you many wish to wait &amp; purchase travel tickets till after we have confirmed our minimum numbers.</p>
-              <p style="margin:0">A deposit of 30% is due in full at the time of registration. If we are not able to accept you into the retreat, the deposit will be refunded. Please review our refund policy below before registering. Contribution includes all food, instruction, guidance &amp; personal support, ceremonies, plant medicines, accommodations in the Retreat Center location. Any profits are devoted to the continuation of this worthy cause for the benefit of all beings.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc">
-            <summary>Refund Policy</summary>
-            <div class="pt-acc-body">
-              <ul style="margin:0">
-                <li>We accept deposits via credit card which is made during the online application process. If you are not accepted to join for the program, your payment will be fully refunded.</li>
-                <li>Your remaining balance can be made with cash or via credit card (with a 3.9% merchant fee added on). If paying in cash (USD) on the first day of the program please bring CRISP, UNRIPPED dollar bills as we cannot use old or damaged bills here in Peru.</li>
-                <li>All deposits are non-refundable with exceptions made when its Covid related. If cancelled due to Covid illness or travel restriction we will fully refund or transfer your deposit. If canceled for any other reason ahead of time we can transfer the deposit to a future program minus a 10% admin fee.</li>
-                <li>All contributions are non-refundable and non-transferable once the program begins.</li>
-                <li>We reserve the right to cancel this retreat if our minimum number of participants isn&rsquo;t met 4-weeks prior to the start date. All payments will be fully refunded if the program is canceled.</li>
-                <li>Additional terms are outlined in our &ldquo;Terms, Conditions, Release Of Liability &amp; Assumption Of Risk&rdquo; document which each participants agrees to by submitting an application.</li>
-              </ul>
-            </div>
-          </details>
-
-          <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:28px">
-            <a href="https://paititi-institute.secure.retreat.guru/program/amazon-16-day-embodying-true-nature-immersion/?form=1&amp;lang=en" target="_blank" rel="noopener" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Register / Apply</x-import></a>
-          </div>
-          <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin:20px 0 0">Please review the <a href="https://docs.google.com/document/d/1Iz2ki_8P0EihfViYT5s6M9HAX22rDdXDZfWYJysG_kY/edit?usp=sharing" target="_blank" rel="noopener"><strong>Travel Info &amp; Prep Document</strong></a> for important preparation information before registering, and the <a href="https://docs.google.com/document/d/1xX6Q5C4Ft3ZkKcKYQCgXKnXmV4chgoLTQk8OFv3tgRk/edit?usp=sharing" target="_blank" rel="noopener"><strong>Program Overview Document</strong></a> for additional information before registering.</p>
-        </div>
-      </article>
+  <!-- ===== Upcoming programs (Retreat Guru) ===== -->
+  <section class="pt-sec rt-listings">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="events" style="--pt-grid-top:151px;--pt-grid-bot:180px;--pt-rows:1;--pt-row-h:329.6560px">
+      <div style="grid-area:1 / 1 / 2 / 25">
+        <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat" title="Upcoming retreats and events" style="height:330px" loading="lazy"></iframe>
+      </div>
     </div>
   </section>
 
-  <!-- Live Retreat Guru widget: future retreats appear here automatically -->
-  <section style="background:var(--surface-page)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 32px">All upcoming programs</h2>
-      <iframe id="rbg-frame" src="/rbg-widget.html?cat=events,retreat" title="Program listings and registration" style="width:100%;height:900px;border:0;display:block" loading="lazy"></iframe>
+  <!-- ===== Himalayan Pilgrimage ===== -->
+  <section class="pt-sec rt-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:32">
+      <div class="pt-prose" style="grid-area:1 / 1 / 32 / 12">
+        <h2>Himalayan Pilgrimage: An Indigenous Wisdom Journey Through Nepal</h2>
+        <p>Join us for a unique collaboration between Paititi Institute and the Karuna Project on a 15-day pilgrimage through the sacred landscapes of Nepal.</p>
+        <p>This immersive journey weaves together Himalayan trekking, Tibetan Buddhist philosophy, and the indigenous wisdom traditions of the Amazon and Andes. Through Primordial Breathwork, Qigong, dreamwork, meditation, and meaningful cultural exchange, participants will experience Nepal not only as a destination, but as a living path of inner transformation.</p>
+        <p>From the sacred temples of Kathmandu to the breathtaking Langtang Himal, this pilgrimage combines contemplative practice, ethical adventure, and service to local communities, creating an experience that nourishes body, mind, and spirit.</p>
+        <p>We are honored to partner with the Karuna Project in offering this extraordinary journey.</p>
+        <p><strong>October 17-31, 2026</strong></p>
+        <p>Click the photo to learn more about the full itinerary, pricing, and registration.</p>
+      </div>
+      <div class="pt-fit" style="grid-area:1 / 13 / 14 / 23">
+        <a href="https://www.karuna-project.com/nepal-15-day-langtang" target="_blank" rel="noopener">
+          <img src="/assets/retreats/signal-2026-07-08-172812.webp" alt="Himalayan Pilgrimage through Nepal with the Karuna Project" loading="lazy">
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- Himalayan Pilgrimage -->
-  <section style="background:var(--surface-section)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 28px">Himalayan Pilgrimage: An Indigenous Wisdom Journey Through Nepal</h2>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 16px">Join us for a unique collaboration between Paititi Institute and the Karuna Project on a 15-day pilgrimage through the sacred landscapes of Nepal.</p>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 16px">This immersive journey weaves together Himalayan trekking, Tibetan Buddhist philosophy, and the indigenous wisdom traditions of the Amazon and Andes. Through Primordial Breathwork, Qigong, dreamwork, meditation, and meaningful cultural exchange, participants will experience Nepal not only as a destination, but as a living path of inner transformation.</p>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 16px">From the sacred temples of Kathmandu to the breathtaking Langtang Himal, this pilgrimage combines contemplative practice, ethical adventure, and service to local communities, creating an experience that nourishes body, mind, and spirit.</p>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 16px">We are honored to partner with the Karuna Project in offering this extraordinary journey.</p>
-      <p style="font-size:18px;font-weight:700;color:var(--text-heading);margin:0 0 8px">October 17-31, 2026</p>
-      <p style="font-size:15px;color:var(--text-muted);margin:0 0 24px">Click the photo to learn more about the full itinerary, pricing, and registration.</p>
-      <a href="https://www.karuna-project.com/nepal-15-day-langtang" target="_blank" rel="noopener" style="display:block;max-width:820px"><img src="/assets/retreats/signal-2026-07-08-172812.webp" alt="Himalayan Pilgrimage through Nepal" loading="lazy" style="width:100%;height:auto;border-radius:var(--radius-lg);display:block"></a>
-    </div>
-  </section>
-
-  <!-- Our Facilitator -->
-  <section style="background:var(--surface-page)">
-    <div data-enter style="max-width:var(--container);margin:0 auto;padding:var(--section-y) 24px">
-      <h2 class="ink-rule" style="font:var(--text-h2);color:var(--text-heading);letter-spacing:-0.01em;margin:0 0 28px">Our Facilitator</h2>
-      <p style="max-width:70ch;font-size:var(--fs-body);line-height:var(--lh-body);margin:0 0 20px">Co-founder of Paititi Institute and healer Roman Hanis with over 20 years of experience and thousands of sacred plant ceremonies led to this date also featured in critically acclaimed documentary The Sacred Science filmed in 2010. Roman Hanis has been working closely with the indigenous Peruvian cultures in the Amazonian rainforest and Andean mountains since 2001.</p>
-      <a href="/team" style="font-weight:700;font-size:16px">Learn more about Roman</a>
+  <!-- ===== Facilitator ===== -->
+  <section class="pt-sec rt-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:8">
+      <div class="pt-fit" style="grid-area:1 / 3 / 9 / 8">
+        <img src="/assets/retreats/healing-philosophy.webp" alt="" loading="lazy">
+      </div>
+      <div class="pt-vc" style="grid-area:1 / 8 / 3 / 18">
+        <h3>Our Facilitator</h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 8 / 9 / 23">
+        <p>Co-founder of Paititi Institute and healer Roman Hanis with over 20 years of experience and thousands of sacred plant ceremonies led to this date also featured in critically acclaimed documentary The Sacred Science filmed in 2010. Roman Hanis has been working closely with the indigenous Peruvian cultures in the Amazonian rainforest and Andean mountains since 2001.</p>
+        <p><a href="/roman-hanis" style="color:#584364"><strong>Learn more about Roman</strong></a></p>
+      </div>
     </div>
   </section>
 
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:3600}}">
-class Component extends DCLogic {
-  renderVals() { return {}; }
-}
-</script>
 </body>
 </html>

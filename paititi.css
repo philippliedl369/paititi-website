@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Paititi page shell — the type, colour and layout system measured off the
+   live Squarespace site at 1440px. Every .dc.html page links this file, so
+   the shell exists once instead of being re-declared per page (which is how
+   the first build drifted). Page-specific rules stay in the page's <style>.
+
+   Type    Philosopher 400 headings, untracked:
+             h1 64/78.848  h2 41.6/54.5126  h3 28.8/39.0298  h4 19.2/26.665
+           Lato 300 body, line-height 1.8, letter-spacing a flat 1.408px:
+             large 19.2  body 17.6  small 14.272
+   Colour  headings and body #210416, band #F1EAF6, deep plum #2A1736,
+           plum #584364, and white sections do occur
+   Layout  1200px content column (x=120..1320 at 1440 wide)
+
+   The letter-spacing matters more than it looks: it is declared once in em at
+   the root font size and inherited as a px value, so setting it anywhere else
+   silently rescales it and every paragraph rewraps.
+   ========================================================================== */
+
+html { scroll-behavior: smooth }
+body { margin: 0; background: #F1EAF6 }
+
+.pt-page, .pt-page *, .pt-page *::before, .pt-page *::after { box-sizing: border-box }
+
+/* Lato Light with open tracking. The tracking is not cosmetic — it decides
+   where every paragraph wraps, and therefore all vertical geometry below it. */
+.pt-page {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: #210416;
+  background: #F1EAF6;
+}
+/* Scoped to main on purpose: SiteHeader and SiteFooter declare their tracking
+   in em against the inherited font size, so setting a size on .pt-page would
+   silently rescale the nav and footer too. */
+.pt-page main {
+  font-size: 17.6px;
+  line-height: 1.8;
+  letter-spacing: .08em; /* = 1.408px at 17.6px, then inherited as px */
+}
+
+/* 1248 including gutters = the original's 1200px column at 1440 wide. */
+.pt-wrap { max-width: 1248px; margin: 0 auto; padding: 0 24px }
+/* The narrow measure Squarespace uses for legal copy and single-column prose. */
+.pt-wrap-narrow { max-width: 996px; margin: 0 auto; padding: 0 24px }
+
+.pt-page main h1, .pt-page main h2, .pt-page main h3, .pt-page main h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  /* Measured across the live pages: #210416 is the heading colour almost
+     everywhere; plum is the exception, not the rule. */
+  color: #210416;
+  margin: 0;
+  letter-spacing: normal;
+  line-height: 1.3;
+}
+.pt-page main h1 { font-size: 64px; line-height: 1.232 }
+.pt-page main h2 { font-size: 41.6px; line-height: 1.3104 }
+.pt-page main h3 { font-size: 28.8px; line-height: 1.3552 }
+.pt-page main h4 { font-size: 19.2px; line-height: 1.3888 }
+.pt-page main p, .pt-page main li { font-size: 17.6px; line-height: 1.8; margin: 0 }
+/* Squarespace's three rich-text sizes. */
+.pt-page main .pt-lg { font-size: 19.2px }
+.pt-page main .pt-sm { font-size: 14.272px }
+
+/* Squarespace's html block separates paragraphs with a flat 16px margin, not a
+   line-height-derived one, and gives headings a 32px one. Specificity has to
+   beat the element rules above. Everything here — and the element typography —
+   is scoped to main so SiteHeader and SiteFooter keep their own type scale. */
+.pt-page main .pt-prose > * { margin-bottom: 16px }
+/* A heading inside a rich-text run gets 32px above as well as below. */
+.pt-page main .pt-prose > h1,
+.pt-page main .pt-prose > h2,
+.pt-page main .pt-prose > h3,
+.pt-page main .pt-prose > h4 { margin: 32px 0 }
+.pt-page main .pt-prose > h1:first-child,
+.pt-page main .pt-prose > h2:first-child,
+.pt-page main .pt-prose > h3:first-child,
+.pt-page main .pt-prose > h4:first-child { margin-top: 0 }
+.pt-page main .pt-prose > *:last-child { margin-bottom: 0 }
+.pt-page main .pt-prose ul, .pt-page main .pt-prose ol { margin: 0 0 16px; padding-left: 40px }
+.pt-page main .pt-prose li { margin-bottom: 8.8px }
+.pt-page main .pt-prose li:last-child { margin-bottom: 0 }
+.pt-prose em { font-style: italic }
+.pt-prose strong { font-weight: 700 }
+.pt-prose a { text-decoration: underline; text-underline-offset: 3px }
+
+.pt-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 63px; padding: 0 30px;
+  background: #584364; color: #fff;
+  border-radius: 16px 0;
+  font-size: 19px; font-weight: 700; letter-spacing: .02em;
+  text-decoration: none; text-align: center;
+  transition: background .2s ease;
+}
+.pt-btn:hover { background: #2A1736; color: #fff }
+.pt-btn-light { background: #fff; color: #000 }
+.pt-btn-light:hover { background: #F1EAF6; color: #000 }
+/* A button block fills its grid cell rather than sizing to its label. */
+.pt-fluid .pt-btn { width: 100%; height: 100%; padding: 0 20.8px; font-size: 19.2px; letter-spacing: .384px }
+
+/* ---- Sections and the wave divider ----------------------------------------
+   Consecutive sections on the original are separated by a shallow sine wave,
+   not a straight line, and each section carries its own background colour —
+   the page alternates lavender, deep plum, white and plum rather than running
+   one tint throughout.
+
+   Measured off /about-us: the boundary sits 14px above the section edge with
+   an amplitude of ±13.5px and exactly one period across the viewport — mean
+   at x=0, crest at x=360, mean at x=720, trough at x=1080. Squarespace draws
+   it by letting each section's background start 28px early and clipping its
+   top edge to that curve, so the incoming colour rises into the section above.
+   `--pt-bg` is the section's colour; `.pt-sec-flat` opts out of the wave.     */
+.pt-sec { position: relative; isolation: isolate }
+.pt-sec > .pt-sec-bg {
+  position: absolute; inset: -28px 0 0; z-index: -1; overflow: hidden;
+  background: var(--pt-bg, transparent);
+  /* Two mask layers unioned: the wave for the top 28px, a solid box below. */
+  -webkit-mask-image: var(--pt-wave), linear-gradient(#000, #000);
+          mask-image: var(--pt-wave), linear-gradient(#000, #000);
+  -webkit-mask-size: 100% 28px, 100% calc(100% - 28px);
+          mask-size: 100% 28px, 100% calc(100% - 28px);
+  -webkit-mask-position: top, bottom;
+          mask-position: top, bottom;
+  -webkit-mask-repeat: no-repeat, no-repeat;
+          mask-repeat: no-repeat, no-repeat;
+}
+.pt-sec > .pt-sec-bg > img,
+.pt-sec > .pt-sec-bg > video {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: var(--pt-bg-pos, 50% 50%); display: block;
+}
+/* Squarespace darkens photo sections with a flat scrim in the section colour. */
+.pt-sec > .pt-sec-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background: var(--pt-scrim, transparent);
+}
+/* The first section has nothing above it to rise into. */
+.pt-sec-flat > .pt-sec-bg {
+  inset: 0;
+  -webkit-mask-image: none; mask-image: none;
+}
+
+:root {
+  --pt-wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 28' preserveAspectRatio='none'%3E%3Cpath d='M0,14 c360,-18 360,-18 720,0 s360,18 720,0 V28 H0 Z' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* ---- Fluid engine ---------------------------------------------------------
+   Squarespace 7.1 positions every block on a grid rather than in flow, which
+   is why sections on the live site overlap each other's line boxes. Measured
+   at 1440px it is 26 columns — an outer margin column, 24 content columns and
+   another margin — with 11px gaps and 25.7969px rows.
+
+   Reproducing it exactly is what makes a page match instead of merely
+   resemble: the column span decides where each paragraph wraps, and the row
+   span decides every y offset below it. Blocks carry the live grid-area with
+   the column indices shifted down by one, since the outer margin column is
+   the container's own padding here.
+
+     <div class="pt-fluid"> <div style="grid-area:5 / 6 / 16 / 20"> … </div> </div>
+
+   --pt-grid-top is the gap between the section edge and the grid's first row;
+   it varies per section on the original, so each section sets its own.        */
+.pt-fluid {
+  display: grid;
+  grid-template-columns: repeat(24, minmax(0, 1fr));
+  /* Squarespace exposes the gutter per section; most are 11px but a few
+     sections are set to 0, which widens every column and rewraps the text. */
+  column-gap: var(--pt-col-gap, 11px);
+  row-gap: var(--pt-row-gap, 11px);
+  /* Each section declares a fixed row count, which can exceed the last block's
+     row — that trailing empty space is part of the section's height. Rows grow
+     when a block outruns its span, which is what lets the About Us accordion
+     push its section taller than the row count implies. */
+  grid-template-rows: repeat(var(--pt-rows, 1), minmax(var(--pt-row-h, 25.7969px), auto));
+  grid-auto-rows: minmax(var(--pt-row-h, 25.7969px), auto);
+  max-width: 1200px;
+  margin: 0 auto;
+  /* --pt-grid-top / --pt-grid-bot are the measured gaps between the section
+     edge and the grid, taken per section off the live page. */
+  padding: var(--pt-grid-top, 48px) 0 var(--pt-grid-bot, 76px);
+}
+.pt-fluid > * { min-width: 0; position: relative }
+/* Squarespace exposes a per-block vertical alignment; blocks default to the
+   top of their cell, and .pt-vc opts into the centred setting. */
+.pt-fluid > .pt-vc { display: flex; flex-direction: column; justify-content: center }
+/* A rule block is a 1px line centred in its cell. */
+.pt-rule { border: 0; height: 1px; width: 100%; margin: 0; background: var(--pt-rule, #fff) }
+/* Squarespace's image and video blocks fill their grid cell and crop. They have
+   to be taken out of flow: a percentage height cannot resolve against an auto
+   grid row, so an in-flow image falls back to its intrinsic height and silently
+   stretches the row — which then pushes every block below it. */
+.pt-fluid > * > img,
+.pt-fluid > * > video,
+.pt-fluid > * > a > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* A linked image block: the anchor is the whole cell. */
+.pt-fluid > * > a:only-child { position: absolute; inset: 0; display: block }
+.pt-fluid .pt-fit > img, .pt-fluid .pt-fit > a > img { object-fit: contain }
+
+/* Below the fluid breakpoint the original collapses to a single column in DOM
+   order, so the grid-area values have to stop applying. */
+@media (max-width: 1180px) {
+  .pt-fluid {
+    display: flex; flex-direction: column; gap: 28px;
+    max-width: 720px; padding: 48px 24px 0;
+  }
+  .pt-fluid > * { grid-area: auto !important; height: auto !important }
+  .pt-fluid img { height: auto }
+}
+
+/* ---- Page hero ------------------------------------------------------------
+   Full-bleed photo with the title centred over it. The fixed header floats on
+   top, so the top padding has to reserve --pt-header-h or the title hides
+   underneath it. Live heights vary per page (660 / 825 / 932 / 1153), set with
+   the --pt-hero-h custom property.                                            */
+/* A hero is a .pt-sec with a photo background; its top clearance comes from
+   the grid's --pt-grid-top, so it needs no padding of its own. */
+.pt-hero {
+  --pt-bg: #2A1736;
+  --pt-scrim: rgba(42, 23, 54, .45);
+  min-height: var(--pt-hero-h, 660px);
+  text-align: center;
+}
+.pt-hero h1, .pt-hero h2, .pt-hero p { color: #fff }
+
+/* The hero title sits on a translucent plum panel, inset by the text-block
+   padding — measured at rgba(88,67,100,.39). */
+.pt-hero-panel { background: rgba(88, 67, 100, .39); padding: var(--pt-panel-pad, 17.8281px) }
+.pt-page .pt-hero-panel > * + * { margin-top: 32px }
+
+/* ---- Full-bleed image band (a section whose only content is its photo) ---- */
+.pt-band { height: var(--pt-band-h, 660px) }
+
+/* ---- Standard content section --------------------------------------------- */
+.pt-section { padding: 84px 0 }
+.pt-section-tight { padding: 48px 0 }
+
+/* ---- Pull quote: quote-mark icon set left of an oversized quote ------------ */
+.pt-quote { display: grid; grid-template-columns: 90px 1fr; column-gap: 61px; align-items: start;
+  max-width: 947px; margin: 0 auto; padding: 84px 24px }
+.pt-quote-mark { width: 90px; height: auto; display: block; margin-top: 47px }
+.pt-quote h3 { line-height: 1.3 }
+.pt-quote p { margin-top: 18px }
+
+/* ---- Accordion (Squarespace "accordion" block) -----------------------------
+   Measured on /about-us: each closed row is 93px — a 92px button (28.8px
+   Philosopher, 30px padding top and bottom) over a 1px rule. */
+.pt-acc { border-top: 1px solid rgba(88, 67, 100, .3) }
+.pt-acc-item { border-bottom: 1px solid rgba(88, 67, 100, .3) }
+.pt-acc-item > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 30px 0; min-height: 92px;
+  font-family: var(--font-display); font-size: 28.8px; font-weight: 400;
+  line-height: normal; color: #584364;
+}
+.pt-acc-item > summary::-webkit-details-marker { display: none }
+.pt-acc-item > summary::after {
+  content: ""; flex: none; width: 16px; height: 16px;
+  border-right: 2px solid #584364; border-bottom: 2px solid #584364;
+  transform: rotate(45deg) translate(-4px, -4px);
+  transition: transform .25s ease;
+}
+.pt-acc-item[open] > summary::after { transform: rotate(-135deg) translate(-4px, -4px) }
+.pt-acc-body { padding: 0 4px 32px }
+
+/* Text blocks that carry Squarespace's "text block background" tweak — the
+   hero titles — are inset by 17.83px, which narrows their measure and so
+   changes where the subtitle wraps. */
+.pt-textbg { padding: 17.8281px }
+
+/* ---- Small shared pieces --------------------------------------------------- */
+.pt-icon { display: block; height: auto; margin: 0 auto }
+.pt-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden }
+.pt-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0 }
+.pt-center { text-align: center }
+.pt-btn-row { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 36px }
+.pt-btn-row-center { justify-content: center }
+
+/* Two-column split used across About / Initiatives / Retreats. */
+.pt-split { display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; align-items: center }
+.pt-split img { width: 100%; height: auto; display: block }
+
+/* ---- Responsive ------------------------------------------------------------ */
+@media (max-width: 1180px) {
+  .pt-hero { min-height: 0; padding: calc(var(--pt-header-h, 209px) + 32px) 0 48px }
+  .pt-band { height: 420px }
+  .pt-section { padding: 64px 0 }
+  .pt-split { grid-template-columns: 1fr; row-gap: 36px }
+  .pt-quote { grid-template-columns: 1fr; row-gap: 12px; padding: 64px 24px }
+  .pt-quote-mark { margin-top: 0; width: 64px }
+}
+@media (max-width: 640px) {
+  .pt-page h1 { font-size: 34px }
+  .pt-page h2 { font-size: 30px }
+  .pt-page h3 { font-size: 23px }
+  .pt-acc-item > summary { font-size: 22px }
+  .pt-band { height: 300px }
+}

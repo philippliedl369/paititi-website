@@ -45,7 +45,7 @@ maps clean URLs via `_redirects`).
 | Newsletter block ("Sign up for updates") | Footer form → `POST /api/newsletter` (worker.js) → KV `NEWSLETTER` or Resend audience |
 | Contact form | `Contact.dc.html` → `POST /api/contact` → email via Resend to `CONTACT_TO` |
 | Store + cart + checkout (US Tour RSVP $300) | `Store.dc.html` / `StoreProduct-UsTour.dc.html` (14-field intake form) / `Cart.dc.html` (`cart.js`, localStorage) → `POST /api/checkout` → Stripe Checkout. Catalog: `data/products.json` (server-side price validation) |
-| Donation block (Q'ero page: 2 funds, presets, recurring) | `Donate.dc.html` → Stripe Checkout, one-time or weekly/monthly/quarterly/annual |
+| Donation block (Q'ero page: 2 funds, presets, recurring) | Rebuilt in place on `InitiativeQero.dc.html` → `POST /api/checkout` → Stripe, one-time or weekly/monthly/quarterly/annual. There is no `/donate` page on the live site, so that path is a 301 |
 | Zeffy donation embed (Yagua page) | Kept as-is — plain iframe, platform-independent |
 | Retreat Guru listings (retreats / online courses) | Kept as-is — script embed + static fallback cards |
 | Blog CMS (8 posts, 4 categories) | Statically generated: `tools/migrate_blog.py` pulls Squarespace `?format=json`, downloads images to `assets/blog/`, writes `Blog*.dc.html` |
@@ -105,6 +105,7 @@ Two things worth knowing:
 ├── worker.js             # /api/contact · /api/newsletter · /api/checkout (Stripe)
 ├── data/products.json    # trusted price catalog for checkout
 ├── cart.js               # localStorage cart + checkout client
+├── paititi.css           # the shared page shell: fluid grid, sections, type scale
 ├── Home.dc.html …        # one .dc.html per page (see _redirects for the map)
 ├── Blog*.dc.html         # generated — edit tools/migrate_blog.py and re-run instead
 ├── SiteHeader/SiteFooter.dc.html   # shared chrome (nav, announcement bar, newsletter)
@@ -113,6 +114,32 @@ Two things worth knowing:
 ├── tools/migrate_blog.py # blog migration/regeneration script
 └── _redirects · _headers · wrangler.jsonc   # Cloudflare Workers hosting
 ```
+
+## Matching the original
+
+Pages are not laid out in normal flow. Squarespace 7.1 positions every block on
+a **fluid engine grid**, and `paititi.css` reproduces it: 24 content columns
+across a 1200px column, 11px gaps, 25.7969px rows. Each block carries the live
+`grid-area`, so a page is a transcription of measured coordinates rather than an
+approximation:
+
+```html
+<section class="pt-sec" style="--pt-bg:#F1EAF6">
+  <div class="pt-sec-bg"></div>
+  <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:46">
+    <div class="pt-prose" style="grid-area:5 / 6 / 16 / 20"> … </div>
+  </div>
+</section>
+```
+
+Sections carry their own background colour and are separated by a shallow sine
+wave rather than a straight edge; `.pt-sec-bg` draws both. The per-section
+values (`--pt-grid-top`, `--pt-grid-bot`, `--pt-rows`, and occasionally
+`--pt-row-h` or zero gaps) are measured off the live page, not chosen.
+
+Fidelity is checked by diffing every block's box against the live site. Two
+sections deliberately differ: the Retreat Guru widgets on Retreats and Online
+Courses render live listings, so their height follows real data.
 
 The page model (Design Components, islands, motion) is documented in
 `docs/design-system.md`; deployment details in the original starter notes
