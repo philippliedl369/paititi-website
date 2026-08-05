@@ -32,7 +32,7 @@
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
   .bp-sec{--pt-bg:#210416;color:#fff}
-  .bp-item{max-width:596px;margin:0 auto;padding:266px 0 0}
+  .bp-item{max-width:596px;margin:0 auto;padding:266px 0 57.6px}
   .bp-sec h1,.bp-sec h2,.bp-sec h3,.bp-sec h4,.bp-sec p,.bp-sec li{color:#fff}
   /* The live title box carries 32px of padding as well as a 32px margin. */
   .pt-page .bp-sec h1{font-size:64px;line-height:1.232;margin:0 0 32px;padding-bottom:32px}
@@ -46,30 +46,89 @@
   /* The byline is a second meta group, set further from the categories. */
   .bp-meta .bp-author{margin-left:64px}
 
-  .bp-body{margin-top:87px}
+  .bp-body{margin:70px 0 44px}
   .bp-body img{max-width:100%;height:auto;display:block}
-  /* Squarespace's half-width floated images inside post bodies. */
-  .bp-body .float-right{float:right;width:47%;margin:0 0 24px 28px}
-  .bp-body .float-left{float:left;width:47%;margin:0 28px 24px 0}
-  .bp-body .float-right::after,.bp-body .float-left::after{content:"";display:table;clear:both}
+  /* Squarespace's own block scaffolding is preserved verbatim in the migrated
+     body, so its spacing has to be reproduced rather than replaced. Rich text
+     runs on a flat 16px paragraph rhythm and 32px around headings, with the
+     first and last child of each run flush to the block. */
+  .pt-page .bp-body .sqs-html-content > *{margin:16px 0}
+  .pt-page .bp-body .sqs-html-content > h1,
+  .pt-page .bp-body .sqs-html-content > h2,
+  .pt-page .bp-body .sqs-html-content > h3,
+  .pt-page .bp-body .sqs-html-content > h4{margin:32px 0}
+  .pt-page .bp-body .sqs-html-content > *:first-child{margin-top:0}
+  .pt-page .bp-body .sqs-html-content > *:last-child{margin-bottom:0}
+  .pt-page .bp-body .sqs-html-content ul,
+  .pt-page .bp-body .sqs-html-content ol{padding-left:40px}
+  .pt-page .bp-body .sqs-html-content li{margin-bottom:8.8px}
+
+  /* An image block is an aspect-ratio box: the container reserves the height
+     with padding-bottom and the image is taken out of flow inside it. Leaving
+     the image in flow doubles the height — the container's padding *plus* the
+     image's intrinsic height — which is what made post bodies run long. */
+  .bp-body figure{margin:0}
+  /* An image block's caption is a rich-text paragraph and carries the same 16px
+     rhythm as body copy; the quote block sets its own measure and type. */
+  .pt-page .bp-body .image-caption p{margin:16px 0 0}
+  .bp-body .sqs-quote-block-contents{margin:17.6px 0}
+  .pt-page .bp-body blockquote{margin:0;font-size:19.2px;line-height:34.56px}
+  .pt-page .bp-body figcaption.source{font-size:14.272px;font-weight:400;
+    line-height:17.1264px;letter-spacing:normal}
+  .bp-body .image-block-wrapper{position:relative;overflow:hidden}
+  .bp-body .sqs-image-shape-container-element{position:relative;overflow:hidden}
+  .bp-body .has-aspect-ratio > img{position:absolute;inset:0;
+    width:100%;height:100%;max-width:none;object-fit:cover;display:block}
+  /* The other variant, content-fit, has no reserved ratio: the image keeps its
+     own height and must stay in flow or the block collapses to nothing. */
+  .bp-body .content-fit > img{position:relative;width:100%;height:auto;display:block}
+
+  /* Squarespace gutters every block with 17px of padding and pulls the row out
+     by the same amount, so the text still lands on the 596px measure while the
+     blocks themselves are 630px wide. Reproducing the gutter is what supplies
+     the 17px between consecutive blocks and the right width for a half-width
+     float — 315px, not 280px. */
+  .bp-body .sqs-row{margin:0 -17px}
+  .bp-body .sqs-block{padding:17px}
+  .bp-body .float-right{float:right;width:50%}
+  .bp-body .float-left{float:left;width:50%}
+  .bp-body .sqs-row::after{content:"";display:table;clear:both}
   .bp-body a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+  /* Button blocks: the light variant, white on the near-black ground. */
+  .bp-body .sqs-block-button-container{display:flex}
+  .bp-body .sqs-block-button-container--center{justify-content:center}
+  .bp-body .sqs-block-button-container--right{justify-content:flex-end}
+  .pt-page .bp-body .sqs-block-button-element{display:block;padding:19.2px 38.4768px;
+    background:#fff;color:#000;border-radius:16px 0;text-decoration:none;
+    font-size:19.2px;font-weight:700;line-height:23.04px;letter-spacing:.384px}
+  .pt-page .bp-body .sqs-block-button-element:hover{background:#F1EAF6;color:#000}
   .pt-page .bp-body h2{font-size:41.6px;line-height:1.3104}
   .pt-page .bp-body h3{font-size:28.8px;line-height:1.3552}
 
-  /* Previous / next, two half-width targets on the same dark ground. */
-  .bp-pager{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#210416;padding:44px 58px}
-  .bp-pager a{display:block;text-decoration:none;color:#fff;max-width:662px}
-  .bp-pager .bp-pager-label{display:block;font-size:14.272px;margin-bottom:6px;opacity:.8}
-  .pt-page .bp-pager h2{font-family:var(--font-display);font-weight:400;font-size:28.8px;line-height:1.3552;
-    color:#fff;margin:0;letter-spacing:normal}
-  .bp-pager .bp-next{text-align:left}
+  /* Previous / next: two half-width targets on the same dark ground, each a
+     chevron beside a two-line title set solid at 28.8px. */
+  .bp-pager{display:flex;background:#210416;padding:43.2px 57.6px}
+  .bp-pager a{flex:1 1 0;min-width:0;display:flex;align-items:center;
+    text-decoration:none;color:#fff}
+  .bp-pager .bp-pager-icon{flex:none;width:18px;height:32px;display:block}
+  .bp-pager .bp-prev .bp-pager-icon{padding-right:25px;box-sizing:content-box}
+  .bp-pager .bp-next .bp-pager-icon{padding-left:25px;box-sizing:content-box}
+  .bp-pager .bp-pager-icon svg{width:18px;height:32px;display:block}
+  .bp-pager .bp-pager-title{flex:1 1 auto;min-width:0}
+  /* Present for screen readers; the chevron is the visible cue. */
+  .bp-pager .bp-pager-label{position:absolute;width:1px;height:1px;overflow:hidden;
+    clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+  .pt-page .bp-pager h2{font-family:var(--font-display);font-weight:400;font-size:28.8px;
+    line-height:28.8px;color:#fff;margin:0;letter-spacing:normal}
 
   @media (max-width:1180px){
-    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 0}
-    .bp-body .float-right,.bp-body .float-left{float:none;width:100%;margin:0 0 24px}
+    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 57.6px}
+    .bp-body .sqs-row{margin:0}
+    .bp-body .float-right,.bp-body .float-left{float:none;width:100%}
     .pt-page .bp-sec h1{font-size:40px}
     .pt-page .bp-body h2{font-size:30px}
-    .bp-pager{grid-template-columns:1fr;gap:28px;padding:36px 24px}
+    .bp-pager{flex-direction:column;gap:28px;padding:36px 24px}
   }
 </style>
 </helmet>
@@ -199,7 +258,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-01.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/thewindinthemeat.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -761,7 +820,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-02.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/lovepainting.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -976,7 +1035,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-03.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/blackholemaxresdefault.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1459,7 +1518,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-04.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/69989014-2367556036662683-3473014429329653760-n.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1651,7 +1710,7 @@
               
               
               
-              <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-05.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+              <img src="/assets/blog/roots.webp" alt="" loading="lazy">
 
               <div class="image-overlay" style="overflow: hidden;-webkit-mask-image: -webkit-radial-gradient(white, black);"></div>
             </div>
@@ -1883,7 +1942,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-06.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/paititipath.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -2243,7 +2302,7 @@
               
               
               
-              <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-07.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+              <img src="/assets/blog/flowermandala.webp" alt="" loading="lazy">
 
               <div class="image-overlay" style="overflow: hidden;-webkit-mask-image: -webkit-radial-gradient(white, black);"></div>
             </div>
@@ -2368,7 +2427,7 @@
                 
                 
                 
-                <img src="/assets/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times-08.jpg" alt="" loading="lazy" style="max-width:100%;height:auto">
+                <img src="/assets/blog/paititi-institute-events.webp" alt="" loading="lazy">
 
             </div>
           </div>
@@ -2552,8 +2611,8 @@
   </section>
 
   <nav class="bp-pager" aria-label="More journal entries">
-    <a class="bp-prev" href="/blog/integration-phenomenal-into-mundane"><span class="bp-pager-label">Previous</span><h2>Integration: Phenomenal into Mundane</h2></a>
-    <a class="bp-next" href="/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"><span class="bp-pager-label">Next</span><h2>A Living Rite of Passage into the Forgotten Kingdoms of the Amazon Rainforest</h2></a>
+    <a class="bp-prev" href="/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest"><span class="bp-pager-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 4 7 12 15 20"/></svg></span><span class="bp-pager-title"><span class="bp-pager-label">Previous</span><h2>A Living Rite of Passage into the Forgotten Kingdoms of the Amazon Rainforest</h2></span></a>
+    <a class="bp-next" href="/blog/integration-phenomenal-into-mundane"><span class="bp-pager-title"><span class="bp-pager-label">Next</span><h2>Integration: Phenomenal into Mundane</h2></span><span class="bp-pager-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 4 17 12 9 20"/></svg></span></a>
   </nav>
 
 </main>

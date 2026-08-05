@@ -10,8 +10,8 @@
 <body>
 <x-dc>
 <helmet>
-<title>Store 2 | Paititi Institute</title>
-<meta property="og:title" content="Store 2 | Paititi Institute">
+<title>US TOUR &mdash; Store 2 | Paititi Institute</title>
+<meta property="og:title" content="US TOUR — Store 2 | Paititi Institute">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/store/9f81c-coca-ceremony-paititi-institute-iquitos-peru-greg-good.webp">
@@ -34,28 +34,18 @@
 <dc-import name="SiteHeader" active="store" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- A commerce page, not a fluid-engine one: no grid, no wave divider, white
-       throughout, and the header's height is reserved as section padding. -->
+  <!-- The US TOUR category. Same product list as /store, except the category
+       nav row is empty — it only lists a category's *children*, and this one
+       has none — so the grid keeps the row but at zero height. -->
   <section class="st-sec">
     <div class="st-list">
 
-      <div class="st-header"><h2>Store</h2></div>
+      <div class="st-header"><h2>US TOUR</h2></div>
 
-      <!-- Row 2 of the product-list grid. On a category page it collapses to
-           zero height, which is what moves the product grid 52px up there. -->
-      <div class="st-nav">
-        <ul>
-          <li><a href="/store/retreats">US TOUR</a></li>
-        </ul>
-      </div>
+      <div class="st-nav"></div>
 
-      <!-- Rows 3 and 5 are the filter drawer and the pager. Both are empty on
-           this store but they still carry a 10px gap each, so they stay. -->
       <div></div>
 
-      <!-- The store carries a single product. Cards are written out rather than
-           looped so the image src is a real URL in the source: a bound src is
-           fetched literally by the parser before the runtime rewrites it. -->
       <div class="st-container">
         <div class="st-grid">
           <div class="st-item">
@@ -87,7 +77,7 @@
 <dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1926}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1874}}">
 class Component extends DCLogic {
   state = { added: false };
   renderVals() {

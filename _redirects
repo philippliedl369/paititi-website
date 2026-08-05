@@ -29,7 +29,9 @@
 
 # Store / checkout
 /store                          /Store.dc.html              200
-/store/retreats                 /Store.dc.html              200
+# The US TOUR category is its own page on the original — same product grid, but
+# titled after the category and with the category nav row collapsed away.
+/store/retreats                 /StoreCategory-UsTour.dc.html 200
 /store/p/us-tour-rsvp-donation  /StoreProduct-UsTour.dc.html 200
 /cart                           /Cart.dc.html               200
 /order-confirmed                /OrderConfirmed.dc.html     200

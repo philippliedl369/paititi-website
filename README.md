@@ -93,6 +93,10 @@ Two things worth knowing:
   but they are not the original masters. If you need print-resolution or the
   layered logo, export those from the Squarespace admin — that's the one thing
   scraping cannot reach.
+- **The manifest is keyed by origin URL**, which is what makes reuse possible:
+  `tools/migrate_blog.py` looks each blog image up there before fetching, so the
+  blog references the same mirrored WebP as everything else. Skipping that
+  lookup once cost 8MB of JPEGs duplicating files already in the repo.
 - **`assets/brand/` is hand-curated** and deliberately excluded from
   `dedupe_assets.py`. The logo and favicon exist as both a WebP master and a
   PNG derivative (`sips -s format png`), because favicons and some clients
@@ -140,6 +144,25 @@ values (`--pt-grid-top`, `--pt-grid-bot`, `--pt-rows`, and occasionally
 Fidelity is checked by diffing every block's box against the live site. Two
 sections deliberately differ: the Retreat Guru widgets on Retreats and Online
 Courses render live listings, so their height follows real data.
+
+**The commerce pages are the exception.** `/store`, `/store/retreats`,
+`/store/p/…`, `/cart` and `/order-confirmed` are Squarespace *commerce* and
+*system* pages: no fluid grid, no wave divider, white ground, a 1324.8px
+measure instead of the 1200px column. Their system lives in `store.css`; the
+55px commerce button is `.pt-sqs-btn` in `paititi.css`. Nothing on the live
+product page collects an application — the RSVP button only adds the $300
+deposit to the cart — so this replica does the same, and the Stripe path
+(`cart.js` → `/api/checkout`) is unchanged.
+
+**Blog pages are generated.** Edit `tools/migrate_blog.py` and re-run it; never
+edit `Blog*.dc.html`. The migration keeps Squarespace's own block scaffolding
+verbatim, so `POST_CSS` has to reproduce that scaffolding's spacing rather than
+replace it — the 17px block gutter with the row pulled out to match, the 16px
+paragraph rhythm, image blocks as aspect-ratio boxes with the image out of
+flow, and the two image-container variants (`has-aspect-ratio` reserves the
+height, `content-fit` does not). Images are resolved through
+`assets/manifest.json`, which is keyed by the origin CDN URL, so the mirrored
+WebP is reused instead of re-downloading a JPEG copy.
 
 The page model (Design Components, islands, motion) is documented in
 `docs/design-system.md`; deployment details in the original starter notes

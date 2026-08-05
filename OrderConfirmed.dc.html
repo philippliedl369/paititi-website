@@ -10,36 +10,46 @@
 <body>
 <x-dc>
 <helmet>
-<title>Thank you | Paititi Institute</title>
+<title>Paititi Institute</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
+<link rel="stylesheet" href="/store.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-<style>body{margin:0;background:var(--surface-page)} a{color:var(--accent-primary)}</style>
 </helmet>
-<div style="font-family:var(--font-body);color:var(--text-body);background:var(--surface-page)">
-<dc-import name="SiteHeader" style="display:block;height:var(--pt-header-h,209px)" hint-size="100%,209px"></dc-import>
+<div class="pt-page sy-shell">
+<dc-import name="SiteHeader" active="store" hint-size="100%,209px"></dc-import>
 <main>
-  <section style="background:var(--surface-page);min-height:45vh">
-    <div style="max-width:var(--container-narrow);margin:0 auto;padding:96px 24px;text-align:center">
-      <h1 style="font:var(--text-h1);color:var(--text-heading);margin:0 0 16px">Thank you! 🌿</h1>
-      <p style="font-size:18px;line-height:1.7;margin:0 0 32px">Your payment was received. A receipt is on its way to your inbox. With deep gratitude from the whole Paititi family — your support helps preserve Indigenous wisdom, protect the Amazon, and awaken our shared human heart.</p>
-      <a href="/" style="text-decoration:none"><x-import component-from-global-scope="MeristemDS.Button" variant="primary" size="lg" hint-size="180px,48px">Back to home</x-import></a>
+
+  <!-- Squarespace's order confirmation lives behind its own checkout, so there
+       is no live page to measure. It is built on the same system-page frame as
+       the cart, which is the closest thing the original does show. -->
+  <div class="sy-page">
+    <div class="sy-body">
+
+      <div class="sy-title-row"><h2 class="sy-title">Thank you</h2></div>
+      <div class="sy-msg-row">
+        <p class="sy-msg">Your payment was received and a receipt is on its way to your inbox. With deep gratitude from the whole Paititi family &mdash; your support helps preserve Indigenous wisdom, protect the Amazon, and awaken our shared human heart.</p>
+      </div>
+      <a class="pt-sqs-btn pt-sqs-btn-sec" href="/">Continue Shopping</a>
+
     </div>
-  </section>
+  </div>
+
 </main>
-<dc-import name="SiteFooter" hint-size="100%,700px"></dc-import>
+<dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
 class Component extends DCLogic {
   componentDidMount() {
     if (window.PtCart) window.PtCart.clear();

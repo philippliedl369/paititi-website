@@ -100,6 +100,30 @@ body { margin: 0; background: #F1EAF6 }
 /* A button block fills its grid cell rather than sizing to its label. */
 .pt-fluid .pt-btn { width: 100%; height: 100%; padding: 0 20.8px; font-size: 19.2px; letter-spacing: .384px }
 
+/* ---- Commerce buttons ------------------------------------------------------
+   The store, product and cart pages are Squarespace *commerce* pages, not
+   fluid-engine pages, and their buttons are a size of their own: 55px tall,
+   19.2px Lato Bold tracked 0.384px, in the same 16px/0 corner shape as the
+   rest of the site. The cart's "Continue Shopping" is the secondary variant —
+   white with a 2px plum border, which is why it measures 59px rather than 55. */
+.pt-sqs-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 55px; padding: 0 19.2px;
+  border: 0; border-radius: 16px 0;
+  background: #584364; color: #fff;
+  font-family: var(--font-body);
+  font-size: 19.2px; font-weight: 700; line-height: 23.04px; letter-spacing: .384px;
+  text-align: center; text-decoration: none; cursor: pointer;
+  transition: background .2s ease;
+}
+.pt-sqs-btn:hover { background: #2A1736; color: #fff }
+.pt-sqs-btn-sec {
+  display: inline-block; width: auto; height: auto;
+  padding: 16px 20.8px; border: 2px solid #584364;
+  background: #fff; color: #584364;
+}
+.pt-sqs-btn-sec:hover { background: #F1EAF6; color: #584364 }
+
 /* ---- Sections and the wave divider ----------------------------------------
    Consecutive sections on the original are separated by a shallow sine wave,
    not a straight line, and each section carries its own background colour —
@@ -185,6 +209,7 @@ body { margin: 0; background: #F1EAF6 }
 /* Squarespace exposes a per-block vertical alignment; blocks default to the
    top of their cell, and .pt-vc opts into the centred setting. */
 .pt-fluid > .pt-vc { display: flex; flex-direction: column; justify-content: center }
+.pt-fluid > .pt-vb { display: flex; flex-direction: column; justify-content: flex-end }
 /* A rule block is a 1px line centred in its cell. */
 .pt-rule { border: 0; height: 1px; width: 100%; margin: 0; background: var(--pt-rule, #fff) }
 /* Squarespace's image and video blocks fill their grid cell and crop. They have
