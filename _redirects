@@ -17,6 +17,26 @@
 /online-courses      /OnlineCourses.dc.html    200
 /beyond-ayahuasca    /BeyondAyahuasca.dc.html  200
 
+# Distance Healing — the ten pages of the standalone paititidistancehealing.com
+# site are now sections of one page here, so each old path lands on its section.
+# The two payment pages stay separate: they are emailed to an applicant, not
+# browsed to, and each carries its own JotForm.
+/distance-healing                     /DistanceHealing.dc.html              200
+/distance-healing/application-fee     /DistanceHealingFee.dc.html           200
+/distance-healing/final-contribution  /DistanceHealingContribution.dc.html  200
+/welcome                      /distance-healing#welcome            301
+/program-overview             /distance-healing#overview           301
+/health-condition-pre         /distance-healing#health-conditions  301
+/packages                     /distance-healing#packages           301
+/getting-started-orientation  /distance-healing#getting-started    301
+/enroll                       /distance-healing#enroll             301
+/meet-our-team                /distance-healing#team               301
+/janel-p                      /distance-healing#team               301
+/frequently-asked-questions   /distance-healing#faq                301
+/home-study-course            /distance-healing#home-study-course  301
+/application-fee              /distance-healing/application-fee     301
+/final-contribution           /distance-healing/final-contribution  301
+
 # Initiatives + donations
 /initiatives         /Initiatives.dc.html      200
 /initiatives/yagua-cultural-heritage-center-indigenous-school  /InitiativeYagua.dc.html  200
@@ -76,5 +96,7 @@
 /store/p/SiteFooter.dc.html         /SiteFooter.dc.html  200
 /initiatives/SiteHeader.dc.html     /SiteHeader.dc.html  200
 /initiatives/SiteFooter.dc.html     /SiteFooter.dc.html  200
+/distance-healing/SiteHeader.dc.html  /SiteHeader.dc.html  200
+/distance-healing/SiteFooter.dc.html  /SiteFooter.dc.html  200
 /who/SiteHeader.dc.html             /SiteHeader.dc.html  200
 /who/SiteFooter.dc.html             /SiteFooter.dc.html  200

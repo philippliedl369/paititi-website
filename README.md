@@ -48,6 +48,7 @@ maps clean URLs via `_redirects`).
 | Donation block (Q'ero page: 2 funds, presets, recurring) | Rebuilt in place on `InitiativeQero.dc.html` → `POST /api/checkout` → Stripe, one-time or weekly/monthly/quarterly/annual. There is no `/donate` page on the live site, so that path is a 301 |
 | Zeffy donation embed (Yagua page) | Kept as-is — plain iframe, platform-independent |
 | Retreat Guru listings (retreats / online courses) | Kept as-is — script embed + static fallback cards |
+| Distance Healing — a *separate* Squarespace 7.0 site at `paititidistancehealing.com` | Folded into this one. Its ten nav pages are the sections of `/distance-healing`; the two JotForm payment pages stay separate under `/distance-healing/*`. Old paths 301 to the matching section (see `_redirects`) |
 | Blog CMS (8 posts, 4 categories) | Statically generated: `tools/migrate_blog.py` pulls Squarespace `?format=json`, downloads images to `assets/blog/`, writes `Blog*.dc.html` |
 | Announcement bar | Baked into `SiteHeader.dc.html` |
 | Clean URLs / legacy URLs | `_redirects` (incl. old encoded category URLs, `/home`, `/the-institute`, `/s/*.pdf`) |
@@ -142,6 +143,7 @@ Two things worth knowing:
 ├── cart.js               # localStorage cart + checkout client
 ├── paititi.css           # the shared page shell: fluid grid, sections, type scale
 ├── Home.dc.html …        # one .dc.html per page (see _redirects for the map)
+├── DistanceHealing*.dc.html        # the absorbed paititidistancehealing.com
 ├── Blog*.dc.html         # generated — edit tools/migrate_blog.py and re-run instead
 ├── SiteHeader/SiteFooter.dc.html   # shared chrome (nav, announcement bar, newsletter)
 ├── _ds/meristem-design-system/     # tokens rethemed to Paititi (Philosopher/Lato, plum)
@@ -184,6 +186,19 @@ measure instead of the 1200px column. Their system lives in `store.css`; the
 product page collects an application — the RSVP button only adds the $300
 deposit to the cart — so this replica does the same, and the Stripe path
 (`cart.js` → `/api/checkout`) is unchanged.
+
+**Distance Healing is the other exception,** for the opposite reason. It has no
+counterpart on paititi-institute.org to measure: the copy comes 1:1 from the
+standalone `paititidistancehealing.com`, a Squarespace 7.0 site on the "Peak"
+template with none of this design. So the page is *composed* on the fluid engine
+rather than transcribed onto it, and its blocks mostly span a single auto-height
+row (`grid-area: r / c1 / r+1 / c2`) with spacer rows between them — the grid
+still fixes the measure, which is what decides where the text wraps, but no row
+count is pretending to be a measurement. Only the side-by-side pairs pin real
+spans. Two things it needs that no other page does: `frame-src` in `_headers`
+lists JotForm (three embeds came across with the content), and the pale
+line-art ornaments are re-inked via CSS `mask-image` — at watermark contrast
+they disappear on the light grounds, and here they have to work as icons.
 
 **Blog pages are generated.** Edit `tools/migrate_blog.py` and re-run it; never
 edit `Blog*.dc.html`. The migration keeps Squarespace's own block scaffolding

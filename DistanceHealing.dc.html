@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Distance Healing Journey | Paititi Institute</title>
+<meta name="description" content="A three-month evolutionary health program from Paititi Institute: a personalized nutritional program, shamanic transpersonal dreamwork, one-on-one transformational coaching and energetic healing, wherever in the world you are.">
+<meta property="og:title" content="Distance Healing Journey | Paititi Institute">
+<meta property="og:description" content="In development since 2001 through the experience of Paititi Institute, based on millennia of wisdom from Ando-Amazonian indigenous cultures and Eastern holistic traditions with the support of Transpersonal psychology.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/initiatives/distance-healing.webp">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script>
+  // The early-bird signup is the same JotForm embed the original site used.
+  // JotForm posts "setHeight:<px>:<frame id>" from inside the iframe; grow the
+  // frame so the form never ends up scrolling inside a scrollbar of its own.
+  // Origin-checked, because any framed page can post to this window.
+  window.addEventListener('message', function (e) {
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (err) { return; }
+    if (!/(^|\.)jotform(pro)?\.com$/.test(host)) return;
+    var args = String(e.data).split(':');
+    if (args[0] !== 'setHeight') return;
+    var px = parseInt(args[1], 10);
+    var frame = document.getElementById('dh-course-form');
+    if (frame && px > 0) frame.style.height = px + 'px';
+  });
+</script>
+<style>
+  .dh-hero{--pt-hero-h:932px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.52);--pt-hero-ink:#fff;--pt-bg-pos:50% 42%}
+  .dh-hero .pt-hero-panel{background:rgba(88,67,100,.36)}
+  .dh-hero h1,.dh-hero p{text-align:center}
+
+  /* The four grounds the rest of the site alternates between. Headings and copy
+     are named explicitly on the reversed ones: paititi.css deliberately leaves
+     colour off its heading selectors so a section's own `color` can win, and
+     naming them keeps that contract visible per section. */
+  .dh-band{--pt-bg:#F1EAF6}
+  .dh-white{--pt-bg:#fff}
+  .dh-plum{--pt-bg:#584364;color:#fff}
+  .dh-plum h2,.dh-plum h3,.dh-plum p,.dh-plum li{color:#fff}
+  .dh-dark{--pt-bg:#210416;color:#fff}
+  .dh-dark h2,.dh-dark h3,.dh-dark p,.dh-dark li{color:#fff}
+  .dh-deep{--pt-bg:#2A1736;color:#fff}
+  .dh-deep h2,.dh-deep h3,.dh-deep p,.dh-deep li{color:#fff}
+  .dh-deep .pt-prose a{color:#fff}
+
+  /* The ten pages of the standalone site are sections here, so each keeps a
+     linkable id. The header is fixed and floats over the page, so an anchored
+     section has to stop short of it. */
+  .pt-fluid[id]{scroll-margin-top:130px}
+
+  /* ---- Ornament marks -------------------------------------------------------
+     Paititi's line-art ornaments are drawn in a near-white lavender: over a
+     photo or a dark ground they read as intended, but on the light grounds they
+     all but vanish, which is fine for a watermark and useless for an icon. Each
+     file is flat colour over an alpha channel, so masking it re-inks the same
+     drawing in plum (or white) without touching the artwork.
+
+     The drawing arrives as `--dh-mask`, not as an inline mask-image: the DC
+     runtime drops `-webkit-` properties from a style attribute (only the
+     unprefixed one survives into the DOM), while custom properties pass
+     through untouched. Declaring both forms here keeps pre-15.4 WebKit. */
+  .dh-mark{display:block;background-color:#584364;width:100%;height:var(--dh-mark-h,170px);
+    -webkit-mask-image:var(--dh-mask);mask-image:var(--dh-mask);
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center;
+    -webkit-mask-size:contain;mask-size:contain}
+  .dh-mark-light{background-color:#fff}
+  .dh-mark-soft{opacity:.55}
+
+  /* ---- The four elements ----------------------------------------------------
+     Outside the fluid grid, like the Initiatives project cards: four equal
+     cards whose height follows their label rather than a row span. */
+  .dh-elements{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;
+    max-width:1200px;margin:0 auto;padding:0 24px 124px}
+  .dh-element{display:block;text-align:center;color:inherit;text-decoration:none}
+  .dh-element .dh-mark{--dh-mark-h:158px;transition:opacity .2s ease}
+  .dh-element:hover .dh-mark{opacity:.72}
+  .dh-element-n{display:block;margin-top:20px;font-family:var(--font-body);font-size:14.272px;
+    font-weight:700;letter-spacing:.08em;color:#584364}
+  .dh-element-t{display:block;margin-top:6px;font-family:var(--font-display);font-size:19.2px;
+    font-weight:400;line-height:1.3888;letter-spacing:normal;color:#210416}
+
+  /* ---- Package panels -------------------------------------------------------
+     The site's one panel shape — 16px/0 corners over a plum rule — at card
+     scale. The price selector is two classes deep so it beats `main p`. */
+  .dh-pack{background:#fff;border:2px solid #584364;border-radius:16px 0;padding:36px 40px}
+  .dh-pack .dh-pack-price{font-family:var(--font-display);font-size:28.8px;line-height:1.3552;
+    letter-spacing:normal;color:#584364}
+
+  /* ---- Numbered steps -------------------------------------------------------
+     A plum disc per step: at this length the sequence has to read as a path,
+     which a default list marker does not do. */
+  .dh-steps{list-style:none;counter-reset:dh-step;margin:0;padding:0}
+  /* min-height reserves the disc on one-line steps, which would otherwise sit
+     closer together than the disc is tall and read as one run-on block. */
+  /* Scoped through .pt-page main so the margin beats paititi.css's `main li
+     {margin:0}`, which is one element more specific than a bare class. */
+  .pt-page main .dh-steps > li{counter-increment:dh-step;position:relative;padding-left:66px;
+    min-height:42px;margin-bottom:26px}
+  .pt-page main .dh-steps > li:last-child{margin-bottom:0}
+  .dh-steps > li::before{content:counter(dh-step);position:absolute;left:0;top:-5px;
+    width:42px;height:42px;border-radius:50%;background:#584364;color:#fff;
+    font-family:var(--font-display);font-size:19.2px;letter-spacing:normal;
+    display:flex;align-items:center;justify-content:center}
+  .dh-steps a{text-decoration:underline;text-underline-offset:3px;color:inherit}
+
+  /* ---- Facilitator portraits -------------------------------------------------
+     The circular crop /team uses, at the smaller two-up size. `position:static`
+     ties with paititi.css's `.pt-fluid > * > img` and wins on source order,
+     which is what lets a portrait keep its square instead of filling the cell. */
+  .dh-portrait{align-self:start;display:flex;justify-content:center}
+  .dh-portrait img{position:static;width:100%;max-width:330px;height:auto;aspect-ratio:1;
+    object-fit:cover;clip-path:circle(50% at 50% 50%)}
+  .pt-prose .dh-role{font-family:var(--font-body);font-size:14.272px;font-weight:700;
+    letter-spacing:.08em}
+
+  /* A photo that keeps its own proportions instead of cropping to its cell. */
+  .dh-photo{display:flex;flex-direction:column;justify-content:center}
+  .dh-photo > img{position:static;height:auto;border-radius:15px}
+
+  .dh-form{width:100%;border:0;display:block;background:#fff;border-radius:15px}
+
+  .dh-center{text-align:center}
+
+  @media (max-width:1180px){
+    .dh-hero h1{font-size:40px}
+    .dh-elements{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px;padding-bottom:64px}
+    .dh-pack{padding:28px 24px}
+    /* Below the fluid breakpoint paititi.css forces `height:auto` on every grid
+       child so images can size themselves. A mark is an empty box whose height
+       is all it has, so it has to opt back out or it vanishes. */
+    .pt-fluid > .dh-mark{height:var(--dh-mark-h,170px) !important}
+    /* The collapsed grid has no bottom padding, and the next section's wave
+       rises 28px into whatever is above it — which here is the last line of a
+       paragraph. Give the stack somewhere to end. */
+    .pt-fluid{padding-bottom:56px}
+  }
+  @media (max-width:640px){
+    .dh-elements{grid-template-columns:1fr}
+    .pt-page main .dh-steps > li{padding-left:52px;min-height:34px}
+    .dh-steps > li::before{width:34px;height:34px;font-size:17.6px}
+  }
+  /* The footer wave must match this page's final section colour. */
+  footer.pt-footer{--pt-footer-wave:#2A1736}
+</style>
+</helmet>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="healing" hint-size="100%,209px"></dc-import>
+<main>
+
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero dh-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/initiatives/distance-healing.webp" alt="Paititi Institute facilitators treating a patient at a natural medicine clinic in Peru" loading="eager">
+    </div>
+    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:15">
+      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 3 / 10 / 23">
+        <h1><strong>Distance Healing Journey</strong></h1>
+        <p class="pt-lg">In development since 2001 through the experience of Paititi Institute based on millennia of wisdom from Ando-Amazonian indigenous cultures and Eastern holistic traditions with the support of Transpersonal psychology</p>
+      </div>
+      <div class="pt-fit" style="grid-area:10 / 10 / 16 / 16">
+        <img src="/assets/retreats/healing-philosophy.webp" alt="" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Welcome ===== -->
+  <section class="pt-sec dh-band">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="welcome" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
+      <div class="dh-center" style="grid-area:1 / 4 / 2 / 22">
+        <h2><strong>Welcome</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 3 / 4 / 23">
+        <h3><strong>If you are seeking healing and self realization that unlocks your evolutionary path as a human being then this program can help unfold the potential of you and your inner healer. After close to 20 years of experience with this approach applied to thousands of people in a live retreat setting, this distance healing program is designed to bring the same essence of self actualizing potential while being able to reach those who may be unable to experience it in person. If you are interested in being empowered on your journey to break free from the patterns of dis-ease, we are here in service.</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:6 / 4 / 7 / 22">
+        <p>The Distance Healing Program is for educational purposes only and is available to be implemented at the discretion and informed choice of the participant and is not meant as a substitute for diagnosis or treatment. All the info provided by the Distance Healing Facilitation team must be confirmed by the overseeing physician or licensed health care professional. While we have seen improvement in symptoms and are willing to support the healing journey, we can neither promise, nor guarantee any results. Since this is an educational program, it is<span style="text-decoration:underline"> essential f</span>or the participant to be engaged in their own process as well as a discipline to maintain stricter dietary regimens through personal initiative.</p>
+        <p>The particular approach of Paititi Institute was designed over a number of years and experiences after Roman Hanis, Cynthia Robinson, and other facilitators had studied with indigenous healers of the Amazon and the Andes (such as the Ashuar, Huitoto, Quechua, and Mestizo healers). The main facet of this approach is quite different from the more conventional modern mentality of telling people what to do along every step of the way-&nbsp; looking outside oneself for a &lsquo;fix&rsquo; that addresses the symptoms and not the source, which within each individual is seen as the capacity to face the challenges at hand. The participant is provided with educational information from which they are free to make informed choices and then learn through personal experience. This journey is intended to help unravel the inner healer by becoming in tune with all of the facets of participant&rsquo;s life through inspired engagement and initiative.&nbsp;&nbsp;</p>
+        <p>The Distance Healing Program is an opportunity to dive deeper in one&rsquo;s personal transformational journey by learning how to listen deeply to the messages of the organism and how to respond by making positive changes in one&rsquo;s own life from a place of inspiration, rather than desperation.</p>
+        <p>It is up to each individual to cultivate receptivity and intuition and check in throughout the course to gain a point of reference with the facilitators who have seen numerous people&rsquo;s experiences and gone through their own similar process of activating the inner healer.</p>
+      </div>
+      <div class="dh-mark dh-mark-soft" style="grid-area:9 / 8 / 10 / 18;--dh-mark-h:96px;--dh-mask:url(/assets/initiatives/flower.webp)"></div>
+    </div>
+  </section>
+
+  <!-- ===== Journey overview and the four elements ===== -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="overview" style="--pt-grid-top:95px;--pt-grid-bot:66px;--pt-rows:6">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Distance Healing Journey Overview</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
+        <p>This evolutionary health program involves a multidisciplinary approach towards the discovery and resolution of suffering in a human being. There are diverse tools that are utilized during the healing process to aid in changes of nutrition, lifestyle and dominating perspectives that are often contributing factors to a disease. The healing process requires a dedicated effort on the part of the participant and many changes in lifestyle have to be implemented in a sustainable way including dietary, emotional, spiritual and physical.</p>
+        <p>An indispensable element here is how one&rsquo;s consciousness relates to the sensations and symptoms which underlie every disease. Specifically the perspective with which one views life determines the outcome of life. When one&rsquo;s attitude in life changes towards discovery, inner growth, and the limitless realm of possibilities then healing becomes possible.</p>
+        <p>&nbsp;The program consists of multiple facets to ensure that the healing addresses the whole being- mind, body, and spirit. In our experience, there is a lot more to a specific condition than just nutritional factors. Hence, the Distance Healing Program consists of several modalities which work synergistically with each other. The 3 month period has several reasons behind it &ndash; specifically for the nutritional program this provides a sufficient amount of time to see how the organism interacts with a nutritional approach and provides some experiential steps to continue developing one&rsquo;s own unique strategy. This approach also allows those who do choose to work with us on a deeper level at our center in Peru to gradually transition to a much stricter dietary regimen that is often a part of a healing program at the center. At the same time our facilitators are able to see whether the organism can adapt to a different frequency of being through the nutritional changes and how that can support the overall healing process after the three month are over. </p>
+      </div>
+      <div class="dh-center" style="grid-area:6 / 3 / 7 / 23">
+        <h3><strong>The Distance Healing Journey consists of four elements:</strong></h3>
+      </div>
+    </div>
+    <div class="dh-elements">
+      <a class="dh-element" href="#nutrition">
+        <span class="dh-mark" style="--dh-mask:url(/assets/retreats/foundational-practices.webp)"></span>
+        <span class="dh-element-n">One</span>
+        <span class="dh-element-t">Personalized Nutritional Program</span>
+      </a>
+      <a class="dh-element" href="#dreamwork">
+        <span class="dh-mark" style="--dh-mask:url(/assets/initiatives/living-wisdom-traditions.webp)"></span>
+        <span class="dh-element-n">Two</span>
+        <span class="dh-element-t">Shamanic Transpersonal Dream Exploration</span>
+      </a>
+      <a class="dh-element" href="#coaching">
+        <span class="dh-mark" style="--dh-mask:url(/assets/initiatives/unlock.webp)"></span>
+        <span class="dh-element-n">Three</span>
+        <span class="dh-element-t">One-on-One Transformational Coaching</span>
+      </a>
+      <a class="dh-element" href="#energetic-healing">
+        <span class="dh-mark" style="--dh-mask:url(/assets/brand/icon-vision-purpose.webp)"></span>
+        <span class="dh-element-n">Four</span>
+        <span class="dh-element-t">Tap into our Collective Healing Frequency with Energetic Healing</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Element one and two ===== -->
+  <section class="pt-sec dh-band">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="nutrition" style="--pt-grid-top:95px;--pt-grid-bot:48px;--pt-rows:3">
+      <div class="dh-mark" style="grid-area:1 / 1 / 4 / 8;--dh-mark-h:230px;--dh-mask:url(/assets/retreats/foundational-practices.webp)"></div>
+      <div style="grid-area:1 / 9 / 2 / 24">
+        <h3><strong>Personalized Nutrition Program</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 9 / 4 / 24">
+        <p>The Personalized Nutritional Program is an educational resource that provides information customized to the unique health condition of the participant - including dietary, supplement, and herbal resources suggestions, as well as recipes and methods on how to make these dietary shifts.&nbsp;</p>
+        <p>Participants are encouraged to utilize the Nutritional Program as a springboard to initiate additional research, working to implement nutritional changes. After receiving the nutritional program, Distance Healing facilitators are available to consult with questions throughout the active period of the program however nutritional changes should be self-directed and up to the discretion of each individual to determine which aspect of the Nutritional Program should be implemented based on individual research. This self-direction and engagement is a foundation for the discipline required to promote a healthy internal landscape.&nbsp; In this way, individuals become informed advocates of their own well-being and, in our experience, the changes made become more sustainable when self-motivated.&nbsp;</p>
+        <p>This individualized approach to nutrition initiates the healing process, allows us to observe how the organism adapts to the dietary changes, and initiates the individual to become more self-directed towards well-being.The Nutritional Program requires an active level of initiative and engagement on the participant's side.</p>
+      </div>
+    </div>
+    <div class="pt-fluid" id="dreamwork" style="--pt-grid-top:66px;--pt-grid-bot:124px;--pt-rows:3">
+      <div style="grid-area:1 / 1 / 2 / 15">
+        <h3><strong>Shamanic Transpersonal Dreamwork</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 1 / 4 / 15">
+        <p>Dream Work is a tool which supports us to identify the psychosomatic source of the dis-ease; contributing conditions and suppressed content of the subconscious. This process involves documenting and evaluating series of dreams to identify recurring key motifs. Getting to know the transpersonal archetypal language can produce a powerful insight into the communication of the subconscious regarding the healthy equilibrium of the organism. In essence, this tool helps assess how hidden personality traits and emotional/mental patterns influence the health condition at hand. The Dreamwork is implemented using indigenous shamanic approaches woven with modern Transpersonal Psychology.</p>
+        <p>Participants type a recent series of dreams and communications are conducted over email, with the one-on-one coaching via skype. Over the 3 month program, participants receive a 1-hour coaching session each month, addressing the most recent round of dreams, the different patterns that surface, and how they relate to the participant&rsquo;s waking life.&nbsp; The Dream Exploration and Transformational Coaching are paired together to provide reflection, as well as to promote the application of responsive changes in one&rsquo;s daily experience. </p>
+      </div>
+      <div class="dh-photo" style="grid-area:1 / 16 / 4 / 25">
+        <img src="/assets/home/dreamworksacredgeometry-square.webp" alt="Sacred geometry spiralling out of the centre of a flower" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Element three ===== -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="coaching" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:5">
+      <div style="grid-area:1 / 1 / 2 / 16">
+        <h3><strong>One-on-One Transformational Coaching</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 1 / 4 / 16">
+        <p>Transformational Coaching offers a compassionate and uncompromising reflection that supports the participant to realize the blind spots in a relationship to the self, family, community, nature and the universe at large. Coaching facilitators gracefully combine formal training with an intuitive understanding of the human psyche. There are three main outcomes intended in these sessions:</p>
+      </div>
+      <div class="dh-photo" style="grid-area:1 / 17 / 4 / 25">
+        <img src="/assets/home/discoverpaititi-02.webp" alt="A quiet desk at home, set up for a coaching call" loading="lazy">
+      </div>
+      <div class="pt-prose" style="grid-area:5 / 1 / 6 / 22">
+        <ol>
+          <li>The participant feels safe &ndash; By being heard at a level that they&rsquo;re not normally used to,&nbsp; participants are able to relax and open up, thereby moving deeper into the experience that they&rsquo;re wanting to change or bring light to.</li>
+          <li>The participant feels seen &ndash;&nbsp; By implementing tools that allow the participant to receive a level of empathy and compassion, sessions allow participants to clearly see themselves without being &ldquo;told&rdquo; something about themselves.</li>
+          <li>The participant feels capable of change &ndash; By receiving strategic assistance, or a plan toward the implementation of what needs to change, the participant feels empowered to make the necessary positive changes to facilitate healing.</li>
+        </ol>
+        <p>Exploring the different patterns that were revealed through the Dream Exploration, the Transformation Coaching provides tools, perspectives, and practices on how to respond in one&rsquo;s waking life to the messages of the subconscious. Accessing a sense of greater clarity on the different habitual patterns and deep rooted conditions, the participant is empowered to make tangible shifts in his/her waking life from a place of heart-centered responsiveness, rather than conditioned reactiveness. The Dream Exploration provides a blueprint of the transformation journey and the coaching offers ways to embody resolution and learn how to navigate life&rsquo;s experience, directed by each individual&rsquo;s inner healer.</p>
+          <p>All Coaching is done over phone, Facetime or Skype. The Full Package program includes 3 hour-long calls, generally 1 hour long call per month.&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Element four ===== -->
+  <section class="pt-sec dh-dark">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="energetic-healing" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
+      <div style="grid-area:1 / 1 / 2 / 14">
+        <h3><strong>Tap into our Collective Healing Frequency with Energetic Healing</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 1 / 4 / 14">
+        <p>The Amazonian indigenous medicine tradition has a practice where the healing life force of the Mother of Mother Nature is channeled to a person located far away in special sacred ceremonies. The energetic healing supports well-being and harmony during the challenging times of healing and assists the organism in subtle ways. The connection to the healing frequency of the organization develops in that way long before actually meeting each other in person. The effects may also include more meaningful dreams that manifest throughout engagement and sometimes beyond.</p>
+      </div>
+      <div class="dh-photo" style="grid-area:1 / 15 / 4 / 25">
+        <img src="/assets/store/9f81c-coca-ceremony-paititi-institute-iquitos-peru-greg-good.webp" alt="A night ceremony circle in the maloka at the Paititi centre" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Input vs output ===== -->
+  <section class="pt-sec dh-plum">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="input-vs-output" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
+      <div class="dh-center" style="grid-area:1 / 4 / 2 / 22">
+        <h3><strong>Input vs Output</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
+        <p>It&rsquo;s essential to note that willingness to sacrifice habitual patterns no matter how comfortable we are with them is essential to this work. The conditioned ego usually enjoys different habitual traits without considering the whole organism and therefore humbling the ego through resolution of unhealthy and implementation of healthy habits is crucial for health regeneration.</p>
+        <p>The underlying intention here goes much further than the healing of the physical part of our existence to the realm of evolutionary transformation of consciousness. What is usually considered to be a random bothersome occurrence can actually reveal a higher evolutionary meaning and significantly improve the quality of life.</p>
+        <p>One of the most essential reasons for the minimum 3 month period is that this chapter of time working closely together provides a way to cultivate not only a relationship with oneself, but to develop this relationship with Paititi Institute as well. Through a deepened connection, this foundational relationship can be in service of overcoming many different doubts and fears which can prevent someone from fully going through the healing crises and into the activated healing potential of the organism. Without that supportive relationship and foundation established, the healing is not as effective and sustainable. Paititi Institute deeply values a healing approach that is sustaining throughout one&rsquo;s experience beyond a program or retreat. Rather than being a &lsquo;dose&rsquo; of healing, the Distance Healing Program offers a continuous &ldquo;compass&rdquo;, a transformation system, that can serve as a life-long navigation tool towards a greater place of perspective and well-being.&nbsp;&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Health conditions pre-requisite ===== -->
+  <section class="pt-sec dh-deep">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="health-conditions" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Health Conditions Pre-Requisite</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
+        <p><strong>In cases when a health condition is involved it is a pre-requisite in the </strong><a href="/discoverpaititi"><strong>Paititi Institute</strong></a><strong> to go through the complete Distance Healing Program for a minimum period of three months. </strong>At the completion of the program each participant is evaluated for the possibility of attending the physical location of our healing center in Peru or other healing strategies. Participation in the Distance Healing Program does not guarantee admission to participate at the physical location of the healing center in Peru. Your initiative and direct involvement are essential for this process to take place.&nbsp;</p>
+        <p>The Distance Healing Program is for educational purposes only and is available to be implemented at the discretion and informed choice of the participant and is not meant as a substitute for diagnosis or treatment. All the info provided by the Distance Healing Facilitation team&nbsp; must be confirmed by the overseeing physician or licensed health care professional. While we have seen improvement in symptoms and are willing to support the healing journey, we can neither promise, nor guarantee any results. Since this is an educational program, it is<span style="text-decoration:underline"> essential f</span>or the participant to be engaged in their own process as well as a discipline to maintain stricter dietary regimens through personal initiative.<br><br><strong>The Distance Healing Program is a REQUIREMENT for attending a retreat in Peru for those with health conditions as it prepares the participant to fully immerse in the transformation journey, cultivates the initial relationship between the participant and Paititi Institute and allows for a more grounded and gradual preparation. </strong>This foundation of resonance with the traditions and approaches, as well as the facilitators, is where an autonomous life-long discipline of well-being is established. This foundation is what allows the process to be sustainable, as well as provides a scaffolding of support, understanding, and trust between participants and Paititi Institute. In our experience, this is essential to move deeper through the layers of conditioning and access a greater momentum on the evolutionary healing journey.&nbsp;</p>
+        <p>&nbsp;This preparation is essential and we have found throughout the years that the relationship and foundation built in the Distance Healing Process allows for a much more successful healing journey. The gradual, grounded, conscious approach yields deeper, more lasting results. While the length of the program is only 3 month, the nutritional, life style and psycho-somatic approaches allow our participants to develop their own sense of clear direction in order to cultivate the healing journey indefinitely after the completion of the 3 month. We have seen very beneficial results just through the distance healing program.&nbsp;</p>
+        <p>That is the essence of the approach at our Institute where it is up to each participant to become fully involved in their own healing process and learn how to take full responsibility for that process, gradually and eventually learning not to depend on anyone or anything.</p>
+        <p>&nbsp;One of the reasons for the pre-requisites of the distance healing approach before the medicine retreat in Peru is specifically to prepare people for that kind of responsibility of becoming one&rsquo;s own healer. By acquiring and familiarizing oneself with the different tools and practices that become empowering on that journey, the healing regeneration of the organism can be supported throughout one&rsquo;s lifetime. That is how the ancient traditions which we work with approach the healing of many sicknesses and diseases.</p>
+        <p>Through this program, Paititi Institute also has the opportunity to align with the attitude and engagement of each person as it is very important for us to see if we are a good fit to support someone on their healing journey beyond the initial 3 month program. </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Packages ===== -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="packages" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Distance Healing Packages</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
+        <p>We have a minimum recommended contribution for each of our services. This contribution creates a balanced energy exchange with our participants and a sense of value that motivates participants to be more fully involved in the process, as well as an energetic connection with our transformational work where collective energy healing and sublimation are done.</p>
+        <p>This program is available to anyone seeking support in unlocking the inherent healing wisdom of his or her organism and is a <strong>&nbsp;pre-requisite</strong> for anyone with a health condition interested in visiting our Healing Center at the Paititi Institute in Peru. While it is a prerequisite, involvement in and completion of the Distance Healing Program does NOT guarantee an admission to an upcoming retreat. At the completion of each program the interested participants are evaluated based on participants&rsquo; engagement in the program, shifts in the overall health (which may involve overseeing physician notes and test results), and consideration of each individual's&rsquo; unique process for the possibility of attending the physical healing center in Peru .&nbsp;</p>
+      </div>
+
+      <div class="dh-pack" style="grid-area:5 / 2 / 6 / 24">
+        <div class="pt-prose">
+          <p class="dh-pack-price">Full Program: $600</p>
+          <p>The comprehensive full package includes the 4 elements below. For those with a health condition wishing to visit the our healing center in Peru the full package is required:</p>
+          <ul>
+            <li><strong>Personalized Nutritional Education Program</strong> which includes a suggested personalized nutritional education program</li>
+            <li><strong>Shamanic Transpersonal Dream Exploration</strong> for 3 months (conducted via email).</li>
+            <li>3 One-Hour <strong>One-on-One Transformational Coaching </strong>calls (conducted via Skype, Whatsapp, or phone). 1 hour long call per month of program (additional sessions may be added for an additional contribution)</li>
+            <li><strong>Energetic Healing</strong> during indigenous ceremonies at our Amazon centercenter</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dh-pack" style="grid-area:7 / 2 / 8 / 24">
+        <div class="pt-prose">
+          <p class="dh-pack-price">A la Carte</p>
+          <p>There are some ways to shape your program to best fit your needs, as well as to continue the Distance Healing Program after the initial 3 month program. These will be discussed during the Orientation Call and revisited at the closing of the program. The Shamanic Dream Exploration and One-on-One Transformational Coaching are offered as a package the first time through the program. It is suggested to continue them together, however after a completion of the initial 3 month program, participants may consider continuing with one or the other as seen below in the <strong>Add-Ons</strong>.</p>
+          <ul>
+            <li><strong>Nutritional Education Package</strong> which includes a personalized nutritional education program and email consultation for 3 months: $200</li>
+            <li><strong>Shamanic Transpersonal Dream Exploration </strong>includes 3 months of Dreamwork and 3 coaching calls (one dreamwork interpretation with a coaching call per month): $300</li>
+            <li><strong>One Hour One-on-One Transformational Coaching </strong>call: $100*</li>
+            <li><strong>One-on-One Coaching Package</strong> 3 one-hour long One on One Transformational Coaching calls: $300*</li>
+          </ul>
+          <p><em>* Coaching calls which exceed 1 hour are rounded to the nearest half hour at $50 per half hour.</em></p>
+          <p>Note: Energetic Healing is included when participating in any of the above programs.</p>
+        </div>
+      </div>
+
+      <div class="dh-pack" style="grid-area:9 / 2 / 10 / 24">
+        <div class="pt-prose">
+          <p class="dh-pack-price">Add-ons:</p>
+          <p>These additional opportunities are available for participants who have <span style="text-decoration:underline">completed</span> the initial 3 month program and are interested in continuing. These are discussed at the closing of the initial program and are available for past participants on a case-by-case basis.</p>
+          <ul>
+            <li><strong>Continuation of Shamanic Transpersonal Dream Exploration &amp; Coaching</strong> includes 3 months of Dreamwork with coaching (one session per month). Some participants continue with multiple rounds of this program in order to deepen their personal connection with their subconscious: $250</li>
+            <li><strong>Continuation of Shamanic Transpersonal Dream Exploration only (without coaching calls)</strong>: $75 per month</li>
+            <li><strong>One Hour One-on-One Transformational Coaching </strong>call: $85* </li>
+            <li><strong>One-on-One Coaching Package</strong> includes 3 hour long one-on-one Transformational Coaching calls $222*</li>
+          </ul>
+          <p><em>* Coaching calls which exceed 1 hour are rounded to the nearest half hour at $50 per half hour</em>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Getting started and orientation ===== -->
+  <section class="pt-sec dh-band">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="getting-started" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Getting Started &amp; Orientation</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
+        <p>Paititi has worked with a variety of conditions over the years and has a deep respect for each individual&rsquo;s unique process, which is why there is not an &lsquo;end goal&rsquo; or guaranteed result based on a step by step process. Instead, each participant is encouraged to engage in the journey fully and be open to what unfolds within every moment.&nbsp;</p>
+        <p>There are many different levels of conditions that participants face and it is important to realize that the Distance Healing Program, as well as our retreats in Peru, may not be the most suitable fit for all individuals as it requires a shifts in lifestyle that may not be acceptable by some.&nbsp;</p>
+        <p>People living with more serious conditions, whether it be mental illness or terminal diseases, or those that are on numerous pharmaceutical medications, may require an approach that Paititi Institute does not offer at this time. This will be determined through the application process and initial Orientation Call. Paititi Institute is deeply dedicated towards bringing benefit to all beings, while understanding that in some cases this Distance Healing Program may not be beneficial.</p>
+        <p><strong>A Distance Healing Journey can be initiated at any time. Below outlines the beginning steps:</strong></p>
+      </div>
+
+      <div style="grid-area:5 / 4 / 6 / 22">
+        <ol class="dh-steps">
+          <li>Familiarize yourself with Paititi Institute and our approach toward the healing process through this website and the <a href="/blog">Paititi Institute Blog</a>.</li>
+          <li>Fill out the <a href="#enroll">intake form</a></li>
+          <li>Submit your non-refundable <a href="/distance-healing/application-fee">application fee ($25)</a>&nbsp;</li>
+          <li>You will receive a confirmation that the application has been received and we will schedule your orientation call. If there is a waiting list, you will be notified of the estimated timing to start your program and schedule your orientation call.</li>
+          <li>After your orientation call, you can decide if you&rsquo;re ready to begin the journey. You&rsquo;ll receive an email with the next steps to initiate the Distance Healing Program, including the link to make <a href="/distance-healing/final-contribution">your remaining contribution</a> and an engagement package to sign and send back.</li>
+          <li>Once your final contribution and signed engagement package is received, we&rsquo;ll initiate your program.</li>
+        </ol>
+      </div>
+
+      <div style="grid-area:7 / 4 / 8 / 22">
+        <h3><strong>Orientation Calls:</strong></h3>
+      </div>
+      <div class="pt-prose" style="grid-area:9 / 4 / 10 / 22">
+        <p>The orientation call is an opportunity to connect with your facilitator directly and are held via Skype or Whatsapp. During the 20-30 minute call, we guide you through the program, providing an opportunity to ask questions. If after the call you feel the program is unsuitable for your healing process, there&rsquo;s no obligation to continue.</p>
+        <p>In some cases, the Distance Healing Program team may decide the program isn&rsquo;t the best fit for a potential participant. This decision is based on evaluation of the facilitation team&rsquo;s current ability to support the applicant&rsquo;s state of being. In our experience, the Distance Healing Program may not be beneficial for certain conditions. Examples include late stage terminal illnesses, certain mental disorders, or cases of desperation for an &lsquo;easy&rsquo; or &lsquo;external&rsquo; solution. In these instances, the decision will be made by the facilitation team and the applicant will be informed.&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Enroll ===== -->
+  <section class="pt-sec dh-plum">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="enroll" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:10">
+      <div class="dh-mark dh-mark-light" style="grid-area:1 / 10 / 2 / 16;--dh-mark-h:120px;--dh-mask:url(/assets/brand/icon-donate.webp)"></div>
+      <div class="dh-center" style="grid-area:3 / 3 / 4 / 23">
+        <h2><strong>Enroll Now</strong></h2>
+      </div>
+      <div class="pt-prose" style="grid-area:5 / 4 / 6 / 22">
+        <p>If you&rsquo;re inspired to begin your journey with us, please fill out the intake form below after fully reviewing the information provided on this site. <strong>Please note that, at times, the Distance Healing Program may have a wait list, in which case you&rsquo;ll be notified once we receive your application.</strong></p>
+        <p>Remember there&rsquo;s a non-refundable $25 fee to submit and process your application. This fee is deducted from the cost of the program if you decide to enlist after yoru orientation call (within 1 year of the date of submitting this application).</p>
+        <p>Intake forms are 100% private and will only be viewed by the facilitators working directly with you in the program.</p>
+      </div>
+      <div style="grid-area:7 / 7 / 9 / 19">
+        <a class="pt-btn pt-btn-light" href="https://paititidistancehealing.secure.retreat.guru/program/waiting-list-distance-healing-journey/?form=1" target="_blank" rel="noopener">Fill out the Application/Intake Form Now &gt;&gt;</a>
+      </div>
+      <div class="pt-prose" style="grid-area:10 / 4 / 11 / 22">
+        <p class="pt-sm"><em>The Distance Healing Program is for educational purposes only and is available to be implemented at the discretion and informed choice of the participant and is not meant as a substitute for diagnosis or treatment. All the info provided by the Distance Healing Facilitation team must be confirmed by the overseeing physician or licensed health care professional. While we have seen improvement in symptoms and are willing to support the healing journey, we can neither promise, nor guarantee any results. Since this is an educational program, it is </em><span style="text-decoration:underline"><em>essential</em></span><em> for the participant to be engaged in their own process as well as a discipline to maintain stricter dietary regimens through personal initiative.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Meet our team ===== -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="team" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:10">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Meet Our Team</strong></h2>
+      </div>
+
+      <div class="dh-portrait" style="grid-area:3 / 2 / 5 / 10">
+        <img src="/assets/healing/roman-hanis-portrait.webp" alt="Roman Hanis, Distance Healing facilitator" loading="lazy">
+      </div>
+      <div class="pt-prose" style="grid-area:3 / 11 / 4 / 24">
+        <h3><strong>Roman Hanis</strong></h3>
+        <p class="dh-role">Traditional Ando-Amazonian and Chinese Medicine Man</p>
+        <p class="dh-role">Distance Healing Programs Involved In: Nutritional Programs &amp; Dreamwork Analysis</p>
+      </div>
+      <div class="pt-prose" style="grid-area:5 / 2 / 6 / 24">
+        <p>Roman Hanis has been working closely with the indigenous Peruvian cultures in the Amazonian rainforest and Andean mountains since 2001. During this time he has devoted this life to learning the ancient healing ways of these cultures while seeking possibilities for creating ecological sources of sustenance for local populations and working to preserve the rainforest and its spiritual heritage of sacred medicinal plants.</p>
+        <p>Seeing the vital role that ancient cultural practices can play in today&rsquo;s world, Roman honors and shares their value and wisdom through his work in community projects, healing retreats and educational workshops in both Peru and the U.S.</p>
+        <p>He is a certified Traditional Chinese Medicine (TCM) practitioner in Peru, and studied the fundamentals of TCM and acupuncture as an apprentice under the director of the Open International Institute of Oriental Medicine, Myriam Hacker, in Iquitos, Peru.</p>
+        <p>In 2002, Roman was fortunate enough to be cured of a terminal genetic illness&nbsp;, Crohn&rsquo;s disease. In 2004, he was pledged as a healer-curandero by the Whitoto and Yahua tribes and has served the international community as a medicine man ever since. He has also practiced physical trauma rehabilitation, medical massage therapy and Eastern bodywork, having earned his degree from New York&rsquo;s Swedish Institute of Health. With these tools and concentrated efforts, he has been able to help numerous individuals overcome many health issues and pathologies on physical, mental and spiritual levels.</p>
+      </div>
+
+      <div class="pt-vc" style="grid-area:7 / 2 / 8 / 24">
+        <hr class="pt-rule" style="--pt-rule:rgba(88,67,100,.3)">
+      </div>
+
+      <div class="dh-portrait" style="grid-area:9 / 2 / 11 / 10">
+        <img src="/assets/healing/janel-possiel-portrait.webp" alt="Janel Possiel, Dreamwork Coach" loading="lazy">
+      </div>
+      <div class="pt-prose" style="grid-area:9 / 11 / 10 / 24">
+        <h3><strong>Janel Possiel</strong></h3>
+        <p class="dh-role">Dreamwork Coach</p>
+        <p class="dh-role">Distance Healing Programs Involved In: Dreamwork Analysis</p>
+        <p>Bio Coming Soon.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Frequently asked questions ===== -->
+  <section class="pt-sec dh-band">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="faq" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:5">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Frequently Asked Questions</strong></h2>
+      </div>
+      <div class="pt-prose dh-center" style="grid-area:3 / 4 / 4 / 22">
+        <h3><em>Here are some of the common questions/curiosities that arise around the Distance Healing Program.&nbsp;If you have further questions we welcome you to </em><a href="mailto:distancehealing@paititi-institute.org"><strong><em>write us</em></strong></a><em>. Also the Orientation Call provides an opportunity for many inquiries to be clarified with our facilitators.</em></h3>
+      </div>
+
+      <div style="grid-area:5 / 3 / 6 / 23">
+        <div class="pt-acc">
+
+          <details class="pt-acc-item">
+            <summary>Why is the Distance Healing Program a prerequisite to potential participation in future Embody True Nature retreats?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Please review our &ldquo;<a href="#health-conditions">Health Conditions</a>&rdquo; section on this page which covers this extensively. For some minor health issues this pre-requisite may not apply and you are welcome to write us to inquire further about your specific condition.&nbsp;</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>I&rsquo;ve completed a 3-month Distance Healing Program and want to attend an Embodying True Nature retreat. What&rsquo;s next?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>In our experience this is a sensitive process that involves a mindful approach that cannot be rushed. Once we determine there&rsquo;s a positive systemic response to your engagement with us from a distance, we can develop a strategy to safely support a deeper phase of your healing process.</p>
+              <p>An Embody True Nature retreat is NOT a guaranteed next step. Interested participants may need to provide information from their supervising MD&rsquo;s to indicate improvements, shifts, and levels of stability. The interest of each participant is considered alongside all relevant medical data to support the healing journey, on case by case basis.&nbsp;</p>
+              <p>The decision to move forward to the Embody True Nature is discussed with the Distance Healing Facilitator after a 3-month program. The Paititi Distance Healing team and Retreat Facilitators evaluate the participant's health and level of engagement in the program. In cases of serious health conditions, steps are taken to determine stability including doctor reports and recent medical test results. The minimum 3-month program creates a foundation for moving forward, and the best next step varies from case to case. Examples include:</p>
+              <ul>
+                <li>An Embodying True Nature retreat</li>
+                <li>Other shorter retreats facilitated in Peru</li>
+                <li>An event during Paititi Institute's tours outside of Peru</li>
+                <li>Additional time with the Distance Healing Program</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>I am diagnosed with a severe health condition. What results have you seen in the past?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Over the years Paititi has seen many people go into full remission from many conditions, some of them terminal and considered incurable by Western medicine. Examples include colon cancer, rheumatoid arthritis, crohn&rsquo;s disease, hepatitis C, lyme disease, IBS, diabetes, chronic migraines, depression, PTSD and substance abuse, among others.&nbsp;</p>
+              <p>While we&rsquo;ve seen improvements in many cases and are willing to support the healing journey, we can neither promise, nor guarantee any results. Since this is an educational program, it&rsquo;s <span style="text-decoration:underline">essential</span> for the participant to be engaged, showing continuous initiative in their own process and discipline maintaining stricter dietary regimens.</p>
+              <p>In the western, allopathic approach to health conditions are systematically classified. From our experience, while two people may be given the same diagnostic label, the healing approach can vary significantly.&nbsp;</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Can the Distance Healing Program alone help to heal, or is a visit to the healing center in Peru necessary?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Yes, the Distance Healing Program alone can help. In some cases, participants find complete resolution or the direction needed to continue the improving on their own. The results are unique for each person. Many benefit from the Distance Healing Program without intending to visit Peru.</p>
+              <p>Each case is unique and it&rsquo;s essential for participants to provide their health background in the application process and initial Orientation call so the team can determine the appropriate options.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Are there any available discounts or work trade options?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Currently there are no discounts or scholarships available and we work hard to keep the cost of the program as low as possible dedicating each participant substantial personal attention.&nbsp;</p>
+              <p>Regarding work trade, once we get to know someone well enough and in person, we may be open to exploring options. Participation in the Institute&rsquo;s initiatives can help develop the necessary connection.</p>
+            </div>
+          </details>
+
+          <details class="pt-acc-item">
+            <summary>Does Distance Healing Program participation include a discount to the Embody True Nature retreat?</summary>
+            <div class="pt-acc-body pt-prose">
+              <p>Embodying True Nature retreat discounts aren&rsquo;t available for Distance Healing participants. These month-long retreats are distinct events covered at cost and require extensive resources and logistics.</p>
+              <p>In our experience, by making a monetary contribution towards the healing process, participants are more engaged. An energetic exchange is established and there&rsquo;s a sense of dedication through reciprocity.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Home study course ===== -->
+  <section class="pt-sec dh-deep">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="home-study-course" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Embody True Nature<br>Evolutionary Healing Home Study Course</strong></h2>
+      </div>
+      <div class="pt-prose dh-center" style="grid-area:3 / 4 / 4 / 22">
+        <p><strong>Online interactive multimedia course from Paititi Institute</strong></p>
+        <h3><strong>Coming Soon</strong></h3>
+      </div>
+      <div class="dh-mark dh-mark-light dh-mark-soft" style="grid-area:5 / 9 / 6 / 17;--dh-mark-h:88px;--dh-mask:url(/assets/retreats/flower-purple.webp)"></div>
+      <div class="pt-prose" style="grid-area:7 / 4 / 8 / 22">
+        <p><strong>Discover the blueprint encoded in ancestral wisdom lineages that guides you through your evolutionary healing journey.</strong></p>
+        <p><strong>To be effective, this multifaceted interactive course must be made directly relevant to your life. Which begs the question...</strong></p>
+        <p>What are you inspired by and truly passionate about that makes you appreciate this life?</p>
+        <p>Perhaps nothing inspires you, in which case, that rock bottom could become the foundation to develop your life upon.</p>
+        <p>Imagine your life is a training ground for fulfilling your greatest potential&hellip;</p>
+        <p>What if your life has all the necessary ingredients for that fulfillment to take place? Your unique blend of qualities and latent talents, all skillfully combined into a recipe of deep meaning and joyful purpose. Let&rsquo;s face it that without neither a point of reference, clear direction, nor guidance, uniting the puzzle pieces of your life can be unnecessarily long. That is why the living wisdom of ancestral lineages has existed throughout millennia as rites of passage. The blueprint answering these same questions was designed by the indigenous elders to be renewed with each generation only through realized embodiment. The landmarks on this evolutionary map can only be deciphered when the personal challenges of your life are faced with creative objectivity, uncovering the universal meaning in the situations least suspected of it.</p>
+        <p>The ancient lineages implemented in this course serve as a profound reminder that life is always a captivating adventure, an experience of discovery and fascination, even in the midst of the most mundane. The real practice is not a technique but a cultivation of a rooted sense of wonder as an essential attitude in your life.</p>
+        <p>The intention of this course is not to be a generic cookie cutter style curriculum but as a practical and effective insight relevant to the embodiment of your existential truth capable of transcending all adversities.</p>
+        <p>This is a heroic journey starting from an inconsequential speck of dust in the greater collective, and alchemically transforming into a meaningful contribution to the new emerging paradigm.</p>
+        <p>Our experiences of working with these ancestral lineages...</p>
+        <ul>
+          <li>Intercultural bridges - Indigenous evolutionary methods and perspectives from Andean, Amazonian, and Himalayan cultures to awaken the source of creative potential</li>
+          <li>Transpersonal shamanic dreamwork - Learn the language of Nature expressed through the intelligence of your own organism and all phenomena</li>
+          <li>The practice of remembrance - Remembering the original uninhibited state of being as a conduit of boundless self-realization</li>
+          <li>Inner and outer landscapes - Immerse yourself in a multifaceted integration of physical, mental, emotional and spiritual practices directly impacting every aspect of your life</li>
+          <li>Interviews and talks with various evolutionary guides, elders and healers involved with the Paititi Institute&rsquo;s work</li>
+        </ul>
+        <p><strong><em>While this course is currently in production at this time, you are invited to sign up below and receive a 20% early bird discount coupon. No purchase commitment is required. Coupons will be sent via email when the course is ready to purchase online.</em></strong></p>
+      </div>
+      <div style="grid-area:9 / 4 / 10 / 22">
+        <iframe class="dh-form" id="dh-course-form" title="Home Study Course early-bird signup" src="https://secure.jotformpro.com/form/42671479757975" style="height:487px" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+<dc-import name="SiteFooter"></dc-import>
+</div>
+</x-dc>
+</body>
+</html>

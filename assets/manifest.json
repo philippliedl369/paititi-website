@@ -1,4 +1,24 @@
 {
+  "https://images.squarespace-cdn.com/content/v1/5491d1b8e4b0c3ad9c09e67b/1418852650408-6CUB8M7GRR9B0SSIHJOL/image-asset.jpeg": {
+    "local": "assets/healing/janel-possiel-portrait.webp",
+    "original_name": "image-asset.jpeg",
+    "pages": [
+      "/distance-healing"
+    ],
+    "alt": "Janel Possiel, Dreamwork Coach",
+    "bytes": 79958,
+    "sha256": "ce59ceeea3326e05"
+  },
+  "https://images.squarespace-cdn.com/content/v1/5491d1b8e4b0c3ad9c09e67b/1418872841461-DCRQBJLJKNN50J304AAJ/Roman.jpg": {
+    "local": "assets/healing/roman-hanis-portrait.webp",
+    "original_name": "Roman.jpg",
+    "pages": [
+      "/distance-healing"
+    ],
+    "alt": "Roman Hanis, Distance Healing facilitator",
+    "bytes": 47758,
+    "sha256": "93456e3cadc4226c"
+  },
   "https://images.squarespace-cdn.com/content/v1/5ec321c2af33de48734cc929/0a46af00-18be-406f-9603-fefc97e10dda/imgg-demo-hNKPmLKj.png": {
     "local": "assets/home/discoverpaititi-02.webp",
     "original_name": "imgg-demo-hNKPmLKj.png",
