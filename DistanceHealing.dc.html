@@ -30,22 +30,6 @@
 <link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
-<script>
-  // The early-bird signup is the same JotForm embed the original site used.
-  // JotForm posts "setHeight:<px>:<frame id>" from inside the iframe; grow the
-  // frame so the form never ends up scrolling inside a scrollbar of its own.
-  // Origin-checked, because any framed page can post to this window.
-  window.addEventListener('message', function (e) {
-    var host;
-    try { host = new URL(e.origin).hostname; } catch (err) { return; }
-    if (!/(^|\.)jotform(pro)?\.com$/.test(host)) return;
-    var args = String(e.data).split(':');
-    if (args[0] !== 'setHeight') return;
-    var px = parseInt(args[1], 10);
-    var frame = document.getElementById('dh-course-form');
-    if (frame && px > 0) frame.style.height = px + 'px';
-  });
-</script>
 <style>
   .dh-hero{--pt-hero-h:932px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.52);--pt-hero-ink:#fff;--pt-bg-pos:50% 42%}
   .dh-hero .pt-hero-panel{background:rgba(88,67,100,.36)}
@@ -65,9 +49,31 @@
   .dh-deep h2,.dh-deep h3,.dh-deep p,.dh-deep li{color:#fff}
   .dh-deep .pt-prose a{color:#fff}
 
-  /* The ten pages of the standalone site are sections here, so each keeps a
-     linkable id. The header is fixed and floats over the page, so an anchored
-     section has to stop short of it. */
+  /* ---- Tab bar --------------------------------------------------------------
+     The standalone site was ten nav pages; here they are six tab panels on one
+     URL. The active-tab underline is the header nav's own active mark (inset
+     box-shadow), in plum for the light ground. */
+  .dh-tabbar{--pt-bg:#F1EAF6}
+  /* 44px bottom: the next panel's wave background rises 28px into this
+     section and would otherwise paint straight over the labels. */
+  .dh-tabs{max-width:1200px;margin:0 auto;padding:34px 24px 44px;scroll-margin-top:120px;
+    display:flex;flex-wrap:wrap;justify-content:center;column-gap:38px;row-gap:8px}
+  .dh-tabs button{background:none;border:0;cursor:pointer;padding:6px 2px;
+    font-family:var(--font-display);font-size:19.2px;line-height:1.3;letter-spacing:normal;
+    color:#584364;transition:color .15s ease}
+  .dh-tabs button:hover{color:#210416}
+  .dh-tabs button[data-active="1"]{color:#210416;box-shadow:inset 0 -2px 0 #584364}
+
+  /* The footer wave must match the active tab's final section colour. */
+  .pt-page[data-tab="welcome"] footer.pt-footer{--pt-footer-wave:#fff}
+  .pt-page[data-tab="journey"] footer.pt-footer{--pt-footer-wave:#584364}
+  .pt-page[data-tab="conditions"] footer.pt-footer{--pt-footer-wave:#2A1736}
+  .pt-page[data-tab="packages"] footer.pt-footer{--pt-footer-wave:#fff}
+  .pt-page[data-tab="start"] footer.pt-footer{--pt-footer-wave:#584364}
+  .pt-page[data-tab="faq"] footer.pt-footer{--pt-footer-wave:#F1EAF6}
+
+  /* Old per-page URLs 301 onto hashes; the section ids live inside the panels,
+     so an anchored section has to stop short of the fixed header. */
   .pt-fluid[id]{scroll-margin-top:130px}
 
   /* ---- Ornament marks -------------------------------------------------------
@@ -113,10 +119,10 @@
      A plum disc per step: at this length the sequence has to read as a path,
      which a default list marker does not do. */
   .dh-steps{list-style:none;counter-reset:dh-step;margin:0;padding:0}
-  /* min-height reserves the disc on one-line steps, which would otherwise sit
-     closer together than the disc is tall and read as one run-on block. */
   /* Scoped through .pt-page main so the margin beats paititi.css's `main li
-     {margin:0}`, which is one element more specific than a bare class. */
+     {margin:0}`, which is one element more specific than a bare class.
+     min-height reserves the disc on one-line steps, which would otherwise sit
+     closer together than the disc is tall and read as one run-on block. */
   .pt-page main .dh-steps > li{counter-increment:dh-step;position:relative;padding-left:66px;
     min-height:42px;margin-bottom:26px}
   .pt-page main .dh-steps > li:last-child{margin-bottom:0}
@@ -126,13 +132,14 @@
     display:flex;align-items:center;justify-content:center}
   .dh-steps a{text-decoration:underline;text-underline-offset:3px;color:inherit}
 
-  /* ---- Facilitator portraits -------------------------------------------------
-     The circular crop /team uses, at the smaller two-up size. `position:static`
-     ties with paititi.css's `.pt-fluid > * > img` and wins on source order,
-     which is what lets a portrait keep its square instead of filling the cell. */
-  .dh-portrait{align-self:start;display:flex;justify-content:center}
-  .dh-portrait img{position:static;width:100%;max-width:330px;height:auto;aspect-ratio:1;
-    object-fit:cover;clip-path:circle(50% at 50% 50%)}
+  /* ---- Facilitator strip -----------------------------------------------------
+     Portrait + role only. The full bio lives once, on /team — this follows the
+     Retreats page's "Our Facilitator" pattern: a blurb and a link there.
+     `position:static` ties with paititi.css's `.pt-fluid > * > img` and wins on
+     source order, which is what lets the portrait keep its square. */
+  .dh-team-card{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .dh-team-card img{position:static;width:100%;max-width:250px;height:auto;aspect-ratio:1;
+    object-fit:cover;clip-path:circle(50% at 50% 50%);margin-bottom:24px}
   .pt-prose .dh-role{font-family:var(--font-body);font-size:14.272px;font-weight:700;
     letter-spacing:.08em}
 
@@ -140,12 +147,12 @@
   .dh-photo{display:flex;flex-direction:column;justify-content:center}
   .dh-photo > img{position:static;height:auto;border-radius:15px}
 
-  .dh-form{width:100%;border:0;display:block;background:#fff;border-radius:15px}
-
   .dh-center{text-align:center}
 
   @media (max-width:1180px){
     .dh-hero h1{font-size:40px}
+    .dh-tabs{column-gap:24px;padding-top:24px}
+    .dh-tabs button{font-size:17px}
     .dh-elements{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px;padding-bottom:64px}
     .dh-pack{padding:28px 24px}
     /* Below the fluid breakpoint paititi.css forces `height:auto` on every grid
@@ -162,11 +169,9 @@
     .pt-page main .dh-steps > li{padding-left:52px;min-height:34px}
     .dh-steps > li::before{width:34px;height:34px;font-size:17.6px}
   }
-  /* The footer wave must match this page's final section colour. */
-  footer.pt-footer{--pt-footer-wave:#2A1736}
 </style>
 </helmet>
-<div class="pt-page">
+<div class="pt-page" data-tab="{{ tabKey }}">
 <dc-import name="SiteHeader" active="healing" hint-size="100%,209px"></dc-import>
 <main>
 
@@ -186,7 +191,22 @@
     </div>
   </section>
 
-  <!-- ===== Welcome ===== -->
+  <!-- ===== Tab bar ===== -->
+  <section class="pt-sec dh-tabbar">
+    <div class="pt-sec-bg"></div>
+    <nav class="dh-tabs" id="dh-tabs" aria-label="Distance Healing sections">
+      <button data-active="{{ aWelcome }}" onClick="{{ onWelcome }}">Welcome</button>
+      <button data-active="{{ aJourney }}" onClick="{{ onJourney }}">The Journey</button>
+      <button data-active="{{ aConditions }}" onClick="{{ onConditions }}">Health Conditions</button>
+      <button data-active="{{ aPackages }}" onClick="{{ onPackages }}">Packages</button>
+      <button data-active="{{ aStart }}" onClick="{{ onStart }}">Getting Started</button>
+      <button data-active="{{ aFaq }}" onClick="{{ onFaq }}">FAQ</button>
+    </nav>
+  </section>
+
+  <!-- ================= Tab: Welcome ================= -->
+  <sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ true }}">
+
   <section class="pt-sec dh-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="welcome" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
@@ -206,7 +226,36 @@
     </div>
   </section>
 
-  <!-- ===== Journey overview and the four elements ===== -->
+  <!-- The full bios live once, on /team — this is the Retreats page's
+       facilitator pattern: portrait, role, and a link there. -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="team" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
+      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Your Facilitation Team</strong></h2>
+      </div>
+      <div class="dh-team-card pt-prose" style="grid-area:3 / 3 / 4 / 12">
+        <img src="/assets/healing/roman-hanis-portrait.webp" alt="Roman Hanis, Distance Healing facilitator" loading="lazy">
+        <h3><strong>Roman Hanis</strong></h3>
+        <p class="dh-role">Traditional Ando-Amazonian and Chinese Medicine Man</p>
+        <p class="dh-role">Distance Healing Programs Involved In: Nutritional Programs &amp; Dreamwork Analysis</p>
+        <p>Co-founder of Paititi Institute, working closely with the indigenous Peruvian cultures of the Amazonian rainforest and Andean mountains since 2001.</p>
+        <p><a href="/team" style="color:#584364"><strong>Read Roman&rsquo;s full bio</strong></a></p>
+      </div>
+      <div class="dh-team-card pt-prose" style="grid-area:3 / 14 / 4 / 23">
+        <img src="/assets/healing/janel-possiel-portrait.webp" alt="Janel Possiel, Dreamwork Coach" loading="lazy">
+        <h3><strong>Janel Possiel</strong></h3>
+        <p class="dh-role">Dreamwork Coach</p>
+        <p class="dh-role">Distance Healing Programs Involved In: Dreamwork Analysis</p>
+      </div>
+    </div>
+  </section>
+
+  </sc-if>
+
+  <!-- ================= Tab: The Journey ================= -->
+  <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ false }}">
+
   <section class="pt-sec dh-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="overview" style="--pt-grid-top:95px;--pt-grid-bot:66px;--pt-rows:6">
@@ -246,7 +295,6 @@
     </div>
   </section>
 
-  <!-- ===== Element one and two ===== -->
   <section class="pt-sec dh-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="nutrition" style="--pt-grid-top:95px;--pt-grid-bot:48px;--pt-rows:3">
@@ -274,7 +322,6 @@
     </div>
   </section>
 
-  <!-- ===== Element three ===== -->
   <section class="pt-sec dh-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="coaching" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:5">
@@ -294,12 +341,11 @@
           <li>The participant feels capable of change &ndash; By receiving strategic assistance, or a plan toward the implementation of what needs to change, the participant feels empowered to make the necessary positive changes to facilitate healing.</li>
         </ol>
         <p>Exploring the different patterns that were revealed through the Dream Exploration, the Transformation Coaching provides tools, perspectives, and practices on how to respond in one&rsquo;s waking life to the messages of the subconscious. Accessing a sense of greater clarity on the different habitual patterns and deep rooted conditions, the participant is empowered to make tangible shifts in his/her waking life from a place of heart-centered responsiveness, rather than conditioned reactiveness. The Dream Exploration provides a blueprint of the transformation journey and the coaching offers ways to embody resolution and learn how to navigate life&rsquo;s experience, directed by each individual&rsquo;s inner healer.</p>
-          <p>All Coaching is done over phone, Facetime or Skype. The Full Package program includes 3 hour-long calls, generally 1 hour long call per month.&nbsp;</p>
+        <p>All Coaching is done over phone, Facetime or Skype. The Full Package program includes 3 hour-long calls, generally 1 hour long call per month.&nbsp;</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== Element four ===== -->
   <section class="pt-sec dh-dark">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="energetic-healing" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
@@ -315,7 +361,6 @@
     </div>
   </section>
 
-  <!-- ===== Input vs output ===== -->
   <section class="pt-sec dh-plum">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="input-vs-output" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
@@ -330,7 +375,11 @@
     </div>
   </section>
 
-  <!-- ===== Health conditions pre-requisite ===== -->
+  </sc-if>
+
+  <!-- ================= Tab: Health Conditions ================= -->
+  <sc-if value="{{ isConditions }}" hint-placeholder-val="{{ false }}">
+
   <section class="pt-sec dh-deep">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="health-conditions" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:3">
@@ -339,7 +388,7 @@
       </div>
       <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
         <p><strong>In cases when a health condition is involved it is a pre-requisite in the </strong><a href="/discoverpaititi"><strong>Paititi Institute</strong></a><strong> to go through the complete Distance Healing Program for a minimum period of three months. </strong>At the completion of the program each participant is evaluated for the possibility of attending the physical location of our healing center in Peru or other healing strategies. Participation in the Distance Healing Program does not guarantee admission to participate at the physical location of the healing center in Peru. Your initiative and direct involvement are essential for this process to take place.&nbsp;</p>
-        <p>The Distance Healing Program is for educational purposes only and is available to be implemented at the discretion and informed choice of the participant and is not meant as a substitute for diagnosis or treatment. All the info provided by the Distance Healing Facilitation team&nbsp; must be confirmed by the overseeing physician or licensed health care professional. While we have seen improvement in symptoms and are willing to support the healing journey, we can neither promise, nor guarantee any results. Since this is an educational program, it is<span style="text-decoration:underline"> essential f</span>or the participant to be engaged in their own process as well as a discipline to maintain stricter dietary regimens through personal initiative.<br><br><strong>The Distance Healing Program is a REQUIREMENT for attending a retreat in Peru for those with health conditions as it prepares the participant to fully immerse in the transformation journey, cultivates the initial relationship between the participant and Paititi Institute and allows for a more grounded and gradual preparation. </strong>This foundation of resonance with the traditions and approaches, as well as the facilitators, is where an autonomous life-long discipline of well-being is established. This foundation is what allows the process to be sustainable, as well as provides a scaffolding of support, understanding, and trust between participants and Paititi Institute. In our experience, this is essential to move deeper through the layers of conditioning and access a greater momentum on the evolutionary healing journey.&nbsp;</p>
+        <p><strong>The Distance Healing Program is a REQUIREMENT for attending a retreat in Peru for those with health conditions as it prepares the participant to fully immerse in the transformation journey, cultivates the initial relationship between the participant and Paititi Institute and allows for a more grounded and gradual preparation. </strong>This foundation of resonance with the traditions and approaches, as well as the facilitators, is where an autonomous life-long discipline of well-being is established. This foundation is what allows the process to be sustainable, as well as provides a scaffolding of support, understanding, and trust between participants and Paititi Institute. In our experience, this is essential to move deeper through the layers of conditioning and access a greater momentum on the evolutionary healing journey.&nbsp;</p>
         <p>&nbsp;This preparation is essential and we have found throughout the years that the relationship and foundation built in the Distance Healing Process allows for a much more successful healing journey. The gradual, grounded, conscious approach yields deeper, more lasting results. While the length of the program is only 3 month, the nutritional, life style and psycho-somatic approaches allow our participants to develop their own sense of clear direction in order to cultivate the healing journey indefinitely after the completion of the 3 month. We have seen very beneficial results just through the distance healing program.&nbsp;</p>
         <p>That is the essence of the approach at our Institute where it is up to each participant to become fully involved in their own healing process and learn how to take full responsibility for that process, gradually and eventually learning not to depend on anyone or anything.</p>
         <p>&nbsp;One of the reasons for the pre-requisites of the distance healing approach before the medicine retreat in Peru is specifically to prepare people for that kind of responsibility of becoming one&rsquo;s own healer. By acquiring and familiarizing oneself with the different tools and practices that become empowering on that journey, the healing regeneration of the organism can be supported throughout one&rsquo;s lifetime. That is how the ancient traditions which we work with approach the healing of many sicknesses and diseases.</p>
@@ -348,7 +397,11 @@
     </div>
   </section>
 
-  <!-- ===== Packages ===== -->
+  </sc-if>
+
+  <!-- ================= Tab: Packages ================= -->
+  <sc-if value="{{ isPackages }}" hint-placeholder-val="{{ false }}">
+
   <section class="pt-sec dh-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="packages" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
@@ -357,7 +410,7 @@
       </div>
       <div class="pt-prose" style="grid-area:3 / 4 / 4 / 22">
         <p>We have a minimum recommended contribution for each of our services. This contribution creates a balanced energy exchange with our participants and a sense of value that motivates participants to be more fully involved in the process, as well as an energetic connection with our transformational work where collective energy healing and sublimation are done.</p>
-        <p>This program is available to anyone seeking support in unlocking the inherent healing wisdom of his or her organism and is a <strong>&nbsp;pre-requisite</strong> for anyone with a health condition interested in visiting our Healing Center at the Paititi Institute in Peru. While it is a prerequisite, involvement in and completion of the Distance Healing Program does NOT guarantee an admission to an upcoming retreat. At the completion of each program the interested participants are evaluated based on participants&rsquo; engagement in the program, shifts in the overall health (which may involve overseeing physician notes and test results), and consideration of each individual's&rsquo; unique process for the possibility of attending the physical healing center in Peru .&nbsp;</p>
+        <p>This program is available to anyone seeking support in unlocking the inherent healing wisdom of his or her organism, and the full program is a <strong>pre-requisite</strong> for anyone with a health condition interested in visiting our Healing Center in Peru &mdash; the <a href="#health-conditions">Health Conditions</a> section covers what that involves, and what completion does and does not guarantee.</p>
       </div>
 
       <div class="dh-pack" style="grid-area:5 / 2 / 6 / 24">
@@ -404,7 +457,11 @@
     </div>
   </section>
 
-  <!-- ===== Getting started and orientation ===== -->
+  </sc-if>
+
+  <!-- ================= Tab: Getting Started ================= -->
+  <sc-if value="{{ isStart }}" hint-placeholder-val="{{ false }}">
+
   <section class="pt-sec dh-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="getting-started" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
@@ -439,7 +496,6 @@
     </div>
   </section>
 
-  <!-- ===== Enroll ===== -->
   <section class="pt-sec dh-plum">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="enroll" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:10">
@@ -461,46 +517,11 @@
     </div>
   </section>
 
-  <!-- ===== Meet our team ===== -->
-  <section class="pt-sec dh-white">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="team" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:10">
-      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
-        <h2><strong>Meet Our Team</strong></h2>
-      </div>
+  </sc-if>
 
-      <div class="dh-portrait" style="grid-area:3 / 2 / 5 / 10">
-        <img src="/assets/healing/roman-hanis-portrait.webp" alt="Roman Hanis, Distance Healing facilitator" loading="lazy">
-      </div>
-      <div class="pt-prose" style="grid-area:3 / 11 / 4 / 24">
-        <h3><strong>Roman Hanis</strong></h3>
-        <p class="dh-role">Traditional Ando-Amazonian and Chinese Medicine Man</p>
-        <p class="dh-role">Distance Healing Programs Involved In: Nutritional Programs &amp; Dreamwork Analysis</p>
-      </div>
-      <div class="pt-prose" style="grid-area:5 / 2 / 6 / 24">
-        <p>Roman Hanis has been working closely with the indigenous Peruvian cultures in the Amazonian rainforest and Andean mountains since 2001. During this time he has devoted this life to learning the ancient healing ways of these cultures while seeking possibilities for creating ecological sources of sustenance for local populations and working to preserve the rainforest and its spiritual heritage of sacred medicinal plants.</p>
-        <p>Seeing the vital role that ancient cultural practices can play in today&rsquo;s world, Roman honors and shares their value and wisdom through his work in community projects, healing retreats and educational workshops in both Peru and the U.S.</p>
-        <p>He is a certified Traditional Chinese Medicine (TCM) practitioner in Peru, and studied the fundamentals of TCM and acupuncture as an apprentice under the director of the Open International Institute of Oriental Medicine, Myriam Hacker, in Iquitos, Peru.</p>
-        <p>In 2002, Roman was fortunate enough to be cured of a terminal genetic illness&nbsp;, Crohn&rsquo;s disease. In 2004, he was pledged as a healer-curandero by the Whitoto and Yahua tribes and has served the international community as a medicine man ever since. He has also practiced physical trauma rehabilitation, medical massage therapy and Eastern bodywork, having earned his degree from New York&rsquo;s Swedish Institute of Health. With these tools and concentrated efforts, he has been able to help numerous individuals overcome many health issues and pathologies on physical, mental and spiritual levels.</p>
-      </div>
+  <!-- ================= Tab: FAQ ================= -->
+  <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
 
-      <div class="pt-vc" style="grid-area:7 / 2 / 8 / 24">
-        <hr class="pt-rule" style="--pt-rule:rgba(88,67,100,.3)">
-      </div>
-
-      <div class="dh-portrait" style="grid-area:9 / 2 / 11 / 10">
-        <img src="/assets/healing/janel-possiel-portrait.webp" alt="Janel Possiel, Dreamwork Coach" loading="lazy">
-      </div>
-      <div class="pt-prose" style="grid-area:9 / 11 / 10 / 24">
-        <h3><strong>Janel Possiel</strong></h3>
-        <p class="dh-role">Dreamwork Coach</p>
-        <p class="dh-role">Distance Healing Programs Involved In: Dreamwork Analysis</p>
-        <p>Bio Coming Soon.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Frequently asked questions ===== -->
   <section class="pt-sec dh-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="faq" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:5">
@@ -517,7 +538,7 @@
           <details class="pt-acc-item">
             <summary>Why is the Distance Healing Program a prerequisite to potential participation in future Embody True Nature retreats?</summary>
             <div class="pt-acc-body pt-prose">
-              <p>Please review our &ldquo;<a href="#health-conditions">Health Conditions</a>&rdquo; section on this page which covers this extensively. For some minor health issues this pre-requisite may not apply and you are welcome to write us to inquire further about your specific condition.&nbsp;</p>
+              <p>Please review our &ldquo;<a href="#health-conditions">Health Conditions</a>&rdquo; section which covers this extensively. For some minor health issues this pre-requisite may not apply and you are welcome to write us to inquire further about your specific condition.&nbsp;</p>
             </div>
           </details>
 
@@ -574,47 +595,78 @@
     </div>
   </section>
 
-  <!-- ===== Home study course ===== -->
-  <section class="pt-sec dh-deep">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="home-study-course" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
-      <div class="dh-center" style="grid-area:1 / 3 / 2 / 23">
-        <h2><strong>Embody True Nature<br>Evolutionary Healing Home Study Course</strong></h2>
-      </div>
-      <div class="pt-prose dh-center" style="grid-area:3 / 4 / 4 / 22">
-        <p><strong>Online interactive multimedia course from Paititi Institute</strong></p>
-        <h3><strong>Coming Soon</strong></h3>
-      </div>
-      <div class="dh-mark dh-mark-light dh-mark-soft" style="grid-area:5 / 9 / 6 / 17;--dh-mark-h:88px;--dh-mask:url(/assets/retreats/flower-purple.webp)"></div>
-      <div class="pt-prose" style="grid-area:7 / 4 / 8 / 22">
-        <p><strong>Discover the blueprint encoded in ancestral wisdom lineages that guides you through your evolutionary healing journey.</strong></p>
-        <p><strong>To be effective, this multifaceted interactive course must be made directly relevant to your life. Which begs the question...</strong></p>
-        <p>What are you inspired by and truly passionate about that makes you appreciate this life?</p>
-        <p>Perhaps nothing inspires you, in which case, that rock bottom could become the foundation to develop your life upon.</p>
-        <p>Imagine your life is a training ground for fulfilling your greatest potential&hellip;</p>
-        <p>What if your life has all the necessary ingredients for that fulfillment to take place? Your unique blend of qualities and latent talents, all skillfully combined into a recipe of deep meaning and joyful purpose. Let&rsquo;s face it that without neither a point of reference, clear direction, nor guidance, uniting the puzzle pieces of your life can be unnecessarily long. That is why the living wisdom of ancestral lineages has existed throughout millennia as rites of passage. The blueprint answering these same questions was designed by the indigenous elders to be renewed with each generation only through realized embodiment. The landmarks on this evolutionary map can only be deciphered when the personal challenges of your life are faced with creative objectivity, uncovering the universal meaning in the situations least suspected of it.</p>
-        <p>The ancient lineages implemented in this course serve as a profound reminder that life is always a captivating adventure, an experience of discovery and fascination, even in the midst of the most mundane. The real practice is not a technique but a cultivation of a rooted sense of wonder as an essential attitude in your life.</p>
-        <p>The intention of this course is not to be a generic cookie cutter style curriculum but as a practical and effective insight relevant to the embodiment of your existential truth capable of transcending all adversities.</p>
-        <p>This is a heroic journey starting from an inconsequential speck of dust in the greater collective, and alchemically transforming into a meaningful contribution to the new emerging paradigm.</p>
-        <p>Our experiences of working with these ancestral lineages...</p>
-        <ul>
-          <li>Intercultural bridges - Indigenous evolutionary methods and perspectives from Andean, Amazonian, and Himalayan cultures to awaken the source of creative potential</li>
-          <li>Transpersonal shamanic dreamwork - Learn the language of Nature expressed through the intelligence of your own organism and all phenomena</li>
-          <li>The practice of remembrance - Remembering the original uninhibited state of being as a conduit of boundless self-realization</li>
-          <li>Inner and outer landscapes - Immerse yourself in a multifaceted integration of physical, mental, emotional and spiritual practices directly impacting every aspect of your life</li>
-          <li>Interviews and talks with various evolutionary guides, elders and healers involved with the Paititi Institute&rsquo;s work</li>
-        </ul>
-        <p><strong><em>While this course is currently in production at this time, you are invited to sign up below and receive a 20% early bird discount coupon. No purchase commitment is required. Coupons will be sent via email when the course is ready to purchase online.</em></strong></p>
-      </div>
-      <div style="grid-area:9 / 4 / 10 / 22">
-        <iframe class="dh-form" id="dh-course-form" title="Home Study Course early-bird signup" src="https://secure.jotformpro.com/form/42671479757975" style="height:487px" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
+  </sc-if>
 
 </main>
 <dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+// Every page of the old standalone site keeps its URL: the 301s in _redirects
+// land on a hash, and this map decides which tab that hash lives in. In-page
+// links (the FAQ pointing at Health Conditions, the steps pointing at Enroll)
+// go through the same hashchange path, so a link can cross tabs.
+const TAB_FOR_HASH = {
+  'welcome': 'welcome', 'team': 'welcome',
+  'overview': 'journey', 'nutrition': 'journey', 'dreamwork': 'journey',
+  'coaching': 'journey', 'energetic-healing': 'journey', 'input-vs-output': 'journey',
+  'health-conditions': 'conditions',
+  'packages': 'packages',
+  'getting-started': 'start', 'enroll': 'start',
+  'faq': 'faq',
+};
+
+class Component extends DCLogic {
+  state = { tab: 'welcome' };
+
+  componentDidMount() {
+    // On a direct visit to /distance-healing#packages the right tab has to be
+    // selected before anchor-scroll.js can find the target; it watches the DOM
+    // and scrolls once the panel renders, so no scrolling is needed here.
+    this.syncFromHash(false);
+    window.addEventListener('hashchange', () => this.syncFromHash(true));
+  }
+
+  syncFromHash(scroll) {
+    let id = location.hash.slice(1);
+    try { id = decodeURIComponent(id); } catch (err) { /* keep raw */ }
+    const tab = TAB_FOR_HASH[id];
+    if (!tab) return;
+    if (tab !== this.state.tab) this.setState({ tab });
+    if (!scroll) return;
+    // The browser's native jump ran while the target was still in an inactive
+    // panel (absent from the DOM), so re-run it after the switch renders.
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 80);
+  }
+
+  renderVals() {
+    const t = this.state.tab;
+    // replaceState instead of assigning location.hash: the assignment would
+    // fire hashchange and re-scroll to the section top, when a tab click
+    // should land on the tab bar itself.
+    const pick = (tab, hash) => () => {
+      if (this.state.tab !== tab) this.setState({ tab });
+      history.replaceState(null, '', '#' + hash);
+      const bar = document.getElementById('dh-tabs');
+      if (bar) bar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return {
+      tabKey: t,
+      isWelcome: t === 'welcome', isJourney: t === 'journey',
+      isConditions: t === 'conditions', isPackages: t === 'packages',
+      isStart: t === 'start', isFaq: t === 'faq',
+      aWelcome: t === 'welcome' ? '1' : '0', aJourney: t === 'journey' ? '1' : '0',
+      aConditions: t === 'conditions' ? '1' : '0', aPackages: t === 'packages' ? '1' : '0',
+      aStart: t === 'start' ? '1' : '0', aFaq: t === 'faq' ? '1' : '0',
+      onWelcome: pick('welcome', 'welcome'), onJourney: pick('journey', 'overview'),
+      onConditions: pick('conditions', 'health-conditions'), onPackages: pick('packages', 'packages'),
+      onStart: pick('start', 'getting-started'), onFaq: pick('faq', 'faq'),
+    };
+  }
+}
+</script>
 </body>
 </html>

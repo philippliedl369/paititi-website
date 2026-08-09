@@ -37,6 +37,21 @@
     var f = document.getElementById('rbg-frame');
     if (f) f.style.height = Math.max(1319, e.data.rbgHeight) + 'px';
   });
+  // The Home Study Course early-bird signup is a JotForm embed (moved here
+  // from the absorbed paititidistancehealing.com). JotForm posts
+  // "setHeight:<px>:<frame id>" from inside the iframe; grow the frame so the
+  // form never scrolls inside a scrollbar of its own. Origin-checked, because
+  // any framed page can post to this window.
+  window.addEventListener('message', function (e) {
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (err) { return; }
+    if (!/(^|\.)jotform(pro)?\.com$/.test(host)) return;
+    var args = String(e.data).split(':');
+    if (args[0] !== 'setHeight') return;
+    var px = parseInt(args[1], 10);
+    var frame = document.getElementById('oc-course-form');
+    if (frame && px > 0) frame.style.height = px + 'px';
+  });
 </script>
 <style>
   .oc-hero{--pt-hero-h:932px;--pt-bg-pos:50% 20%;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41);--pt-hero-ink:#fff}
@@ -44,6 +59,27 @@
   .oc-hero h1,.oc-hero p{text-align:center}
   .oc-list{--pt-bg:#F1EAF6}
   .oc-frame{width:100%;border:0;display:block}
+
+  /* ---- Home Study Course (from the absorbed Distance Healing site) -------- */
+  .oc-dark{--pt-bg:#2A1736;color:#fff}
+  .oc-dark h2,.oc-dark h3,.oc-dark p,.oc-dark li{color:#fff}
+  .oc-center{text-align:center}
+  .oc-form{width:100%;border:0;display:block;background:#fff;border-radius:15px}
+  /* The blossom ornament is near-white line art; re-inked white via a mask so
+     it reads on the deep ground. The drawing travels as a custom property
+     because the DC runtime drops -webkit-* from inline style attributes. */
+  .oc-mark{display:block;background-color:#fff;opacity:.55;width:100%;height:var(--oc-mark-h,88px);
+    -webkit-mask-image:var(--oc-mask);mask-image:var(--oc-mask);
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    -webkit-mask-position:center;mask-position:center;
+    -webkit-mask-size:contain;mask-size:contain}
+  .pt-fluid[id]{scroll-margin-top:130px}
+  @media (max-width:1180px){
+    .pt-fluid > .oc-mark{height:var(--oc-mark-h,88px) !important}
+    .pt-fluid{padding-bottom:56px}
+  }
+  /* The footer wave must match this page's final section colour. */
+  footer.pt-footer{--pt-footer-wave:#2A1736}
 </style>
 </helmet>
 <div class="pt-page">
@@ -72,6 +108,44 @@
     <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:1;--pt-row-h:1318.6600px">
       <div style="grid-area:1 / 1 / 2 / 25">
         <iframe class="oc-frame" id="rbg-frame" src="/rbg-widget.html?cat=online-resources" title="Online course listings and registration" style="height:1319px" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Home Study Course (moved here from the Distance Healing site) ===== -->
+  <section class="pt-sec oc-dark">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" id="home-study-course" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
+      <div class="oc-center" style="grid-area:1 / 3 / 2 / 23">
+        <h2><strong>Embody True Nature<br>Evolutionary Healing Home Study Course</strong></h2>
+      </div>
+      <div class="pt-prose oc-center" style="grid-area:3 / 4 / 4 / 22">
+        <p><strong>Online interactive multimedia course from Paititi Institute</strong></p>
+        <h3><strong>Coming Soon</strong></h3>
+      </div>
+      <div class="oc-mark" style="grid-area:5 / 9 / 6 / 17;--oc-mask:url(/assets/retreats/flower-purple.webp)"></div>
+      <div class="pt-prose" style="grid-area:7 / 4 / 8 / 22">
+        <p><strong>Discover the blueprint encoded in ancestral wisdom lineages that guides you through your evolutionary healing journey.</strong></p>
+        <p><strong>To be effective, this multifaceted interactive course must be made directly relevant to your life. Which begs the question...</strong></p>
+        <p>What are you inspired by and truly passionate about that makes you appreciate this life?</p>
+        <p>Perhaps nothing inspires you, in which case, that rock bottom could become the foundation to develop your life upon.</p>
+        <p>Imagine your life is a training ground for fulfilling your greatest potential&hellip;</p>
+        <p>What if your life has all the necessary ingredients for that fulfillment to take place? Your unique blend of qualities and latent talents, all skillfully combined into a recipe of deep meaning and joyful purpose. Let&rsquo;s face it that without neither a point of reference, clear direction, nor guidance, uniting the puzzle pieces of your life can be unnecessarily long. That is why the living wisdom of ancestral lineages has existed throughout millennia as rites of passage. The blueprint answering these same questions was designed by the indigenous elders to be renewed with each generation only through realized embodiment. The landmarks on this evolutionary map can only be deciphered when the personal challenges of your life are faced with creative objectivity, uncovering the universal meaning in the situations least suspected of it.</p>
+        <p>The ancient lineages implemented in this course serve as a profound reminder that life is always a captivating adventure, an experience of discovery and fascination, even in the midst of the most mundane. The real practice is not a technique but a cultivation of a rooted sense of wonder as an essential attitude in your life.</p>
+        <p>The intention of this course is not to be a generic cookie cutter style curriculum but as a practical and effective insight relevant to the embodiment of your existential truth capable of transcending all adversities.</p>
+        <p>This is a heroic journey starting from an inconsequential speck of dust in the greater collective, and alchemically transforming into a meaningful contribution to the new emerging paradigm.</p>
+        <p>Our experiences of working with these ancestral lineages...</p>
+        <ul>
+          <li>Intercultural bridges - Indigenous evolutionary methods and perspectives from Andean, Amazonian, and Himalayan cultures to awaken the source of creative potential</li>
+          <li>Transpersonal shamanic dreamwork - Learn the language of Nature expressed through the intelligence of your own organism and all phenomena</li>
+          <li>The practice of remembrance - Remembering the original uninhibited state of being as a conduit of boundless self-realization</li>
+          <li>Inner and outer landscapes - Immerse yourself in a multifaceted integration of physical, mental, emotional and spiritual practices directly impacting every aspect of your life</li>
+          <li>Interviews and talks with various evolutionary guides, elders and healers involved with the Paititi Institute&rsquo;s work</li>
+        </ul>
+        <p><strong><em>While this course is currently in production at this time, you are invited to sign up below and receive a 20% early bird discount coupon. No purchase commitment is required. Coupons will be sent via email when the course is ready to purchase online.</em></strong></p>
+      </div>
+      <div style="grid-area:9 / 4 / 10 / 22">
+        <iframe class="oc-form" id="oc-course-form" title="Home Study Course early-bird signup" src="https://secure.jotformpro.com/form/42671479757975" style="height:487px" loading="lazy"></iframe>
       </div>
     </div>
   </section>
