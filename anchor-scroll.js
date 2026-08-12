@@ -25,9 +25,21 @@
     return el && root.contains(el) ? el : null;
   }
 
+  // Nav anchors can point at accordion items (e.g. /initiatives#biocultural-reserve);
+  // a closed <details> would leave the jump landing on a collapsed summary.
+  function openDetails(el) {
+    for (let d = el.closest('details'); d; d = d.parentElement?.closest('details')) {
+      d.open = true;
+    }
+    if (el.tagName === 'DETAILS') el.open = true;
+  }
+
   function jump() {
     const el = target();
-    if (el && !userScrolled) el.scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (el && !userScrolled) {
+      openDetails(el);
+      el.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
     return !!el;
   }
 
@@ -56,4 +68,13 @@
   } else {
     start();
   }
+
+  // In-page hash clicks (header dropdown → same page): no reload happens, so
+  // open the accordion and scroll smoothly ourselves.
+  addEventListener('hashchange', () => {
+    const el = target();
+    if (!el) return;
+    openDetails(el);
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 })();

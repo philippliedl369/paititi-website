@@ -11,13 +11,12 @@
 <x-dc>
 <helmet>
 <title>Online Courses | Paititi Institute</title>
-<meta name="description" content="Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.">
+<meta name="description" content="Self-paced online courses from Paititi Institute: Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, Ancestral Remembrance, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
 <meta property="og:title" content="Online Courses | Paititi Institute">
-<meta property="og:description" content="Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.">
+<meta property="og:description" content="Self-paced online courses from Paititi Institute: Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, Ancestral Remembrance, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/retreats/online-courses-01.webp">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -60,6 +59,33 @@
   .oc-list{--pt-bg:#F1EAF6}
   .oc-frame{width:100%;border:0;display:block}
 
+  /* ---- Course gateway ------------------------------------------------------
+     Crawlable course cards ahead of the Retreat Guru widget, which renders
+     client-side and leaves search engines nothing to read. */
+  .oc-white{--pt-bg:#fff;padding:95px 0 108px}
+  .oc-gate-head{max-width:1200px;margin:0 auto;padding:0 24px;text-align:center}
+  .oc-gate-head h2{color:#584364}
+  .oc-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
+    max-width:1324px;margin:0 auto;padding:44px 58px 0}
+  .oc-card{display:flex;flex-direction:column;background:#fff;border-radius:48px 0;overflow:hidden;
+    box-shadow:0 10px 30px rgba(33,4,22,.1)}
+  .oc-card > img{width:100%;height:280px;object-fit:cover;display:block}
+  .oc-card-body{padding:28px 32px 32px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .oc-card h3{font-family:var(--font-display);font-weight:400;font-size:28.8px;line-height:1.3;
+    color:#584364;margin:0;letter-spacing:normal}
+  .oc-card-note{font-size:14.272px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    color:#8C8290;margin:0}
+  .oc-card p{font-size:17.6px;font-weight:300;line-height:1.8;color:#210416;margin:0}
+  .oc-card-more{margin-top:auto;padding-top:12px}
+  .oc-card-more a{font-weight:700;color:#584364;text-decoration:underline;text-underline-offset:5px}
+  .oc-card-more a:hover{opacity:.8;color:#584364}
+
+  @media (max-width:1180px){
+    .oc-white{padding:64px 0 72px}
+    .oc-cards{grid-template-columns:1fr;padding:32px 24px 0}
+    .oc-card > img{height:230px}
+  }
+
   /* ---- Home Study Course (from the absorbed Distance Healing site) -------- */
   .oc-dark{--pt-bg:#2A1736;color:#fff}
   .oc-dark h2,.oc-dark h3,.oc-dark p,.oc-dark li{color:#fff}
@@ -83,7 +109,7 @@
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="courses" hint-size="100%,209px"></dc-import>
+<dc-import name="SiteHeader" active="programs" hint-size="100%,209px"></dc-import>
 <main>
 
   <!-- ===== Hero ===== -->
@@ -99,6 +125,58 @@
       <div class="pt-fit" style="grid-area:9 / 10 / 15 / 16">
         <img src="/assets/retreats/foundational-practices.webp" alt="" loading="lazy">
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Course gateway (crawlable) ===== -->
+  <section class="pt-sec oc-white">
+    <div class="pt-sec-bg"></div>
+    <div class="oc-gate-head pt-prose">
+      <h2><strong>Living Wisdom Courses</strong></h2>
+      <p>Self-paced home-study courses that bring the ancestral practices held at Paititi &mdash; breathwork, qigong, remembrance and contemplative inquiry &mdash; into everyday life. Begin any time; every enrollment helps sustain the Institute&rsquo;s Indigenous education and conservation initiatives.</p>
+    </div>
+    <div class="oc-cards">
+
+      <div class="oc-card">
+        <img src="/assets/retreats/primordial-breathwork.jpg" alt="Sacred spiral artwork for the Primordial Breathwork course" loading="lazy">
+        <div class="oc-card-body">
+          <h3>Primordial Breathwork</h3>
+          <p class="oc-card-note">Online home study course series &middot; Sliding-scale contribution</p>
+          <p>Inspired by the tribal cultures of the Amazonian rainforest, Primordial Breathwork&trade; works directly with the breath to release what inhibits the organism and reconnect with the source of creative potential. This home-study series focuses on the first portion of the practice: five recorded practice sessions &mdash; over four hours of guided breathwork &mdash; together with talks on the theory and philosophy that root the practice in its Indigenous origins. The course is ongoing, so you can begin at any time and move at your own pace, returning to each session as the practice deepens.</p>
+          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/primordial-breathwork-online-home-study-course-series/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
+        </div>
+      </div>
+
+      <div class="oc-card">
+        <img src="/assets/retreats/qigong-stone-tower.jpg" alt="Balanced stone tower by the water, emblem of the Alchemy of Immortality Qigong course" loading="lazy">
+        <div class="oc-card-body">
+          <h3>Alchemy of Immortality Qigong &mdash; Andean Art of Being</h3>
+          <p class="oc-card-note">Online home study course &middot; Sliding-scale contribution</p>
+          <p>A meeting of Daoist energy cultivation and Andean wisdom teachings: movement, meditation and philosophical study woven into one practice of restoring vital life force. Across three progressive modules &mdash; more than three and a half hours of video teachings and active practice sessions &mdash; you learn to gather, circulate and settle energy in the body, and to carry the Andean art of being into ordinary daily activity. Self-paced and open-ended, with scholarship applications available so cost is never the barrier to practice.</p>
+          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/alchemy-of-immortality-daoist-qigong-andean-art-of-being-online-home-study-course/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
+        </div>
+      </div>
+
+      <div class="oc-card">
+        <img src="/assets/retreats/etn-circle.jpg" alt="Ceremony circle gathered at the Paititi centre" loading="lazy">
+        <div class="oc-card-body">
+          <h3>Ancestral Remembrance</h3>
+          <p class="oc-card-note">Meditation practice &middot; Taught within the Practical Alchemy Series</p>
+          <p>The practice of remembrance: remembering the original, uninhibited state of being as a conduit of boundless self-realization. Where breathwork and qigong work through the body and its energy, Ancestral Remembrance Meditation turns attention to what has never been wounded &mdash; the ground of being the ancestral lineages point to beneath every technique. It is currently taught as one of the three core Indigenous practices of the Practical Alchemy Series, alongside Primordial Breathwork and the Alchemy of Immortality Qigong.</p>
+          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/beyond-ayahuasca-book-practical-alchemy-series/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
+        </div>
+      </div>
+
+      <div class="oc-card">
+        <img src="/assets/retreats/radiant-alchemy-in-the-jungle.webp" alt="Radiant alchemy artwork of light rising through the jungle canopy" loading="lazy">
+        <div class="oc-card-body">
+          <h3>Practical Alchemy Series</h3>
+          <p class="oc-card-note">Online course &middot; Free with a Beyond Ayahuasca book purchase</p>
+          <p>A living extension of the <em>Beyond Ayahuasca</em> book &mdash; a pathway where ancient wisdom becomes embodied truth. You&rsquo;ll be guided through three core Indigenous practices rooted in the sacred traditions shared in the book: Primordial Breathwork, Alchemy of Immortality Qigong / Andean Art of Being, and Ancestral Remembrance Meditation. These practices are portals into ancestral knowledge and deep inner transformation, turning the reading of the book into a daily, lived rite of passage.</p>
+          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/beyond-ayahuasca-book-practical-alchemy-series/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
+        </div>
+      </div>
+
     </div>
   </section>
 

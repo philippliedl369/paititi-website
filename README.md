@@ -67,8 +67,10 @@ unavailable and log the real reason; everything else works statically. The
 error text a form prints comes straight from `api.js`, so nothing internal —
 missing secrets, provider names, product ids — may appear in it.
 
-Before launch also work through `docs/seo.md` — every page currently ships
-`noindex` on purpose; strip those metas when the domain cuts over.
+Public pages are indexable; `noindex` remains only on the checkout pages
+(cart, order confirmation) and the two emailed Distance Healing payment
+pages. `docs/seo.md` lists the remaining launch-time SEO steps (GSC
+submission after the DNS switch).
 
 ### The newsletter
 

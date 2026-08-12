@@ -155,11 +155,21 @@ const server = createServer(async (req, res) => {
     }
 
     // 2. _redirects — 200 rewrites keep the URL, 30x tell the browser to move.
+    // "/journal/* /blog/:splat"-style suffix wildcards match like Cloudflare's.
     for (const rule of redirects) {
-      if (rule.from !== pathname) continue;
-      if (rule.status === 200) { pathname = rule.to; break; }
-      if (/^https?:\/\//.test(rule.to) || rule.status >= 300) {
-        return send(res, rule.status, { location: rule.to }, '');
+      let to = null;
+      if (rule.from === pathname) {
+        to = rule.to;
+      } else if (rule.from.endsWith('/*')) {
+        const base = rule.from.slice(0, -2);
+        if (pathname.startsWith(base + '/') && pathname.length > base.length + 1) {
+          to = rule.to.replace(':splat', pathname.slice(base.length + 1));
+        }
+      }
+      if (to === null) continue;
+      if (rule.status === 200) { pathname = to; break; }
+      if (/^https?:\/\//.test(to) || rule.status >= 300) {
+        return send(res, rule.status, { location: to }, '');
       }
     }
 

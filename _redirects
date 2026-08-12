@@ -16,6 +16,14 @@
 /retreats            /Retreats.dc.html         200
 /online-courses      /OnlineCourses.dc.html    200
 /beyond-ayahuasca    /BeyondAyahuasca.dc.html  200
+/mentorship          /Mentorship.dc.html       200
+# The old /courses path 404'd on the live site but still has external links.
+/courses             /online-courses           301
+# Old Squarespace events page, still linked from migrated blog posts.
+/events              /retreats#events          301
+# "Journal" is the nav label; the URL stays /blog.
+/journal             /blog                     301
+/journal/*           /blog/:splat              301
 
 # Distance Healing — the standalone paititidistancehealing.com site, absorbed.
 # Its nav pages are now tab panels of one page here; each old path lands on a
@@ -81,6 +89,24 @@
 /blog/category/Indigenous+Traditions      /blog/category/indigenous-traditions 301
 /blog/category/Plant+Medicine             /blog/category/plant-medicine        301
 /blog/category/Transformation             /blog/category/transformation        301
+
+# Ancient Squarespace-era paths (pre-2020 site architecture), each aimed at
+# its nearest current page. Listed with and without the trailing slash: the
+# Node server matches paths exactly.
+/stewardship/courses-retreats         /retreats   301
+/stewardship/courses-retreats/        /retreats   301
+/education/peru-retreats-courses      /retreats   301
+/education/peru-retreats-courses/     /retreats   301
+/paititi-family                       /team       301
+/paititi-family/                      /team       301
+/who/paititi-centers                  /about-us   301
+/who/paititi-centers/                 /about-us   301
+/who/the-paititi-family/roman-hanis   /team       301
+/who/the-paititi-family/roman-hanis/  /team       301
+/who/partners/sacred-science          /about-us   301
+/who/partners/sacred-science/         /about-us   301
+/healing/indigenous-healing-center    /initiatives#community-health  301
+/healing/indigenous-healing-center/   /initiatives#community-health  301
 
 # Assets kept at their legacy Squarespace paths
 /s/Paititi-living-vision-mindmap.pdf  /assets/Paititi-living-vision-mindmap.pdf  301

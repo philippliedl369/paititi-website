@@ -17,7 +17,6 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -39,55 +38,29 @@
      near-black used almost everywhere else. */
   .pt-page .hm-body h2,.pt-page .hm-body h3{color:#584364}
 
-  /* ---- Slideshow -----------------------------------------------------------
-     A Squarespace gallery block in "stacked slideshow" mode: slides stacked in
-     one 809px box, each image *fitted* rather than cropped (the third is
-     narrower than the viewport and sits centred on the band), and the caption
-     pinned bottom-left in a translucent panel. The section is 63px taller than
-     the gallery because the block is stretched over 24 grid rows.            */
-  .hm-slideshow{height:872.1px}
-  .hm-slides{position:relative;height:809.388px;overflow:hidden}
-  .hm-slide{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;
-    transition:opacity .9s ease}
-  .hm-slide[data-on="1"]{opacity:1;visibility:visible;pointer-events:auto}
-  .hm-slide > a,.hm-slide > .hm-frame{position:absolute;inset:0;display:block;
-    border-radius:96px 0;overflow:hidden}
-  .hm-slide img{width:100%;height:100%;object-fit:contain;display:block}
-
-  /* The caption panel sits above the full-slide link; on live the whole slide
-     (card included) click-throughs, so let clicks fall through to the anchor. */
-  .hm-meta{position:absolute;left:20px;bottom:20px;width:719px;max-width:calc(100% - 40px);
-    background:rgba(0,0,0,.6);border-radius:48px 0;color:#fff;pointer-events:none}
-  .hm-meta-inside{padding:25px}
-  .hm-meta-title{font-family:var(--font-display);font-weight:400;font-size:64px;line-height:76.8px;
-    letter-spacing:normal;color:#fff}
-  .hm-meta-desc{margin-top:4.2px}
-  /* Squarespace's gallery captions run on a tight 21px leading with a 16px
-     pad below each line group — not the 1.8 body rhythm used elsewhere. */
-  .pt-page .hm-meta-desc p{font-size:19.2px;line-height:21px;padding-bottom:16px;margin:16px 0;
-    color:rgba(255,255,255,.95)}
-  .pt-page .hm-meta-desc p:first-child{margin-top:0}
-  .pt-page .hm-meta-desc p:last-child{margin-bottom:0}
-  .hm-meta-desc strong{font-weight:700}
-
-  .hm-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:none;border:0;
-    color:#fff;cursor:pointer;padding:16px;opacity:.85;line-height:0}
-  .hm-nav:hover{opacity:1}
-  .hm-nav[data-dir="prev"]{left:8px}
-  .hm-nav[data-dir="next"]{right:8px}
+  /* ---- Ways to Walk With Us ------------------------------------------------
+     Replaces the auto-rotating offering gallery: four crawlable cards, one per
+     way of engaging (Roman's endorsed architecture). */
+  .hm-ways{padding:95px 0 108px}
+  .hm-ways-head{max-width:1200px;margin:0 auto;padding:0 24px;text-align:center}
+  .hm-ways-head h2{color:#584364}
+  .hm-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
+    max-width:1324px;margin:0 auto;padding:44px 58px 0}
+  .hm-card{display:flex;flex-direction:column;background:#fff;border-radius:48px 0;overflow:hidden;
+    box-shadow:0 10px 30px rgba(33,4,22,.08);text-decoration:none;color:inherit;
+    transition:transform .25s ease,box-shadow .25s ease}
+  .hm-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(33,4,22,.14)}
+  .hm-card img{width:100%;height:300px;object-fit:cover;display:block}
+  .hm-card-body{padding:28px 32px 32px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .hm-card h3{font-family:var(--font-display);font-weight:400;font-size:28.8px;line-height:1.3;
+    color:#584364;margin:0;letter-spacing:normal}
+  .hm-card p{font-size:17.6px;font-weight:300;line-height:1.8;color:#210416;margin:0}
+  .hm-card-more{margin-top:auto;padding-top:8px;font-weight:700;color:#584364}
 
   @media (max-width:1180px){
-    .hm-slideshow{height:auto}
-    .hm-slides{height:520px}
-    .hm-slide > a,.hm-slide > .hm-frame{border-radius:48px 0}
-    .hm-slide img{object-fit:cover}
-    .hm-meta{left:12px;bottom:12px;width:auto;right:12px;max-width:none;border-radius:28px 0}
-    .hm-meta-title{font-size:38px;line-height:1.2}
-  }
-  @media (max-width:640px){
-    .hm-slides{height:400px}
-    .hm-meta-title{font-size:28px}
-    .pt-page .hm-meta-desc p{font-size:16px}
+    .hm-ways{padding:64px 0 72px}
+    .hm-cards{grid-template-columns:1fr;padding:32px 24px 0}
+    .hm-card img{height:240px}
   }
 </style>
 </helmet>
@@ -121,61 +94,54 @@
     </div>
   </section>
 
-  <!-- The gallery is full-bleed, so it sits outside the 1200px column and no
-       wave divider is visible at either of its edges. -->
-  <section class="pt-sec pt-sec-flat hm-slideshow" style="--pt-bg:#F1EAF6"
-           aria-label="Programs" aria-roledescription="carousel">
+  <!-- ===== Ways to Walk With Us ===== -->
+  <section class="pt-sec pt-sec-flat hm-ways" style="--pt-bg:#F1EAF6" aria-label="Ways to walk with us">
     <div class="pt-sec-bg"></div>
-    <div class="hm-slides">
+    <div class="hm-ways-head">
+      <h2><strong>Ways to Walk With Us</strong></h2>
+    </div>
+    <div class="hm-cards">
 
-      <div class="hm-slide" data-on="{{ on0 }}" aria-hidden="{{ off0 }}">
-        <a href="/retreats">
-          <img src="/assets/home/home-01.webp" alt="Retreats" loading="eager">
-        </a>
-        <div class="hm-meta">
-          <div class="hm-meta-inside">
-            <div class="hm-meta-title">Retreats</div>
-            <div class="hm-meta-desc">
-              <p>Embody True Nature retreats weaves ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.</p>
-              <p><strong>Visit our retreats</strong></p>
-            </div>
-          </div>
+      <a class="hm-card" href="/retreats">
+        <img src="/assets/home/home-01.webp" alt="Retreat gathering at the Paititi Institute centre in Peru" loading="lazy">
+        <div class="hm-card-body">
+          <h3>Immersive Retreats</h3>
+          <p>Deep experiential immersion in ancestral contemplative traditions and the work of integration.</p>
+          <span class="hm-card-more">Explore Retreats &rarr;</span>
         </div>
-      </div>
+      </a>
 
-      <div class="hm-slide" data-on="{{ on1 }}" aria-hidden="{{ off1 }}">
-        <a href="/online-courses">
-          <img src="/assets/home/dreamworksacredgeometry-square.webp" alt="Online Courses" loading="lazy">
-        </a>
-        <div class="hm-meta">
-          <div class="hm-meta-inside">
-            <div class="hm-meta-title">Online Courses</div>
-            <div class="hm-meta-desc">
-              <p><strong>Breathwork &bull; Qi Gong &bull; Evolutionary Blueprint</strong></p>
-              <p>Our transformative courses at Paititi Institute invites you to embark on a journey that unites ancient wisdom with modern stewardship, fostering deep personal transformation and ecological awareness.</p>
-              <p><strong>View our online courses</strong></p>
-            </div>
-          </div>
+      <a class="hm-card" href="/online-courses">
+        <img src="/assets/home/dreamworksacredgeometry-square.webp" alt="Sacred geometry mandala from the Paititi dreamwork teachings" loading="lazy">
+        <div class="hm-card-body">
+          <h3>Online Living Wisdom Courses</h3>
+          <p>Bring Primordial Breathwork, Qigong, Remembrance and contemplative practice into everyday life.</p>
+          <span class="hm-card-more">Explore Online Courses &rarr;</span>
         </div>
-      </div>
+      </a>
 
-      <div class="hm-slide" data-on="{{ on2 }}" aria-hidden="{{ off2 }}">
-        <div class="hm-frame">
-          <img src="/assets/home/yagua-visit-2023.webp" alt="Yagua visit 2023" loading="lazy">
+      <a class="hm-card" href="/mentorship">
+        <img src="/assets/healing/roman-hanis-portrait.webp" alt="Roman Hanis, co-founder of Paititi Institute and mentorship facilitator" loading="lazy">
+        <div class="hm-card-body">
+          <h3>1-on-1 Mentorship &amp; Dreamwork</h3>
+          <p>Individual guidance for people seeking sustained integration, self-understanding and support through significant life transitions.</p>
+          <span class="hm-card-more">Explore Mentorship &rarr;</span>
         </div>
-      </div>
+      </a>
 
-      <button class="hm-nav" data-dir="prev" onClick="{{ prev }}" aria-label="Previous slide">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg>
-      </button>
-      <button class="hm-nav" data-dir="next" onClick="{{ next }}" aria-label="Next slide">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 4 8 8-8 8"/></svg>
-      </button>
+      <a class="hm-card" href="/initiatives">
+        <img src="/assets/home/yagua-visit-2023.webp" alt="Members of the Yagua community welcoming visitors, 2023" loading="lazy">
+        <div class="hm-card-body">
+          <h3>Support Indigenous &amp; Conservation Initiatives</h3>
+          <p>Participate directly in the Yahua and Q&rsquo;ero initiatives, conservation and cultural preservation.</p>
+          <span class="hm-card-more">Explore Initiatives &rarr;</span>
+        </div>
+      </a>
 
     </div>
   </section>
 
-  <section class="pt-sec pt-sec-flat hm-body" style="--pt-bg:#F1EAF6">
+  <section class="pt-sec pt-sec-flat hm-body" id="impact" style="--pt-bg:#F1EAF6">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:59">
 
@@ -240,38 +206,5 @@
 <dc-import name="SiteFooter" hint-size="100%,746px"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:4710}}">
-class Component extends DCLogic {
-  state = { slide: 0 };
-
-  componentDidMount() {
-    // The original slideshow rotates on its own; pausing on hover keeps the
-    // caption readable while someone is actually reading it.
-    const section = document.querySelector('.hm-slides');
-    let paused = false;
-    if (section) {
-      section.addEventListener('mouseenter', () => { paused = true; });
-      section.addEventListener('mouseleave', () => { paused = false; });
-    }
-    this.timer = setInterval(() => {
-      if (!paused && !document.hidden) this.setState(s => ({ slide: (s.slide + 1) % 3 }));
-    }, 6000);
-  }
-
-  componentWillUnmount() { clearInterval(this.timer); }
-
-  renderVals() {
-    const i = this.state.slide;
-    const go = (n) => () => this.setState({ slide: (n + 3) % 3 });
-    return {
-      on0: i === 0 ? '1' : '0', off0: i === 0 ? 'false' : 'true',
-      on1: i === 1 ? '1' : '0', off1: i === 1 ? 'false' : 'true',
-      on2: i === 2 ? '1' : '0', off2: i === 2 ? 'false' : 'true',
-      prev: go(i - 1),
-      next: go(i + 1),
-    };
-  }
-}
-</script>
 </body>
 </html>

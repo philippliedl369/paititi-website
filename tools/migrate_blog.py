@@ -165,6 +165,10 @@ def clean_body(body, slug, page_url):
     # Unwrap squarespace block scaffolding into plain divs (keeps nesting valid).
     body = re.sub(r'\sdata-[a-zA-Z-]+="[^"]*"', '', body)
     body = re.sub(r'\scontenteditable="[^"]*"', '', body)
+    # Squarespace-era links that don't exist here: /events was the old events
+    # page, and "#/events" is its hash-router spelling.
+    body = body.replace('href="/retreats#/events"', 'href="/retreats#events"')
+    body = body.replace('href="/events"', 'href="/retreats#events"')
     return body
 
 
@@ -187,7 +191,6 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="article:published_time" content="{iso_date}">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -205,7 +208,7 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="blog" hint-size="100%,209px"></dc-import>
+<dc-import name="SiteHeader" active="journal" hint-size="100%,209px"></dc-import>
 <main>
 
   <section class="pt-sec pt-sec-flat bp-sec">
@@ -425,7 +428,6 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -443,7 +445,7 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="blog" hint-size="100%,209px"></dc-import>
+<dc-import name="SiteHeader" active="journal" hint-size="100%,209px"></dc-import>
 <main>
 
   <!-- ===== Hero ===== -->

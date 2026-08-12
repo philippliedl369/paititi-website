@@ -17,7 +17,6 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/retreats/coco-ceremony.webp">
-<meta name="robots" content="noindex">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -52,14 +51,19 @@
   }
 
   .rt-listings{--pt-bg:#F1EAF6}
+  .rt-band{--pt-bg:#F1EAF6}
   .rt-white{--pt-bg:#fff}
   .rt-frame{width:100%;border:0;display:block}
+  /* Centered prose column for the gateway framing and reciprocity sections. */
+  .rt-copy{max-width:960px;margin:0 auto;padding:95px 24px;text-align:center}
+  .rt-copy h2{color:#584364}
+  @media (max-width:1180px){.rt-copy{padding:64px 24px}}
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#fff}
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="retreats" hint-size="100%,209px"></dc-import>
+<dc-import name="SiteHeader" active="programs" hint-size="100%,209px"></dc-import>
 <main>
 
   <!-- ===== Hero ===== -->
@@ -76,6 +80,14 @@
       <div class="pt-fit" style="grid-area:14 / 10 / 21 / 16">
         <img src="/assets/retreats/healing-philosophy.webp" alt="" loading="lazy">
       </div>
+    </div>
+  </section>
+
+  <!-- ===== What a retreat here is ===== -->
+  <section class="pt-sec rt-white">
+    <div class="pt-sec-bg"></div>
+    <div class="rt-copy pt-prose">
+      <p class="pt-lg">Retreats at Paititi are not an escape from ordinary life. They are immersive spaces for remembering what becomes possible when ancestral practice, contemplative inquiry, nature and community are brought together, and for learning to carry that remembrance back into relationship, family, work and service.</p>
     </div>
   </section>
 
@@ -107,6 +119,15 @@
           <img src="/assets/retreats/signal-2026-07-08-172812.webp" alt="Himalayan Pilgrimage through Nepal with the Karuna Project" loading="lazy">
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Reciprocity ===== -->
+  <section class="pt-sec rt-band">
+    <div class="pt-sec-bg"></div>
+    <div class="rt-copy pt-prose">
+      <h2><strong>Where Your Participation Goes</strong></h2>
+      <p>Paititi Institute&rsquo;s transformational programs form part of a larger nonprofit ecosystem. Revenue from retreats, courses and educational programs helps sustain the Institute&rsquo;s conservation, Indigenous education and community initiatives. Participants therefore enter a reciprocal relationship: receiving practices preserved through living wisdom traditions while helping those traditions, communities and landscapes continue into future generations.</p>
     </div>
   </section>
 

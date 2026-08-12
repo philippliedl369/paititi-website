@@ -84,9 +84,12 @@
 
   .pt-burger{display:none;margin-left:auto;width:46px;height:46px;align-items:center;justify-content:center;
     background:none;border:1px solid rgba(255,255,255,.45);border-radius:16px 0;color:#fff;cursor:pointer}
-  .pt-mobile{background:#0B0009;padding:8px 24px 26px}
+  .pt-mobile{background:#0B0009;padding:8px 24px 26px;max-height:calc(100vh - 100px);overflow-y:auto}
   .pt-mobile a{display:block;color:#fff;text-decoration:none;font-size:17px;font-weight:700;
     padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  /* Group labels mirror the desktop dropdowns' structure in the flat list. */
+  .pt-mobile-group{display:block;color:rgba(255,255,255,.55);font-size:12px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;padding:20px 0 4px}
   /* Out-specifies .pt-mobile a, which would otherwise paint this white on white. */
   .pt-mobile a.pt-donate{display:inline-flex;color:#584364;margin-top:20px;padding:0 21px;border-bottom:0}
 
@@ -121,17 +124,35 @@
 
     <nav class="pt-nav" aria-label="Main">
       <div class="pt-folder">
-        <a href="/the-institute" data-active="{{ activeInstitute }}">The Institute</a>
+        <a href="/about-us" data-active="{{ activeAbout }}">About</a>
         <div class="pt-folder-panel">
-          <a href="/initiatives">Initiatives</a>
           <a href="/about-us">About Us</a>
           <a href="/team">Team</a>
-          <a href="/beyond-ayahuasca">Beyond Ayahuasca</a>
         </div>
       </div>
-      <sc-for list="{{ links }}" as="link" hint-placeholder-count="4">
-        <a href="{{ link.href }}" data-active="{{ link.active }}">{{ link.label }}</a>
-      </sc-for>
+      <div class="pt-folder">
+        <a href="/retreats" data-active="{{ activePrograms }}">Programs</a>
+        <div class="pt-folder-panel">
+          <a href="/retreats">Retreats</a>
+          <a href="/online-courses">Online Courses</a>
+          <a href="/mentorship">Individual Mentorship &amp; Dreamwork</a>
+          <a href="/distance-healing">Distance Healing</a>
+          <a href="/retreats#events">Workshops &amp; Events</a>
+        </div>
+      </div>
+      <div class="pt-folder">
+        <a href="/initiatives" data-active="{{ activeInitiatives }}">Initiatives</a>
+        <div class="pt-folder-panel">
+          <a href="/initiatives">Our Living Vision</a>
+          <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
+          <a href="/initiatives/project-one-f5w4d-4nex6">Q&rsquo;ero Initiative</a>
+          <a href="/initiatives#biocultural-reserve">Paititi Biocultural Reserve</a>
+          <a href="/initiatives#community-health">Community Health &amp; Natural Medicine</a>
+          <a href="/#impact">Impact</a>
+        </div>
+      </div>
+      <a href="/beyond-ayahuasca" data-active="{{ activeBeyond }}">Beyond Ayahuasca</a>
+      <a href="/blog" data-active="{{ activeJournal }}">Journal</a>
     </nav>
 
     <!-- Inline SVG rather than MeristemDS.Icon: Lucide dropped its brand glyphs,
@@ -154,7 +175,7 @@
       </a>
     </div>
 
-    <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Donate</a>
+    <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support</a>
 
     <!-- Inline SVG, like the social marks above: this component no longer pulls
          in Lucide, and MeristemDS.Icon rendered an empty <svg> without it. -->
@@ -171,16 +192,29 @@
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <div class="pt-mobile">
       <nav aria-label="Mobile">
-        <sc-for list="{{ mobileLinks }}" as="link" hint-placeholder-count="8">
-          <a href="{{ link.href }}">{{ link.label }}</a>
-        </sc-for>
-        <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Donate</a>
+        <span class="pt-mobile-group">About</span>
+        <a href="/about-us">About Us</a>
+        <a href="/team">Team</a>
+        <span class="pt-mobile-group">Programs</span>
+        <a href="/retreats">Retreats</a>
+        <a href="/online-courses">Online Courses</a>
+        <a href="/mentorship">Individual Mentorship &amp; Dreamwork</a>
+        <a href="/distance-healing">Distance Healing</a>
+        <a href="/retreats#events">Workshops &amp; Events</a>
+        <span class="pt-mobile-group">Initiatives</span>
+        <a href="/initiatives">Our Living Vision</a>
+        <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
+        <a href="/initiatives/project-one-f5w4d-4nex6">Q&rsquo;ero Initiative</a>
+        <span class="pt-mobile-group">More</span>
+        <a href="/beyond-ayahuasca">Beyond Ayahuasca</a>
+        <a href="/blog">Journal</a>
+        <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support</a>
       </nav>
     </div>
   </sc-if>
 </header>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;institute&quot;,&quot;retreats&quot;,&quot;courses&quot;,&quot;healing&quot;,&quot;blog&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { open: false, announceOpen: true, hidden: false };
 
@@ -204,27 +238,12 @@ class Component extends DCLogic {
 
   renderVals() {
     const active = this.props.active ?? '';
-    const links = [
-      ['Events & Retreats', '/retreats', 'retreats'],
-      ['Online Courses', '/online-courses', 'courses'],
-      ['Distance Healing', '/distance-healing', 'healing'],
-      ['Blog', '/blog', 'blog'],
-    ].map(([label, href, key]) => ({ label, href, active: key === active ? '1' : '0' }));
-
-    const mobileLinks = [
-      ['Initiatives', '/initiatives'],
-      ['About Us', '/about-us'],
-      ['Team', '/team'],
-      ['Beyond Ayahuasca', '/beyond-ayahuasca'],
-      ['Events & Retreats', '/retreats'],
-      ['Online Courses', '/online-courses'],
-      ['Distance Healing', '/distance-healing'],
-      ['Blog', '/blog'],
-    ].map(([label, href]) => ({ label, href }));
-
     return {
-      links, mobileLinks,
-      activeInstitute: active === 'institute' ? '1' : '0',
+      activeAbout: active === 'about' ? '1' : '0',
+      activePrograms: active === 'programs' ? '1' : '0',
+      activeInitiatives: active === 'initiatives' ? '1' : '0',
+      activeBeyond: active === 'beyond' ? '1' : '0',
+      activeJournal: active === 'journal' ? '1' : '0',
       announceOpen: this.state.announceOpen,
       hidden: this.state.hidden ? '1' : '0',
       menuOpen: this.state.open,

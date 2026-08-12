@@ -12,7 +12,8 @@
 		// own all clean-URL rewrites. "auto-trailing-slash" 307-redirected .html paths
 		// and collided with .dc.html, 404-ing pages and their _redirects targets.
 		"html_handling": "none",
-		"not_found_handling": "none"
+		// Unknown paths serve /404.html with a 404 status (server.js does the same).
+		"not_found_handling": "404-page"
 	},
 	"vars": {
 		"CONTACT_TO": "info@paititi-institute.org",
