@@ -231,8 +231,8 @@ List in the working notes. Never blocks anything.
    copy for its card.)
 2. **Himalayan Pilgrimage** — Oct 17–31 2026 is on the page; price ($2,500–3,900?) and
    whether to show it.
-3. **Distance Healing placement** — absent from his endorsed architecture; default:
-   Programs dropdown next to Mentorship. Who receives
+3. ~~**Distance Healing placement**~~ — **decided (12 Aug): Programs dropdown next
+   to Mentorship**, which is what's built. Still open from this item: who receives
    distancehealing@paititi-institute.org; keep the separate inbox?
 
 Everything else in Phase 1 is buildable without him.
