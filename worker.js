@@ -21,7 +21,16 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (!url.pathname.startsWith('/api/')) {
-      return env.ASSETS.fetch(request);
+      const res = await env.ASSETS.fetch(request);
+      // The workers.dev preview host does get crawled, and an indexed preview
+      // would compete with paititi-institute.org after the DNS switch. The
+      // header covers every page and asset without touching the HTML.
+      if (url.hostname.endsWith('.workers.dev')) {
+        const headers = new Headers(res.headers);
+        headers.set('X-Robots-Tag', 'noindex');
+        return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+      }
+      return res;
     }
 
     const origin = env.SITE_ORIGIN || url.origin;

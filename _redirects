@@ -50,8 +50,10 @@
 # Initiatives + donations
 /initiatives         /Initiatives.dc.html      200
 /initiatives/yagua-cultural-heritage-center-indigenous-school  /InitiativeYagua.dc.html  200
-/initiatives/qero-nation-emergency-food-supply                 /initiatives/project-one-f5w4d-4nex6  301
-/initiatives/project-one-f5w4d-4nex6                           /InitiativeQero.dc.html   200
+# The descriptive slug is canonical; Squarespace's auto-generated
+# "project-one-f5w4d-4nex6" (the URL the old site shipped with) 301s onto it.
+/initiatives/qero-nation-emergency-food-supply                 /InitiativeQero.dc.html   200
+/initiatives/project-one-f5w4d-4nex6                           /initiatives/qero-nation-emergency-food-supply  301
 # /donate was never a page on the live site; the Donate button in the header
 # points at the Yagua initiative, and the donation form itself lives on the
 # Q'ero initiative page. Keep the old path working as a redirect.

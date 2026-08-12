@@ -133,6 +133,14 @@ const server = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = url.pathname;
 
+  // Anything not served from the real domain (Railway preview hosts,
+  // localhost) is a staging copy and must never be indexed — it would
+  // compete with paititi-institute.org after launch.
+  const host = (req.headers.host || '').replace(/:\d+$/, '');
+  if (!/^(www\.)?paititi-institute\.org$/i.test(host)) {
+    res.setHeader('X-Robots-Tag', 'noindex');
+  }
+
   try {
     // 1. API
     if (pathname.startsWith('/api/')) {
