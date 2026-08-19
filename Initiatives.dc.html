@@ -10,13 +10,13 @@
 <body>
 <x-dc>
 <helmet>
-<title>Initiatives | Paititi Institute</title>
-<meta name="description" content="Uniting timeless ancient wisdom with thoughtful modern stewardship to inspire profound personal growth and foster meaningful, lasting planetary transformation.">
-<meta property="og:title" content="Initiatives | Paititi Institute">
-<meta property="og:description" content="Uniting timeless ancient wisdom with thoughtful modern stewardship to inspire profound personal growth and foster meaningful, lasting planetary transformation.">
+<title>Our Living Vision | Paititi Institute</title>
+<meta name="description" content="One living vision: the 1,516-hectare Paititi Biocultural Reserve, the Yahua Ancestral School, free Natural Medicine clinics, and the reciprocity that connects them.">
+<meta property="og:title" content="Our Living Vision | Paititi Institute">
+<meta property="og:description" content="One living vision: the 1,516-hectare Paititi Biocultural Reserve, the Yahua Ancestral School, free Natural Medicine clinics, and the reciprocity that connects them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
-<meta property="og:image" content="/assets/initiatives/distance-healing.webp">
+<meta property="og:image" content="/assets/home/paititi-lizpeace-63.webp">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -30,16 +30,39 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
-  .in-hero{--pt-hero-h:932px;--pt-bg-pos:50% 20%;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.47);--pt-hero-ink:#fff}
+  .in-hero{--pt-hero-h:932px;--pt-bg-pos:50% 55%;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.47);--pt-hero-ink:#fff}
   .in-hero .pt-hero-panel{background:rgba(88,67,100,.29)}
   .in-hero h1,.in-hero p{text-align:center}
 
   .in-band{--pt-bg:#F1EAF6}
   .in-white{--pt-bg:#fff}
+  .in-plum{--pt-bg:#584364;color:#fff}
+  .in-plum h2,.in-plum p,.in-plum li,.in-plum a{color:#fff}
+
+  /* Chapter index under the vision statement: three anchor pills. */
+  .in-index{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+  .in-index a{display:inline-block;padding:10px 24px;border:1px solid rgba(33,4,22,.35);border-radius:999px;
+    text-decoration:none;font-family:var(--font-body);font-size:17.6px;font-weight:300;
+    letter-spacing:.08em;color:#210416}
+  .in-index a:hover{background:rgba(255,255,255,.6)}
+
+  /* Reserve video loop, letterboxed at its native ratio like About's. */
+  .in-video{display:flex;flex-direction:column;justify-content:center}
+  .in-video>video{position:static;width:100%;height:auto;border-radius:15px}
+
+  /* Photos letterboxed at native ratio with rounded corners. */
+  .in-photo{display:flex;flex-direction:column;justify-content:center}
+  .in-photo>img{position:static;height:auto;border-radius:15px}
+
+  /* The flows list in One Living System. */
+  .in-flows{list-style:none;margin:0;padding:0}
+  .in-flows li{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.25)}
+  .in-flows li:first-child{border-top:1px solid rgba(255,255,255,.25)}
+  .in-flows strong{display:block;margin-bottom:6px}
 
   /* Portfolio grid: two project cards, 648px wide, 28px apart. */
   .in-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
-    max-width:1324px;margin:0 auto;padding:95px 58px 0}
+    max-width:1324px;margin:0 auto;padding:0 58px}
   .in-card{display:block;text-decoration:none;color:inherit}
   .in-card img{width:100%;height:432px;object-fit:cover;display:block}
   .in-card span{display:block;margin-top:16px;text-align:center;
@@ -50,7 +73,7 @@
 
   @media (max-width:1180px){
     .in-hero h1{font-size:40px}
-    .in-grid{grid-template-columns:1fr;padding:56px 24px 0}
+    .in-grid{grid-template-columns:1fr;padding:0 24px}
     .in-card img{height:auto;aspect-ratio:3/2}
   }
   /* The footer wave must match this page's final section colour. */
@@ -64,11 +87,11 @@
   <!-- ===== Hero ===== -->
   <section class="pt-sec pt-sec-flat pt-hero in-hero">
     <div class="pt-sec-bg">
-      <img src="/assets/initiatives/distance-healing.webp" alt="Distance healing session at a Paititi natural medicine clinic" loading="eager">
+      <img src="/assets/home/paititi-lizpeace-63.webp" alt="Paititi community walking a rainforest path in the Peruvian Amazon" loading="eager">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:14">
       <div class="pt-hero-panel pt-prose" style="grid-area:1 / 4 / 10 / 22">
-        <h1><strong>Initiatives</strong></h1>
+        <h1><strong>Our Living Vision</strong></h1>
         <p class="pt-lg">Uniting timeless ancient wisdom with thoughtful modern stewardship to inspire profound personal growth and foster meaningful, lasting planetary transformation.</p>
       </div>
       <div class="pt-fit" style="grid-area:9 / 11 / 15 / 15">
@@ -77,37 +100,63 @@
     </div>
   </section>
 
-  <!-- ===== Awakening humanity's shared heart ===== -->
+  <!-- ===== The vision ===== -->
   <section class="pt-sec in-band">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:13">
-      <div class="pt-prose" style="grid-area:1 / 5 / 14 / 21">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:16">
+      <div class="pt-prose" style="grid-area:1 / 5 / 13 / 21">
         <h2>Awakening Humanity&rsquo;s Shared Heart: Bridging Ancient Wisdom and Modern Stewardship</h2>
-        <p>Our Initiatives page serves as a vibrant gateway to the diverse projects and programs that embody Paititi Institute&rsquo;s mission of awakening humanity&rsquo;s shared heart. Here, you can explore our commitment to intercultural dialogue, indigenous wisdom preservation, and sustainable ecological restoration. Each initiative reflects our holistic approach to healing and transformation, demonstrating how collective human effort fosters profound planetary change. Whether it&rsquo;s through innovative consciousness evolution workshops, community-driven sustainability practices, or collaborative indigenous partnerships, this page highlights the concrete steps we take to nurture a thriving, balanced future for all.</p>
+        <p>For years we&rsquo;ve been building something simple and whole: a way of living where culture, land, health, learning, and livelihoods stop pulling in different directions and start breathing together. Nothing here is theoretical. Every piece exists to steady the others.</p>
+        <p>Our north star is to safeguard biocultural wisdom, regenerate ecosystems, and cultivate mature human beings who serve their communities. The pattern is an inhale and an exhale: retreats&mdash;the in-breath&mdash;remember the center; community programs&mdash;the out-breath&mdash;embody it. The land keeps the rhythm, the school raises the next generation in that cadence, and honest livelihoods give the whole pattern long legs.</p>
+        <p>This page walks the vision in order: the land that anchors it, the culture and learning it protects, the health it restores, and the reciprocity that funds it all.</p>
+      </div>
+      <nav class="in-index" style="grid-area:14 / 3 / 16 / 23" aria-label="Chapters of the living vision">
+        <a href="#biocultural-reserve">The Land</a>
+        <a href="#culture-learning">Culture &amp; Learning</a>
+        <a href="#community-health">Community Health</a>
+        <a href="#living-system">One Living System</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== The Land — Paititi Biocultural Reserve ===== -->
+  <section class="pt-sec in-white" id="biocultural-reserve">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:26">
+      <div class="pt-prose" style="grid-area:1 / 3 / 15 / 15">
+        <h2>The Land &mdash; Paititi Biocultural Reserve</h2>
+        <p>The Paititi Biocultural Reserve protects <strong>1,516 hectares</strong> in the buffer zone of Manu National Park, one of the most biodiverse regions on Earth. Under the Institute&rsquo;s stewardship since 2014, the reserve safeguards cloud forests, Andean grasslands, critical watersheds, archaeological sites, sections of the ancient Qhapaq &Ntilde;an (Royal Inca Road), and an ecological corridor adjacent to protected landscapes associated with Indigenous Peoples in Voluntary Isolation.</p>
+        <p>In 2026, after more than a decade of stewardship and legal proceedings, the <strong>Supreme Court of Lima affirmed Paititi Institute&rsquo;s ownership</strong> of the reserve&mdash;protecting these Andean-Amazonian ecosystems from illegal occupation and securing their long-term care.</p>
+      </div>
+      <div class="in-video" style="grid-area:3 / 16 / 12 / 23">
+        <video src="/assets/video/about-vision.mp4" poster="/assets/video/about-vision-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Looping footage from the Paititi Biocultural Reserve"></video>
+      </div>
+      <div class="pt-prose" style="grid-area:15 / 3 / 27 / 23">
+        <p>The reserve is both <strong>pantry and classroom</strong>. As pantry: food forests, seed nurseries, and demonstration plots grow organic food and medicinal plants for community kitchens, the school, and local markets, while watershed and forest care keep the water flowing clear and the farms viable. As classroom: the land itself is the living curriculum&mdash;children study, sing, and plant in the same place, youth capstones and farmer trainings run on its plots, and elders teach beside master gardeners.</p>
+        <p>This is the proof-of-concept plot where all the threads meet: language classes under a thatched roof, seed trays in the nursery, water flowing clear, elders teaching next to master gardeners, visitors serving side by side with locals. Because it works in one place, it can be replicated by other communities in Peru and beyond&mdash;always Indigenous-led, locally adapted, and paced by elders&rsquo; consent.</p>
       </div>
     </div>
   </section>
 
-  <!-- ===== Project cards ===== -->
-  <section class="pt-sec in-white" style="height:675px">
+  <!-- ===== Culture & Learning ===== -->
+  <section class="pt-sec in-band" id="culture-learning">
     <div class="pt-sec-bg"></div>
-    <div class="in-grid">
-      <a class="in-card" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
-        <img src="/assets/retreats/beyond-ayahuasca-01.webp" alt="Yagua Cultural Heritage Center &amp; Indigenous School" loading="lazy">
-        <span>Yagua Cultural Heritage Center &amp; Indigenous School</span>
-      </a>
-      <a class="in-card" href="/initiatives/qero-nation-emergency-food-supply">
-        <img src="/assets/initiatives/covidaid-fbarticleimage.webp" alt="Q'ero Nation Emergency Food Supply During COVID" loading="lazy">
-        <span>Q'ero Nation Emergency Food Supply During COVID</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ===== Seed of the Heart film ===== -->
-  <section class="pt-sec in-white">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:48px;--pt-rows:19">
-      <div style="grid-area:1 / 1 / 20 / 25">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:44">
+      <div class="pt-prose" style="grid-area:1 / 3 / 10 / 23">
+        <h2>Culture &amp; Learning &mdash; Keeping Wisdom Alive</h2>
+        <p>Cultural healing programs across the Amazon and the Andes have helped neighbors who drifted from their roots recognize the worth of their inheritance&mdash;language, songs, ceremony, plant knowledge. These circles also change how locals see visitors: not &ldquo;gringos consuming an experience,&rdquo; but human beings in reciprocity. That social honesty is the ground everything else stands on. Our relationships with Indigenous communities have been tended for more than two decades, and that continuity keeps the work clean.</p>
+      </div>
+      <div class="in-photo" style="grid-area:10 / 3 / 22 / 13">
+        <img src="/assets/home/discoverpaititi-01.webp" alt="Yagua elder and children gathered beneath the thatched roof of a community maloca" loading="lazy">
+      </div>
+      <div class="pt-prose pt-vc" style="grid-area:10 / 14 / 22 / 23">
+        <p>The <strong>Yahua Ancestral School</strong>&mdash;with the Yahua people in the lower Amazon basin near Iquitos&mdash;is our keystone. The first maloca stands complete, built entirely through proceeds from <em>Beyond Ayahuasca</em>. Inside it lives an eco-socio-emotional curriculum: breath and body presence, story and song, craft and play, tending seeds and water, language revival, and the ability to turn conflict into listening. Elders teach; children carry. As it matures, the model is intended to travel to other rainforest nations and, in time, to the Q&rsquo;ero in the Andes.</p>
+        <p><a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support the school&rsquo;s growth &rarr;</a></p>
+      </div>
+      <div class="pt-prose" style="grid-area:23 / 3 / 32 / 23">
+        <p>Learning doesn&rsquo;t require leaving. The <strong>community e-campus</strong>&mdash;now in pilot design&mdash;keeps higher education in rural life so youth don&rsquo;t have to abandon home to grow: capstone projects like seed banks, clean-water systems, biodiversity monitoring, and language programs, guided by local mentors and partner institutions. Alongside it, independent <strong>organic certification</strong> and story-based market paths help regional farmers earn fairly without leaving their land. Economics stops eroding culture and starts protecting it.</p>
+      </div>
+      <div style="grid-area:33 / 5 / 45 / 21">
         <div class="pt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/tPmqXtte86M" title="Seed of the Heart Prophecy - Uniting the Elders and Children across the World" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
@@ -115,185 +164,75 @@
     </div>
   </section>
 
-  <!-- ===== Living vision ===== -->
-  <section class="pt-sec in-white">
+  <!-- ===== Community Health & Natural Medicine ===== -->
+  <section class="pt-sec in-white" id="community-health">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:61">
-
-      <div class="pt-prose in-center" style="grid-area:1 / 2 / 12 / 24">
-        <h1><strong>Paititi Institute vision overview</strong></h1>
-        <h2>Threads of one vision</h2>
-        <p class="pt-lg">For years we&rsquo;ve been building something simple and whole: a way of living where culture, land, health, learning, and livelihoods stop pulling in different directions and start breathing together. Nothing here is theoretical. Every piece exists to steady the others.</p>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:26">
+      <div class="pt-prose" style="grid-area:1 / 3 / 10 / 23">
+        <h2>Community Health &amp; Natural Medicine</h2>
+        <p>Free Natural Medicine clinics bring Indigenous healers and licensed Peruvian physicians to the same table. Together they have served <strong>more than 2,000 people</strong>, with mobile brigades reaching communities far from care in both the Amazon and the Andes&mdash;offering treatment, foundational health education, and renewed trust in the medicine of these lands.</p>
       </div>
-
-      <div style="grid-area:11 / 3 / 59 / 24">
-        <div class="pt-acc">
-
-          <details class="pt-acc-item" open id="community-health">
-            <summary>Culture &mdash; returning to ourselves</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Cultural healing programs and free natural-medicine clinics across the Amazon and the Andes have helped neighbors who drifted from their roots recognize the worth of their inheritance&mdash;language, songs, ceremony, plant knowledge. These circles also change how locals see visitors: not &ldquo;gringos consuming an experience,&rdquo; but human beings in reciprocity. That social honesty is the ground everything else stands on. Our relationships with Indigenous communities have been tended for two decades, and that continuity keeps the work clean.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>School &mdash; planting the center</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>The Yahua Ancestral School&mdash;with the Yahua people in the lower Amazon basin near Iquitos&mdash;is our next keystone. Inside it lives an eco-socio-emotional curriculum: breath and body presence, story and song, craft and play, tending seeds and water, language revival, and the ability to turn conflict into listening. Elders teach; children carry. As it matures, the model is intended to be implemented with other rainforest nations and, in time, with the Q&rsquo;ero in the Andes. The school then feeds culture back into clinics, land care, and community life.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item" id="biocultural-reserve">
-            <summary>Land &mdash; pantry and classroom</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>The Paititi Biocultural Reserve&mdash;1,516 hectares next to Manu&mdash;is both pantry and classroom. As pantry: food forests, seed nurseries, and demonstration plots grow organic food and medicinal plants for community kitchens, the school, and local markets, while watershed and forest care keep the water flowing clear and the farms viable. As classroom: the land itself is the living curriculum&mdash;children study, sing, and plant in the same place, youth capstones and farmer trainings run on its plots, and elders teach beside master gardeners. The school raises caretakers for the land; the land supplies food and medicine for the school.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Learning that doesn&rsquo;t require leaving</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>The community e-campus keeps higher education in rural life so youth don&rsquo;t have to abandon home to grow. Capstones are real projects&mdash;seed banks, clean water systems, biodiversity monitoring, language programs, honest market access&mdash;guided by local mentors and partner institutions. The e-campus is in the pilot design stage; cohorts will start small and practical. When young people lead at home, villages stay whole and extractive pressure loses leverage.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Retreats &mdash; awakening the shared heart</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Our retreats are inner-work immersions, not service trips. They awaken the shared heart and help people remember true nature&mdash;balance between inner and outer universes&mdash;so transformation becomes daily life. For twenty years these retreats have been held safely and intentionally, and their proceeds have funded every nonprofit initiative at Paititi.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Proof in hard times</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>When COVID hit, our community rallied. Together we brought food support to the Q&rsquo;ero Nation and to Yahua and Bora communities&mdash;over 600 families across Peru. Paititi covered transport, fuel, and legal permits, and shared the food costs so help actually reached highland and rainforest communities. We also installed a water-purification system for the Yahua&mdash;a practical, lasting improvement for daily life. In crisis, this is what &ldquo;we&rdquo; means.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Livelihoods with dignity</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Independent organic certification and story-based market paths help regional farmers earn fairly without leaving their land. As household stability grows, families can participate more fully in language revival, forest care, and school life. Economics stops eroding culture and starts protecting it.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>How the threads hold each other</summary>
-            <div class="pt-acc-body pt-prose">
-              <p><strong>Culture &harr; Clinics. Healing gatherings restore trust in natural medicine and reshape visitor relationships; trust makes health work effective and ethical.</strong></p>
-              <p><strong>School &harr; Land. Children study, sing, and plant in the same place; the land supplies food and medicines for the school, the school supplies caretakers for the land.</strong></p>
-              <p><strong>e-Campus &harr; Village futures. Youth projects repair water, soil, language, and livelihoods; a thriving village deters logging and mining. (Status: pilot design, phasing in with real needs first.)</strong></p>
-              <p><strong>Retreats &harr; Everything. Inner work awakens the will to serve; retreat proceeds keep the school opening, nurseries growing, clinics moving, and e-campus scholarships alive.</strong></p>
-              <p><strong>Livelihoods &harr; Culture. Fair income reduces the push to migrate; families stay, culture breathes, forests stand.</strong></p>
-              <p><strong><em>It&rsquo;s an inhale&ndash;exhale pattern: retreats (in-breath) remember the center; community programs (out-breath) embody it; the land keeps the rhythm; the school raises the next generation in that cadence; the e-campus lets them grow without leaving; livelihoods give the whole pattern long legs.</em></strong></p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Why this matters beyond us</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Living wisdom traditions aren&rsquo;t museum pieces; they&rsquo;re operating instructions for staying human while caring for a living world. Follow those instructions&mdash;cleanly, without spectacle&mdash;and the shared vision of humanity stops being a slogan and becomes daily reality: neighbors who belong, watersheds that recover, children who recognize themselves, elders whose knowledge is used and honored.</p>
-              <p>Roman&rsquo;s book, now an international bestseller in Shamanism, Beyond Ayahuasca, ties the threads and helps pay for the next steps. (A children&rsquo;s book, Seed of the Heart, is already in circulation with the Yahua community and on its way to publication; additional Beyond Ayahuasca titles are queued for release.) </p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>The Unity of Diversity as an Integral Paradigm Shift</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Paititi is a living model where culture, land, health, learning, and livelihoods make each other stronger. The book Beyond Ayahuasca carries the philosophy behind it and helps fund it. What follows is how each vessel supports the others so the whole system grows soundly.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>The vessels (what we are building and doing)</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>1. Cultural Healing &amp; Exchange &mdash; community gatherings, clinics with native healers and integrative practitioners, language and story circles, elder&ndash;youth mentorship.</p>
-              <p>2. Yahua Ancestral School &amp; Heritage &mdash; a home for language, music, craft, values, and rites of passage.</p>
-              <p>3. The Land (Paititi Reserve) &mdash; 1,516 hectares next to Manu as a biocultural sanctuary, seed nurseries, water protection, and demonstration plots for food and medicine.</p>
-              <p>4. Community e-Campus &mdash; higher education in rural communities so youth can earn credentials through real projects at home (nurseries, water systems, language programs, honest market paths) instead of leaving and never returning.</p>
-              <p>5. Retreats (integrity-anchored) &mdash; limited, lineage-aligned programs that share ancestral wisdom responsibly and help finance community priorities.</p>
-              <p>6. Natural Medicine Care &mdash; for now: intercultural mobile clinics and referral networks; long-horizon: a dedicated care hub when communities and partnerships are ready.</p>
-              <p>7. Livelihood &amp; Market Pathways &mdash; farmer support, independent organic certification, and story-based provenance so families thrive without extractive pressure.</p>
-              <p>8. The Book &mdash; Beyond Ayahuasca as the narrative and funding thread connecting the vessels above; every reader helps lay the next stone. The flows (how each vessel feeds the others)</p>
-              <p>A. Culture &harr; Community Healing</p>
-              <ul>
-                <li>Cultural healing campaigns help neighbors who&rsquo;ve grown distant from their heritage rediscover its value and regain trust in natural medicine.</li>
-                <li>These gatherings also shift how locals see visitors: not &ldquo;gringos consuming an experience,&rdquo; but people in reciprocity&mdash;learning, serving, and returning value to the community.</li>
-              </ul>
-              <p>B. Culture &harr; School</p>
-              <ul>
-                <li> The Yahua school makes culture visible in daily life: elders teach, youth carry. The school then supplies ritual literacy, language teachers, and culture bearers for healing events, retreats, and visiting learners.</li>
-              </ul>
-              <p>C. Land &harr; Everyone</p>
-              <ul>
-                <li> The reserve grows medicinal plants and organic food for community kitchens, visiting programs, and local markets; it also offers living classrooms for youth capstones and farmer trainings.</li>
-                <li> Watershed and forest care keep farms viable and reduce the opening for miners and loggers that often follows rural out-migration.</li>
-              </ul>
-              <p>D. e-Campus &harr; Village Futures</p>
-              <ul>
-                <li> The e-campus keeps young people rooted by making higher education project-based and place-based. Their capstones&mdash;nurseries, water systems, biodiversity monitoring, language revival&mdash;directly strengthen the school, the land, and local livelihoods.</li>
-                <li> When youth stay and lead, communities do not dwindle; when communities are strong, extractive industries have less room to enter.</li>
-              </ul>
-              <p>E. Retreats &harr; Community Integrity</p>
-              <ul>
-                <li> Retreats model ancestral social technology&mdash;how a circle becomes family, how conflict becomes learning, how service anchors insight. Participants take this relational intelligence back to their lives.</li>
-                <li> A portion of retreat revenue funds the Yahua school, seed nurseries, e-campus scholarships, and elder stipends, so visitors&rsquo; transformation translates into community benefit.</li>
-              </ul>
-              <p>F. Natural Medicine Care &harr; Evidence &amp; Trust</p>
-              <ul>
-                <li> Mobile intercultural clinics and carefully screened collaborations demonstrate the diversity of medicinal plants coupled with ancient healing arts in a safe, ethical way.</li>
-                <li> Over the long horizon, a dedicated care hub (when the time is right) can serve patients from around the world, train local health workers, and provide a steady financial backbone for schools and restoration&mdash;only after community priorities are secure.</li>
-              </ul>
-              <p>G. Livelihoods &harr; Dignity</p>
-              <ul>
-                <li> Organic certification and fair market access raise household income, which reduces the economic push to migrate; in turn, more families can participate in language revival, forest care, and school life.</li>
-                <li> Visitors encounter transparent, story-based products that make reciprocity tangible.</li>
-              </ul>
-              <p>H. Book &harr; All Vessels</p>
-              <ul>
-                <li> Beyond Ayahuasca tells the long arc of this work and finances the next steps.</li>
-              </ul>
-              <p>Readers become partners; the narrative carries the why, the funds fuel the how.</p>
-              <p>The flywheels (what keeps gaining momentum)</p>
-              <p>1. Healing &rarr; Belonging &rarr; Stewardship </p>
-              <p>Cultural campaigns restore dignity &rarr; locals and visitors relate as kin &rarr; joint care for land and language strengthens.</p>
-              <p>2. Land &rarr; Food/Medicine &rarr; Health &rarr; Capacity</p>
-              <p>Healthy soils and forests produce nourishing food and herbs &rarr; community health improves &rarr; more capacity for teaching, learning, and governance.</p>
-              <p>3. e-Campus &rarr; Local Projects &rarr; Livelihoods &rarr; Retention</p>
-              <p>Youth complete capstones that solve local problems &rarr; livelihoods grow &rarr; fewer leave &rarr; extraction loses leverage.</p>
-              <p>4. Retreats &rarr; Funding/Relationships &rarr; Programs &rarr; Proof</p>
-              <p>Retreats generate resources and long-term allies &rarr; schools, nurseries, and clinics expand &rarr; results attract more aligned support.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Why the land is the anchor</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>The reserve is the proof-of-concept plot where all threads meet: language classes under a thatched roof, seed trays in the nursery, water flowing clear, elders teaching next to master gardeners, visitors serving side by side with locals. Because it works in one place, it can be replicated by other communities in Peru and beyond&mdash;always Indigenous-led, locally adapted, and paced by elders&rsquo; consent.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>How the book ties the bow</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>Beyond Ayahuasca is the unifying piece: the story that explains why this way of living works and the practical tools for walking it. Every copy helps fund the Yahua school, restoration on the reserve, e-campus scholarships, and elder stipends. Each reader is not just an audience member; each reader is a builder.</p>
-            </div>
-          </details>
-
-        </div>
+      <div class="in-photo" style="grid-area:10 / 3 / 21 / 14">
+        <img src="/assets/initiatives/distance-healing.webp" alt="Roman Hanis and a practitioner treating a patient at a free Natural Medicine clinic in the Andes" loading="lazy">
       </div>
-
-      <div style="grid-area:60 / 8 / 62 / 18">
-        <a class="pt-btn" href="/s/Paititi-living-vision-mindmap.pdf" target="_blank" rel="noopener">Download Paititi Living Vision Mind-map</a>
+      <div class="pt-prose pt-vc" style="grid-area:10 / 15 / 21 / 23">
+        <p>The same commitment carried us through the pandemic: emergency food relief reached <strong>more than 600 Indigenous families</strong> across Peru, and a <strong>clean-water purification system</strong> now serves the Yahua Nation&mdash;a practical, lasting improvement to daily life.</p>
+        <p><a href="/initiatives/qero-nation-emergency-food-supply">Read the story of the journey to the Q&rsquo;ero Nation &rarr;</a></p>
       </div>
-
+      <div class="pt-prose" style="grid-area:22 / 3 / 27 / 23">
+        <p>For now, care moves through intercultural mobile clinics and referral networks. Over the long horizon, a dedicated care hub&mdash;when communities and partnerships are ready&mdash;could serve patients from around the world, train local health workers, and provide a steady financial backbone for the schools and restoration work.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ===== Trailing spacer section ===== -->
-  <section class="pt-sec in-white" style="height:55px">
+  <!-- ===== One Living System ===== -->
+  <section class="pt-sec in-plum" id="living-system">
     <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:30">
+      <div class="pt-prose" style="grid-area:1 / 5 / 6 / 21">
+        <h2>One Living System</h2>
+        <p>Personal transformation and planetary service are not two different activities&mdash;one matures into the other. Each thread of this vision holds the others:</p>
+      </div>
+      <div style="grid-area:6 / 5 / 24 / 21">
+        <ul class="in-flows pt-prose">
+          <li><strong>Culture &harr; Clinics.</strong> Healing gatherings restore trust in natural medicine; trust makes health work effective and ethical.</li>
+          <li><strong>School &harr; Land.</strong> Children study, sing, and plant in the same place; the land feeds the school, and the school raises caretakers for the land.</li>
+          <li><strong>Learning &harr; Village futures.</strong> Youth projects repair water, soil, language, and livelihoods; a thriving village deters logging and mining.</li>
+          <li><strong>Livelihoods &harr; Culture.</strong> Fair income reduces the push to migrate; families stay, culture breathes, forests stand.</li>
+          <li><strong>Retreats &harr; Everything.</strong> Inner work awakens the will to serve&mdash;and for twenty years, proceeds from our retreats have funded every nonprofit initiative at Paititi.</li>
+        </ul>
+      </div>
+      <div class="pt-prose" style="grid-area:25 / 5 / 31 / 21">
+        <p>Roman&rsquo;s book <em>Beyond Ayahuasca</em>, an international bestseller in Shamanism, ties the threads together: 100% of Roman Hanis&rsquo; author royalties from <em>Beyond Ayahuasca</em> support Paititi Institute&rsquo;s Indigenous education and cultural preservation initiatives. A children&rsquo;s book, <em>Seed of the Heart</em>, is already in circulation with the Yahua community and on its way to publication.</p>
+        <p><a href="/retreats">Explore our retreats</a> &nbsp;&middot;&nbsp; <a href="/beyond-ayahuasca">About the book</a> &nbsp;&middot;&nbsp; <a href="/#impact">See our impact in numbers</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Walk with us ===== -->
+  <section class="pt-sec in-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:55px;--pt-rows:22">
+      <div class="pt-prose in-center" style="grid-area:1 / 5 / 5 / 21">
+        <h2>Walk With Us</h2>
+        <p>Every thread of this vision is open to participation&mdash;as a supporter, a reader, a retreat participant, or a friend of the work.</p>
+      </div>
+      <div style="grid-area:5 / 1 / 19 / 25">
+        <div class="in-grid">
+          <a class="in-card" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
+            <img src="/assets/retreats/beyond-ayahuasca-01.webp" alt="Yagua Cultural Heritage Center &amp; Indigenous School" loading="lazy">
+            <span>Yagua Cultural Heritage Center &amp; Indigenous School</span>
+          </a>
+          <a class="in-card" href="/initiatives/qero-nation-emergency-food-supply">
+            <img src="/assets/initiatives/covidaid-fbarticleimage.webp" alt="Q'ero Nation Emergency Food Supply During COVID" loading="lazy">
+            <span>Q'ero Nation Emergency Food Supply During COVID</span>
+          </a>
+        </div>
+      </div>
+      <div style="grid-area:20 / 8 / 22 / 18">
+        <a class="pt-btn" href="/s/Paititi-living-vision-mindmap.pdf" target="_blank" rel="noopener">Download Paititi Living Vision Mind-map</a>
+      </div>
+    </div>
   </section>
 
 </main>
