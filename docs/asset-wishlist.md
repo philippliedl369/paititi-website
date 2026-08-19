@@ -57,6 +57,19 @@ nothing looks soft — only re-export these if you need print resolution:
 `initiatives/unsplash-image-uo1hwtgi6ze.webp` and the four
 `initiatives/screenshot-2025-08-01…` / `screenshot-2025-11-14…` files.
 
+## 4. Missing subjects — wanted for the impact story (18 Aug 2026)
+
+The /initiatives rework told the Reserve and Community Health chapters with the
+only imagery that exists. These subjects have **no photo at all** in the mirror —
+ask Roman for originals (≥2880w where they'll go full-bleed):
+
+| subject | would replace / fill | save as |
+|---|---|---|
+| Reserve landscape (cloud forest, watershed, plots, nursery) | interim in place: `initiatives/reserve-valley.webp` (1000w, from the old Squarespace CDN) now sits on /initiatives — still want ≥2880w originals; the hummingbird loop remains on /about-us and /discover-paititi | `initiatives/reserve-…webp` |
+| Clinic day — wide shot with patients waiting / brigade travelling | only one clinic photo exists (`initiatives/distance-healing.webp`) | `initiatives/clinic-…webp` |
+| Yahua school in use — children learning inside the maloca | school photos are all of the empty building | `initiatives/school-…webp` |
+| Q'ero present-day (not COVID relief) — despacho, elders, village | Q'ero imagery is all 2021 food-drive | `initiatives/qero-…webp` |
+
 ## Naming
 
 Lowercase kebab-case, subject first, no dates, no capture-app prefixes
