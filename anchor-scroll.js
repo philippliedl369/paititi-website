@@ -69,6 +69,16 @@
     start();
   }
 
+  // Late reflows move an anchor after the DOM settles: web fonts swapping in
+  // and images loading without reserved dimensions both change the height of
+  // everything above the target, and neither is a DOM mutation the observer
+  // sees. Re-assert once each pipeline finishes; jump() already declines when
+  // the reader has started scrolling.
+  addEventListener('load', () => setTimeout(jump, 50));
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => setTimeout(jump, 50));
+  }
+
   // In-page hash clicks (header dropdown → same page): no reload happens, so
   // open the accordion and scroll smoothly ourselves.
   addEventListener('hashchange', () => {
