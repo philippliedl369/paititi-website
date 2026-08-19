@@ -30,11 +30,16 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <script>
-  // Grow the Retreat Guru iframe with its content (see rbg-widget.html).
+  // Grow the Retreat Guru iframe with its content (see rbg-widget.html), and
+  // collapse the whole band while every listing it returns is already one of
+  // the hand-built sections below (rbgCount counts the cards left visible
+  // after the iframe's exclude filter).
   window.addEventListener('message', function (e) {
     if (e.origin !== location.origin || !e.data || !e.data.rbgHeight) return;
     var f = document.getElementById('rbg-frame');
-    if (f) f.style.height = Math.max(330, e.data.rbgHeight) + "px";
+    if (f) f.style.height = Math.max(120, e.data.rbgHeight) + 'px';
+    var s = document.getElementById('rbg-listings');
+    if (s && typeof e.data.rbgCount === 'number') s.classList.toggle('rt-listings-empty', e.data.rbgCount === 0);
   });
 </script>
 <style>
@@ -50,16 +55,25 @@
     .rt-hero .pt-hero-panel{justify-self:center;width:calc((100% - 253px)/24*17 + 176px)}
   }
 
-  .rt-listings{--pt-bg:#F1EAF6}
   .rt-band{--pt-bg:#F1EAF6}
   .rt-white{--pt-bg:#fff}
+  /* Retreat Guru listings band. White, so that while it is collapsed (all
+     current listings are hand-built sections below) the framing → Himalayan
+     wave rhythm is unchanged, and when a new program opens it it reads as a
+     continuation of the framing section. */
+  .rt-listings{--pt-bg:#fff}
   .rt-frame{width:100%;border:0;display:block}
+  /* Collapsed state: zero height but still in the DOM, so the #events anchor
+     keeps working and a new Retreat Guru posting can reopen it. */
+  .rt-listings-empty .pt-fluid{padding:0;--pt-row-h:0}
+  .rt-listings-empty .rt-frame{height:0 !important}
+  .rt-listings-empty .pt-sec-bg{display:none}
   /* Centered prose column for the gateway framing and reciprocity sections. */
   .rt-copy{max-width:960px;margin:0 auto;padding:95px 24px;text-align:center}
   .rt-copy h2{color:#584364}
   @media (max-width:1180px){.rt-copy{padding:64px 24px}}
   /* The footer wave must match this page's final section colour. */
-  footer.pt-footer{--pt-footer-wave:#fff}
+  footer.pt-footer{--pt-footer-wave:#F1EAF6}
 </style>
 </helmet>
 <div class="pt-page">
@@ -92,17 +106,23 @@
   </section>
 
   <!-- ===== Upcoming programs (Retreat Guru) ===== -->
-  <section class="pt-sec rt-listings">
+  <!-- id="events": /retreats#events is the long-standing "upcoming programs"
+       anchor — the /events 301, DiscoverPaititi's button and five blog posts
+       all point here. The iframe's exclude list hides programs that already
+       have a hand-built section below, so nothing is listed twice; anything
+       newly posted on Retreat Guru appears here automatically. Starts
+       collapsed and opens only when unlisted programs exist. -->
+  <section class="pt-sec rt-listings rt-listings-empty" id="rbg-listings">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="events" style="--pt-grid-top:151px;--pt-grid-bot:180px;--pt-rows:1;--pt-row-h:329.6560px">
+    <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:1">
       <div style="grid-area:1 / 1 / 2 / 25">
-        <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat" title="Upcoming retreats and events" style="height:330px" loading="lazy"></iframe>
+        <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat&amp;exclude=amazon-16-day-embodying-true-nature-immersion" title="Upcoming retreats and events" style="height:120px" loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
   <!-- ===== Himalayan Pilgrimage ===== -->
-  <section class="pt-sec rt-white">
+  <section class="pt-sec rt-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:32">
       <div class="pt-prose" style="grid-area:1 / 1 / 32 / 12">
@@ -134,7 +154,7 @@
       <div class="pt-prose" style="grid-area:1 / 12 / 24 / 25">
         <h2>Amazon: 16-Day Embodying True Nature Immersion</h2>
         <p>Sixteen days of deep immersion at Paititi&rsquo;s center in the Amazon rainforest outside Iquitos, Peru. Embodying True Nature retreats weave ancestral living wisdom traditions supported by Jungian transpersonal psychology to provide a foundation to both discover and develop the innermost purpose of your life.</p>
-        <p>Facilitated by Roman Hanis.</p>
+        <p>Facilitated by <a href="/team" style="color:#584364">Roman Hanis</a>.</p>
         <p><strong>December 21, 2026 &ndash; January 5, 2027</strong></p>
         <p>Sliding-scale contribution of $2,333&ndash;$2,777, covering all food, lodging, ceremonies, instruction and personal support.</p>
         <p><a href="https://paititi-institute.secure.retreat.guru/program/amazon-16-day-embodying-true-nature-immersion/" target="_blank" rel="noopener" style="color:#584364"><strong>Learn more &amp; register</strong></a></p>
@@ -148,23 +168,6 @@
     <div class="rt-copy pt-prose">
       <h2><strong>Where Your Participation Goes</strong></h2>
       <p>Paititi Institute&rsquo;s transformational programs form part of a larger nonprofit ecosystem. Revenue from retreats, courses and educational programs helps sustain the Institute&rsquo;s conservation, Indigenous education and community initiatives. Participants therefore enter a reciprocal relationship: receiving practices preserved through living wisdom traditions while helping those traditions, communities and landscapes continue into future generations.</p>
-    </div>
-  </section>
-
-  <!-- ===== Facilitator ===== -->
-  <section class="pt-sec rt-white">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:8">
-      <div class="pt-fit" style="grid-area:1 / 3 / 9 / 8">
-        <img src="/assets/retreats/healing-philosophy.webp" alt="" loading="lazy">
-      </div>
-      <div class="pt-vc" style="grid-area:1 / 8 / 3 / 18">
-        <h3>Our Facilitator</h3>
-      </div>
-      <div class="pt-prose" style="grid-area:3 / 8 / 9 / 23">
-        <p>Co-founder of Paititi Institute and healer Roman Hanis with over 20 years of experience and thousands of sacred plant ceremonies led to this date also featured in critically acclaimed documentary The Sacred Science filmed in 2010. Roman Hanis has been working closely with the indigenous Peruvian cultures in the Amazonian rainforest and Andean mountains since 2001.</p>
-        <p><a href="/roman-hanis" style="color:#584364"><strong>Learn more about Roman</strong></a></p>
-      </div>
     </div>
   </section>
 

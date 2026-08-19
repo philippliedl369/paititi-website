@@ -15,12 +15,27 @@
      Category comes from ?cat= (events,retreat | online-resources). -->
 <div id="rbg-connect"></div>
 <script type="text/javascript">
-  var cat = new URLSearchParams(location.search).get('cat') || 'events,retreat';
+  var params = new URLSearchParams(location.search);
+  var cat = params.get('cat') || 'events,retreat';
+  // ?exclude= names the slugs of programs the parent page already presents as
+  // hand-built sections: their cards are hidden so nothing is listed twice.
+  // Matched against each card's HTML, which carries the slug in its links.
+  var exclude = (params.get('exclude') || '').split(',').filter(Boolean);
   rbgOptions = { retreatType: "Retreat", customer: "paititi-institute", eventCategory: cat, buttonColor: "", defaultRoute: "" };
   !function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://s3.amazonaws.com/rbgconnect.retreat.guru/public/rbg-connect.min.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}"complete"===document.readyState?t():window.attachEvent?window.attachEvent("onload",t):window.addEventListener("load",t,!1)}();
-  // Report height to the parent page so the iframe can grow with the listings.
+  // Hide excluded cards, then report height and the visible-card count so the
+  // parent can grow the iframe — or collapse the whole band when nothing is
+  // left to show. rbgCount stays null until the widget has rendered.
   setInterval(function () {
-    parent.postMessage({ rbgHeight: document.documentElement.scrollHeight, cat: cat }, location.origin);
+    var cards = document.querySelectorAll('.rs-event-wrapper');
+    var visible = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (c.style.display !== 'none' && exclude.some(function (s) { return c.innerHTML.indexOf(s) !== -1; })) c.style.display = 'none';
+      if (c.style.display !== 'none') visible++;
+    }
+    var rendered = !!document.querySelector('.rs-events-container');
+    parent.postMessage({ rbgHeight: document.documentElement.scrollHeight, rbgCount: rendered ? visible : null, cat: cat }, location.origin);
   }, 500);
 </script>
 </body>

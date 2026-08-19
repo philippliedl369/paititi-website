@@ -54,9 +54,11 @@
   .pt-nav [data-active="1"]{box-shadow:inset 0 -2px 0 #fff}
 
   .pt-folder{position:relative}
-  /* Translucent plum card, white bold items — matches the live flyout. */
+  /* Solid plum card, white bold items. Opaque on purpose: the flyout opens
+     over the heroes' translucent plum panels, and translucent-on-translucent
+     read as a rendering glitch. */
   .pt-folder-panel{position:absolute;top:calc(100% + 13px);left:-22px;min-width:330px;
-    background:rgba(88,67,100,.94);box-shadow:0 14px 38px rgba(11,0,9,.28);padding:16px 22px;z-index:60;
+    background:#584364;box-shadow:0 14px 38px rgba(11,0,9,.28);padding:16px 22px;z-index:60;
     /* Kept in flow but invisible rather than display:none, so leaving the menu
        fades out over .28s instead of snapping shut the instant the pointer
        slips off an item. */
@@ -137,7 +139,6 @@
           <a href="/online-courses">Online Courses</a>
           <a href="/mentorship">Individual Mentorship &amp; Dreamwork</a>
           <a href="/distance-healing">Distance Healing</a>
-          <a href="/retreats#events">Workshops &amp; Events</a>
         </div>
       </div>
       <div class="pt-folder">
@@ -200,7 +201,6 @@
         <a href="/online-courses">Online Courses</a>
         <a href="/mentorship">Individual Mentorship &amp; Dreamwork</a>
         <a href="/distance-healing">Distance Healing</a>
-        <a href="/retreats#events">Workshops &amp; Events</a>
         <span class="pt-mobile-group">Initiatives</span>
         <a href="/initiatives">Our Living Vision</a>
         <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>

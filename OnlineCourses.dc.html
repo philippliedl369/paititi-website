@@ -30,11 +30,17 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <script>
-  // Grow the Retreat Guru iframe with its content (see rbg-widget.html).
+  // Grow the Retreat Guru iframe with its content (see rbg-widget.html). All
+  // current online-resources programs already have hand-built cards above, so
+  // the listings band starts collapsed and only opens when the widget returns
+  // a program missing from its exclude list — i.e. anything newly posted on
+  // Retreat Guru.
   window.addEventListener('message', function (e) {
     if (e.origin !== location.origin || !e.data || !e.data.rbgHeight) return;
     var f = document.getElementById('rbg-frame');
-    if (f) f.style.height = Math.max(1319, e.data.rbgHeight) + 'px';
+    if (f) f.style.height = Math.max(120, e.data.rbgHeight) + 'px';
+    var s = document.getElementById('rbg-listings');
+    if (s && typeof e.data.rbgCount === 'number') s.classList.toggle('oc-list-empty', e.data.rbgCount === 0);
   });
   // The Home Study Course early-bird signup is a JotForm embed (moved here
   // from the absorbed paititidistancehealing.com). JotForm posts
@@ -56,12 +62,19 @@
   .oc-hero{--pt-hero-h:932px;--pt-bg-pos:50% 20%;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41);--pt-hero-ink:#fff}
   .oc-hero .pt-hero-panel{background:rgba(88,67,100,.32)}
   .oc-hero h1,.oc-hero p{text-align:center}
+  /* Retreat Guru listings band — the safety net under the hand-built cards.
+     Collapsed while every program in the feed is on the iframe's exclude
+     list; a new posting reopens it. */
   .oc-list{--pt-bg:#F1EAF6}
   .oc-frame{width:100%;border:0;display:block}
+  .oc-list-empty .pt-fluid{padding:0;--pt-row-h:0}
+  .oc-list-empty .oc-frame{height:0 !important}
+  .oc-list-empty .pt-sec-bg{display:none}
 
   /* ---- Course gateway ------------------------------------------------------
-     Crawlable course cards ahead of the Retreat Guru widget, which renders
-     client-side and leaves search engines nothing to read. */
+     Crawlable course cards; each links straight to its Retreat Guru
+     enrollment page, so search engines get real content ahead of the
+     client-rendered listings widget below. */
   .oc-white{--pt-bg:#fff;padding:95px 0 108px}
   .oc-gate-head{max-width:1200px;margin:0 auto;padding:0 24px;text-align:center}
   .oc-gate-head h2{color:#584364}
@@ -180,12 +193,16 @@
     </div>
   </section>
 
-  <!-- ===== Course listings (Retreat Guru) ===== -->
-  <section class="pt-sec oc-list">
+  <!-- ===== Additional course listings (Retreat Guru) ===== -->
+  <!-- Every current feed entry is excluded because it already has a card
+       above (your-evolutionary-blueprint is excluded pending Roman blocker
+       #1 — it is plausibly the "Embody True Nature Home Study Course"
+       promoted below). New Retreat Guru postings appear here automatically. -->
+  <section class="pt-sec oc-list oc-list-empty" id="rbg-listings">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:1;--pt-row-h:1318.6600px">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:1">
       <div style="grid-area:1 / 1 / 2 / 25">
-        <iframe class="oc-frame" id="rbg-frame" src="/rbg-widget.html?cat=online-resources" title="Online course listings and registration" style="height:1319px" loading="lazy"></iframe>
+        <iframe class="oc-frame" id="rbg-frame" src="/rbg-widget.html?cat=online-resources&amp;exclude=primordial-breathwork-online-home-study-course-series,alchemy-of-immortality-daoist-qigong-andean-art-of-being-online-home-study-course,beyond-ayahuasca-book-practical-alchemy-series,your-evolutionary-blueprint-online-home-study-course" title="Online course listings and registration" style="height:120px" loading="lazy"></iframe>
       </div>
     </div>
   </section>

@@ -38,6 +38,13 @@
      near-black used almost everywhere else. */
   .pt-page .hm-body h2,.pt-page .hm-body h3{color:#584364}
 
+  /* The hero stat bullets start flush with their block's left edge — the
+     marker opens the line instead of sitting inside the shell's 40px list
+     indent — while wrapped lines still hang under the text. */
+  .pt-page .hm-hero .pt-prose ul{padding-left:0}
+  .pt-page .hm-hero .pt-prose li{list-style:none;position:relative;padding-left:26px}
+  .pt-page .hm-hero .pt-prose li::before{content:"\2022";position:absolute;left:0}
+
   /* ---- Ways to Walk With Us ------------------------------------------------
      Replaces the auto-rotating offering gallery: four crawlable cards, one per
      way of engaging (Roman's endorsed architecture). */
