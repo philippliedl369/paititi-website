@@ -71,10 +71,10 @@
     font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416}
   .qe-fees{display:flex;align-items:flex-start;gap:10px;font-size:17.6px;font-weight:300;color:#210416}
   .qe-fees input{margin-top:6px}
-  /* Sized like every other button on the site (the header's "Support"), not
-     stretched to the panel: the fluid engine's fill-the-cell rule would
-     otherwise blow it up to the panel's whole remaining height. */
-  .qe-panel .qe-donate{width:auto;height:auto;min-height:63px;align-self:flex-start;
+  /* Full panel width like the selects above it, but only as tall as a normal
+     button: the fluid engine's fill-the-cell rule would otherwise stretch it
+     down the panel's whole remaining height. */
+  .qe-panel .qe-donate{width:100%;height:auto;min-height:63px;align-self:stretch;
     padding:0 30px;font-size:19px;letter-spacing:.02em}
   .qe-err{color:#A33;font-size:14.272px;margin:0}
 
@@ -107,7 +107,6 @@
        2/2/1 with a ragged last line. */
     .qe-amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .qe-amounts button:last-child{grid-column:1 / -1}
-    .qe-panel .qe-donate{align-self:stretch;width:100%}
   }
 
   /* This is the page that takes money, so its controls are the ones that most
