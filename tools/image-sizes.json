@@ -1,0 +1,751 @@
+{
+ "/assets/brand/paititi-logo-white.png": {
+  "nat": 525,
+  "natH": 245,
+  "w390": 168,
+  "w900": 212,
+  "w1440": 313
+ },
+ "/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp": {
+  "nat": 2500,
+  "natH": 1408,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/home/home-01.webp": {
+  "nat": 2352,
+  "natH": 1322,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/home/dreamworksacredgeometry-square.webp": {
+  "nat": 841,
+  "natH": 473,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/healing/roman-hanis-portrait.webp": {
+  "nat": 562,
+  "natH": 562,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/home/yagua-visit-2023.webp": {
+  "nat": 1280,
+  "natH": 960,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/home/beyond-ayahuasca.webp": {
+  "nat": 1186,
+  "natH": 1574,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 650
+ },
+ "/assets/home/whatsapp-image-2025-11-19-at-104324.webp": {
+  "nat": 1280,
+  "natH": 825,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 544
+ },
+ "/assets/home/home-02.webp": {
+  "nat": 1099,
+  "natH": 679,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 595
+ },
+ "/assets/brand/icon-donate.webp": {
+  "nat": 700,
+  "natH": 348,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman-.webp": {
+  "nat": 678,
+  "natH": 446,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/brand/paititi-family-icon.webp": {
+  "nat": 510,
+  "natH": 500,
+  "w390": 104,
+  "w900": 140,
+  "w1440": 191
+ },
+ "/assets/home/paititi-lizpeace-63.webp": {
+  "nat": 2500,
+  "natH": 1662,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/brand/icon-hummingbird.webp": {
+  "nat": 1317,
+  "natH": 574,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 393
+ },
+ "/assets/home/screenshot-2026-03-27-at-10011-am.webp": {
+  "nat": 1498,
+  "natH": 972,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/home/whatsapp-image-2024-05-06-at-174328.webp": {
+  "nat": 2048,
+  "natH": 1366,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 393
+ },
+ "/assets/brand/icon-vision-purpose.webp": {
+  "nat": 601,
+  "natH": 500,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/brand/icon-quotemark.webp": {
+  "nat": 181,
+  "natH": 142,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 90
+ },
+ "/assets/about/whatsapp-image-2026-01-28-at-181841.webp": {
+  "nat": 1066,
+  "natH": 1600,
+  "w390": 350,
+  "w900": 490,
+  "w1440": 490
+ },
+ "/assets/retreats/coco-ceremony.webp": {
+  "nat": 1500,
+  "natH": 1001,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/retreats/healing-philosophy.webp": {
+  "nat": 500,
+  "natH": 745,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/retreats/signal-2026-07-08-172812.webp": {
+  "nat": 478,
+  "natH": 532,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 494
+ },
+ "/assets/retreats/etn-circle.jpg": {
+  "nat": 801,
+  "natH": 801,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/retreats/online-courses-01.webp": {
+  "nat": 1788,
+  "natH": 1206,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/retreats/foundational-practices.webp": {
+  "nat": 500,
+  "natH": 642,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/retreats/primordial-breathwork.jpg": {
+  "nat": 388,
+  "natH": 388,
+  "w390": 342,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/retreats/qigong-stone-tower.jpg": {
+  "nat": 1080,
+  "natH": 1080,
+  "w390": 342,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/retreats/radiant-alchemy-in-the-jungle.webp": {
+  "nat": 1024,
+  "natH": 1024,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/initiatives/distance-healing.webp": {
+  "nat": 1404,
+  "natH": 936,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/healing/janel-possiel-portrait.webp": {
+  "nat": 616,
+  "natH": 616,
+  "w390": 250,
+  "w900": 250,
+  "w1440": 250
+ },
+ "/assets/home/discoverpaititi-02.webp": {
+  "nat": 2500,
+  "natH": 1750,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 393
+ },
+ "/assets/store/9f81c-coca-ceremony-paititi-institute-iquitos-peru-greg-good.webp": {
+  "nat": 600,
+  "natH": 400,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 662
+ },
+ "/assets/initiatives/unlock.webp": {
+  "nat": 253,
+  "natH": 237,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 191
+ },
+ "/assets/initiatives/reserve-valley.webp": {
+  "nat": 1000,
+  "natH": 533,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 342
+ },
+ "/assets/home/discoverpaititi-01.webp": {
+  "nat": 2500,
+  "natH": 1406,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/retreats/beyond-ayahuasca-01.webp": {
+  "nat": 1099,
+  "natH": 679,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/initiatives/covidaid-fbarticleimage.webp": {
+  "nat": 1200,
+  "natH": 630,
+  "w390": 302,
+  "w900": 624,
+  "w1440": 528
+ },
+ "/assets/initiatives/living-wisdom-traditions.webp": {
+  "nat": 500,
+  "natH": 382,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/initiatives/screenshot-2025-11-14-at-33258-pm.webp": {
+  "nat": 2418,
+  "natH": 1424,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 544
+ },
+ "/assets/initiatives/whatsapp-image-2025-08-10-at-133636.webp": {
+  "nat": 1600,
+  "natH": 1204,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 342
+ },
+ "/assets/initiatives/initiatives-yagua-cultural-heritage-center-indigenous-school-01.webp": {
+  "nat": 963,
+  "natH": 1280,
+  "w390": 319,
+  "w900": 612,
+  "w1440": 311
+ },
+ "/assets/initiatives/illustration2-2.webp": {
+  "nat": 1511,
+  "natH": 1132,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/initiatives/beyond-ayahuasca.webp": {
+  "nat": 1186,
+  "natH": 1574,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 393
+ },
+ "/assets/retreats/flower-purple.webp": {
+  "nat": 1027,
+  "natH": 347,
+  "w390": 521,
+  "w900": 843,
+  "w1440": 700
+ },
+ "/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp": {
+  "nat": 2500,
+  "natH": 1631,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/initiatives/screenshot-2025-08-01-at-100143-pm.webp": {
+  "nat": 2500,
+  "natH": 1563,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 342
+ },
+ "/assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp": {
+  "nat": 2500,
+  "natH": 1563,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 320
+ },
+ "/assets/initiatives/food-drive-3.webp": {
+  "nat": 720,
+  "natH": 960,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 320
+ },
+ "/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp": {
+  "nat": 2500,
+  "natH": 1667,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/retreats/beyond-ayahuasca-02.webp": {
+  "nat": 960,
+  "natH": 1280,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 443
+ },
+ "/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp": {
+  "nat": 1616,
+  "natH": 1080,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/blog/unsplash-image-jwn0vkrklvk.webp": {
+  "nat": 2500,
+  "natH": 1666,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/blog/screenshot-2025-12-03-at-115430-am.webp": {
+  "nat": 210,
+  "natH": 134,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/blog/blog-01.webp": {
+  "nat": 2500,
+  "natH": 1875,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/blog-02.webp": {
+  "nat": 598,
+  "natH": 598,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/blog-03.webp": {
+  "nat": 200,
+  "natH": 200,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/blog-04.webp": {
+  "nat": 500,
+  "natH": 500,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/blog-05.webp": {
+  "nat": 500,
+  "natH": 500,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/blog-06.webp": {
+  "nat": 650,
+  "natH": 650,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 512
+ },
+ "/assets/blog/826e5-img-8614.webp": {
+  "nat": 600,
+  "natH": 400,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/47170-img-0512.webp": {
+  "nat": 600,
+  "natH": 400,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/2fdce-img-1476.webp": {
+  "nat": 1000,
+  "natH": 533,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/cbe58-img-0548.webp": {
+  "nat": 600,
+  "natH": 400,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/96244-p1000372.webp": {
+  "nat": 768,
+  "natH": 576,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/97b25-paititi-institute-events.webp": {
+  "nat": 1000,
+  "natH": 300,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/roman-with-the-yaguas-and-kids.webp": {
+  "nat": 1280,
+  "natH": 960,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/yahua-school-kids.webp": {
+  "nat": 1600,
+  "natH": 900,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/roman-with-yahua-elder.webp": {
+  "nat": 727,
+  "natH": 432,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/thewindinthemeat.webp": {
+  "nat": 909,
+  "natH": 600,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/lovepainting.webp": {
+  "nat": 812,
+  "natH": 1000,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/blackholemaxresdefault.webp": {
+  "nat": 1280,
+  "natH": 720,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/69989014-2367556036662683-3473014429329653760-n.webp": {
+  "nat": 1080,
+  "natH": 1350,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/roots.webp": {
+  "nat": 1000,
+  "natH": 750,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/paititipath.webp": {
+  "nat": 1080,
+  "natH": 880,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/flowermandala.webp": {
+  "nat": 950,
+  "natH": 950,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/paititi-institute-events.webp": {
+  "nat": 1000,
+  "natH": 300,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/stellagap-small.webp": {
+  "nat": 1000,
+  "natH": 614,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/221197022-4320552828031250-1143921062422649047-n.webp": {
+  "nat": 2048,
+  "natH": 1365,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/stelladoor-small.webp": {
+  "nat": 1000,
+  "natH": 606,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/stellaclimbing-small.webp": {
+  "nat": 1000,
+  "natH": 911,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/stellakey-small.webp": {
+  "nat": 1000,
+  "natH": 609,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/principles-of-integrating-medicine-work-by-paititi-insitute.webp": {
+  "nat": 1134,
+  "natH": 720,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/paititi-institute-events-2.webp": {
+  "nat": 1000,
+  "natH": 300,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/a-life-worth-living.webp": {
+  "nat": 1092,
+  "natH": 1085,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/blog-makes-life-worth-living-in-a-time-turmoil-01.webp": {
+  "nat": 2048,
+  "natH": 1365,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/life-worth-living-45.webp": {
+  "nat": 960,
+  "natH": 701,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/life-worth-living-35.webp": {
+  "nat": 600,
+  "natH": 543,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/life-worth-living-4.webp": {
+  "nat": 2048,
+  "natH": 1701,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/4.webp": {
+  "nat": 2048,
+  "natH": 1724,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/medicine.webp": {
+  "nat": 640,
+  "natH": 400,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/10.webp": {
+  "nat": 1080,
+  "natH": 810,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/11.webp": {
+  "nat": 1080,
+  "natH": 810,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/7.webp": {
+  "nat": 1192,
+  "natH": 742,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/5.webp": {
+  "nat": 2048,
+  "natH": 1162,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/1.webp": {
+  "nat": 960,
+  "natH": 640,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/healing-retreat-11.webp": {
+  "nat": 650,
+  "natH": 650,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/464054780-8702127826540373-6933023580014756778-n.webp": {
+  "nat": 960,
+  "natH": 720,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/healing-retreat-12.webp": {
+  "nat": 640,
+  "natH": 427,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 596
+ },
+ "/assets/blog/healing-retreat-embody-true-nature-2.webp": {
+  "nat": 678,
+  "natH": 452,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/healing-retreat-19.webp": {
+  "nat": 640,
+  "natH": 480,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/blog/healing-retreat-embody-true-nature-7.webp": {
+  "nat": 678,
+  "natH": 509,
+  "w390": 350,
+  "w900": 514,
+  "w1440": 281
+ },
+ "/assets/about/paititi-lizpeace-190.webp": {
+  "nat": 2500,
+  "natH": 1662,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/about/whatsapp-image-2024-05-06-at-174414.webp": {
+  "nat": 2048,
+  "natH": 1366,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 544
+ },
+ "/assets/about/roman-ancelmo-book.webp": {
+  "nat": 2500,
+  "natH": 1875,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/about/art.webp": {
+  "nat": 903,
+  "natH": 428,
+  "w390": 350,
+  "w900": 672,
+  "w1440": 292
+ },
+ "/assets/brand/signal-2024-01-27-195101.webp": {
+  "nat": 960,
+  "natH": 672,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/brand/embody-true-nature-ayahuasca-retreat-5.webp": {
+  "nat": 1023,
+  "natH": 682,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ }
+}

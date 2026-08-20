@@ -17,10 +17,22 @@
    silently rescales it and every paragraph rewraps.
    ========================================================================== */
 
-html { scroll-behavior: smooth }
+html {
+  scroll-behavior: smooth;
+  /* iOS inflates text in rotated/narrow layouts unless told not to. The type
+     scale below is deliberate at every width, so opt out of the guesswork. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body { margin: 0; background: #F1EAF6 }
 
 .pt-page, .pt-page *, .pt-page *::before, .pt-page *::after { box-sizing: border-box }
+
+/* Long unbroken strings — URLs in legal copy, "paititidistancehealing.com",
+   Quechua names — are the one thing a fluid measure cannot absorb, and on a
+   390px screen a single one pushes the whole document sideways. */
+.pt-page main p, .pt-page main li, .pt-page main h1, .pt-page main h2,
+.pt-page main h3, .pt-page main h4, .pt-page main td { overflow-wrap: break-word }
 
 /* Lato Light with open tracking. The tracking is not cosmetic — it decides
    where every paragraph wraps, and therefore all vertical geometry below it. */
@@ -236,10 +248,48 @@ body { margin: 0; background: #F1EAF6 }
 @media (max-width: 1180px) {
   .pt-fluid {
     display: flex; flex-direction: column; gap: 28px;
-    max-width: 720px; padding: 48px 24px 0;
+    max-width: 720px;
+    /* The bottom was 0, which meant every section's last block sat flush on the
+       boundary and the next section's wave cut straight into it — the measured
+       --pt-grid-bot (usually 76px) is dropped along with the grid. 48px both
+       ends restores a symmetric band. */
+    padding: 48px 24px;
   }
   .pt-fluid > * { grid-area: auto !important; height: auto !important }
+
+  /* Put fluid-cell media back in flow. Above the breakpoint an image block is
+     taken out of flow and stretched over its cell, because a percentage height
+     can't resolve against an auto grid row. Once the grid collapses there is no
+     cell to fill: the wrapper's height comes from its content, the content is
+     absolutely positioned, so the wrapper measured 0 and the image painted on
+     top of whatever followed it. That was every image block on the site at
+     mobile width — /, /about-us, /retreats, /beyond-ayahuasca and the rest all
+     had text running underneath a photo. In flow they size to their own aspect
+     ratio, which is what the single-column layout wants anyway. */
+  .pt-fluid > * > img,
+  .pt-fluid > * > video,
+  .pt-fluid > * > a > img {
+    position: static;
+    width: 100%; height: auto;
+    /* No fixed height any more, so there is nothing to crop against. */
+    object-fit: contain;
+  }
+  .pt-fluid > * > a:only-child:not(.pt-btn) { position: static; display: block }
   .pt-fluid img { height: auto }
+
+  /* Pages with no hero photo — /team, the two Distance Healing payment pages —
+     open on a plain section that reserves the fixed header inside its own
+     --pt-grid-top. The padding shorthand above replaces that declaration
+     wholesale, so the reservation vanished and the page title rendered
+     underneath the header: "Meet the Team" measured 48px from the top of a
+     document whose header is 124px tall. Heroes are excluded because .pt-hero
+     already carries its own header clearance. */
+  main > .pt-sec:first-of-type:not(.pt-hero) > .pt-fluid {
+    padding-top: calc(var(--pt-header-h-live, var(--pt-header-h, 150px)) + 32px);
+  }
+}
+@media (max-width: 640px) {
+  .pt-fluid { gap: 24px; padding: 40px 20px }
 }
 
 /* ---- Page hero ------------------------------------------------------------
@@ -327,19 +377,92 @@ body { margin: 0; background: #F1EAF6 }
 .pt-split { display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; align-items: center }
 .pt-split img { width: 100%; height: auto; display: block }
 
-/* ---- Responsive ------------------------------------------------------------ */
+/* ---- Responsive ------------------------------------------------------------
+   Everything below the 1180px fluid breakpoint. Above it nothing here applies,
+   so the desktop transcription — where the measured column span decides each
+   wrap point and therefore all vertical geometry — is left exactly as it was.
+   Below it the grid has already collapsed to a flex column, so type is free to
+   scale without moving anything that was measured.
+
+   These selectors must carry the *same* specificity as the ones they override.
+   The base scale is `.pt-page main h1` — (0,1,2). The previous mobile block
+   here was written `.pt-page h1` — (0,1,1) — which loses to it at every width,
+   media query or not, so none of it had ever taken effect: an h1 stayed 64px on
+   a 390px phone. That is what pushed /blog, the category pages and /terms into
+   horizontal scroll, and it is the same specificity trap documented at the top
+   of this file for `color`. Keep `main` in every selector below.               */
 @media (max-width: 1180px) {
-  .pt-hero { min-height: 0; padding: calc(var(--pt-header-h, 209px) + 32px) 0 48px }
+  /* Interpolated so each size arrives at exactly its desktop value at 1180px —
+     no jump at the breakpoint — and bottoms out at a phone-legible size.
+     h1 34→64, h2 27→41.6, h3 22→28.8, h4 17.6→19.2 across 390→1180px. */
+  .pt-page main h1 { font-size: clamp(34px, 19.19px + 3.797vw, 64px) }
+  .pt-page main h2 { font-size: clamp(27px, 19.79px + 1.848vw, 41.6px) }
+  .pt-page main h3 { font-size: clamp(22px, 18.64px + 0.861vw, 28.8px) }
+  .pt-page main h4 { font-size: clamp(17.6px, 16.81px + 0.203vw, 19.2px) }
+  /* The large rich-text size closes on the body size rather than staying a
+     fixed step above it; 19.2px of Lato Light is a lot of measure on a phone. */
+  .pt-page main .pt-lg { font-size: clamp(17.6px, 16.81px + 0.203vw, 19.2px) }
+  /* 14.272px is below the comfortable floor on a phone. Flat rather than
+     interpolated: the desktop value is *smaller*, so there is nothing to ramp
+     towards — the 0.7px step back at 1180px is imperceptible. */
+  .pt-page main .pt-sm { font-size: 15px }
+  .pt-acc-item > summary { font-size: clamp(20px, 17.65px + 0.603vw, 28.8px) }
+
+  /* The heading margins inside a rich-text run are a 32px desktop measurement;
+     at mobile sizes they read as gaps rather than as grouping. */
+  .pt-page main .pt-prose > h1,
+  .pt-page main .pt-prose > h2,
+  .pt-page main .pt-prose > h3,
+  .pt-page main .pt-prose > h4 { margin: 24px 0 }
+
+  .pt-hero { min-height: 0; padding: calc(var(--pt-header-h-live, var(--pt-header-h, 209px)) + 32px) 0 48px }
   .pt-band { height: 420px }
   .pt-section { padding: 64px 0 }
+  .pt-section-tight { padding: 40px 0 }
   .pt-split { grid-template-columns: 1fr; row-gap: 36px }
   .pt-quote { grid-template-columns: 1fr; row-gap: 12px; padding: 64px 24px }
   .pt-quote-mark { margin-top: 0; width: 64px }
+  .pt-wrap, .pt-wrap-narrow { padding: 0 20px }
+
+  /* Anchor targets have to clear the *real* header, which is taller here than
+     the 130px desktop figure and changes when the announcement bar is
+     dismissed. SiteHeader measures itself into --pt-header-h-live. */
+  .pt-fluid[id], .pt-acc-item[id], .pt-sec[id] {
+    scroll-margin-top: calc(var(--pt-header-h-live, var(--pt-header-h, 150px)) + 16px);
+  }
 }
+
+/* ---- Phone --------------------------------------------------------------- */
 @media (max-width: 640px) {
-  .pt-page h1 { font-size: 34px }
-  .pt-page h2 { font-size: 30px }
-  .pt-page h3 { font-size: 23px }
-  .pt-acc-item > summary { font-size: 22px }
   .pt-band { height: 300px }
+  .pt-section { padding: 48px 0 }
+  .pt-quote { padding: 48px 20px }
+  /* A hero that reserved 800px of photo on desktop should not open the page
+     with a screen and a half of scrim before the first line of copy. */
+  .pt-hero { padding: calc(var(--pt-header-h-live, var(--pt-header-h, 150px)) + 24px) 0 40px }
+  /* Buttons go full-measure rather than sitting in a ragged wrapped row. */
+  .pt-btn-row { gap: 12px }
+  .pt-btn-row > .pt-btn { width: 100% }
+  .pt-prose ul, .pt-prose ol { padding-left: 24px }
+}
+
+/* ---- Touch ----------------------------------------------------------------
+   Applies by input type rather than by width, so a touch laptop gets it and a
+   narrow desktop window does not. 44px is the accessible minimum (WCAG 2.5.8
+   asks 24px, Apple and Google both ask 44/48); the shell's own controls are
+   already well over it, so this is aimed at the small inline links.           */
+@media (pointer: coarse) {
+  .pt-prose a { text-underline-offset: 4px }
+  .pt-btn, .pt-sqs-btn { min-height: 48px }
+
+  /* A paragraph whose whole content is a single link is a call to action, not a
+     sentence that happens to contain one: "Explore the Course →" on each course
+     card, the section CTAs on /initiatives, "Learn more & register" on
+     /retreats, and each of the eight retailers on /beyond-ayahuasca. As inline
+     text they measured 21px tall. Padding lifts them past the 24px minimum
+     without changing the type or the layout; a link genuinely inside a sentence
+     is left alone, because padding one would break the line box around it. */
+  .pt-prose p > a:only-child { display: inline-block; padding: 8px 0 }
+  /* Removes the 300ms tap delay and iOS's grey flash on the site's own links. */
+  a, button, summary, [role="button"] { -webkit-tap-highlight-color: rgba(88, 67, 100, .18) }
 }

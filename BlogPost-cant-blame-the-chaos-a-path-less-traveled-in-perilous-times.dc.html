@@ -122,12 +122,34 @@
     line-height:28.8px;color:#fff;margin:0;letter-spacing:normal}
 
   @media (max-width:1180px){
-    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 57.6px}
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 57px) 24px 57.6px}
     .bp-body .sqs-row{margin:0}
     .bp-body .float-right,.bp-body .float-left{float:none;width:100%}
     .pt-page .bp-sec h1{font-size:40px}
     .pt-page .bp-body h2{font-size:30px}
     .bp-pager{flex-direction:column;gap:28px;padding:36px 24px}
+  }
+  @media (max-width:640px){
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 36px) 20px 44px}
+    .pt-page .bp-sec h1{font-size:34px;margin:0 0 24px;padding-bottom:24px}
+    .pt-page .bp-body h2{font-size:27px}
+    .pt-page .bp-body h3{font-size:22px}
+    .bp-body{margin:40px 0 32px}
+    /* 14.272px is under the readable floor, and the 64px byline offset is a
+       desktop measurement that on one column just strands the name. */
+    .pt-page .bp-meta{font-size:15px;gap:4px 16px}
+    .bp-meta .bp-author{margin-left:0}
+    /* Squarespace's 17px block gutter costs 34px of an already narrow measure;
+       the horizontal half goes, the vertical rhythm stays. */
+    .bp-body .sqs-block{padding:17px 0}
+    .pt-page .bp-body blockquote{font-size:17.6px;line-height:1.7}
+    .pt-page .bp-body .sqs-block-button-element{padding:16px 24px}
+    .bp-pager{padding:32px 20px}
+  }
+  /* Body links sit in running prose, so they take padding only where a real
+     finger is doing the tapping. */
+  @media (pointer:coarse){
+    .bp-meta a{display:inline-block;padding:5px 0}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#210416}
@@ -259,7 +281,12 @@
                 
                 
                 
-                <img src="/assets/blog/thewindinthemeat.webp" alt="" loading="lazy">
+                <img src="/assets/blog/thewindinthemeat.webp"
+           srcset="/assets/r/blog/thewindinthemeat-320w.webp 320w, /assets/r/blog/thewindinthemeat-480w.webp 480w, /assets/r/blog/thewindinthemeat-640w.webp 640w, /assets/r/blog/thewindinthemeat-800w.webp 800w, /assets/blog/thewindinthemeat.webp 909w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="909"
+           height="600"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -821,7 +848,12 @@
                 
                 
                 
-                <img src="/assets/blog/lovepainting.webp" alt="" loading="lazy">
+                <img src="/assets/blog/lovepainting.webp"
+           srcset="/assets/r/blog/lovepainting-320w.webp 320w, /assets/r/blog/lovepainting-480w.webp 480w, /assets/r/blog/lovepainting-640w.webp 640w, /assets/r/blog/lovepainting-800w.webp 800w, /assets/blog/lovepainting.webp 812w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 281px"
+           width="812"
+           height="1000"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1036,7 +1068,12 @@
                 
                 
                 
-                <img src="/assets/blog/blackholemaxresdefault.webp" alt="" loading="lazy">
+                <img src="/assets/blog/blackholemaxresdefault.webp"
+           srcset="/assets/r/blog/blackholemaxresdefault-320w.webp 320w, /assets/r/blog/blackholemaxresdefault-480w.webp 480w, /assets/r/blog/blackholemaxresdefault-640w.webp 640w, /assets/r/blog/blackholemaxresdefault-800w.webp 800w, /assets/r/blog/blackholemaxresdefault-1080w.webp 1080w, /assets/blog/blackholemaxresdefault.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1280"
+           height="720"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1519,7 +1556,12 @@
                 
                 
                 
-                <img src="/assets/blog/69989014-2367556036662683-3473014429329653760-n.webp" alt="" loading="lazy">
+                <img src="/assets/blog/69989014-2367556036662683-3473014429329653760-n.webp"
+           srcset="/assets/r/blog/69989014-2367556036662683-3473014429329653760-n-320w.webp 320w, /assets/r/blog/69989014-2367556036662683-3473014429329653760-n-480w.webp 480w, /assets/r/blog/69989014-2367556036662683-3473014429329653760-n-640w.webp 640w, /assets/r/blog/69989014-2367556036662683-3473014429329653760-n-800w.webp 800w, /assets/blog/69989014-2367556036662683-3473014429329653760-n.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 281px"
+           width="1080"
+           height="1350"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1711,7 +1753,12 @@
               
               
               
-              <img src="/assets/blog/roots.webp" alt="" loading="lazy">
+              <img src="/assets/blog/roots.webp"
+           srcset="/assets/r/blog/roots-320w.webp 320w, /assets/r/blog/roots-480w.webp 480w, /assets/r/blog/roots-640w.webp 640w, /assets/r/blog/roots-800w.webp 800w, /assets/blog/roots.webp 1000w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1000"
+           height="750"
+           decoding="async" alt="" loading="lazy">
 
               <div class="image-overlay" style="overflow: hidden;-webkit-mask-image: -webkit-radial-gradient(white, black);"></div>
             </div>
@@ -1943,7 +1990,12 @@
                 
                 
                 
-                <img src="/assets/blog/paititipath.webp" alt="" loading="lazy">
+                <img src="/assets/blog/paititipath.webp"
+           srcset="/assets/r/blog/paititipath-320w.webp 320w, /assets/r/blog/paititipath-480w.webp 480w, /assets/r/blog/paititipath-640w.webp 640w, /assets/r/blog/paititipath-800w.webp 800w, /assets/blog/paititipath.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1080"
+           height="880"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -2303,7 +2355,12 @@
               
               
               
-              <img src="/assets/blog/flowermandala.webp" alt="" loading="lazy">
+              <img src="/assets/blog/flowermandala.webp"
+           srcset="/assets/r/blog/flowermandala-320w.webp 320w, /assets/r/blog/flowermandala-480w.webp 480w, /assets/r/blog/flowermandala-640w.webp 640w, /assets/r/blog/flowermandala-800w.webp 800w, /assets/blog/flowermandala.webp 950w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="950"
+           height="950"
+           decoding="async" alt="" loading="lazy">
 
               <div class="image-overlay" style="overflow: hidden;-webkit-mask-image: -webkit-radial-gradient(white, black);"></div>
             </div>
@@ -2428,7 +2485,12 @@
                 
                 
                 
-                <img src="/assets/blog/paititi-institute-events.webp" alt="" loading="lazy">
+                <img src="/assets/blog/paititi-institute-events.webp"
+           srcset="/assets/r/blog/paititi-institute-events-320w.webp 320w, /assets/r/blog/paititi-institute-events-480w.webp 480w, /assets/r/blog/paititi-institute-events-640w.webp 640w, /assets/r/blog/paititi-institute-events-800w.webp 800w, /assets/blog/paititi-institute-events.webp 1000w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1000"
+           height="300"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>

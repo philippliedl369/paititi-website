@@ -66,6 +66,13 @@ def main():
             # a perceptual hash, so leave the whole folder alone.
             if rel.startswith(os.path.join('assets', 'brand') + os.sep):
                 continue
+            # assets/r/ is the responsive ladder written by gen_responsive.py —
+            # every file there is deliberately a smaller copy of a master, so a
+            # perceptual hash pairs all 443 of them with their originals and
+            # this script would offer to delete the entire srcset. It is not in
+            # the manifest and never should be; regenerate it, don't dedupe it.
+            if rel.startswith(os.path.join('assets', 'r') + os.sep):
+                continue
             on_disk.append(rel)
 
     legacy = sorted(p for p in on_disk if p not in canonical)

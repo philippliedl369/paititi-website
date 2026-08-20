@@ -122,12 +122,34 @@
     line-height:28.8px;color:#fff;margin:0;letter-spacing:normal}
 
   @media (max-width:1180px){
-    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 57.6px}
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 57px) 24px 57.6px}
     .bp-body .sqs-row{margin:0}
     .bp-body .float-right,.bp-body .float-left{float:none;width:100%}
     .pt-page .bp-sec h1{font-size:40px}
     .pt-page .bp-body h2{font-size:30px}
     .bp-pager{flex-direction:column;gap:28px;padding:36px 24px}
+  }
+  @media (max-width:640px){
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 36px) 20px 44px}
+    .pt-page .bp-sec h1{font-size:34px;margin:0 0 24px;padding-bottom:24px}
+    .pt-page .bp-body h2{font-size:27px}
+    .pt-page .bp-body h3{font-size:22px}
+    .bp-body{margin:40px 0 32px}
+    /* 14.272px is under the readable floor, and the 64px byline offset is a
+       desktop measurement that on one column just strands the name. */
+    .pt-page .bp-meta{font-size:15px;gap:4px 16px}
+    .bp-meta .bp-author{margin-left:0}
+    /* Squarespace's 17px block gutter costs 34px of an already narrow measure;
+       the horizontal half goes, the vertical rhythm stays. */
+    .bp-body .sqs-block{padding:17px 0}
+    .pt-page .bp-body blockquote{font-size:17.6px;line-height:1.7}
+    .pt-page .bp-body .sqs-block-button-element{padding:16px 24px}
+    .bp-pager{padding:32px 20px}
+  }
+  /* Body links sit in running prose, so they take padding only where a real
+     finger is doing the tapping. */
+  @media (pointer:coarse){
+    .bp-meta a{display:inline-block;padding:5px 0}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#210416}
@@ -259,7 +281,12 @@
                 
                 
                 
-                <img src="/assets/blog/a-life-worth-living.webp" alt="" loading="lazy">
+                <img src="/assets/blog/a-life-worth-living.webp"
+           srcset="/assets/r/blog/a-life-worth-living-320w.webp 320w, /assets/r/blog/a-life-worth-living-480w.webp 480w, /assets/r/blog/a-life-worth-living-640w.webp 640w, /assets/r/blog/a-life-worth-living-800w.webp 800w, /assets/r/blog/a-life-worth-living-1080w.webp 1080w, /assets/blog/a-life-worth-living.webp 1092w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1092"
+           height="1085"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -479,7 +506,12 @@
                 
                 
                 
-                <img src="/assets/blog/blog-makes-life-worth-living-in-a-time-turmoil-01.webp" alt="" loading="lazy">
+                <img src="/assets/blog/blog-makes-life-worth-living-in-a-time-turmoil-01.webp"
+           srcset="/assets/r/blog/blog-makes-life-worth-living-in-a-time-turmoil-01-320w.webp 320w, /assets/r/blog/blog-makes-life-worth-living-in-a-time-turmoil-01-480w.webp 480w, /assets/r/blog/blog-makes-life-worth-living-in-a-time-turmoil-01-640w.webp 640w, /assets/r/blog/blog-makes-life-worth-living-in-a-time-turmoil-01-800w.webp 800w, /assets/r/blog/blog-makes-life-worth-living-in-a-time-turmoil-01-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="2048"
+           height="1365"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -699,7 +731,12 @@
                 
                 
                 
-                <img src="/assets/blog/life-worth-living-45.webp" alt="" loading="lazy">
+                <img src="/assets/blog/life-worth-living-45.webp"
+           srcset="/assets/r/blog/life-worth-living-45-320w.webp 320w, /assets/r/blog/life-worth-living-45-480w.webp 480w, /assets/r/blog/life-worth-living-45-640w.webp 640w, /assets/r/blog/life-worth-living-45-800w.webp 800w, /assets/blog/life-worth-living-45.webp 960w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="960"
+           height="701"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -919,7 +956,12 @@
                 
                 
                 
-                <img src="/assets/blog/life-worth-living-35.webp" alt="" loading="lazy">
+                <img src="/assets/blog/life-worth-living-35.webp"
+           srcset="/assets/r/blog/life-worth-living-35-320w.webp 320w, /assets/r/blog/life-worth-living-35-480w.webp 480w, /assets/blog/life-worth-living-35.webp 600w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="600"
+           height="543"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1134,7 +1176,12 @@
                 
                 
                 
-                <img src="/assets/blog/life-worth-living-4.webp" alt="" loading="lazy">
+                <img src="/assets/blog/life-worth-living-4.webp"
+           srcset="/assets/r/blog/life-worth-living-4-320w.webp 320w, /assets/r/blog/life-worth-living-4-480w.webp 480w, /assets/r/blog/life-worth-living-4-640w.webp 640w, /assets/r/blog/life-worth-living-4-800w.webp 800w, /assets/r/blog/life-worth-living-4-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="2048"
+           height="1701"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1349,7 +1396,12 @@
                 
                 
                 
-                <img src="/assets/blog/paititi-institute-events-2.webp" alt="" loading="lazy">
+                <img src="/assets/blog/paititi-institute-events-2.webp"
+           srcset="/assets/r/blog/paititi-institute-events-2-320w.webp 320w, /assets/r/blog/paititi-institute-events-2-480w.webp 480w, /assets/r/blog/paititi-institute-events-2-640w.webp 640w, /assets/r/blog/paititi-institute-events-2-800w.webp 800w, /assets/blog/paititi-institute-events-2.webp 1000w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1000"
+           height="300"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>

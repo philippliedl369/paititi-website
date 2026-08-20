@@ -103,11 +103,42 @@
     .pt-header .pt-social{gap:16px}
   }
   @media (max-width:1080px){
-    :root{--pt-header-h:150px}
+    /* Two lines of announcement (49px is the one-line desktop figure) plus the
+       100px bar. Only a starting estimate — the component measures the real
+       height into --pt-header-h-live, which is what the page shell consumes;
+       keeping the static default close to truth avoids a first-paint jump. */
+    :root{--pt-header-h:168px}
     .pt-nav,.pt-header .pt-social,.pt-donate{display:none}
     .pt-burger{display:inline-flex}
     .pt-bar{height:100px;padding:0 22px}
     .pt-logo img{height:78px}
+  }
+
+  /* ---- Phone ---------------------------------------------------------------
+     The header is fixed, so every pixel it takes is permanently off the
+     readable area. At 390px the old bar cost 171px — a fifth of the screen —
+     because the announcement wrapped to three lines at desktop type size. */
+  @media (max-width:640px){
+    :root{--pt-header-h:124px}
+    .pt-announce{padding:0 46px 0 14px;min-height:0}
+    .pt-announce a.pt-announce-link{font-size:13px;line-height:1.32;padding:8px 0}
+    /* 44px square hit area without widening the visible glyph. */
+    .pt-announce-x{right:2px;padding:12px;font-size:20px}
+    .pt-bar{height:76px;padding:0 14px 0 16px;gap:12px}
+    .pt-logo img{height:56px}
+    .pt-burger{width:44px;height:44px}
+    .pt-mobile{padding:4px 20px 24px;max-height:calc(100dvh - var(--pt-header-h-live,124px))}
+    .pt-mobile a{font-size:16px;padding:13px 0}
+    .pt-mobile-group{padding:16px 0 2px}
+    .pt-mobile a.pt-donate{height:52px;margin-top:18px}
+  }
+
+  /* The flyout panels are hover-driven, which a touch device cannot express:
+     the first tap opens the panel and swallows the navigation, the second
+     follows the link. On coarse pointers the burger menu is the whole nav
+     anyway (<=1080px), so this only guards the 1081-1180px touch-tablet band. */
+  @media (pointer:coarse){
+    .pt-folder-panel{transition:none}
   }
 </style>
 </helmet>
@@ -121,7 +152,12 @@
 
   <div class="pt-bar">
     <a class="pt-logo" href="/" aria-label="Paititi Institute — home">
-      <img src="/assets/brand/paititi-logo-white.png" alt="Paititi Institute" width="525" height="245">
+      <img src="/assets/brand/paititi-logo-white.png"
+           srcset="/assets/r/brand/paititi-logo-white-320w.webp 320w, /assets/r/brand/paititi-logo-white-480w.webp 480w, /assets/brand/paititi-logo-white.png 525w"
+           sizes="(max-width:640px) 44vw, (max-width:1180px) 212px, 313px"
+           width="525"
+           height="245"
+           decoding="async" alt="Paititi Institute" loading="eager" fetchpriority="high">
     </a>
 
     <nav class="pt-nav" aria-label="Main">
@@ -223,6 +259,29 @@ class Component extends DCLogic {
       if (localStorage.getItem('pt-announce-dismissed') === '1') this.setState({ announceOpen: false });
     } catch (err) { /* localStorage unavailable */ }
 
+    // Publish the header's real height as --pt-header-h-live. paititi.css uses
+    // it for the hero's top clearance and for every anchor's scroll-margin, and
+    // the static --pt-header-h it falls back to can only ever be an estimate:
+    // the announcement bar is dismissable and its copy wraps to a different
+    // number of lines at every width. Measured from the announce bar and the
+    // bar itself rather than the header element, so opening the mobile menu —
+    // which makes .pt-header nearly full-screen — doesn't push every hero down.
+    this.syncHeaderHeight = () => {
+      const el = document.querySelector('.pt-header');
+      if (!el) return;
+      const announce = el.querySelector('.pt-announce');
+      const bar = el.querySelector('.pt-bar');
+      const h = (announce ? announce.offsetHeight : 0) + (bar ? bar.offsetHeight : 0);
+      if (h > 0) document.documentElement.style.setProperty('--pt-header-h-live', h + 'px');
+    };
+    this.syncHeaderHeight();
+    // The logo is the tallest thing in the bar; until it has loaded the bar can
+    // measure short. Fonts settle the announcement's line count.
+    window.addEventListener('load', this.syncHeaderHeight);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.syncHeaderHeight);
+    window.addEventListener('resize', this.syncHeaderHeight, { passive: true });
+    window.addEventListener('orientationchange', this.syncHeaderHeight);
+
     // The original header is fixed and retracts while you scroll down, returning
     // the moment you scroll back up. Small movements are ignored so the bar
     // doesn't flicker, and it always shows again near the top of the page.
@@ -249,10 +308,19 @@ class Component extends DCLogic {
       menuOpen: this.state.open,
       menuClosed: !this.state.open,
       menuExpanded: this.state.open ? 'true' : 'false',
-      toggleMenu: () => this.setState(s => ({ open: !s.open })),
+      toggleMenu: () => this.setState(s => {
+        const open = !s.open;
+        // The menu is a panel inside the fixed header, so without this the page
+        // behind it scrolls under the reader's thumb while the menu is up.
+        document.body.style.overflow = open ? 'hidden' : '';
+        return { open };
+      }),
       closeAnnounce: () => {
         this.setState({ announceOpen: false });
         try { localStorage.setItem('pt-announce-dismissed', '1'); } catch (err) { /* ignore */ }
+        // The bar is gone on the next paint; heroes and anchor offsets below
+        // are sized off --pt-header-h-live and have to hear about it.
+        requestAnimationFrame(() => this.syncHeaderHeight && this.syncHeaderHeight());
       },
     };
   }

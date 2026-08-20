@@ -122,12 +122,34 @@
     line-height:28.8px;color:#fff;margin:0;letter-spacing:normal}
 
   @media (max-width:1180px){
-    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 57.6px}
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 57px) 24px 57.6px}
     .bp-body .sqs-row{margin:0}
     .bp-body .float-right,.bp-body .float-left{float:none;width:100%}
     .pt-page .bp-sec h1{font-size:40px}
     .pt-page .bp-body h2{font-size:30px}
     .bp-pager{flex-direction:column;gap:28px;padding:36px 24px}
+  }
+  @media (max-width:640px){
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 36px) 20px 44px}
+    .pt-page .bp-sec h1{font-size:34px;margin:0 0 24px;padding-bottom:24px}
+    .pt-page .bp-body h2{font-size:27px}
+    .pt-page .bp-body h3{font-size:22px}
+    .bp-body{margin:40px 0 32px}
+    /* 14.272px is under the readable floor, and the 64px byline offset is a
+       desktop measurement that on one column just strands the name. */
+    .pt-page .bp-meta{font-size:15px;gap:4px 16px}
+    .bp-meta .bp-author{margin-left:0}
+    /* Squarespace's 17px block gutter costs 34px of an already narrow measure;
+       the horizontal half goes, the vertical rhythm stays. */
+    .bp-body .sqs-block{padding:17px 0}
+    .pt-page .bp-body blockquote{font-size:17.6px;line-height:1.7}
+    .pt-page .bp-body .sqs-block-button-element{padding:16px 24px}
+    .bp-pager{padding:32px 20px}
+  }
+  /* Body links sit in running prose, so they take padding only where a real
+     finger is doing the tapping. */
+  @media (pointer:coarse){
+    .bp-meta a{display:inline-block;padding:5px 0}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#210416}
@@ -328,7 +350,12 @@
                 
                 
                 
-                <img src="/assets/blog/4.webp" alt="" loading="lazy">
+                <img src="/assets/blog/4.webp"
+           srcset="/assets/r/blog/4-320w.webp 320w, /assets/r/blog/4-480w.webp 480w, /assets/r/blog/4-640w.webp 640w, /assets/r/blog/4-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 281px"
+           width="2048"
+           height="1724"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -533,7 +560,12 @@
                 
                 
                 
-                <img src="/assets/blog/medicine.webp" alt="" loading="lazy">
+                <img src="/assets/blog/medicine.webp"
+           srcset="/assets/r/blog/medicine-320w.webp 320w, /assets/r/blog/medicine-480w.webp 480w, /assets/blog/medicine.webp 640w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="640"
+           height="400"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -738,7 +770,12 @@
                 
                 
                 
-                <img src="/assets/blog/10.webp" alt="" loading="lazy">
+                <img src="/assets/blog/10.webp"
+           srcset="/assets/r/blog/10-320w.webp 320w, /assets/r/blog/10-480w.webp 480w, /assets/r/blog/10-640w.webp 640w, /assets/r/blog/10-800w.webp 800w, /assets/blog/10.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1080"
+           height="810"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -948,7 +985,12 @@
                 
                 
                 
-                <img src="/assets/blog/11.webp" alt="" loading="lazy">
+                <img src="/assets/blog/11.webp"
+           srcset="/assets/r/blog/11-320w.webp 320w, /assets/r/blog/11-480w.webp 480w, /assets/r/blog/11-640w.webp 640w, /assets/r/blog/11-800w.webp 800w, /assets/blog/11.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1080"
+           height="810"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1079,7 +1121,12 @@
                 
                 
                 
-                <img src="/assets/blog/7.webp" alt="" loading="lazy">
+                <img src="/assets/blog/7.webp"
+           srcset="/assets/r/blog/7-320w.webp 320w, /assets/r/blog/7-480w.webp 480w, /assets/r/blog/7-640w.webp 640w, /assets/r/blog/7-800w.webp 800w, /assets/r/blog/7-1080w.webp 1080w, /assets/blog/7.webp 1192w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1192"
+           height="742"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1289,7 +1336,12 @@
                 
                 
                 
-                <img src="/assets/blog/5.webp" alt="" loading="lazy">
+                <img src="/assets/blog/5.webp"
+           srcset="/assets/r/blog/5-320w.webp 320w, /assets/r/blog/5-480w.webp 480w, /assets/r/blog/5-640w.webp 640w, /assets/r/blog/5-800w.webp 800w, /assets/r/blog/5-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="2048"
+           height="1162"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1420,7 +1472,12 @@
                 
                 
                 
-                <img src="/assets/blog/1.webp" alt="" loading="lazy">
+                <img src="/assets/blog/1.webp"
+           srcset="/assets/r/blog/1-320w.webp 320w, /assets/r/blog/1-480w.webp 480w, /assets/r/blog/1-640w.webp 640w, /assets/r/blog/1-800w.webp 800w, /assets/blog/1.webp 960w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="960"
+           height="640"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>
@@ -1561,7 +1618,12 @@
                 
                 
                 
-                <img src="/assets/blog/paititi-institute-events-2.webp" alt="" loading="lazy">
+                <img src="/assets/blog/paititi-institute-events-2.webp"
+           srcset="/assets/r/blog/paititi-institute-events-2-320w.webp 320w, /assets/r/blog/paititi-institute-events-2-480w.webp 480w, /assets/r/blog/paititi-institute-events-2-640w.webp 640w, /assets/r/blog/paititi-institute-events-2-800w.webp 800w, /assets/blog/paititi-institute-events-2.webp 1000w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 514px, 596px"
+           width="1000"
+           height="300"
+           decoding="async" alt="" loading="lazy">
 
             </div>
           </div>

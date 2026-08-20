@@ -330,12 +330,34 @@ POST_CSS = """
     line-height:28.8px;color:#fff;margin:0;letter-spacing:normal}
 
   @media (max-width:1180px){
-    .bp-item{padding:calc(var(--pt-header-h,209px) + 57px) 24px 57.6px}
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 57px) 24px 57.6px}
     .bp-body .sqs-row{margin:0}
     .bp-body .float-right,.bp-body .float-left{float:none;width:100%}
     .pt-page .bp-sec h1{font-size:40px}
     .pt-page .bp-body h2{font-size:30px}
     .bp-pager{flex-direction:column;gap:28px;padding:36px 24px}
+  }
+  @media (max-width:640px){
+    .bp-item{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 36px) 20px 44px}
+    .pt-page .bp-sec h1{font-size:34px;margin:0 0 24px;padding-bottom:24px}
+    .pt-page .bp-body h2{font-size:27px}
+    .pt-page .bp-body h3{font-size:22px}
+    .bp-body{margin:40px 0 32px}
+    /* 14.272px is under the readable floor, and the 64px byline offset is a
+       desktop measurement that on one column just strands the name. */
+    .pt-page .bp-meta{font-size:15px;gap:4px 16px}
+    .bp-meta .bp-author{margin-left:0}
+    /* Squarespace's 17px block gutter costs 34px of an already narrow measure;
+       the horizontal half goes, the vertical rhythm stays. */
+    .bp-body .sqs-block{padding:17px 0}
+    .pt-page .bp-body blockquote{font-size:17.6px;line-height:1.7}
+    .pt-page .bp-body .sqs-block-button-element{padding:16px 24px}
+    .bp-pager{padding:32px 20px}
+  }
+  /* Body links sit in running prose, so they take padding only where a real
+     finger is doing the tapping. */
+  @media (pointer:coarse){
+    .bp-meta a{display:inline-block;padding:5px 0}
   }
 """
 
@@ -541,6 +563,20 @@ INDEX_CSS = '''
     .bl-grid{grid-template-columns:1fr;gap:48px;padding:48px 24px}
     .bl-image img{height:auto;aspect-ratio:3/2}
     .bl-filter{padding:48px 24px 0}
+  }
+  @media (max-width:640px){
+    .bl-grid{gap:40px;padding:40px 20px}
+    .bl-filter{padding:40px 20px 0;font-size:16px}
+    /* The index is a list of things to choose between, and at 14.272px the
+       excerpt and date were the smallest type on the site. */
+    .pt-page .bl-meta{font-size:15px}
+    .pt-page .bl-excerpt{font-size:16px;letter-spacing:1.28px}
+    .pt-page .bl-more{font-size:16px}
+    .pt-page .bl-title{font-size:24px}
+  }
+  @media (pointer:coarse){
+    .bl-filter a{display:inline-block;padding:6px 0}
+    .bl-meta a{display:inline-block;padding:5px 0}
   }
 '''
 

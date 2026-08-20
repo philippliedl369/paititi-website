@@ -69,6 +69,20 @@
     .hm-cards{grid-template-columns:1fr;padding:32px 24px 0}
     .hm-card img{height:240px}
   }
+  @media (max-width:640px){
+    .hm-ways{padding:48px 0 56px}
+    .hm-cards{padding:28px 20px 0;gap:20px}
+    .hm-card img{height:200px}
+    .hm-card{border-radius:32px 0}
+    .hm-card-body{padding:22px 24px 26px}
+    /* The hero's stat bullets are centred on the wide layout, where each one
+       is a single line and the flush marker reads as an ornament. On a phone
+       every one wraps to two or three lines, and centred text hanging off a
+       left-set marker just looks like a broken list — so the list goes
+       left-aligned while the heading and closing paragraph stay centred. */
+    .pt-page .hm-hero .pt-prose ul{text-align:left;max-width:30ch;margin-inline:auto}
+    .pt-page .hm-hero .pt-prose li{padding-left:22px}
+  }
 </style>
 </helmet>
 <div class="pt-page">
@@ -78,7 +92,12 @@
   <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:808px">
     <div class="pt-sec-bg">
       <img src="/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp"
-           alt="Sunset over the Andean mountains at the Paititi Biocultural Reserve" loading="eager">
+           srcset="/assets/r/home/screenshot-2025-04-12-at-70237e280afpm-320w.webp 320w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-480w.webp 480w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-640w.webp 640w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-800w.webp 800w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1080w.webp 1080w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1280w.webp 1280w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1600w.webp 1600w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-2000w.webp 2000w, /assets/home/screenshot-2025-04-12-at-70237e280afpm.webp 2500w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="2500"
+           height="1408"
+           decoding="async"
+           alt="Sunset over the Andean mountains at the Paititi Biocultural Reserve" loading="eager" fetchpriority="high">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:256px;--pt-grid-bot:48px;--pt-rows:14">
 
@@ -110,7 +129,12 @@
     <div class="hm-cards">
 
       <a class="hm-card" href="/retreats">
-        <img src="/assets/home/home-01.webp" alt="Retreat gathering at the Paititi Institute centre in Peru" loading="lazy">
+        <img src="/assets/home/home-01.webp"
+           srcset="/assets/r/home/home-01-320w.webp 320w, /assets/r/home/home-01-480w.webp 480w, /assets/r/home/home-01-640w.webp 640w, /assets/r/home/home-01-800w.webp 800w, /assets/r/home/home-01-1080w.webp 1080w, /assets/r/home/home-01-1280w.webp 1280w, /assets/r/home/home-01-1600w.webp 1600w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="2352"
+           height="1322"
+           decoding="async" alt="Retreat gathering at the Paititi Institute centre in Peru" loading="lazy">
         <div class="hm-card-body">
           <h3>Immersive Retreats</h3>
           <p>Deep experiential immersion in ancestral contemplative traditions and the work of integration.</p>
@@ -119,7 +143,12 @@
       </a>
 
       <a class="hm-card" href="/online-courses">
-        <img src="/assets/home/dreamworksacredgeometry-square.webp" alt="Sacred geometry mandala from the Paititi dreamwork teachings" loading="lazy">
+        <img src="/assets/home/dreamworksacredgeometry-square.webp"
+           srcset="/assets/r/home/dreamworksacredgeometry-square-320w.webp 320w, /assets/r/home/dreamworksacredgeometry-square-480w.webp 480w, /assets/r/home/dreamworksacredgeometry-square-640w.webp 640w, /assets/r/home/dreamworksacredgeometry-square-800w.webp 800w, /assets/home/dreamworksacredgeometry-square.webp 841w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="841"
+           height="473"
+           decoding="async" alt="Sacred geometry mandala from the Paititi dreamwork teachings" loading="lazy">
         <div class="hm-card-body">
           <h3>Online Living Wisdom Courses</h3>
           <p>Bring Primordial Breathwork, Qigong, Remembrance and contemplative practice into everyday life.</p>
@@ -128,7 +157,12 @@
       </a>
 
       <a class="hm-card" href="/mentorship">
-        <img src="/assets/healing/roman-hanis-portrait.webp" alt="Roman Hanis, co-founder of Paititi Institute and mentorship facilitator" loading="lazy">
+        <img src="/assets/healing/roman-hanis-portrait.webp"
+           srcset="/assets/r/healing/roman-hanis-portrait-320w.webp 320w, /assets/r/healing/roman-hanis-portrait-480w.webp 480w, /assets/healing/roman-hanis-portrait.webp 562w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="562"
+           height="562"
+           decoding="async" alt="Roman Hanis, co-founder of Paititi Institute and mentorship facilitator" loading="lazy">
         <div class="hm-card-body">
           <h3>1-on-1 Mentorship &amp; Dreamwork</h3>
           <p>Individual guidance for people seeking sustained integration, self-understanding and support through significant life transitions.</p>
@@ -137,7 +171,12 @@
       </a>
 
       <a class="hm-card" href="/initiatives">
-        <img src="/assets/home/yagua-visit-2023.webp" alt="Members of the Yagua community welcoming visitors, 2023" loading="lazy">
+        <img src="/assets/home/yagua-visit-2023.webp"
+           srcset="/assets/r/home/yagua-visit-2023-320w.webp 320w, /assets/r/home/yagua-visit-2023-480w.webp 480w, /assets/r/home/yagua-visit-2023-640w.webp 640w, /assets/r/home/yagua-visit-2023-800w.webp 800w, /assets/r/home/yagua-visit-2023-1080w.webp 1080w, /assets/home/yagua-visit-2023.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="1280"
+           height="960"
+           decoding="async" alt="Members of the Yagua community welcoming visitors, 2023" loading="lazy">
         <div class="hm-card-body">
           <h3>Support Indigenous &amp; Conservation Initiatives</h3>
           <p>Participate directly in the Yahua and Q&rsquo;ero initiatives, conservation and cultural preservation.</p>
@@ -172,7 +211,12 @@
       <!-- Fitted, not cropped: the cover keeps its portrait shape inside a
            wider cell, which is what centres it at x=225 rather than x=171. -->
       <div class="pt-fit" style="grid-area:20 / 2 / 36 / 13">
-        <img src="/assets/home/beyond-ayahuasca.webp" alt="Book cover of 'Beyond Ayahuasca' by Roman Hanis, featuring a background of vibrant green leaves and the subtitle 'Unlocking the Evolutionary Science of Indigenous Amazonian Wisdom to Access Your Highest Potential.' Foreword by Nick Polizzi, founder of The Sacred Science." loading="lazy">
+        <img src="/assets/home/beyond-ayahuasca.webp"
+           srcset="/assets/r/home/beyond-ayahuasca-320w.webp 320w, /assets/r/home/beyond-ayahuasca-480w.webp 480w, /assets/r/home/beyond-ayahuasca-640w.webp 640w, /assets/r/home/beyond-ayahuasca-800w.webp 800w, /assets/r/home/beyond-ayahuasca-1080w.webp 1080w, /assets/home/beyond-ayahuasca.webp 1186w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 650px"
+           width="1186"
+           height="1574"
+           decoding="async" alt="Book cover of 'Beyond Ayahuasca' by Roman Hanis, featuring a background of vibrant green leaves and the subtitle 'Unlocking the Evolutionary Science of Indigenous Amazonian Wisdom to Access Your Highest Potential.' Foreword by Nick Polizzi, founder of The Sacred Science." loading="lazy">
       </div>
 
       <div class="pt-prose" style="grid-area:21 / 14 / 34 / 23">
@@ -186,11 +230,21 @@
       </div>
 
       <div class="pt-fit" style="grid-area:33 / 1 / 47 / 12">
-        <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp" alt="Q'ero community elders gathered outside a stone dwelling in the Andes" loading="lazy">
+        <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp"
+           srcset="/assets/r/home/whatsapp-image-2025-11-19-at-104324-320w.webp 320w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-480w.webp 480w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-640w.webp 640w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-800w.webp 800w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-1080w.webp 1080w, /assets/home/whatsapp-image-2025-11-19-at-104324.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 544px"
+           width="1280"
+           height="825"
+           decoding="async" alt="Q'ero community elders gathered outside a stone dwelling in the Andes" loading="lazy">
       </div>
 
       <div style="grid-area:35 / 12 / 45 / 24">
-        <img src="/assets/home/home-02.webp" alt="Members of the Yagua community holding copies of Beyond Ayahuasca" loading="lazy">
+        <img src="/assets/home/home-02.webp"
+           srcset="/assets/r/home/home-02-320w.webp 320w, /assets/r/home/home-02-480w.webp 480w, /assets/r/home/home-02-640w.webp 640w, /assets/r/home/home-02-800w.webp 800w, /assets/r/home/home-02-1080w.webp 1080w, /assets/home/home-02.webp 1099w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 595px"
+           width="1099"
+           height="679"
+           decoding="async" alt="Members of the Yagua community holding copies of Beyond Ayahuasca" loading="lazy">
       </div>
 
       <div class="pt-prose" style="grid-area:46 / 5 / 53 / 21">
@@ -199,7 +253,12 @@
       </div>
 
       <div class="pt-fit" style="grid-area:51 / 10 / 57 / 16">
-        <img src="/assets/brand/icon-donate.webp" alt="" aria-hidden="true" loading="lazy">
+        <img src="/assets/brand/icon-donate.webp"
+           srcset="/assets/r/brand/icon-donate-320w.webp 320w, /assets/r/brand/icon-donate-480w.webp 480w, /assets/r/brand/icon-donate-640w.webp 640w, /assets/brand/icon-donate.webp 700w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 292px"
+           width="700"
+           height="348"
+           decoding="async" alt="" aria-hidden="true" loading="lazy">
       </div>
 
       <div style="grid-area:56 / 9 / 58 / 17">

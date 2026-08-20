@@ -6,6 +6,15 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Images never change under a given name: sync_assets.py gives each mirrored
+# asset a deterministic filename, and the responsive ladder under /assets/r/ is
+# derived from those masters at a fixed set of widths. So a phone that has seen
+# a page once should not pay for its photographs again. A week rather than a
+# year because these are not content-hashed — replacing a photo in place stays
+# possible, it just takes a cache purge to be immediate for everyone.
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
 # Runtime-fetched fragments: reachable for support.js, but never indexed.
 /SiteHeader.dc.html
   X-Robots-Tag: noindex

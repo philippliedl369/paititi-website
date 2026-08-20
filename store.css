@@ -16,7 +16,16 @@
 /* Commerce pages are white, so the footer wave must be too. */
 footer.pt-footer { --pt-footer-wave: #fff }
 
-.st-sec { background: #fff; padding-top: var(--pt-header-h, 209px) }
+/* …and so must the header get a ground of its own. SiteHeader is white chrome
+   with a transparent bar, which works everywhere else because every other page
+   opens on a photo or the plum band. These five open on #fff to the very top
+   edge, so the logo, the nav, the Support button and the burger were all white
+   on white — invisible at every width, desktop included, which left /store,
+   /cart and the product page with no visible navigation at all. Plum matches
+   the nav's own flyout panels. */
+.pt-bar { background: #584364 }
+
+.st-sec { background: #fff; padding-top: var(--pt-header-h-live, var(--pt-header-h, 209px)) }
 
 /* Squarespace lays the list out as a named-area grid with five rows — header,
    category nav, filter drawer, products, pager — and a flat 10px row gap. The
@@ -65,7 +74,7 @@ footer.pt-footer { --pt-footer-wave: #fff }
 
 /* ---- Product detail (/store/p/…) ------------------------------------------- */
 
-.sp-sec { background: #fff; padding-top: var(--pt-header-h, 209px) }
+.sp-sec { background: #fff; padding-top: var(--pt-header-h-live, var(--pt-header-h, 209px)) }
 .sp-inner { display: flex; flex-direction: column; gap: 22px; padding: 43.2px 57.6px }
 
 .sp-nav { display: flex; align-items: center; gap: 8px }
@@ -174,10 +183,30 @@ footer.pt-footer { --pt-footer-wave: #fff }
   .sp-inner { padding: 43.2px 24px }
   .sp-wrap { flex-direction: column; gap: 28px }
   .sp-gallery { flex: 0 0 auto; width: 100% }
-  .sy-page { margin: 0; padding: var(--pt-header-h, 209px) 24px 57.6px }
+  /* The live header height, so the system pages clear the real bar rather than
+     the static estimate — see SiteHeader's --pt-header-h-live. */
+  .sy-page { margin: 0; padding: var(--pt-header-h-live, var(--pt-header-h, 209px)) 24px 57.6px }
 }
 @media (max-width: 640px) {
   .pt-page .sp-title { font-size: 30px; line-height: 1.4 }
   .sp-controls { flex-wrap: wrap }
   .sp-cart-btn { flex: 1 0 100% }
+  .sp-inner { padding: 36px 20px }
+  .st-list { padding: 20px }
+  .sy-page { padding-left: 20px; padding-right: 20px }
+  /* The quantity pill and the add-to-cart button each take the full width
+     rather than sharing a cramped row. */
+  .sp-qty { width: 100% }
+}
+
+/* ---- Touch ----------------------------------------------------------------
+   The quantity stepper is the smallest control on the site: the − and + were
+   17px square inside a 55px pill, well under half the 44px minimum, on the one
+   page where a mis-tap costs the visitor money. The glyphs stay 17px; only the
+   hit area grows, and it fits — 44 + 41 + 44 is inside the pill's 140px.      */
+@media (pointer: coarse) {
+  .sp-qty { padding: 0 4px }
+  .sp-qty button { width: 44px; height: 44px; align-items: center; justify-content: center }
+  .sp-qty input { height: 44px; line-height: 44px }
+  .pt-page .sp-nav a, .pt-page .sp-nav span { padding: 5px 0 }
 }

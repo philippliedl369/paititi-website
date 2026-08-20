@@ -87,6 +87,40 @@
 
   @media (max-width:1180px){
     .qe-hero h1{font-size:40px}
+    /* The 519px floor is the live block's height on desktop; on one column it
+       just adds dead space under a form that is already the right height. */
+    .qe-panel{min-height:0;padding:28px 22px;gap:22px}
+    /* The three clipped photos are centred in their grid cell by top/left 50%
+       plus a translate. Once the grid collapses and the shell puts images back
+       in flow, top/left stop applying but the translate does not — each photo
+       jumped half its own size up and to the left, over the paragraph above it.
+       On one column there is no cell to centre in: they are simply full-width
+       squares carrying the same clip shape. */
+    .qe-circle img,.qe-squircle img,.qe-star img{
+      top:auto;left:auto;transform:none;
+      width:100%;height:auto;max-width:100%;max-height:none;
+      aspect-ratio:1;object-fit:cover}
+  }
+  @media (max-width:640px){
+    .qe-hero h1{font-size:34px}
+    /* Presets to a two-up grid: as a wrapping flex row the five pills broke
+       2/2/1 with a ragged last line. */
+    .qe-amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .qe-amounts button:last-child{grid-column:1 / -1}
+    .qe-panel .qe-donate{align-self:stretch;width:100%}
+  }
+
+  /* This is the page that takes money, so its controls are the ones that most
+     need to be thumb-sized. Measured at 390px before this: the presets were
+     35px tall, both selects 34px, and the fee checkbox 13px square. */
+  @media (pointer:coarse){
+    .qe-panel select{height:48px;padding-right:26px;background-position:right 4px center}
+    .qe-amounts button{min-height:48px;padding:7px 20px}
+    .qe-custom{height:48px}
+    /* A 13px checkbox is not reliably hittable; the whole label is a target
+       anyway, so give it a real row height too. */
+    .qe-fees{align-items:center;gap:14px;padding:6px 0}
+    .qe-fees input{width:22px;height:22px;margin-top:0;flex:0 0 auto;accent-color:#584364}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#fff}
@@ -102,7 +136,12 @@
   <!-- ===== Hero ===== -->
   <section class="pt-sec pt-sec-flat pt-hero qe-hero">
     <div class="pt-sec-bg">
-      <img src="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp" alt="Q'ero community receiving emergency food supplies in the high Andes" loading="eager">
+      <img src="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp"
+           srcset="/assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-320w.webp 320w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-480w.webp 480w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-640w.webp 640w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-800w.webp 800w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-1080w.webp 1080w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-1280w.webp 1280w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-1600w.webp 1600w, /assets/r/initiatives/screenshot-2025-08-01-at-95612-pm-2000w.webp 2000w, /assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp 2500w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="2500"
+           height="1631"
+           decoding="async" alt="Q'ero community receiving emergency food supplies in the high Andes" loading="eager" fetchpriority="high">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:228px;--pt-grid-bot:105px;--pt-rows:22">
       <div class="pt-vc qe-title" style="grid-area:8 / 4 / 13 / 22">
@@ -130,13 +169,28 @@
         <p>We were welcomed with open arms and shared meals, treated with care, and reminded what it means to live in communion with Earth and one another. To everyone who made this mission possible: thank you. Your offerings became living prayers in action. This is sacred activism &mdash; remembering, responding, and regenerating. </p>
       </div>
       <div class="qe-circle" style="grid-area:35 / 18 / 46 / 25">
-        <img src="/assets/initiatives/screenshot-2025-08-01-at-100143-pm.webp" alt="" loading="lazy">
+        <img src="/assets/initiatives/screenshot-2025-08-01-at-100143-pm.webp"
+           srcset="/assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-320w.webp 320w, /assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-480w.webp 480w, /assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-640w.webp 640w, /assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-800w.webp 800w, /assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-1080w.webp 1080w, /assets/r/initiatives/screenshot-2025-08-01-at-100143-pm-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 342px"
+           width="2500"
+           height="1563"
+           decoding="async" alt="" loading="lazy">
       </div>
       <div class="qe-squircle" style="grid-area:36 / 1 / 45 / 9">
-        <img src="/assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp" alt="" loading="lazy">
+        <img src="/assets/initiatives/screenshot-2025-08-01-at-103113-pm.webp"
+           srcset="/assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-320w.webp 320w, /assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-480w.webp 480w, /assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-640w.webp 640w, /assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-800w.webp 800w, /assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-1080w.webp 1080w, /assets/r/initiatives/screenshot-2025-08-01-at-103113-pm-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 320px"
+           width="2500"
+           height="1563"
+           decoding="async" alt="" loading="lazy">
       </div>
       <div class="qe-star" style="grid-area:36 / 8 / 45 / 18">
-        <img src="/assets/initiatives/food-drive-3.webp" alt="" loading="lazy">
+        <img src="/assets/initiatives/food-drive-3.webp"
+           srcset="/assets/r/initiatives/food-drive-3-320w.webp 320w, /assets/r/initiatives/food-drive-3-480w.webp 480w, /assets/r/initiatives/food-drive-3-640w.webp 640w, /assets/initiatives/food-drive-3.webp 720w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 320px"
+           width="720"
+           height="960"
+           decoding="async" alt="" loading="lazy">
       </div>
     </div>
   </section>
@@ -144,7 +198,12 @@
   <!-- ===== Donate ===== -->
   <section class="pt-sec qe-give">
     <div class="pt-sec-bg">
-      <img src="/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp" alt="" loading="lazy">
+      <img src="/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp"
+           srcset="/assets/r/initiatives/unsplash-image-uo1hwtgi6ze-320w.webp 320w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-480w.webp 480w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-640w.webp 640w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-800w.webp 800w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1080w.webp 1080w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1280w.webp 1280w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1600w.webp 1600w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-2000w.webp 2000w, /assets/initiatives/unsplash-image-uo1hwtgi6ze.webp 2500w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="2500"
+           height="1667"
+           decoding="async" alt="" loading="lazy">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:13;--pt-row-h:28.4531px">
       <div class="pt-prose pt-vc" style="grid-area:1 / 1 / 9 / 13">

@@ -77,10 +77,57 @@
     .pt-legal{text-align:center}
     .pt-footer-in{padding:64px 24px 36px}
   }
+
+  /* ---- Phone ---------------------------------------------------------------
+     The footer is where the newsletter signup lives, so it is the one part of
+     the chrome a phone visitor is asked to *use* rather than read past.        */
+  @media (max-width:640px){
+    .pt-footer-in{padding:48px 20px 32px}
+    .pt-footer .pt-news h2{font-size:24px}
+    .pt-news{padding:28px 22px 36px;border-radius:32px 0}
+    /* The field and the button each take the full measure instead of the
+       button being squeezed onto the end of a shrunken input. */
+    .pt-news form{gap:12px}
+    .pt-news-input{flex:1 1 100%;max-width:none;min-width:0;height:56px;padding:0 20px;
+      /* <16px in an iOS text field makes Safari zoom the whole page on focus
+         and it never zooms back. 17.6px is already above the line — this only
+         pins it so a future size change cannot quietly cross it. */
+      font-size:17.6px}
+    .pt-news-btn{width:100%;height:56px}
+    .pt-footer .pt-news p{margin:0 0 28px}
+    .pt-footer .pt-news p.pt-news-note{margin:28px 0 0}
+    /* Clear of the panel's bottom-left copy rather than sitting across it. */
+    .pt-bee{width:104px;bottom:-46px;right:-4px}
+    .pt-foot-bottom{margin-top:82px;gap:24px}
+    .pt-foot-logo{padding-left:0}
+    .pt-foot-logo img{width:168px}
+  }
+
+  /* ---- Touch ----------------------------------------------------------------
+     These are the site's smallest controls: the link pair measured 32px tall and
+     the social marks 30px square, both under the 44px minimum. Padding rather
+     than font-size, so nothing about the footer's look changes — the targets
+     just stop being smaller than a fingertip. Negative margins keep the rows
+     from growing by the padding they gain. */
+  @media (pointer:coarse){
+    .pt-foot-links a{padding:6px 0;margin-bottom:9px}
+    .pt-footer .pt-social{gap:6px}
+    .pt-footer .pt-social a{padding:7px;margin:-7px 0}
+    /* The two legal links sit side by side on one line, so vertical padding
+       grows each target without them overlapping each other. 25.7px line box
+       plus 9px each side clears 44. */
+    .pt-legal a{padding:9px 0}
+    .pt-news-btn{min-height:48px}
+  }
 </style>
 </helmet>
 <footer class="pt-footer">
-  <img class="pt-footer-bg" src="/assets/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman-.webp" alt="" aria-hidden="true" loading="lazy">
+  <img class="pt-footer-bg" src="/assets/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman-.webp"
+           srcset="/assets/r/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman--320w.webp 320w, /assets/r/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman--480w.webp 480w, /assets/r/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman--640w.webp 640w, /assets/home/maloka-interior-paititi-institute-iquitos-peru-greg-goodman-.webp 678w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="678"
+           height="446"
+           decoding="async" alt="" aria-hidden="true" loading="lazy">
   <svg class="pt-wave" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,0 L0,13.5 C120,13.5 240,0 360,0 C540,0 900,27 1080,27 C1200,27 1320,13.5 1440,13.5 L1440,0 Z" fill="var(--pt-footer-wave)"></path>
   </svg>
@@ -109,13 +156,23 @@
             <p class="pt-news-note" style="color:#FFC9C9;font-style:normal">{{ newsErrorMsg }}</p>
           </sc-if>
         </sc-if>
-        <img class="pt-bee" src="/assets/brand/paititi-family-icon.webp" alt="" aria-hidden="true" loading="lazy">
+        <img class="pt-bee" src="/assets/brand/paititi-family-icon.webp"
+           srcset="/assets/r/brand/paititi-family-icon-320w.webp 320w"
+           sizes="(max-width:640px) 27vw, (max-width:1180px) 140px, 191px"
+           width="510"
+           height="500"
+           decoding="async" alt="" aria-hidden="true" loading="lazy">
       </div>
     </div>
 
     <div class="pt-foot-bottom">
       <a class="pt-foot-logo" href="/" aria-label="Paititi Institute — home">
-        <img src="/assets/brand/paititi-logo-white.png" alt="Paititi Institute" width="525" height="245">
+        <img src="/assets/brand/paititi-logo-white.png"
+           srcset="/assets/r/brand/paititi-logo-white-320w.webp 320w, /assets/r/brand/paititi-logo-white-480w.webp 480w, /assets/brand/paititi-logo-white.png 525w"
+           sizes="(max-width:640px) 44vw, (max-width:1180px) 212px, 313px"
+           width="525"
+           height="245"
+           decoding="async" alt="Paititi Institute" loading="lazy">
       </a>
 
       <div class="pt-foot-center">

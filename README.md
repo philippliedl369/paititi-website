@@ -137,6 +137,34 @@ Two things worth knowing:
   still need PNG. The header uses the purple logo on light chrome, the footer
   the white one on the dark band.
 
+### The responsive ladder (`assets/r/`)
+
+The mirrored masters are single files sized for a 1440px desktop, so a phone
+used to download all of them at full size — `/beyond-ayahuasca` shipped 5.8MB
+of images to a 390px screen. `tools/gen_responsive.py` builds a width ladder
+per image under `assets/r/` and rewrites every `<img>` with a `srcset`, a
+`sizes`, intrinsic `width`/`height` and lazy-loading:
+
+```bash
+python3 tools/gen_responsive.py --report   # what would change
+python3 tools/gen_responsive.py            # generate + wire up (idempotent)
+python3 tools/gen_responsive.py --clean    # delete assets/r/ and unwire
+```
+
+Three things worth knowing:
+
+- **Masters are never touched.** `assets/` stays exactly as `sync_assets.py`
+  left it and `src` still points at the master, so anything that cannot read a
+  `srcset` gets what it got before, and the desktop layout is unchanged.
+- **`sizes` is measured, not guessed.** `tools/image-sizes.json` records the
+  width each image actually renders at in each of the three layout regimes
+  (phone / collapsed / desktop), taken in a headless browser. A guessed `sizes`
+  is how `srcset` quietly serves the wrong file. Re-measure if the layout moves.
+- **Run it after `migrate_blog.py`.** That regenerates `Blog*.dc.html` from
+  scratch and would drop the attributes this adds. `assets/r/` is also skipped
+  by `dedupe_assets.py` — every file in it is deliberately a smaller copy of a
+  master, so a perceptual hash pairs all of them with their originals.
+
 ## Layout
 
 ```
@@ -220,6 +248,50 @@ flow, and the two image-container variants (`has-aspect-ratio` reserves the
 height, `content-fit` does not). Images are resolved through
 `assets/manifest.json`, which is keyed by the origin CDN URL, so the mirrored
 WebP is reused instead of re-downloading a JPEG copy.
+
+## Mobile
+
+Below 1180px the fluid grid stops applying and every section becomes a single
+flex column, so nothing under that width is a transcription of anything — it is
+its own layout, and the rules for it live in the `@media` blocks at the foot of
+`paititi.css` plus a `640px` block per page. Above 1180px nothing in those
+blocks applies, which is what keeps the measured desktop geometry intact; the
+check for that is diffing every block's box at 1440px before and after a change
+and expecting zero movement.
+
+Four things decide whether a page works on a phone here:
+
+- **Type scales between 390 and 1180px**, interpolated with `clamp()` so each
+  size lands on exactly its desktop value at the breakpoint and there is no jump.
+  These selectors must carry the same specificity as the base scale —
+  `.pt-page main h1`, not `.pt-page h1`. Written the short way they lose to the
+  base rule at every width and silently do nothing, which is why an h1 used to
+  render at 64px on a 390px screen and push three pages into horizontal scroll.
+  It is the same specificity trap the top of `paititi.css` describes for `color`.
+- **Fluid-cell images go back into flow.** Above the breakpoint an image block
+  is absolutely positioned and stretched over its grid cell, because a
+  percentage height cannot resolve against an auto grid row. Once the grid is
+  gone there is no cell to fill, so the wrapper measures 0 and the photo paints
+  on top of the text below it. A page that overrides the positioning of its own
+  images — the Q'ero clip shapes centre theirs with a translate — has to undo
+  that too, or the transform survives without the offsets it was balancing.
+- **The header measures itself.** `--pt-header-h` is a static estimate per
+  breakpoint; the component writes the real height to `--pt-header-h-live`,
+  which the hero clearance, every anchor's `scroll-margin`, the commerce pages'
+  top padding and Distance Healing's sticky subnav all read. The announcement
+  bar is dismissable and its copy wraps to a different number of lines at every
+  width, so a fixed number is wrong somewhere by construction.
+- **Touch targets are set by `@media (pointer: coarse)`**, not by width, so a
+  touch laptop gets them and a narrow desktop window does not. It is padding
+  only — nothing about the type or the layout changes, the targets just stop
+  being smaller than a fingertip.
+
+Layout checks cannot see any of this on their own. A collapsed column has no
+row template to measure against, so the useful automated checks are: document
+`scrollWidth` against the viewport (horizontal scroll), sibling boxes inside a
+`.pt-fluid` intersecting (a block that lost its height), and an image's box
+escaping its parent's on any side. Everything interactive still has to be
+driven in a browser — see the note under **Matching the original**.
 
 The page model (Design Components, islands, motion) is documented in
 `docs/design-system.md`; deployment details in the original starter notes
