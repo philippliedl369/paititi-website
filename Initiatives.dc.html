@@ -39,12 +39,27 @@
   .in-plum{--pt-bg:#584364;color:#fff}
   .in-plum h2,.in-plum p,.in-plum li,.in-plum a{color:#fff}
 
-  /* Chapter index under the vision statement: three anchor pills. */
-  .in-index{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
-  .in-index a{display:inline-block;padding:10px 24px;border:1px solid rgba(33,4,22,.35);border-radius:999px;
-    text-decoration:none;font-family:var(--font-body);font-size:17.6px;font-weight:300;
-    letter-spacing:.08em;color:#210416}
-  .in-index a:hover{background:rgba(255,255,255,.6)}
+  /* ---- Sticky chapter nav ----------------------------------------------------
+     Same component as the Distance Healing page: the chapters of this page are
+     long, so the index has to travel with the reader instead of sitting once
+     under the vision statement. Direct child of <main> so position:sticky holds
+     for the whole scroll; its top offset follows the retracting header (script
+     below) on the header's own transition curve, and z-index stays under the
+     header's 50. The wave seam into the hero is the zero-height section right
+     above it — the bar itself must stay a plain rectangle, or content shows
+     through the wave gap while stuck. The active underline is the header nav's
+     active mark (inset box-shadow). */
+  .in-navwave{--pt-bg:#F1EAF6}
+  .in-subnav{position:sticky;top:var(--in-nav-top,209px);z-index:40;background:#F1EAF6;
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    transition:top .3s cubic-bezier(.4,0,.2,1)}
+  .in-subnav::-webkit-scrollbar{display:none}
+  .in-subnav-in{display:flex;width:max-content;margin:0 auto;column-gap:38px;padding:0 24px}
+  .in-subnav a{display:block;padding:17px 2px 15px;white-space:nowrap;
+    font-family:var(--font-display);font-size:19.2px;line-height:1.3;letter-spacing:normal;
+    color:#584364;text-decoration:none;transition:color .15s ease}
+  .in-subnav a:hover{color:#210416}
+  .in-subnav a[data-active="1"]{color:#210416;box-shadow:inset 0 -2px 0 #584364}
 
   /* Photos letterboxed at native ratio with rounded corners. */
   .in-photo{display:flex;flex-direction:column;justify-content:center}
@@ -69,6 +84,8 @@
 
   @media (max-width:1180px){
     .in-hero h1{font-size:40px}
+    .in-subnav-in{column-gap:24px}
+    .in-subnav a{font-size:17px;padding:14px 2px 12px}
     .in-grid{grid-template-columns:1fr;padding:0 24px}
     .in-card img{height:auto;aspect-ratio:3/2}
   }
@@ -106,22 +123,32 @@
     </div>
   </section>
 
+  <!-- ===== Sticky chapter nav =====
+       The wave seam belongs to the zero-height section above the bar, so the
+       vision band below it runs flat. Every id is always in the DOM, so
+       anchor-scroll.js handles direct visits (/initiatives#community-health
+       from the header dropdown) as well as in-page jumps. -->
+  <section class="pt-sec in-navwave"><div class="pt-sec-bg"></div></section>
+  <nav class="in-subnav" id="in-subnav" aria-label="Chapters of the living vision">
+    <div class="in-subnav-in">
+      <a href="#vision">The Vision</a>
+      <a href="#biocultural-reserve">The Land</a>
+      <a href="#culture-learning">Culture &amp; Learning</a>
+      <a href="#community-health">Community Health</a>
+      <a href="#living-system">One Living System</a>
+    </div>
+  </nav>
+
   <!-- ===== The vision ===== -->
-  <section class="pt-sec in-band">
+  <section class="pt-sec pt-sec-flat in-band" id="vision">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:16">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:12">
       <div class="pt-prose" style="grid-area:1 / 5 / 13 / 21">
         <h2>Awakening Humanity&rsquo;s Shared Heart: Bridging Ancient Wisdom and Modern Stewardship</h2>
         <p>For years we&rsquo;ve been building something simple and whole: a way of living where culture, land, health, learning, and livelihoods stop pulling in different directions and start breathing together. Nothing here is theoretical. Every piece exists to steady the others.</p>
         <p>Our north star is to safeguard biocultural wisdom, regenerate ecosystems, and cultivate mature human beings who serve their communities. The pattern is an inhale and an exhale: retreats&mdash;the in-breath&mdash;remember the center; community programs&mdash;the out-breath&mdash;embody it. The land keeps the rhythm, the school raises the next generation in that cadence, and honest livelihoods give the whole pattern long legs.</p>
         <p>This page walks the vision in order: the land that anchors it, the culture and learning it protects, the health it restores, and the reciprocity that funds it all.</p>
       </div>
-      <nav class="in-index" style="grid-area:14 / 3 / 16 / 23" aria-label="Chapters of the living vision">
-        <a href="#biocultural-reserve">The Land</a>
-        <a href="#culture-learning">Culture &amp; Learning</a>
-        <a href="#community-health">Community Health</a>
-        <a href="#living-system">One Living System</a>
-      </nav>
     </div>
   </section>
 
@@ -270,5 +297,70 @@
 <dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+// This component only runs the sticky chapter nav — same behaviour as the one
+// on the Distance Healing page.
+class Component extends DCLogic {
+  componentDidMount() {
+    const nav = document.getElementById('in-subnav');
+    if (!nav) return;
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+
+    // The fixed header retracts on scroll-down and returns on scroll-up
+    // (SiteHeader sets data-hidden). The nav sticks below the header while it
+    // shows and at the viewport top while it hides; any gap this leaves above
+    // the nav is exactly the strip the header itself covers. Height is
+    // measured, not assumed: the announcement bar is dismissable and the bar
+    // shrinks at the breakpoints.
+    let header = null;
+    const syncTop = () => {
+      const hidden = header && header.dataset.hidden === '1';
+      nav.style.setProperty('--in-nav-top', (!header || hidden ? 0 : header.offsetHeight) + 'px');
+    };
+    const bindHeader = () => {
+      header = document.querySelector('.pt-header');
+      if (!header) return false;
+      new MutationObserver(syncTop).observe(header,
+        { attributes: true, attributeFilter: ['data-hidden'], childList: true, subtree: true });
+      syncTop();
+      return true;
+    };
+    if (!bindHeader()) {
+      // The header is a dc-import and can finish rendering after this mount.
+      const mo = new MutationObserver(() => { if (bindHeader()) mo.disconnect(); });
+      mo.observe(document.getElementById('dc-root') || document.body, { childList: true, subtree: true });
+    }
+    window.addEventListener('resize', syncTop, { passive: true });
+
+    // Scrollspy: active = the last nav target whose section top has passed
+    // under the stuck nav (140 ≈ the sections' 130px scroll-margin). The
+    // closing "Walk With Us" section has no nav entry, so it belongs to the
+    // chapter above it, which "last one passed" gives for free. Direct DOM
+    // writes — a setState here would re-render the page per scroll frame.
+    let current = -1;
+    const spy = () => {
+      let active = -1;
+      for (let i = 0; i < links.length; i++) {
+        const el = document.getElementById(links[i].getAttribute('href').slice(1));
+        if (el && el.getBoundingClientRect().top <= 140) active = i;
+      }
+      if (active === current) return;
+      current = active;
+      links.forEach((a, i) => { a.dataset.active = i === active ? '1' : '0'; });
+      // Keep the active label in view when the bar overflows (narrow screens).
+      if (active >= 0 && nav.scrollWidth > nav.clientWidth) {
+        const a = links[active];
+        nav.scrollTo({ left: a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+      }
+    };
+    let raf = 0;
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; spy(); });
+    }, { passive: true });
+    spy();
+  }
+}
+</script>
 </body>
 </html>
