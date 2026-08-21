@@ -24,8 +24,15 @@
   :root{--pt-header-h:209px;--pt-announce-h:49px}
   .pt-header,.pt-header *,.pt-header *::before,.pt-header *::after{box-sizing:border-box}
   .pt-header{position:fixed;top:0;left:0;right:0;z-index:50;font-family:var(--font-body);
-    letter-spacing:.08em;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+    letter-spacing:.08em;transition:transform .3s cubic-bezier(.4,0,.2,1),background-color .2s ease}
   .pt-header[data-hidden="1"]{transform:translateY(-100%)}
+  /* The bar carries no ground of its own so it can sit over a hero photo — the
+     logo and the nav links are white for exactly that reason. Once the bar has
+     travelled past the hero it is over ordinary page content instead, where
+     white-on-white would be unreadable and the retracting bar would return as a
+     band of transparency with the page sliding through it. Past that point it
+     takes a ground; the script below sets data-solid. */
+  .pt-header[data-solid="1"]{background:#210416}
   .pt-announce{background:#0B0009;color:#fff;position:relative;
     display:flex;align-items:center;justify-content:center;min-height:var(--pt-announce-h);padding:0 48px}
   .pt-announce a.pt-announce-link{color:#fff;text-decoration:none;font-size:14px;font-weight:300;
@@ -142,7 +149,7 @@
   }
 </style>
 </helmet>
-<header class="pt-header" data-hidden="{{ hidden }}">
+<header class="pt-header" data-hidden="{{ hidden }}" data-solid="{{ solid }}">
   <sc-if value="{{ announceOpen }}" hint-placeholder-val="{{ true }}">
     <div class="pt-announce">
       <a class="pt-announce-link" href="https://www.zeffy.com/en-US/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" target="_blank" rel="noopener">🌿 Support the Growth of the Yahua Ancestral School and Living Wisdom Center</a>
@@ -252,7 +259,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { open: false, announceOpen: true, hidden: false };
+  state = { open: false, announceOpen: true, hidden: false, solid: false };
 
   componentDidMount() {
     try {
@@ -282,6 +289,32 @@ class Component extends DCLogic {
     window.addEventListener('resize', this.syncHeaderHeight, { passive: true });
     window.addEventListener('orientationchange', this.syncHeaderHeight);
 
+    // The bar is transparent over a hero and takes a ground past it (see the
+    // stylesheet). "Past it" is where the bar's own band stops overlapping the
+    // hero — measured, because heroes range from 700px to 932px and the bar's
+    // height moves with the announcement bar. Pages with no hero reserve the
+    // bar's height as padding on their first section, so nothing is under the
+    // bar there until you scroll; those fall back to the same 240px the retract
+    // uses, which is where the bar starts behaving as a travelling bar at all.
+    const solidFrom = () => {
+      const el = document.querySelector('.pt-header');
+      const h = el ? el.offsetHeight : 0;
+      const hero = document.querySelector('.pt-hero');
+      if (!hero) return 240;
+      return hero.getBoundingClientRect().bottom + window.scrollY - h;
+    };
+    // A deep link (/initiatives#community-health) and a browser-restored scroll
+    // position both land past the hero without a scroll event ever firing, so
+    // the state has to be settled on the same beats as the height.
+    this.syncSolid = () => {
+      const solid = window.scrollY > solidFrom();
+      if (solid !== this.state.solid) this.setState({ solid });
+    };
+    this.syncSolid();
+    window.addEventListener('load', this.syncSolid);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.syncSolid);
+    window.addEventListener('resize', this.syncSolid, { passive: true });
+
     // The original header is fixed and retracts while you scroll down, returning
     // the moment you scroll back up. Small movements are ignored so the bar
     // doesn't flicker, and it always shows again near the top of the page.
@@ -290,7 +323,11 @@ class Component extends DCLogic {
       const y = window.scrollY;
       if (Math.abs(y - last) < 8) return;
       const hide = y > last && y > 240 && !this.state.open;
-      if (hide !== this.state.hidden) this.setState({ hidden: hide });
+      const solid = y > solidFrom();
+      const next = {};
+      if (hide !== this.state.hidden) next.hidden = hide;
+      if (solid !== this.state.solid) next.solid = solid;
+      if (next.hidden !== undefined || next.solid !== undefined) this.setState(next);
       last = y;
     }, { passive: true });
   }
@@ -305,6 +342,7 @@ class Component extends DCLogic {
       activeJournal: active === 'journal' ? '1' : '0',
       announceOpen: this.state.announceOpen,
       hidden: this.state.hidden ? '1' : '0',
+      solid: this.state.solid ? '1' : '0',
       menuOpen: this.state.open,
       menuClosed: !this.state.open,
       menuExpanded: this.state.open ? 'true' : 'false',
