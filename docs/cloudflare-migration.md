@@ -1,9 +1,10 @@
 # Moving paititi-institute.org to Cloudflare
 
-Updated 23 Aug 2026. Decisions so far: Cloudflare account exists; Stripe is not
-used; the store is gone. The newsletter cannot stay on Squarespace — it has no
-subscribe API, so a new site could only feed it by hand — and choosing its
-replacement is the last open question.
+Updated 24 Aug 2026. All decisions are made: the Cloudflare account exists,
+Stripe is not used, the store is gone, and the newsletter moves off Squarespace
+to **MailerLite Comfort** with the nonprofit discount — Squarespace has no
+subscribe API, so a new site could only ever have fed it by hand. Sign-ups are
+stored by us for the first week or two while MailerLite is set up.
 
 **No deadline.** The Squarespace plans are paid into 2027, so the old site,
 the domain and Email Campaigns all keep running while we cut over. Nothing
@@ -30,9 +31,9 @@ do them **before anything is ever cancelled**, and keep auto-renew on until then
 - **Form submissions**, if any forms stored responses in Squarespace rather than emailing them: **Contacts**, or the form block's own storage — see **Settings → Form & Newsletter Storage**.
 - **DNS screenshots**: Squarespace → **Domains → paititi-institute.org → DNS settings** — screenshot the entire page.
 
-### The newsletter — the one real decision left
+### The newsletter
 
-**It has to move, and here is why.** Squarespace offers no way for
+**It has to move off Squarespace, and here is why.** Squarespace offers no way for
 an outside website to add a subscriber: no API, and its hosted sign-up form is
 not findable in this account. Staying on Squarespace therefore means exporting
 and importing a CSV by hand forever, which is not a plan. Automations don't
@@ -49,27 +50,43 @@ NEWSLETTER_API_KEY    that provider's key   (secret)
 NEWSLETTER_LIST_ID    the form / group / list / audience id
 ```
 
-**Check this first.** The domain's DNS already carries a MailerLite SPF include
-(`include:_spf.mlsend.com`) and a Brevo verification code. An SPF include means
-someone actually configured *sending* through MailerLite at some point. If that
-account exists and holds the list, it is the obvious answer — no new account,
-DNS already correct, and MailerLite is one of the six. Find out who set it up
-before choosing anything else.
+**Decided 24 Aug 2026: MailerLite, Comfort plan, with the nonprofit discount.**
+No free tier — every free plan stamps its own branding on the emails, and that
+is not acceptable for the Institute's newsletter.
 
-**If nothing usable exists, the choice comes down to list size** (the Squarespace
-export in Step 1 tells you):
+Why MailerLite over the alternatives:
 
-| | Free tier | Good for | Watch out |
+| | Removes branding | Nonprofit discount | Note |
 |---|---|---|---|
-| **Kit** (recommended) | 10,000 subscribers, unlimited sends | Almost certainly covers this list at no cost | Kit branding on emails; 1 form, 1 automation |
-| **Brevo** | Unlimited contacts, 300 emails/**day** | Small lists | A 2,000-person send takes a week on free. Realistically $9/mo |
-| **MailerLite** | 250 subscribers (cut from 500 in June 2026) | Only if the account already exists and is paid | $12/mo for 500 |
+| **MailerLite Comfort** ✅ | Included in the plan | **30%**, the highest going | From $12/mo at 500 subscribers → ~$8.40 after discount. Sends 10× your tier per month |
+| Brevo | Costs **+$10.80/mo** on top | — | $9 + $10.80 ≈ $20/mo for less |
+| Kit | Paid plans only | — | Free tier is generous but branded, and paid costs more |
+| Mailchimp | Paid plans only | 15% | Dearer at every tier |
 
-Whichever it is, do these three in the provider, not here: **verify the domain
-with SPF/DKIM/DMARC while we still control DNS**, set the confirmation email
-(new sign-ups double opt in by default), and put the postal address in the
-campaign footer — bulk email legally needs it, and Squarespace used to supply it
-invisibly.
+It is also the least disruptive choice: the domain's DNS **already** carries a
+MailerLite SPF include (`include:_spf.mlsend.com`), meaning sending through
+MailerLite was configured for this domain at some point. Find out who set that
+up — if the account still exists, there may be nothing to create at all, and
+during a migration whose riskiest step is DNS, not touching DNS is worth a lot.
+
+**Two things to do at MailerLite:**
+1. **Claim the nonprofit discount before paying anything.** Start the 14-day
+   free trial, pick *nonprofit* as the industry, then send support the proof of
+   status (the fiscal sponsor's IRS determination letter) **within those 14
+   days**. The discount is applied before the first payment. Discounts don't
+   stack, so don't bother with the annual-billing discount as well.
+2. **Ask about the Pay-it-forward programme** while you're talking to them —
+   MailerLite gives selected nonprofits the *Power* plan free for two years,
+   and says it leans toward learning- and arts-based organisations. Long odds,
+   costs one email, and would make this free outright.
+
+**The exact price depends on the list size**, which the Step 1 export will tell
+you. Get that number before subscribing so you buy the right tier.
+
+Then, in MailerLite rather than here: **verify the domain with SPF/DKIM/DMARC
+while we still control DNS**, set the confirmation email (new sign-ups double
+opt in by default), and put the postal address in the campaign footer — bulk
+email legally needs it, and Squarespace used to supply it invisibly.
 
 **Import the old list** into the new provider from the Step 1 CSV. Import only
 the *subscribed* file; the unsubscribed and cleaned files exist so you can
@@ -100,10 +117,12 @@ TXT  @  mailerlite-domain-verification=946625c1545d080d6432144ea8f498b5c06525b8
 Records pointing at Squarespace (`A 198.185.159.x / 198.49.23.x`, `www → ext-sq.squarespace.com`) are the ones we replace. There may be more records (DKIM, subdomains) — the screenshots are the source of truth.
 
 ### Secrets the site needs
-Two: `RESEND_API_KEY` (contact form) and `NEWSLETTER_API_KEY` (whichever
-provider wins), plus the plain variables `NEWSLETTER_PROVIDER` and
-`NEWSLETTER_LIST_ID`. Missing either one only disables that one form — it says
-"temporarily unavailable" and logs the real reason; the rest of the site works.
+Two: `RESEND_API_KEY` (contact form) and `NEWSLETTER_API_KEY` (MailerLite),
+plus the plain variables `NEWSLETTER_PROVIDER: "mailerlite"` and
+`NEWSLETTER_LIST_ID`. A missing contact key disables only the contact form,
+which says "temporarily unavailable" and logs the real reason. A missing
+newsletter key is softer: sign-ups fall back to our own storage, so nothing is
+lost while the provider is being set up.
 
 ---
 
@@ -136,32 +155,46 @@ Open the printed `…workers.dev` address and click through the site.
 3. `npx wrangler secret put RESEND_API_KEY` (paste, Enter), or Cloudflare → Workers & Pages → paititi-institute → Settings → Variables and Secrets → Add secret.
 4. Test the contact form on the workers.dev address after Step 7 (Resend needs the DNS live).
 
-### Step 6 — Newsletter provider
-1. Settle the provider question above (start by finding out who owns the
-   MailerLite account the DNS points at).
-2. In that provider: verify the domain, import the Step 1 CSV, create the list,
-   generate an API key, note the list/form id.
-3. Set the three values — key as a secret, the other two as plain variables:
-   ```bash
-   npx wrangler secret put NEWSLETTER_API_KEY
-   ```
-   `NEWSLETTER_PROVIDER` and `NEWSLETTER_LIST_ID` go in `wrangler.jsonc` under
-   `vars` (or the dashboard), then `npx wrangler deploy`.
-4. Put one real address through the footer form and confirm it arrives.
+### Step 6 — Newsletter, in two parts
 
-**Safety net, if the provider isn't settled by launch:** create the KV
-namespace instead and the form keeps every address rather than turning people
-away —
+**6a. At launch — store sign-ups ourselves.** One command, so nobody who signs
+up in the first week or two is lost while MailerLite is being set up:
 
 ```bash
 npx wrangler kv namespace create NEWSLETTER
 ```
 
-paste the printed id into the commented `kv_namespaces` block in
-`wrangler.jsonc`, uncomment, deploy. `node tools/export_subscribers.mjs` reads
-them back out later for a one-time import into whichever provider wins. This is
-a stopgap, not a destination: a stored address with nothing to send from it is
-not a newsletter.
+Paste the printed id into the commented `kv_namespaces` block in
+`wrangler.jsonc`, uncomment those lines, `npx wrangler deploy`. Test the footer
+form on the workers.dev address, then `node tools/export_subscribers.mjs`
+should show your test address.
+
+Do this **even though** MailerLite is coming: it costs one command, and it is
+what catches sign-ups during the changeover. The code prefers the provider as
+soon as one is fully configured, and falls back to this storage whenever the
+provider is named but its key hasn't been deployed yet — so there is no window
+where an address is turned away.
+
+**6b. Within a week or two — switch to MailerLite.**
+1. Get the list size from the Step 1 export, claim the nonprofit discount
+   (above), subscribe to Comfort at the right tier.
+2. In MailerLite: verify the domain, import the *subscribed* CSV, create the
+   group, set the confirmation email and the postal footer, generate an API key,
+   note the **group id** (it's in the URL when you open the group).
+3. Wire it up:
+   ```bash
+   npx wrangler secret put NEWSLETTER_API_KEY
+   ```
+   and add to `wrangler.jsonc` under `vars`:
+   ```jsonc
+   "NEWSLETTER_PROVIDER": "mailerlite",
+   "NEWSLETTER_LIST_ID": "<the group id>"
+   ```
+   then `npx wrangler deploy`.
+4. Put one real address through the footer form and confirm it lands in the
+   group and that the confirmation email arrives.
+5. Import the leftovers collected in 6a — `node tools/export_subscribers.mjs`
+   → upload that CSV to the same group — then that stopgap is done with.
 
 ### Step 7 — Switch nameservers (weekday morning)
 Squarespace → Domains → paititi-institute.org → DNS → **Nameservers → Use custom nameservers** → replace the four `ns-cloud-*.googledomains.com` with the two Cloudflare ones → Save. Wait 10 min–2 h (up to 24). Cloudflare emails when Active.
@@ -187,4 +220,4 @@ Cloudflare → Workers & Pages → paititi-institute → Settings → **Domains 
 - Contact form "temporarily unavailable": Workers & Pages → paititi-institute → Logs shows why.
 
 ## Order in one line
-Export the list → screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → pick the newsletter provider and import the list → switch nameservers, check email → attach domain → sitemap. The Squarespace website itself can keep running until its plan lapses in 2027.
+Export the list → screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → newsletter KV → switch nameservers, check email → attach domain → sitemap → then MailerLite within a week or two. The Squarespace website itself can keep running until its plan lapses in 2027.

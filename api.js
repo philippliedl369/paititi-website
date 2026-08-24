@@ -175,7 +175,17 @@ async function newsletter(body, env, deps) {
     const key = env.NEWSLETTER_API_KEY || env.RESEND_API_KEY;
     const list = env.NEWSLETTER_LIST_ID || env.RESEND_AUDIENCE_ID;
     if (!key || !list) {
-      return unavailable(`newsletter: ${name} selected but API key or list id is missing`, soon);
+      // Half-configured, which is what the switch-over looks like for as long
+      // as it takes to deploy the secret after naming the provider. Keep the
+      // address if there is anywhere to keep it rather than turning the
+      // visitor away; the log still says the configuration is wrong.
+      const why = `newsletter: ${name} selected but API key or list id is missing`;
+      if (deps.saveSubscriber) {
+        console.error(`[paititi] ${why} — keeping the address in storage instead`);
+        await deps.saveSubscriber(email, { ts: new Date().toISOString(), source: body.source || 'site' });
+        return ok({ ok: true });
+      }
+      return unavailable(why, soon);
     }
     // Default to double opt-in: the list is being rebuilt on a cold sending
     // domain, and confirmed addresses are what keep it out of spam folders.
