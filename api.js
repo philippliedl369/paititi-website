@@ -227,8 +227,11 @@ async function checkout(body, env, origin, deps) {
   const recurring = items.some((it) => INTERVALS[it.frequency]);
   const params = new URLSearchParams();
   params.set('mode', recurring ? 'subscription' : 'payment');
-  params.set('success_url', `${origin}/order-confirmed?session_id={CHECKOUT_SESSION_ID}`);
-  params.set('cancel_url', `${origin}/cart`);
+  // The store, cart and order-confirmed pages were retired on 23 Aug 2026, so
+  // the only caller left is the Q'ero donation block. Stripe returns the donor
+  // to that page either way; `?donation=` lets it say thank you or nothing.
+  params.set('success_url', `${origin}/initiatives/qero-nation-emergency-food-supply?donation=thanks&session_id={CHECKOUT_SESSION_ID}`);
+  params.set('cancel_url', `${origin}/initiatives/qero-nation-emergency-food-supply?donation=cancelled`);
 
   let i = 0;
   for (const item of items) {

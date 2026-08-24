@@ -1,17 +1,6 @@
 {
   "products": [
     {
-      "id": "us-tour-rsvp-donation",
-      "name": "US TOUR RSVP DONATION",
-      "priceCents": 30000,
-      "currency": "usd",
-      "category": "US TOUR",
-      "type": "service",
-      "description": "Retreat deposit / RSVP for the US Tour retreats with Roman Hanis. $300 deposit reserves your spot; the balance ($625–$900 sliding scale) is settled at the retreat.",
-      "image": "/assets/store/9f81c-coca-ceremony-paititi-institute-iquitos-peru-greg-good.webp",
-      "url": "/store/p/us-tour-rsvp-donation"
-    },
-    {
       "id": "donation-qero",
       "name": "Q'ero Nation Initiative Donation",
       "customAmount": true,

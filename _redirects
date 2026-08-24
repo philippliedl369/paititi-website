@@ -59,14 +59,17 @@
 # Q'ero initiative page. Keep the old path working as a redirect.
 /donate              /initiatives/yagua-cultural-heritage-center-indigenous-school  301
 
-# Store / checkout
-/store                          /Store.dc.html              200
-# The US TOUR category is its own page on the original — same product grid, but
-# titled after the category and with the category nav row collapsed away.
-/store/retreats                 /StoreCategory-UsTour.dc.html 200
-/store/p/us-tour-rsvp-donation  /StoreProduct-UsTour.dc.html 200
-/cart                           /Cart.dc.html               200
-/order-confirmed                /OrderConfirmed.dc.html     200
+# Store / checkout — retired 23 Aug 2026. The only product was the US Tour RSVP
+# donation, for an event that has passed; retreats and online courses are booked
+# through Retreat Guru, not a cart. The pages and cart.js are gone (recover from
+# git if a shop is ever wanted again). These paths were indexed, so they redirect
+# rather than 404: the store to Programs, the two system pages to home.
+/store                          /retreats                   301
+/store/retreats                 /retreats                   301
+/store/p/us-tour-rsvp-donation  /retreats                   301
+/store/*                        /retreats                   301
+/cart                           /                           301
+/order-confirmed                /                           301
 
 # Legal
 /terms-conditions    /Terms.dc.html    200
@@ -120,10 +123,6 @@
 /blog/SiteFooter.dc.html            /SiteFooter.dc.html  200
 /blog/category/SiteHeader.dc.html   /SiteHeader.dc.html  200
 /blog/category/SiteFooter.dc.html   /SiteFooter.dc.html  200
-/store/SiteHeader.dc.html           /SiteHeader.dc.html  200
-/store/SiteFooter.dc.html           /SiteFooter.dc.html  200
-/store/p/SiteHeader.dc.html         /SiteHeader.dc.html  200
-/store/p/SiteFooter.dc.html         /SiteFooter.dc.html  200
 /initiatives/SiteHeader.dc.html     /SiteHeader.dc.html  200
 /initiatives/SiteFooter.dc.html     /SiteFooter.dc.html  200
 /distance-healing/SiteHeader.dc.html  /SiteHeader.dc.html  200

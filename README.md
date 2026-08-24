@@ -44,7 +44,7 @@ maps clean URLs via `_redirects`).
 |---|---|
 | Newsletter block ("Sign up for updates") | Footer form → `POST /api/newsletter` (worker.js) → KV `NEWSLETTER` or Resend audience |
 | Contact form | `Contact.dc.html` → `POST /api/contact` → email via Resend to `CONTACT_TO` |
-| Store + cart + checkout (US Tour RSVP $300) | `Store.dc.html` / `StoreProduct-UsTour.dc.html` (14-field intake form) / `Cart.dc.html` (`cart.js`, localStorage) → `POST /api/checkout` → Stripe Checkout. Catalog: `data/products.json` (server-side price validation) |
+| ~~Store + cart + checkout~~ | Retired 23 Aug 2026. The one product was the US Tour RSVP donation, for a past event; nothing else was ever sold here. `/store*`, `/cart` and `/order-confirmed` now 301, and the pages, `cart.js` and `store.css` are gone — recover from git if a shop is ever wanted again. `data/products.json` stays: it still holds the two donation funds, and `/api/checkout` still serves the Q'ero donation block |
 | Donation block (Q'ero page: 2 funds, presets, recurring) | Rebuilt in place on `InitiativeQero.dc.html` → `POST /api/checkout` → Stripe, one-time or weekly/monthly/quarterly/annual. There is no `/donate` page on the live site, so that path is a 301 |
 | Zeffy donation embed (Yagua page) | Kept as-is — plain iframe, platform-independent |
 | Retreat Guru listings (retreats / online courses) | Kept as-is — script embed + static fallback cards |
@@ -169,8 +169,6 @@ Three things worth knowing:
 
 ```
 ├── worker.js             # /api/contact · /api/newsletter · /api/checkout (Stripe)
-├── data/products.json    # trusted price catalog for checkout
-├── cart.js               # localStorage cart + checkout client
 ├── paititi.css           # the shared page shell: fluid grid, sections, type scale
 ├── Home.dc.html …        # one .dc.html per page (see _redirects for the map)
 ├── DistanceHealing*.dc.html        # the absorbed paititidistancehealing.com
@@ -208,14 +206,11 @@ Fidelity is checked by diffing every block's box against the live site. Two
 sections deliberately differ: the Retreat Guru widgets on Retreats and Online
 Courses render live listings, so their height follows real data.
 
-**The commerce pages are the exception.** `/store`, `/store/retreats`,
-`/store/p/…`, `/cart` and `/order-confirmed` are Squarespace *commerce* and
-*system* pages: no fluid grid, no wave divider, white ground, a 1324.8px
-measure instead of the 1200px column. Their system lives in `store.css`; the
-55px commerce button is `.pt-sqs-btn` in `paititi.css`. Nothing on the live
-product page collects an application — the RSVP button only adds the $300
-deposit to the cart — so this replica does the same, and the Stripe path
-(`cart.js` → `/api/checkout`) is unchanged.
+**The commerce pages used to be the exception** — `/store`, `/cart` and the
+rest were Squarespace *commerce* pages on their own 1324.8px measure, with
+their own `store.css`. They were removed on 23 Aug 2026 (see the functions
+table above). `.pt-sqs-btn`, the 55px commerce button, is now unused but stays
+defined in `paititi.css`.
 
 **Distance Healing is the other exception,** for the opposite reason. It has no
 counterpart on paititi-institute.org to measure: the copy comes from the
