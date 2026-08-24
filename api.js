@@ -144,6 +144,13 @@ const NEWSLETTER_PROVIDERS = {
     headers: { 'api-key': env.NEWSLETTER_API_KEY },
     body: { email, listIds: [Number(env.NEWSLETTER_LIST_ID)], updateEnabled: true },
   }),
+  // EmailOctopus v2. Prices by contact but sends without limit, which suits a
+  // large list mailed occasionally. PENDING is its double opt-in state.
+  emailoctopus: (email, env, confirm) => ({
+    url: `https://api.emailoctopus.com/lists/${env.NEWSLETTER_LIST_ID}/contacts`,
+    headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },
+    body: { email_address: email, status: confirm ? 'PENDING' : 'SUBSCRIBED' },
+  }),
   beehiiv: (email, env) => ({
     url: `https://api.beehiiv.com/v2/publications/${env.NEWSLETTER_LIST_ID}/subscriptions`,
     headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },

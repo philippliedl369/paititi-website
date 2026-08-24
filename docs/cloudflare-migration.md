@@ -1,10 +1,11 @@
 # Moving paititi-institute.org to Cloudflare
 
-Updated 24 Aug 2026. All decisions are made: the Cloudflare account exists,
-Stripe is not used, the store is gone, and the newsletter moves off Squarespace
-to **MailerLite Comfort** with the nonprofit discount — Squarespace has no
-subscribe API, so a new site could only ever have fed it by hand. Sign-ups are
-stored by us for the first week or two while MailerLite is set up.
+Updated 24 Aug 2026. The Cloudflare account exists, Stripe is not used, and
+the store is gone. The newsletter has to leave Squarespace eventually — it has
+no subscribe API, so a new site could only ever feed it by hand — but that is
+**not a launch task**: the site collects sign-ups itself from day one, and the
+provider can be chosen at leisure. EmailOctopus is the standing recommendation
+for the ~8,000-contact list; see the newsletter section for the costing.
 
 **No deadline.** The Squarespace plans are paid into 2027, so the old site,
 the domain and Email Campaigns all keep running while we cut over. Nothing
@@ -25,7 +26,7 @@ do them **before anything is ever cancelled**, and keep auto-renew on until then
 4. **Google Search Console** — to resubmit the sitemap after the switch.
 
 ### Exports (where to click — no hurry, but do them before any cancellation)
-- **Newsletter list** (needed — this is the list that moves to the new provider): Squarespace → your site → **Marketing → Email Campaigns → Mailing Lists** (newer accounts: **Contacts → Lists & Segments**) → hover the list → **⋯ → Export**. You get a .zip with three CSVs (subscribed / unsubscribed / cleaned). Keep all three.
+- **Newsletter list** (~8,000 contacts — this is what moves to the new provider): Squarespace → your site → **Marketing → Email Campaigns → Mailing Lists** (newer accounts: **Contacts → Lists & Segments**) → hover the list → **⋯ → Export**. You get a .zip with three CSVs (subscribed / unsubscribed / cleaned). Keep all three.
 - **Orders** (the old US Tour RSVP payments — records only, the store is not coming back): **Commerce → Orders** (newer UI: **Products & Services → Orders**) → **Export data → Download CSV**. Pick *All statuses* and the full date range.
 - **Contacts** (customers + donors + subscribers in one): **Contacts** panel → **Export**.
 - **Form submissions**, if any forms stored responses in Squarespace rather than emailing them: **Contacts**, or the form block's own storage — see **Settings → Form & Newsletter Storage**.
@@ -41,56 +42,70 @@ rescue it either — "Tag Contacts who fill out a form" triggers on *"a form
 completed on your site"*, meaning the Squarespace site, and Squarespace stops
 automations once that site is offline.
 
-So sign-ups go to a provider with an API. `api.js` already speaks six of them
-and all six are tested; picking one is three values, no code:
+So sign-ups go to a provider with an API. `api.js` speaks seven of them and all
+seven are tested, so picking one is three values and no code:
 
 ```
-NEWSLETTER_PROVIDER   kit | mailerlite | brevo | mailchimp | beehiiv | resend
+NEWSLETTER_PROVIDER   emailoctopus | mailerlite | brevo | kit | mailchimp | beehiiv | resend
 NEWSLETTER_API_KEY    that provider's key   (secret)
-NEWSLETTER_LIST_ID    the form / group / list / audience id
+NEWSLETTER_LIST_ID    the list / group / form / audience id
 ```
 
-**Decided 24 Aug 2026: MailerLite, Comfort plan, with the nonprofit discount.**
-No free tier — every free plan stamps its own branding on the emails, and that
-is not acceptable for the Institute's newsletter.
+**Nothing here is urgent.** The site collects sign-ups on its own from day one
+(Step 6a). This is a decision to take calmly, not before launch.
 
-Why MailerLite over the alternatives:
+#### What the 8,000-contact list costs
 
-| | Removes branding | Nonprofit discount | Note |
+Free tiers are out — every one of them brands the emails. And at 8,000
+contacts, *how* a provider charges matters more than its headline price. Some
+bill per contact held, some per email sent. A list this size mailed once or
+twice a month is the case where those two models diverge hardest:
+
+| | ~8,000 contacts | Branding | Nonprofit |
 |---|---|---|---|
-| **MailerLite Comfort** ✅ | Included in the plan | **30%**, the highest going | From $12/mo at 500 subscribers → ~$8.40 after discount. Sends 10× your tier per month |
-| Brevo | Costs **+$10.80/mo** on top | — | $9 + $10.80 ≈ $20/mo for less |
-| Kit | Paid plans only | — | Free tier is generous but branded, and paid costs more |
-| Mailchimp | Paid plans only | 15% | Dearer at every tier |
+| **EmailOctopus Pro** ⭐ | **~$24/mo**, unlimited sends | Removed on Pro | — |
+| Brevo Starter | ~$18–32/mo by send volume, **+$9/mo** to remove branding | Surcharge | 15–20% |
+| MailerLite Comfort | **~$90/mo** (your figure) → ~$63 with the 30% discount | Removed in plan | 30%, the highest |
+| Kit / Mailchimp | Dearer again at this tier | Paid plans only | Mailchimp 15% |
+| Resend | Marketing email bills by contact, from $40 at 5,000 | — | — |
 
-It is also the least disruptive choice: the domain's DNS **already** carries a
-MailerLite SPF include (`include:_spf.mlsend.com`), meaning sending through
-MailerLite was configured for this domain at some point. Find out who set that
-up — if the account still exists, there may be nothing to create at all, and
-during a migration whose riskiest step is DNS, not touching DNS is worth a lot.
+**EmailOctopus is the recommendation: about $24/mo, roughly $290/year, against
+$756/year for MailerLite even after its nonprofit discount.** It prices by
+contact but sends without limit, which is exactly the right shape for a big
+list mailed occasionally. Pro removes branding, and its API is already wired
+up here.
 
-**Two things to do at MailerLite:**
-1. **Claim the nonprofit discount before paying anything.** Start the 14-day
-   free trial, pick *nonprofit* as the industry, then send support the proof of
-   status (the fiscal sponsor's IRS determination letter) **within those 14
-   days**. The discount is applied before the first payment. Discounts don't
-   stack, so don't bother with the annual-billing discount as well.
-2. **Ask about the Pay-it-forward programme** while you're talking to them —
-   MailerLite gives selected nonprofits the *Power* plan free for two years,
-   and says it leans toward learning- and arts-based organisations. Long odds,
-   costs one email, and would make this free outright.
+The trade is that it is a smaller, plainer tool: solid campaigns, forms and
+basic drip sequences, but nothing like MailerLite's automation builder. For a
+newsletter — which is all this is — that costs nothing. **Send yourself a test
+campaign before committing**, since deliverability is the one thing a price
+comparison can't tell you.
 
-**The exact price depends on the list size**, which the Step 1 export will tell
-you. Get that number before subscribing so you buy the right tier.
+Two reasons you might still pay MailerLite's premium, and they're legitimate:
+the DNS **already** carries a MailerLite SPF include
+(`include:_spf.mlsend.com`), so somebody once set sending up there — if that
+account still exists with the list in it, the cheapest option is the one you
+don't have to migrate to. And MailerLite runs a **Pay-it-forward** programme
+giving selected nonprofits the Power plan free for two years, leaning toward
+learning- and arts-based organisations. One email to ask; it would beat every
+price in the table.
 
-Then, in MailerLite rather than here: **verify the domain with SPF/DKIM/DMARC
-while we still control DNS**, set the confirmation email (new sign-ups double
-opt in by default), and put the postal address in the campaign footer — bulk
-email legally needs it, and Squarespace used to supply it invisibly.
+If you do go MailerLite, claim the **30% nonprofit discount** first: start the
+14-day trial, pick *nonprofit* as the industry, and send support the fiscal
+sponsor's IRS determination letter **within those 14 days**. It applies before
+the first payment, and discounts don't stack.
 
-**Import the old list** into the new provider from the Step 1 CSV. Import only
-the *subscribed* file; the unsubscribed and cleaned files exist so you can
-honour those opt-outs, not re-mail them.
+#### Whoever wins
+
+In the provider, not here: **verify the domain with SPF/DKIM/DMARC while we
+still control DNS**, set the confirmation email (new sign-ups double opt in by
+default), and put the postal address in the campaign footer — bulk email
+legally needs it, and Squarespace used to supply it invisibly.
+
+**Import the old list** from the Step 1 export. Import only the *subscribed*
+file; the unsubscribed and cleaned files exist so you can honour those opt-outs,
+not re-mail them. Re-mailing people who unsubscribed is how a domain's sending
+reputation gets destroyed on day one.
 
 ### The store — removed 23 Aug 2026
 Nothing was sold there but the US Tour RSVP donation, for an event that has
@@ -117,9 +132,9 @@ TXT  @  mailerlite-domain-verification=946625c1545d080d6432144ea8f498b5c06525b8
 Records pointing at Squarespace (`A 198.185.159.x / 198.49.23.x`, `www → ext-sq.squarespace.com`) are the ones we replace. There may be more records (DKIM, subdomains) — the screenshots are the source of truth.
 
 ### Secrets the site needs
-Two: `RESEND_API_KEY` (contact form) and `NEWSLETTER_API_KEY` (MailerLite),
-plus the plain variables `NEWSLETTER_PROVIDER: "mailerlite"` and
-`NEWSLETTER_LIST_ID`. A missing contact key disables only the contact form,
+One to launch: `RESEND_API_KEY` (contact form). Later, when a newsletter
+provider is chosen: `NEWSLETTER_API_KEY` plus the plain variables
+`NEWSLETTER_PROVIDER` and `NEWSLETTER_LIST_ID`. A missing contact key disables only the contact form,
 which says "temporarily unavailable" and logs the real reason. A missing
 newsletter key is softer: sign-ups fall back to our own storage, so nothing is
 lost while the provider is being set up.
@@ -175,26 +190,27 @@ soon as one is fully configured, and falls back to this storage whenever the
 provider is named but its key hasn't been deployed yet — so there is no window
 where an address is turned away.
 
-**6b. Within a week or two — switch to MailerLite.**
-1. Get the list size from the Step 1 export, claim the nonprofit discount
-   (above), subscribe to Comfort at the right tier.
-2. In MailerLite: verify the domain, import the *subscribed* CSV, create the
-   group, set the confirmation email and the postal footer, generate an API key,
-   note the **group id** (it's in the URL when you open the group).
+**6b. Whenever the provider is settled — switch to it.** No deadline; the site
+keeps collecting in the meantime.
+1. Sign up (EmailOctopus Pro unless the MailerLite account turns out to exist),
+   verify the domain, import the *subscribed* CSV, set the confirmation email
+   and the postal footer.
+2. Generate an API key and note the list id.
 3. Wire it up:
    ```bash
    npx wrangler secret put NEWSLETTER_API_KEY
    ```
    and add to `wrangler.jsonc` under `vars`:
    ```jsonc
-   "NEWSLETTER_PROVIDER": "mailerlite",
-   "NEWSLETTER_LIST_ID": "<the group id>"
+   "NEWSLETTER_PROVIDER": "emailoctopus",
+   "NEWSLETTER_LIST_ID": "<the list id>"
    ```
-   then `npx wrangler deploy`.
-4. Put one real address through the footer form and confirm it lands in the
-   group and that the confirmation email arrives.
-5. Import the leftovers collected in 6a — `node tools/export_subscribers.mjs`
-   → upload that CSV to the same group — then that stopgap is done with.
+   then `npx wrangler deploy`. Order doesn't matter — until both exist,
+   sign-ups keep falling back to our own storage rather than failing.
+4. Put one real address through the footer form; confirm it lands in the list
+   and that the confirmation email arrives.
+5. Import the addresses collected in 6a — `node tools/export_subscribers.mjs`
+   → upload that CSV to the same list — and the stopgap is done with.
 
 ### Step 7 — Switch nameservers (weekday morning)
 Squarespace → Domains → paititi-institute.org → DNS → **Nameservers → Use custom nameservers** → replace the four `ns-cloud-*.googledomains.com` with the two Cloudflare ones → Save. Wait 10 min–2 h (up to 24). Cloudflare emails when Active.
@@ -220,4 +236,4 @@ Cloudflare → Workers & Pages → paititi-institute → Settings → **Domains 
 - Contact form "temporarily unavailable": Workers & Pages → paititi-institute → Logs shows why.
 
 ## Order in one line
-Export the list → screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → newsletter KV → switch nameservers, check email → attach domain → sitemap → then MailerLite within a week or two. The Squarespace website itself can keep running until its plan lapses in 2027.
+Export the list → screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → newsletter KV → switch nameservers, check email → attach domain → sitemap. Newsletter provider whenever — nothing waits on it. The Squarespace website itself can keep running until its plan lapses in 2027.
