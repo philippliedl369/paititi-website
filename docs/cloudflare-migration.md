@@ -39,16 +39,31 @@ welcome emails) stop once the site is gone.
 So the list, the sending, the unsubscribe footer — all stay where they are.
 Two things change:
 
-1. **Sign-ups from the new site.** Squarespace has no API, but it offers a
-   hosted **sign-up form** for exactly this case: Email Campaigns dashboard →
-   **Sign-up forms → Create** → name it, choose fields, **Share** → copy the
-   link. The new site's newsletter box links to that page. (One-line change
-   in the site; send me the link.)
-   Later alternative: keep the on-site form, have Cloudflare store sign-ups
-   (already supported), and import the CSV into Squarespace monthly via
-   **Lists & Segments → list → Add Subscribers → Upload a list**.
-2. **Automations**, if any exist, need re-creating elsewhere later. Check
-   **Email Campaigns → Automations** — if the list is empty, nothing to do.
+1. **Sign-ups from the new site.** Squarespace has no subscribe API, but it has
+   **Sign-up forms**, which work with no Squarespace website at all:
+
+   Email Campaigns dashboard → **Sign-up forms → Create** → name it, switch on
+   the fields you want (email is enough) → save. Then the **•••** beside the
+   form gives two things:
+   - **Embed form** — an HTML snippet for an external site. **Preferred**: the
+     newsletter box stays on our own page and nobody is sent away.
+   - **Copy form** — a plain link to a Squarespace-hosted page. The fallback if
+     the embed proves ugly or heavy.
+
+   Send me whichever one; I wire it in. The embed needs one extra line in
+   `_headers` (its domain added to the Content-Security-Policy) or the browser
+   will silently block it.
+
+   Later alternative: keep our own form, let Cloudflare store sign-ups (already
+   built), and import the CSV monthly via **Lists & Segments → list → Add
+   Subscribers → Upload a list**.
+
+2. **Do NOT use Automations for this.** The "Tag Contacts who fill out a form"
+   automation triggers on *"a form completed on your site"* — the Squarespace
+   site, which is the thing going away. Squarespace stops automations once the
+   site is offline, so anything built there is temporary by definition.
+   If Automations already contains something live, note what it does; it would
+   have to be rebuilt elsewhere eventually. An empty list means nothing to do.
 
 ### The store — removed 23 Aug 2026
 Nothing was sold there but the US Tour RSVP donation, for an event that has
