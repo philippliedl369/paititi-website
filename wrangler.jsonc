@@ -27,6 +27,18 @@
 	//   npx wrangler secret put RESEND_API_KEY      (contact form email)
 	//   npx wrangler secret put STRIPE_SECRET_KEY   (store/donation checkout)
 	//   npx wrangler secret put NEWSLETTER_API_KEY  (email provider)
-	// Optional KV, to hold signups until the provider is chosen:
-	//   npx wrangler kv namespace create NEWSLETTER  → add "kv_namespaces" here
+	// KV holds newsletter signups until a provider is wired up. Without it the
+	// footer form has nowhere to put an address and tells the visitor sign-up is
+	// unavailable, so create it before going live:
+	//
+	//   npx wrangler kv namespace create NEWSLETTER
+	//
+	// then paste the id it prints here and uncomment:
+	//
+	// "kv_namespaces": [
+	//   { "binding": "NEWSLETTER", "id": "<the id wrangler printed>" }
+	// ]
+	//
+	// Read the addresses back out with:
+	//   node tools/export_subscribers.mjs
 }

@@ -39,31 +39,45 @@ welcome emails) stop once the site is gone.
 So the list, the sending, the unsubscribe footer — all stay where they are.
 Two things change:
 
-1. **Sign-ups from the new site.** Squarespace has no subscribe API, but it has
-   **Sign-up forms**, which work with no Squarespace website at all:
+**Sign-ups from the new site: nothing to find in Squarespace.** Squarespace has
+no subscribe API, and its "Sign-up forms" panel is proving hard to locate —
+so we don't use it. The site keeps its own newsletter box in the footer, and
+Cloudflare stores the addresses (`api.js` → KV). Setup is one command, in
+Step 6 below.
 
-   Email Campaigns dashboard → **Sign-up forms → Create** → name it, switch on
-   the fields you want (email is enough) → save. Then the **•••** beside the
-   form gives two things:
-   - **Embed form** — an HTML snippet for an external site. **Preferred**: the
-     newsletter box stays on our own page and nobody is sent away.
-   - **Copy form** — a plain link to a Squarespace-hosted page. The fallback if
-     the embed proves ugly or heavy.
+Getting those addresses into Squarespace so campaigns can go out is then a
+two-minute job whenever you feel like it:
 
-   Send me whichever one; I wire it in. The embed needs one extra line in
-   `_headers` (its domain added to the Content-Security-Policy) or the browser
-   will silently block it.
+```bash
+node tools/export_subscribers.mjs              # → subscribers-YYYY-MM-DD.csv
+node tools/export_subscribers.mjs --since 2026-09-01   # only what's new
+```
 
-   Later alternative: keep our own form, let Cloudflare store sign-ups (already
-   built), and import the CSV monthly via **Lists & Segments → list → Add
-   Subscribers → Upload a list**.
+Then Squarespace → **Lists & Segments** → the list → **Add Subscribers →
+Upload a list** → choose the CSV → switch on *"These subscribers accept
+marketing"* → **Import**.
 
-2. **Do NOT use Automations for this.** The "Tag Contacts who fill out a form"
-   automation triggers on *"a form completed on your site"* — the Squarespace
-   site, which is the thing going away. Squarespace stops automations once the
-   site is offline, so anything built there is temporary by definition.
-   If Automations already contains something live, note what it does; it would
-   have to be rebuilt elsewhere eventually. An empty list means nothing to do.
+**Do NOT use Automations for this.** The "Tag Contacts who fill out a form"
+automation triggers on *"a form completed on your site"* — the Squarespace
+site, which is the thing going away. Squarespace stops automations once the
+site is offline, so anything built there is temporary by definition. If
+Automations already holds something live, note what it does; an empty list
+means nothing to do.
+
+**The shortcut worth considering.** The domain's DNS already carries a
+MailerLite SPF include *and* a Brevo verification code, so an account at one or
+both already exists. If either one holds (or could hold) the list, sign-ups
+flow automatically with no CSV ever — `api.js` speaks both. It needs three
+values, and the manual step disappears:
+
+```
+NEWSLETTER_PROVIDER   mailerlite | brevo
+NEWSLETTER_API_KEY    that provider's key   (secret)
+NEWSLETTER_LIST_ID    the group / list id
+```
+
+Worth ten minutes finding out who set those up before committing to the
+monthly CSV.
 
 ### The store — removed 23 Aug 2026
 Nothing was sold there but the US Tour RSVP donation, for an event that has
@@ -124,8 +138,20 @@ Open the printed `…workers.dev` address and click through the site.
 3. `npx wrangler secret put RESEND_API_KEY` (paste, Enter), or Cloudflare → Workers & Pages → paititi-institute → Settings → Variables and Secrets → Add secret.
 4. Test the contact form on the workers.dev address after Step 7 (Resend needs the DNS live).
 
-### Step 6 — Newsletter link
-Email Campaigns → Sign-up forms → Create → Share → copy link → send it to me; I point the site's newsletter box at it and redeploy.
+### Step 6 — Newsletter storage
+One command, so the footer sign-up box has somewhere to put an address:
+
+```bash
+npx wrangler kv namespace create NEWSLETTER
+```
+
+It prints an id. Paste it into `wrangler.jsonc` (the commented `kv_namespaces`
+block near the bottom shows exactly where), uncomment those lines, then
+`npx wrangler deploy`. Test the sign-up box on the workers.dev address; then
+`node tools/export_subscribers.mjs` should show your test address.
+
+Skip this only if you go the MailerLite/Brevo route above — then set the three
+`NEWSLETTER_*` values instead and no KV is needed.
 
 ### Step 7 — Switch nameservers (weekday morning)
 Squarespace → Domains → paititi-institute.org → DNS → **Nameservers → Use custom nameservers** → replace the four `ns-cloud-*.googledomains.com` with the two Cloudflare ones → Save. Wait 10 min–2 h (up to 24). Cloudflare emails when Active.
@@ -151,4 +177,4 @@ Cloudflare → Workers & Pages → paititi-institute → Settings → **Domains 
 - Contact form "temporarily unavailable": Workers & Pages → paititi-institute → Logs shows why.
 
 ## Order in one line
-Screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → sign-up form link → switch nameservers, check email → attach domain → sitemap. Exports any time before the eventual website cancellation, which can wait until the plan runs out in 2027.
+Screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → newsletter KV → switch nameservers, check email → attach domain → sitemap. Exports any time before the eventual website cancellation, which can wait until the plan runs out in 2027.
