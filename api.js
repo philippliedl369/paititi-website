@@ -116,13 +116,22 @@ const NEWSLETTER_PROVIDERS = {
     headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}` },
     body: { email_address: email, status: confirm ? 'pending' : 'subscribed' },
   }),
-  // Kit (formerly ConvertKit): LIST_ID is a form id, and the form's own
-  // setting decides whether it double opts in.
-  kit: (email, env) => ({
-    url: `https://api.kit.com/v4/forms/${env.NEWSLETTER_LIST_ID}/subscribers`,
-    headers: { 'X-Kit-Api-Key': env.NEWSLETTER_API_KEY },
-    body: { email_address: email },
-  }),
+  // Kit (formerly ConvertKit): LIST_ID is a form id, and the form's own setting
+  // decides whether it double opts in. Two calls, because /forms/…/subscribers
+  // only accepts an address Kit already knows — a brand new one 404s there, so
+  // it has to be created first. A returning subscriber makes step one a no-op.
+  kit: (email, env) => ([
+    {
+      url: 'https://api.kit.com/v4/subscribers',
+      headers: { 'X-Kit-Api-Key': env.NEWSLETTER_API_KEY },
+      body: { email_address: email },
+    },
+    {
+      url: `https://api.kit.com/v4/forms/${env.NEWSLETTER_LIST_ID}/subscribers`,
+      headers: { 'X-Kit-Api-Key': env.NEWSLETTER_API_KEY },
+      body: { email_address: email },
+    },
+  ]),
   mailerlite: (email, env) => ({
     url: 'https://connect.mailerlite.com/api/subscribers',
     headers: { authorization: `Bearer ${env.NEWSLETTER_API_KEY}`, accept: 'application/json' },
@@ -171,15 +180,20 @@ async function newsletter(body, env, deps) {
     // Default to double opt-in: the list is being rebuilt on a cold sending
     // domain, and confirmed addresses are what keep it out of spam folders.
     const confirm = env.NEWSLETTER_DOUBLE_OPT_IN !== 'false';
-    const req = build(email, { ...env, NEWSLETTER_API_KEY: key, NEWSLETTER_LIST_ID: list }, confirm);
-    const res = await fetch(req.url, {
-      method: 'POST',
-      headers: { ...JSON_HEADERS, ...req.headers },
-      body: JSON.stringify(req.body),
-    });
-    if (!res.ok) {
+    const built = build(email, { ...env, NEWSLETTER_API_KEY: key, NEWSLETTER_LIST_ID: list }, confirm);
+    // Most providers subscribe in one call; Kit needs two (create, then join
+    // the form), so a builder may return a list of requests to run in order.
+    for (const req of Array.isArray(built) ? built : [built]) {
+      const res = await fetch(req.url, {
+        method: 'POST',
+        headers: { ...JSON_HEADERS, ...req.headers },
+        body: JSON.stringify(req.body),
+      });
+      if (res.ok) continue;
       const detail = await res.text().catch(() => '');
-      if (res.status < 500 && ALREADY_SUBSCRIBED.test(detail)) return ok({ ok: true });
+      // Signing up twice is not an error worth showing anyone — and in a
+      // two-step provider the remaining step still has to run.
+      if (res.status < 500 && ALREADY_SUBSCRIBED.test(detail)) continue;
       console.error('[paititi] newsletter:', name, res.status, detail.slice(0, 300));
       return fail(502, soon);
     }
