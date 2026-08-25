@@ -11,12 +11,12 @@
 <x-dc>
 <helmet>
 <title>Discover Paititi | Paititi Institute</title>
-<meta name="description" content="The Paititi Institute for the Preservation of Ecology and Indigenous Culture is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.">
+<meta name="description" content="A short introduction to the Paititi Institute — a non-profit for the preservation of ecology and Indigenous culture, founded in 2010. Start with the book, the documentaries, our retreats and courses, or the initiatives you can support.">
 <meta property="og:title" content="Discover Paititi | Paititi Institute">
-<meta property="og:description" content="The Paititi Institute for the Preservation of Ecology and Indigenous Culture is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.">
+<meta property="og:description" content="A short introduction to the Paititi Institute — a non-profit for the preservation of ecology and Indigenous culture, founded in 2010. Start with the book, the documentaries, our retreats and courses, or the initiatives you can support.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="/assets/home/paititi-lizpeace-63.webp">
 <meta property="og:site_name" content="Paititi Institute">
-<meta property="og:image" content="/assets/home/discoverpaititi-01.webp">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -30,30 +30,209 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
-  /* Opening section: a bright photo behind a light scrim, so the copy stays dark. */
-  .dp-welcome{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.15);min-height:866px}
+  /* ==========================================================================
+     /discoverpaititi — the page that gets shared on its own.
 
-  .dp-hero{--pt-hero-h:660px}
-  .dp-hero h1,.dp-hero p{text-align:center}
+     It is not a chapter of the site; it is the front door someone lands on
+     from a link with no idea who we are. So it answers three things in order
+     — who this is, where to go next, and what the name means — and then
+     stops. The long-form telling lives at /about-us and is not repeated here.
 
-  .dp-dark{--pt-bg:#2A1736;color:#fff}
-  .dp-dark h1,.dp-dark h2,.dp-dark h3,.dp-dark summary{color:#fff}
-  .dp-dark .pt-acc{border-top-color:rgba(255,255,255,.3)}
-  .dp-dark .pt-acc-item{border-bottom-color:rgba(255,255,255,.3)}
-  .dp-dark .pt-acc-item > summary::after{border-color:#fff}
-  .dp-white{--pt-bg:#fff}
-  .dp-white h2{color:#210416}
-  .dp-plum{--pt-bg:#584364;color:#fff}
-  .dp-plum h3,.dp-plum p{color:#fff}
+     Nothing on this page uses the fluid engine. Every other page is a
+     transcription of a measured Squarespace grid, but this one has no live
+     original to match, so it is built in flow: the card grids reflow on their
+     own instead of needing a hand-written grid-area per block and a second
+     set of rules to undo them below 1180px.
 
-  .dp-clip img{clip-path:polygon(14% 0,86% 0,86% 14%,100% 14%,100% 86%,86% 86%,86% 100%,14% 100%,14% 86%,0 86%,0 14%,14% 14%)}
-  .ab-video{width:100%;height:100%;object-fit:cover;display:block}
+     The card shape (48px 0 corners, white on lavender, lift on hover) and the
+     hairline fact row are lifted from Home deliberately. This page used to
+     look like it came from a different site than the one it points at.
+     ========================================================================== */
+
+  /* ---- Hero ---------------------------------------------------------------
+     The old hero left --pt-hero-ink at its dark default, so "Discover Paititi"
+     rendered in #210416 over a night-time jungle photo and was effectively
+     invisible. It is white here, over a top-to-bottom scrim that is heaviest
+     at the foot where the fact row sits. */
+  .dp-hero{
+    --pt-bg:#210416;
+    --pt-scrim:linear-gradient(to bottom,rgba(33,4,22,.34) 0%,rgba(33,4,22,.54) 48%,rgba(33,4,22,.78) 100%);
+    --pt-hero-ink:#fff;
+    --pt-hero-h:800px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  /* The header floats over the hero, so the clearance has to be reserved here.
+     justify-content centres the content inside what is left. */
+  .dp-hero-in{
+    width:100%;max-width:1060px;margin:0 auto;text-align:center;
+    padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 48px) 24px 56px;
+  }
+  .dp-mark{width:min(340px,72vw);height:auto;display:block;margin:0 auto 22px;opacity:.92}
+  /* Every rule below that sets margin, font-size or colour on a p or an h*
+     carries `.pt-page main`. The base scale in paititi.css is written
+     `.pt-page main p` — (0,1,2) — so a bare `.dp-hero-lede` (0,1,0) loses to it
+     and the declaration silently does nothing. It is the same specificity trap
+     the top of paititi.css documents for `color`. */
+  .pt-page main .dp-hero h1{margin:0}
+  .pt-page main .dp-hero-lede{max-width:720px;margin:22px auto 0;font-size:19.2px;opacity:.94}
+
+  /* Three facts, set as figures rather than a sentence: the number lands, the
+     label explains it. Hairlines and no boxes, so the row sits on the photo. */
+  .dp-facts{
+    display:flex;flex-wrap:wrap;justify-content:center;
+    max-width:900px;margin:40px auto 0;padding-top:26px;
+    border-top:1px solid rgba(255,255,255,.28);
+  }
+  .dp-fact{flex:1 1 210px;padding:0 26px}
+  .dp-fact + .dp-fact{border-left:1px solid rgba(255,255,255,.28)}
+  .dp-fact b{display:block;font-family:var(--font-display);font-weight:400;
+    font-size:33px;line-height:1.15;letter-spacing:normal;margin-bottom:5px}
+  .dp-fact span{display:block;font-size:15px;line-height:1.55;opacity:.88}
+
+  .dp-scroll{
+    display:inline-flex;align-items:center;gap:10px;margin-top:38px;
+    font-size:15.5px;font-weight:700;letter-spacing:.06em;color:#fff;
+    text-decoration:none;padding:14px 26px;border-radius:16px 0;
+    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8);
+    transition:background .2s ease;
+  }
+  .dp-scroll:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- Choose where to begin ---------------------------------------------
+     Six destinations, previously six identical plum bricks whose labels ran to
+     three lines and gave no clue which were ours and which were off-site.
+     Now two tiers: the book and the current film carry pictures at size, the
+     other four are compact. Every card says what kind of thing it is before it
+     says its name, and off-site ones are marked. */
+  .dp-begin{padding:92px 0 104px}
+  .dp-head{max-width:1200px;margin:0 auto;padding:0 24px;text-align:center}
+  .pt-page main .dp-head h2{color:#584364}
+  .pt-page main .dp-head p{max-width:780px;margin:20px auto 0;font-size:19.2px}
+
+  .pt-page main .dp-rail{
+    max-width:1324px;margin:60px auto 0;padding:0 58px;
+    display:flex;align-items:center;gap:20px;
+    font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:#584364;line-height:1.4;
+  }
+  .dp-rail::after{content:"";flex:1;height:1px;background:rgba(88,67,100,.28)}
+
+  .dp-grid{max-width:1324px;margin:0 auto;padding:24px 58px 0;display:grid;gap:28px}
+  .dp-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dp-grid-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+
+  .dp-card{
+    display:flex;background:#fff;border-radius:48px 0;overflow:hidden;
+    text-decoration:none;color:inherit;
+    box-shadow:0 10px 30px rgba(33,4,22,.08);
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .dp-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(33,4,22,.14)}
+  .dp-media{position:relative;overflow:hidden;background:#2A1736}
+  .dp-media img{width:100%;height:100%;object-fit:cover;display:block}
+  /* A book cover is the one picture here that must not be cropped — the title
+     is part of it. Contain it on the plum ground instead, with room to breathe
+     so it reads as a jacket rather than a mis-fitted photo. */
+  .dp-media-fit{padding:20px;background:#2A1736}
+  .dp-media-fit img{object-fit:contain}
+
+  /* Featured: picture beside the copy, so a portrait book cover and a
+     landscape film still can share a row without either being cropped to a
+     letterbox. */
+  .dp-card-f{flex-direction:row;min-height:340px}
+  .dp-card-f .dp-media{flex:0 0 42%}
+  .dp-card-f .dp-body{flex:1;padding:34px 36px}
+  .pt-page main .dp-card-f h3{font-size:29px}
+
+  /* Compact: picture on top, four across. */
+  .dp-card-c{flex-direction:column}
+  .dp-card-c .dp-media{flex:none;height:172px}
+  .dp-card-c .dp-body{padding:22px 24px 26px}
+  .pt-page main .dp-card-c h3{font-size:22.5px}
+  .pt-page main .dp-card-c p{font-size:15.5px;line-height:1.7}
+
+  .dp-body{display:flex;flex-direction:column;gap:12px;flex:1}
+  .dp-kicker{font-size:12.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:#6B5378;line-height:1.4}
+  .pt-page main .dp-card h3{font-family:var(--font-display);font-weight:400;
+    line-height:1.28;letter-spacing:normal;color:#584364;margin:0}
+  .pt-page main .dp-card p{font-weight:300;line-height:1.75;color:#210416;margin:0}
+  .dp-go{margin-top:auto;padding-top:10px;font-size:15.5px;font-weight:700;color:#584364}
+
+  /* A play target on the two film cards, so they read as watchable at a glance
+     rather than as another link. */
+  .dp-play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px rgba(33,4,22,.32);
+  }
+  .dp-play::after{
+    content:"";width:0;height:0;margin-left:5px;
+    border-left:19px solid #584364;
+    border-top:12px solid transparent;border-bottom:12px solid transparent;
+  }
+  .dp-card-c .dp-play{width:48px;height:48px}
+  .dp-card-c .dp-play::after{margin-left:4px;border-left-width:15px;
+    border-top-width:9px;border-bottom-width:9px}
+
+  /* ---- What the name means ------------------------------------------------ */
+  .dp-meaning{--pt-bg:#2A1736;color:#fff;padding:88px 0 96px}
+  .pt-page main .dp-meaning h2{color:#fff}
+  .dp-in{max-width:1000px;margin:0 auto;padding:0 24px}
+  .dp-in-narrow{max-width:840px}
+  .dp-meaning .pt-embed{margin-top:44px;border-radius:24px 0;overflow:hidden}
+  .dp-meaning .dp-go{display:inline-block;margin-top:32px;color:#fff;
+    text-decoration:underline;text-underline-offset:4px}
+
+  /* ---- Five key areas ----------------------------------------------------- */
+  .dp-areas{--pt-bg:#fff;padding:88px 0 96px}
+  .pt-page main .dp-areas h2{color:#584364}
+  .dp-areas .pt-acc{margin-top:40px}
+
+  /* ---- Closing ------------------------------------------------------------ */
+  .dp-close{--pt-bg:#584364;color:#fff;padding:84px 0 96px}
+  .dp-close .pt-quote{padding:0 24px}
+  .dp-close .pt-quote p{opacity:.86}
 
   @media (max-width:1180px){
-    .dp-welcome{min-height:0}
-    .dp-hero h1{font-size:40px}
+    /* paititi.css gives .pt-hero its own header clearance below this width, so
+       the inner block must not reserve it a second time. */
+    .dp-hero{--pt-hero-h:0}
+    .dp-hero-in{padding:0 24px}
+    .dp-facts{max-width:520px}
+    .dp-fact{flex:1 1 100%;padding:0}
+    .dp-fact + .dp-fact{border-left:0;border-top:1px solid rgba(255,255,255,.22);
+      margin-top:20px;padding-top:20px}
+
+    .dp-begin{padding:64px 0 72px}
+    .dp-rail{margin-top:40px;padding:0 24px}
+    .dp-grid{padding:22px 24px 0}
+    .dp-grid-2{grid-template-columns:1fr}
+    .dp-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+    .dp-meaning,.dp-areas{padding:64px 0 72px}
+    .dp-close{padding:64px 0 72px}
   }
-  /* The footer wave must match this page's final section colour. */
+  @media (max-width:640px){
+    .dp-hero-in{padding:0 20px}
+    .dp-begin{padding:48px 0 56px}
+    .dp-grid{padding:20px 20px 0;gap:20px}
+    .dp-grid-4{grid-template-columns:1fr}
+    .dp-rail{padding:0 20px}
+    /* A 42% media pane is 130px on a phone — stack instead. */
+    .dp-card-f{flex-direction:column;min-height:0}
+    .dp-card-f .dp-media{flex:none;height:210px}
+    /* The contained book jacket needs the extra height twice over: it loses
+       the padding at both ends and it is portrait. */
+    .dp-card-f .dp-media-fit{height:290px}
+    .dp-card-f .dp-body{padding:24px 24px 28px}
+    .dp-card,.dp-meaning .pt-embed{border-radius:32px 0}
+    .dp-card-c .dp-media{height:190px}
+  }
+
+  /* The footer wave rises into the section above it, so it has to be that
+     section's colour. */
   footer.pt-footer{--pt-footer-wave:#584364}
 </style>
 </helmet>
@@ -61,216 +240,245 @@
 <dc-import name="SiteHeader" active="about" hint-size="100%,209px"></dc-import>
 <main>
 
-  <!-- ===== Welcome / choose where to begin ===== -->
-  <section class="pt-sec pt-sec-flat dp-welcome">
-    <div class="pt-sec-bg">
-      <img src="/assets/home/discoverpaititi-01.webp"
-           srcset="/assets/r/home/discoverpaititi-01-320w.webp 320w, /assets/r/home/discoverpaititi-01-480w.webp 480w, /assets/r/home/discoverpaititi-01-640w.webp 640w, /assets/r/home/discoverpaititi-01-800w.webp 800w, /assets/r/home/discoverpaititi-01-1080w.webp 1080w, /assets/r/home/discoverpaititi-01-1280w.webp 1280w, /assets/r/home/discoverpaititi-01-1600w.webp 1600w, /assets/r/home/discoverpaititi-01-2000w.webp 2000w, /assets/home/discoverpaititi-01.webp 2500w"
-           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
-           width="2500"
-           height="1406"
-           decoding="async" alt="Sunlight through the Amazon rainforest canopy" loading="eager" fetchpriority="high">
-    </div>
-    <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:95px;--pt-rows:13">
-      <div class="pt-prose" style="grid-area:2 / 1 / 7 / 23">
-        <p class="pt-lg"><strong><em>Welcome to Paititi. We're grateful you're here. 🌿 Discover practical Indigenous wisdom for contemporary life while helping preserve the communities, cultures, and ecosystems that keep these traditions alive.</em></strong></p>
-        <p class="pt-lg"><strong><em>Choose where you&rsquo;d like to begin:</em></strong></p>
-      </div>
-      <div style="grid-area:6 / 1 / 9 / 7">
-        <a class="pt-btn" href="https://www.amazon.com/Beyond-Ayahuasca-Unlocking-Evolutionary-Indigenous/dp/1401979599/" target="_blank" rel="noopener">Int'l Bestseller book Beyond Ayahuasca</a>
-      </div>
-      <div style="grid-area:6 / 7 / 9 / 13">
-        <a class="pt-btn" href="https://www.youtube.com/watch?v=QSP8Jw5y0fk" target="_blank" rel="noopener">Recent Documentary: Ayahuasca - The Medicine For Awakening</a>
-      </div>
-      <div style="grid-area:6 / 13 / 9 / 19">
-        <a class="pt-btn" href="https://journey.thesacredscience.com/screening/watch-page.html" target="_blank" rel="noopener">2010 Award Winning Documentary: The Sacred Science</a>
-      </div>
-      <div style="grid-area:9 / 1 / 12 / 7">
-        <a class="pt-btn" href="/retreats#events">Upcoming Retreats and Events</a>
-      </div>
-      <div style="grid-area:9 / 7 / 12 / 13">
-        <a class="pt-btn" href="/online-courses">Online At Your Pace Courses</a>
-      </div>
-      <div style="grid-area:9 / 13 / 12 / 19">
-        <a class="pt-btn" href="/initiatives">Learn About and Support our Non-Profit Initiatives</a>
-      </div>
-      <div class="pt-vc" style="grid-area:12 / 1 / 14 / 25">
-        <h4><strong>Stay connected. Join our newsletter for occasional updates, upcoming events, and stories from the communities we serve. 🌿💓</strong><br>🪷<strong>At the bottom of this page ⏬</strong></h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Hero ===== -->
-  <section class="pt-sec pt-hero dp-hero">
+  <!-- ===== Hero: who this is ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero dp-hero">
     <div class="pt-sec-bg">
       <img src="/assets/home/paititi-lizpeace-63.webp"
            srcset="/assets/r/home/paititi-lizpeace-63-320w.webp 320w, /assets/r/home/paititi-lizpeace-63-480w.webp 480w, /assets/r/home/paititi-lizpeace-63-640w.webp 640w, /assets/r/home/paititi-lizpeace-63-800w.webp 800w, /assets/r/home/paititi-lizpeace-63-1080w.webp 1080w, /assets/r/home/paititi-lizpeace-63-1280w.webp 1280w, /assets/r/home/paititi-lizpeace-63-1600w.webp 1600w, /assets/r/home/paititi-lizpeace-63-2000w.webp 2000w, /assets/home/paititi-lizpeace-63.webp 2500w"
            sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
            width="2500"
            height="1662"
-           decoding="async" alt="Paititi Institute community gathered outdoors in the Peruvian Amazon" loading="eager">
+           decoding="async" alt="Paititi Institute community gathered outdoors in the Peruvian Amazon" loading="eager" fetchpriority="high">
     </div>
-    <div class="pt-fluid" style="--pt-grid-top:117px;--pt-grid-bot:146px;--pt-rows:11;--pt-row-h:26.3906px">
-      <div class="pt-hero-panel pt-prose" style="grid-area:1 / 7 / 8 / 19">
-        <h1><strong>Discover Paititi</strong></h1>
-        <p class="pt-lg">We are a non-profit organization founded in 2010, dedicated to Mother Earth and the Infinite Human Potential.</p>
-      </div>
-      <div class="pt-fit" style="grid-area:7 / 9 / 12 / 17">
-        <img src="/assets/brand/icon-hummingbird.webp"
+
+    <div class="dp-hero-in">
+      <img class="dp-mark" src="/assets/brand/icon-hummingbird.webp"
            srcset="/assets/r/brand/icon-hummingbird-320w.webp 320w, /assets/r/brand/icon-hummingbird-480w.webp 480w, /assets/r/brand/icon-hummingbird-640w.webp 640w, /assets/r/brand/icon-hummingbird-800w.webp 800w, /assets/r/brand/icon-hummingbird-1080w.webp 1080w, /assets/r/brand/icon-hummingbird-1280w.webp 1280w, /assets/brand/icon-hummingbird.webp 1317w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 393px"
            width="1317"
            height="574"
-           decoding="async" alt="Line drawing of a hummingbird surrounded by ornate floral vines and leaves." loading="eager">
+           decoding="async" alt="" loading="eager">
+
+      <h1><strong>Discover Paititi</strong></h1>
+      <p class="dp-hero-lede">A non-profit for the preservation of ecology and Indigenous culture, working alongside communities in the Peruvian Amazon and Andes &mdash; in service to Mother Earth and the infinite human potential.</p>
+
+      <div class="dp-facts">
+        <div class="dp-fact"><b>Since 2010</b><span>a grassroots institute rooted in the Amazon and the Andes</span></div>
+        <div class="dp-fact"><b>1,516 ha</b><span>of biodiversity protected as the Paititi Biocultural Reserve</span></div>
+        <div class="dp-fact"><b>501(c)(3)</b><span>fiscally sponsored in the US by Empowerment WORKS</span></div>
       </div>
+
+      <a class="dp-scroll" href="#begin">Choose where to begin <span aria-hidden="true">&darr;</span></a>
     </div>
   </section>
 
-  <!-- ===== Founding vision ===== -->
-  <section class="pt-sec" style="--pt-bg:#F1EAF6">
+  <!-- ===== Choose where to begin ===== -->
+  <section class="pt-sec dp-begin" id="begin" style="--pt-bg:#F1EAF6" aria-label="Choose where to begin">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:46">
-      <div style="grid-area:1 / 3 / 5 / 23">
-        <h2><strong>&ldquo;Paititi&rdquo;</strong>, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
-      </div>
-      <div class="pt-prose" style="grid-area:5 / 6 / 16 / 20">
-        <p class="pt-lg">Through the awakened spirit of the individual comes the greatest potential for the transformation of the planet. <strong>The Paititi Institute for the Preservation of Ecology and Indigenous Culture</strong> is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.</p>
-        <p>The founding vision of our organization is to be a conduit for innermost heart values to manifest into material realm. Throughout all our programs and initiatives, our efforts focus on supporting a society rooted in true values. In recognition of timeless, essential human values, ancestral wisdom is translated into practical and relevant modern circumstances</p>
-      </div>
-      <div class="pt-fit" style="grid-area:13 / 19 / 18 / 25">
-        <img src="/assets/brand/icon-donate.webp"
-           srcset="/assets/r/brand/icon-donate-320w.webp 320w, /assets/r/brand/icon-donate-480w.webp 480w, /assets/r/brand/icon-donate-640w.webp 640w, /assets/brand/icon-donate.webp 700w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 292px"
-           width="700"
-           height="348"
-           decoding="async" alt="Outline of two hands forming a heart shape" loading="lazy">
-      </div>
-      <div style="grid-area:17 / 3 / 33 / 23">
-        <div class="pt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/mAh0kK0JBQM?start=1" title="The Heart of Paititi Institute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="pt-prose" style="grid-area:34 / 4 / 47 / 22">
-        <p>As humans, we are inexorably linked to the earth and each other. The intercultural bridges our organization is dedicated to developing are based on the essential nature of reciprocity and interconnectedness that this planet is sustained by. As part of this magnificent symbiotic organism, we are dedicated to co-creating the possibility of a meaningful life and a beautiful world for our children and future generations.</p>
-        <p>Dedication to self-realization of highest potential, while humbly sharing it with each other for the greatest benefit of all, reflects the symbiotic quality of Nature&rsquo;s organic intelligence we are all a part of. This is a core value of Paititi and informs the essence of all our projects, such as healing serious health conditions, consciousness transformation, land stewardship, community gardening and permaculture, free natural medicine campaigns for rural communities or social development initiatives. <em>Being a responsible, hearted-centered human being is the key to the blossoming of life on our planet.</em></p>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== Full-bleed band ===== -->
-  <section class="pt-sec pt-band" style="--pt-bg:#210416;--pt-band-h:660px">
-    <div class="pt-sec-bg">
-      <img src="/assets/home/screenshot-2026-03-27-at-10011-am.webp"
+    <div class="dp-head">
+      <h2><strong>Choose where to begin</strong></h2>
+      <p>Welcome, and thank you for being here. Whichever door you open, it leads to the same work: practical Indigenous wisdom for contemporary life, and the preservation of the communities, cultures and ecosystems that keep these traditions alive.</p>
+    </div>
+
+    <p class="dp-rail">Read &amp; watch</p>
+    <div class="dp-grid dp-grid-2">
+
+      <a class="dp-card dp-card-f" href="https://www.amazon.com/Beyond-Ayahuasca-Unlocking-Evolutionary-Indigenous/dp/1401979599/" target="_blank" rel="noopener">
+        <div class="dp-media dp-media-fit">
+          <img src="/assets/home/beyond-ayahuasca.webp"
+           srcset="/assets/r/home/beyond-ayahuasca-320w.webp 320w, /assets/r/home/beyond-ayahuasca-480w.webp 480w, /assets/r/home/beyond-ayahuasca-640w.webp 640w, /assets/r/home/beyond-ayahuasca-800w.webp 800w, /assets/r/home/beyond-ayahuasca-1080w.webp 1080w, /assets/home/beyond-ayahuasca.webp 1186w"
+           sizes="(max-width:640px) 93vw, (max-width:1180px) 672px, 650px"
+           width="1186"
+           height="1574"
+           decoding="async" alt="Cover of the book Beyond Ayahuasca by Roman Hanis" loading="lazy">
+        </div>
+        <div class="dp-body">
+          <span class="dp-kicker">Book &middot; Bestseller</span>
+          <h3>Beyond Ayahuasca</h3>
+          <p>Roman Hanis on unlocking the evolutionary science of Indigenous Amazonian wisdom &mdash; the three pillars of the teachings, and step-by-step guidance for putting them to work in an ordinary life.</p>
+          <span class="dp-go">Find it on Amazon <span aria-hidden="true">&#8599;</span></span>
+        </div>
+      </a>
+
+      <a class="dp-card dp-card-f" href="https://www.youtube.com/watch?v=QSP8Jw5y0fk" target="_blank" rel="noopener">
+        <div class="dp-media">
+          <img src="/assets/retreats/coco-ceremony.webp"
+           srcset="/assets/r/retreats/coco-ceremony-320w.webp 320w, /assets/r/retreats/coco-ceremony-480w.webp 480w, /assets/r/retreats/coco-ceremony-640w.webp 640w, /assets/r/retreats/coco-ceremony-800w.webp 800w, /assets/r/retreats/coco-ceremony-1080w.webp 1080w, /assets/r/retreats/coco-ceremony-1280w.webp 1280w, /assets/retreats/coco-ceremony.webp 1500w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="1500"
+           height="1001"
+           decoding="async" alt="Evening ceremony circle by candlelight inside the maloka at the Paititi centre" loading="lazy">
+          <span class="dp-play" aria-hidden="true"></span>
+        </div>
+        <div class="dp-body">
+          <span class="dp-kicker">Documentary &middot; Watch free</span>
+          <h3>Ayahuasca: The Medicine&nbsp;for Awakening</h3>
+          <p>Our most recent film, shot at the reserve and with the communities we work alongside. The fullest picture of what actually happens here.</p>
+          <span class="dp-go">Watch on YouTube <span aria-hidden="true">&#8599;</span></span>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="dp-rail">Take part</p>
+    <div class="dp-grid dp-grid-4">
+
+      <a class="dp-card dp-card-c" href="https://journey.thesacredscience.com/screening/watch-page.html" target="_blank" rel="noopener">
+        <div class="dp-media">
+          <img src="/assets/home/screenshot-2026-03-27-at-10011-am.webp"
            srcset="/assets/r/home/screenshot-2026-03-27-at-10011-am-320w.webp 320w, /assets/r/home/screenshot-2026-03-27-at-10011-am-480w.webp 480w, /assets/r/home/screenshot-2026-03-27-at-10011-am-640w.webp 640w, /assets/r/home/screenshot-2026-03-27-at-10011-am-800w.webp 800w, /assets/r/home/screenshot-2026-03-27-at-10011-am-1080w.webp 1080w, /assets/r/home/screenshot-2026-03-27-at-10011-am-1280w.webp 1280w, /assets/home/screenshot-2026-03-27-at-10011-am.webp 1498w"
            sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
            width="1498"
            height="972"
            decoding="async" alt="Walkers beneath a giant kapok tree in the Amazon rainforest" loading="lazy">
-    </div>
-  </section>
-
-  <!-- ===== Key areas (accordion) ===== -->
-  <section class="pt-sec dp-dark">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:17">
-      <div style="grid-area:2 / 1 / 4 / 25">
-        <h2>Paititi&rsquo;s Initiatives Fall Into 5 Key Areas:</h2>
-      </div>
-      <div style="grid-area:4 / 1 / 18 / 25">
-        <div class="pt-acc">
-
-                              <details class="pt-acc-item">
-            <summary>Preserving &amp; Integrating of Ancestral Wisdom</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>The cumulative wisdom of humanity containing the essential methods and insights necessary to liberate from the worst suffering is available today through the living millennial lineages from around the world. This wisdom is geared towards an awakening of human organism to the unconditional nature of existence beyond all cultural, societal and personal differences and can only be honored through each individual&rsquo;s inner reconciliation. In our organization the living wisdom lineages of Tibet, The Amazon and The Andes are applied in a direct and experiential way encouraging each individual to face themselves, find inner peace and remember what it is to be a happy and healthy human being. These are &ldquo;living wisdom traditions&rdquo; because it is through each individual bringing this wisdom into daily life that we find genuine transformation of our experience beyond conceptual knowledge.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Consciousness Transformation &amp; Evolutionary Healing</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>We provide a supportive environment through retreats, courses and community living where individuals can safely immerse in the evolutionary journey of self-realization. The <u>skillful means and rites of passage cultivated </u>within such an intentional space allow individuals to realize their unique gifts, qualities, and talents, to be embodied in every-day community living. As we collectively move through powerful rites of passage we unearth our creative potential and learn to embody and share our unique gifts in community.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Restoring &amp; Maintaining Health through Traditional &amp; Natural Methods</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>We utilize indigenous medicine practices and natural healing modalities from around the world to address sickness and disease on a variety of levels, from psycho-spiritual to somatic. In our experience, this approach to healing addresses the root cause of diseases and includes the healing of each individual as a whole rather than merely targeting symptoms. Today, more than any other time in history, we believe that the world needs viable models for this type of comprehensive and evolutionary healing.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Earth Stewardship via Eco-regenerative Community Living</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>We are the stewards of the 1,516-hectare Paititi Biocultural Reserve, a nature sanctuary where our land-based community and retreat center is based. Our center in Peru is a community platform where we can practice to embody a holistic model for the world. We work with Permaculture and local ancestral wisdom to support us in stewarding this land in the most conscious way possible.</p>
-            </div>
-          </details>
-
-          <details class="pt-acc-item">
-            <summary>Conservation &amp; Regeneration of Natural Resources</summary>
-            <div class="pt-acc-body pt-prose">
-              <p>We are dedicated to the preservation and restoration of our precious natural resources. We work with permaculture and natural farming techniques creating vibrant, local food economies. Our food forests and gardens serve as an educational model and and experiential learning group of how to live in harmonious relationship with Pachamama (Mother Earth). We also work to support local Peruvian communities to find fair trade markets for ecological &amp; regenerative products.</p>
-            </div>
-          </details>
-
+          <span class="dp-play" aria-hidden="true"></span>
         </div>
+        <div class="dp-body">
+          <span class="dp-kicker">Documentary &middot; 2010</span>
+          <h3>The Sacred Science</h3>
+          <p>The award-winning film that first brought this work to a wider audience.</p>
+          <span class="dp-go">Watch it <span aria-hidden="true">&#8599;</span></span>
+        </div>
+      </a>
+
+      <a class="dp-card dp-card-c" href="/retreats#events">
+        <div class="dp-media">
+          <img src="/assets/home/home-01.webp"
+           srcset="/assets/r/home/home-01-320w.webp 320w, /assets/r/home/home-01-480w.webp 480w, /assets/r/home/home-01-640w.webp 640w, /assets/r/home/home-01-800w.webp 800w, /assets/r/home/home-01-1080w.webp 1080w, /assets/r/home/home-01-1280w.webp 1280w, /assets/r/home/home-01-1600w.webp 1600w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="2352"
+           height="1322"
+           decoding="async" alt="Retreat gathering at the Paititi Institute centre in Peru" loading="lazy">
+        </div>
+        <div class="dp-body">
+          <span class="dp-kicker">In person &middot; Peru</span>
+          <h3>Retreats &amp; Events</h3>
+          <p>Immersive gatherings at the reserve, with dates through the coming year.</p>
+          <span class="dp-go">See what&rsquo;s upcoming &rarr;</span>
+        </div>
+      </a>
+
+      <a class="dp-card dp-card-c" href="/online-courses">
+        <div class="dp-media">
+          <img src="/assets/retreats/online-courses-01.webp"
+           srcset="/assets/r/retreats/online-courses-01-320w.webp 320w, /assets/r/retreats/online-courses-01-480w.webp 480w, /assets/r/retreats/online-courses-01-640w.webp 640w, /assets/r/retreats/online-courses-01-800w.webp 800w, /assets/r/retreats/online-courses-01-1080w.webp 1080w, /assets/r/retreats/online-courses-01-1280w.webp 1280w, /assets/r/retreats/online-courses-01-1600w.webp 1600w, /assets/retreats/online-courses-01.webp 1788w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="1788"
+           height="1206"
+           decoding="async" alt="Roman Hanis teaching outdoors beside an Andean lake" loading="lazy">
+        </div>
+        <div class="dp-body">
+          <span class="dp-kicker">Online &middot; At your pace</span>
+          <h3>Living Wisdom Courses</h3>
+          <p>Breathwork, Qigong and dreamwork you can practise from anywhere.</p>
+          <span class="dp-go">Browse the courses &rarr;</span>
+        </div>
+      </a>
+
+      <a class="dp-card dp-card-c" href="/initiatives">
+        <div class="dp-media">
+          <img src="/assets/initiatives/reserve-valley.webp"
+           srcset="/assets/r/initiatives/reserve-valley-320w.webp 320w, /assets/r/initiatives/reserve-valley-480w.webp 480w, /assets/r/initiatives/reserve-valley-640w.webp 640w, /assets/r/initiatives/reserve-valley-800w.webp 800w, /assets/initiatives/reserve-valley.webp 1000w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 342px"
+           width="1000"
+           height="533"
+           decoding="async" alt="Forested valley of the Paititi Biocultural Reserve" loading="lazy">
+        </div>
+        <div class="dp-body">
+          <span class="dp-kicker">Non-profit &middot; Support</span>
+          <h3>Our Initiatives</h3>
+          <p>The reserve, the Yahua Ancestral School, and the free medicine clinics.</p>
+          <span class="dp-go">Learn how to help &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== What the name means ===== -->
+  <section class="pt-sec dp-meaning" aria-label="What Paititi means">
+    <div class="pt-sec-bg"></div>
+    <div class="dp-in">
+      <h2><strong>&ldquo;Paititi&rdquo;</strong>, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
+      <div class="pt-prose dp-in-narrow" style="margin-top:32px">
+        <p class="pt-lg">Through the awakened spirit of the individual comes the greatest potential for the transformation of the planet. Our work is to demonstrate what is possible through ordinary, grassroots human effort &mdash; ancestral wisdom translated into practical and relevant modern circumstances, across healing, land stewardship, community living and social development alike.</p>
+        <a class="dp-go" href="/about-us">Read the longer story &rarr;</a>
+      </div>
+      <div class="pt-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/mAh0kK0JBQM?start=1" title="The Heart of Paititi Institute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===== Embodying our highest potential ===== -->
-  <section class="pt-sec dp-white">
+  <!-- ===== Five key areas ===== -->
+  <section class="pt-sec dp-areas" aria-label="Our five key areas">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:25">
-      <div style="grid-area:1 / 1 / 5 / 19">
-        <h2>How do we Embody <strong>our highest potential</strong> and live in harmony with each other and the planet?</h2>
-      </div>
-      <div class="pt-prose" style="grid-area:5 / 13 / 26 / 25">
-        <p class="pt-lg"><strong>From the awakened spirit of the individual comes the greatest potential for the transformation of the planet.</strong></p>
-        <p class="pt-lg">We believe that the only way forward is to be the change. Our work as an institute is rooted in our efforts to embody this and to share tools for others to do the same. Through the practical application of the ancient wisdom of humanity within the modern lives, we build bridges for the physical, emotional, and spiritual healing of our ecology from the inside and out.</p>
-        <p>In this natural way, we channel the healing and rejuvenation of the planet herself. Using holistic models based upon our points of focus listed above, we engage as a community to improve social and environmental life via spiritual evolution and maturation on the collective and individual levels. We utilize the planetary wisdom of humanity to become fully conscious and responsible human beings embracing our shared heart.</p>
-        <p>The ancient, unbroken, and living lineages of direct consciousness transmission are here to help all of us fully realize our true nature in the current turbulent times. By sharing our life experiences with each other we create synergistic networks among all the like-hearted people in the world who are motivated by the freedom and liberation from suffering for all beings.</p>
-      </div>
-      <div class="dp-clip" style="grid-area:6 / 1 / 16 / 9">
-        <img src="/assets/home/whatsapp-image-2024-05-06-at-174328.webp"
-           srcset="/assets/r/home/whatsapp-image-2024-05-06-at-174328-320w.webp 320w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-480w.webp 480w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-640w.webp 640w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-800w.webp 800w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-1080w.webp 1080w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-1280w.webp 1280w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 393px"
-           width="2048"
-           height="1366"
-           decoding="async" alt="Two people hugging outdoors, one wearing a colorful striped sweater and a hat, with green foliage and a rustic building in the background." loading="lazy">
-      </div>
-      <div class="pt-fit" style="grid-area:15 / 7 / 21 / 13">
-        <img src="/assets/brand/icon-vision-purpose.webp"
-           srcset="/assets/r/brand/icon-vision-purpose-320w.webp 320w, /assets/r/brand/icon-vision-purpose-480w.webp 480w, /assets/brand/icon-vision-purpose.webp 601w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 292px"
-           width="601"
-           height="500"
-           decoding="async" alt="Stylized Buddha eyes over water with lotus petals" loading="lazy">
-      </div>
-      <div style="grid-area:19 / 4 / 26 / 12">
-        <video class="ab-video" src="/assets/video/about-vision.mp4" poster="/assets/video/about-vision-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Looping footage from the Paititi Biocultural Reserve"></video>
+    <div class="dp-in">
+      <h2>Our initiatives fall into five key areas</h2>
+      <div class="pt-acc">
+
+        <details class="pt-acc-item">
+          <summary>Preserving &amp; Integrating Ancestral Wisdom</summary>
+          <div class="pt-acc-body pt-prose">
+            <p>The cumulative wisdom of humanity, containing the essential methods and insights necessary to liberate from the worst suffering, is available today through living millennial lineages from around the world. In our organization the living wisdom lineages of Tibet, the Amazon and the Andes are applied in a direct and experiential way, encouraging each individual to face themselves, find inner peace and remember what it is to be a happy and healthy human being. These are &ldquo;living wisdom traditions&rdquo; because it is through each individual bringing this wisdom into daily life that we find genuine transformation beyond conceptual knowledge.</p>
+          </div>
+        </details>
+
+        <details class="pt-acc-item">
+          <summary>Consciousness Transformation &amp; Evolutionary Healing</summary>
+          <div class="pt-acc-body pt-prose">
+            <p>We provide a supportive environment through retreats, courses and community living where individuals can safely immerse in the evolutionary journey of self-realization. The skillful means and rites of passage cultivated within such an intentional space allow individuals to realize their unique gifts, qualities and talents, to be embodied in every-day community living. As we collectively move through powerful rites of passage we unearth our creative potential and learn to embody and share our unique gifts in community.</p>
+          </div>
+        </details>
+
+        <details class="pt-acc-item">
+          <summary>Restoring &amp; Maintaining Health through Traditional &amp; Natural Methods</summary>
+          <div class="pt-acc-body pt-prose">
+            <p>We utilize Indigenous medicine practices and natural healing modalities from around the world to address sickness and disease on a variety of levels, from psycho-spiritual to somatic. In our experience, this approach addresses the root cause of disease and includes the healing of each individual as a whole rather than merely targeting symptoms. Today, more than any other time in history, we believe the world needs viable models for this type of comprehensive and evolutionary healing.</p>
+          </div>
+        </details>
+
+        <details class="pt-acc-item">
+          <summary>Earth Stewardship via Eco-regenerative Community Living</summary>
+          <div class="pt-acc-body pt-prose">
+            <p>We are the stewards of the 1,516-hectare Paititi Biocultural Reserve, a nature sanctuary where our land-based community and retreat center is based. Our center in Peru is a community platform where we can practice to embody a holistic model for the world. We work with permaculture and local ancestral wisdom to support us in stewarding this land in the most conscious way possible.</p>
+          </div>
+        </details>
+
+        <details class="pt-acc-item">
+          <summary>Conservation &amp; Regeneration of Natural Resources</summary>
+          <div class="pt-acc-body pt-prose">
+            <p>We are dedicated to the preservation and restoration of our precious natural resources. We work with permaculture and natural farming techniques, creating vibrant local food economies. Our food forests and gardens serve as an educational model and an experiential learning ground for how to live in harmonious relationship with Pachamama (Mother Earth). We also work to support local Peruvian communities in finding fair trade markets for ecological and regenerative products.</p>
+          </div>
+        </details>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== Closing quote ===== -->
-  <section class="pt-sec dp-plum">
+  <!-- ===== Closing quote =====
+       No newsletter call to action here. The footer's signup form is the very
+       next thing on the page, so a "Stay connected" panel above it was a second
+       ask for the same address, and its button could only scroll a few hundred
+       pixels to a field that was already on screen — which reads as a button
+       that does nothing. The page closes on the quote and hands straight over. -->
+  <section class="pt-sec dp-close" aria-label="Closing">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:11">
-      <div class="pt-fit" style="grid-area:1 / 4 / 4 / 6">
-        <img src="/assets/brand/icon-quotemark.webp"
+
+    <div class="pt-quote">
+      <img class="pt-quote-mark" src="/assets/brand/icon-quotemark.webp"
            srcset="/assets/brand/icon-quotemark.webp 181w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 90px"
            width="181"
            height="142"
            decoding="async" alt="" loading="lazy">
-      </div>
-      <div class="pt-prose" style="grid-area:2 / 5 / 12 / 21">
-        <h3>&ldquo;We but mirror the world. All the tendencies present in the outer world are to be found in the world of our body. If we could change ourselves, the tendencies in the world would also change. As a man changes his own nature, so does the attitude of the world change towards him. This is the divine mystery supreme. A wonderful thing it is and the source of our happiness. We need not wait to see what others do.&rdquo;</h3>
+      <div class="pt-prose">
+        <h3>&ldquo;We but mirror the world. All the tendencies present in the outer world are to be found in the world of our body. If we could change ourselves, the tendencies in the world would also change. We need not wait to see what others do.&rdquo;</h3>
         <p>&ndash; Mahatma Gandhi</p>
       </div>
     </div>
+
   </section>
 
 </main>
