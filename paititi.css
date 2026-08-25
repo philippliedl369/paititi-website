@@ -317,8 +317,11 @@ body { margin: 0; background: #F1EAF6 }
 .pt-hero { color: var(--pt-hero-ink, #210416) }
 
 /* The hero title sits on a translucent plum panel, inset by the text-block
-   padding — measured at rgba(88,67,100,.39). */
-.pt-hero-panel { background: rgba(88, 67, 100, .39); padding: var(--pt-panel-pad, 17.8281px) }
+   padding — measured at rgba(88,67,100,.39). The corners are rounded, which
+   the live site's square panel isn't; it's a deliberate change, so pages that
+   restate the panel's background must not restate a square radius. */
+.pt-hero-panel { background: rgba(88, 67, 100, .39); padding: var(--pt-panel-pad, 17.8281px);
+  border-radius: 16px }
 .pt-page .pt-hero-panel > * + * { margin-top: 32px }
 
 /* ---- Full-bleed image band (a section whose only content is its photo) ---- */
