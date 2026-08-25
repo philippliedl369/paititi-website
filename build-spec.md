@@ -238,3 +238,21 @@ List in the working notes. Never blocks anything.
    distancehealing@paititi-institute.org; keep the separate inbox?
 
 Everything else in Phase 1 is buildable without him.
+
+## Roman-only: the Retreat Guru website field
+
+Retreat Guru builds every link back to "our website" from one field in its admin, as
+`<website>/?programs=1&program=<id>` — the deep-link shape the RBG Connect widget
+answers. Through the migration that field still read `paititi-institute.squarespace.com`,
+so all five program links on his teacher page
+(`paititi-institute.secure.retreat.guru/teacher/roman-hanis/`) and on the centre's
+programs list led back to the old Squarespace site, which is still serving. Nobody on
+this side can change it: it needs the Retreat Guru login.
+
+Setting that field to `https://paititi-institute.org` is the whole fix.
+`retreatguru-deeplink.js` (loaded on Home, Retreats and Online Courses) maps each
+program id onto the page that presents it, so the links land on the right course
+rather than dumping everyone on the homepage. Program ids as of 25 Aug: 614 Your
+Evolutionary Blueprint · 632 Alchemy of Immortality Qigong · 638 Primordial
+Breathwork · 997 Practical Alchemy Series · 1046 Amazon 16-day Immersion. Re-read
+them from the teacher page if a program is added or replaced.
