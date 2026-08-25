@@ -58,6 +58,59 @@ Verified 11 Aug 2026 — do **not** re-do these:
 | 11 | Ancient Squarespace-era paths not in `_redirects`: `/courses`, `/stewardship/courses-retreats/`, `/education/peru-retreats-courses/`, `/paititi-family/`, `/who/paititi-centers/`, `/who/the-paititi-family/roman-hanis/`, `/who/partners/sacred-science/`, `/healing/indigenous-healing-center/`, `/journal/[slug]` | `_redirects` |
 | 12 | Team page meta title is "Team 1 \| Paititi Institute"; bio typo "elders of the and Yahua tribe"; whole bio is `<strong>` | Team.dc.html:13, :85 |
 
+## Post-migration review, 25 Aug 2026 (Roman's AI, second pass)
+
+A review of the migrated site as Google was recrawling it. Checked line by line
+against the repo. Most of it describes the **old Squarespace crawl**, not this
+build — the reviewer was reading an index that still held pre-migration pages.
+Recorded here so the same list does not get re-litigated.
+
+**Real, and fixed in this pass:**
+
+- `Home.dc.html` "Supporting the Yahua and Q'ero tribes" still said *"100% of
+  proceeds will be donated"* — the one place on the site that had not been moved
+  to the royalties commitment, and it sat directly under the book block, so it
+  read as a claim about book proceeds. Now the standard sentence. (The Impact
+  list higher up the same page already said "100% of the author's royalties",
+  so the page contradicted itself.)
+- `OnlineCourses.dc.html` hero: "Our transformative courses … **invites** you"
+  → "invite you".
+- `Privacy.dc.html`: four sentences run together with no space after the full
+  stop ("…anyone else.We collect…"), inherited from the Squarespace copy.
+- `BlogPost-cant-blame-the-chaos…`: a photo caption linked
+  `paititi-institute.org/wp-content/uploads/2019/09/…jpg` — a WordPress-era path
+  this site 404s. Credit kept as text, link dropped.
+
+**Already built — do not re-do:**
+
+- *"Add Individual Mentorship & Dreamwork as a visible pathway"* — the homepage
+  carousel is gone; "Ways to Walk With Us" has been four cards since §1.2, one
+  of them `/mentorship`.
+- *"Strengthen the Online Courses hub"* — §1.3. Four crawlable cards, 100–200
+  words each, ahead of the Retreat Guru iframe.
+- *"Embody True Nature retreats weaves"* and *"Learn how your support…" run into
+  the previous sentence* — neither string exists in this repo. Both are old
+  Squarespace homepage copy that the rebuild replaced.
+- *"Dedicated landing pages for Yahua and Q'ero"* — both exist and are in the
+  sitemap.
+- *"Make the timeline, fiscal sponsorship, APCI and impact visible early on
+  About"* — `AboutUs.dc.html:157` (501(c)(3)/EIN/APCI facts) and `:172` (2014
+  timeline entry) are above the philosophical material, not below it.
+
+**Legacy `/wp-content/uploads/…` PDFs (the reviewer's "highest-value technical
+cleanup"): nothing to do.** Those files are not in this repo, and
+`wrangler.jsonc` sets `not_found_handling: "404-page"`, so every one of them
+already returns a hard 404 — verified live on three paths, 25 Aug. Google drops
+them on recrawl; there is no de-indexing step to perform. Do not add redirects
+for them: 301-ing an outdated work-study PDF onto a current page would launder
+the stale content into a live URL instead of retiring it.
+
+**Still open (Phase 2, unchanged by this review):** separate landing pages for
+the Biocultural Reserve and Community Health (anchors today), individual course
+pages, and the evergreen article set — already §§Phase 2/3 below. The reviewer's
+"what is a biocultural reserve / Indigenous-led conservation / Amazonian
+dreamwork" question-shaped titles are a good seed list for Phase 3.
+
 ## URL policy (supersedes the earlier proposed URL set)
 
 The earlier spec proposed `/about`, `/courses`, `/journal`, `/support`. **Dropped.** The
