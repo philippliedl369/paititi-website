@@ -6,6 +6,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
 <script src="/anchor-scroll.js" defer></script>
+<script src="/retreatguru-deeplink.js"></script>
 </head>
 <body>
 <x-dc>
@@ -30,20 +31,45 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
-  /* The hero photo carries only a 15% scrim — much lighter than the interior
-     pages — and everything on it is reversed out white. */
-  .hm-hero{--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.15);--pt-hero-ink:#fff}
+  /* Everything on the hero photo is reversed out white. The scrim is a pair of
+     gradients rather than the flat 15% the live site uses: left-to-right so the
+     copy column has a ground while the sunset on the right stays at full
+     brightness, plus a bottom-up pass to carry the stat row. A flat 15% left
+     white Lato Light sitting on the brightest part of the sky, which is where
+     the lede falls. */
+  .hm-hero{--pt-bg:#210416;--pt-scrim:linear-gradient(to right,rgba(33,4,22,.52) 0%,rgba(33,4,22,.24) 40%,rgba(33,4,22,0) 66%),linear-gradient(to bottom,rgba(33,4,22,0) 55%,rgba(33,4,22,.42) 100%);--pt-hero-ink:#fff}
 
   /* Home is one of the pages where headings really are plum rather than the
      near-black used almost everywhere else. */
   .pt-page .hm-body h2,.pt-page .hm-body h3{color:#584364}
 
-  /* The hero stat bullets start flush with their block's left edge — the
-     marker opens the line instead of sitting inside the shell's 40px list
-     indent — while wrapped lines still hang under the text. */
-  .pt-page .hm-hero .pt-prose ul{padding-left:0}
-  .pt-page .hm-hero .pt-prose li{list-style:none;position:relative;padding-left:26px}
-  .pt-page .hm-hero .pt-prose li::before{content:"\2022";position:absolute;left:0}
+  /* The hero is one left-ranged column — headline, lede, buttons, then the
+     three proof points as a stat row along the foot. .pt-hero sets
+     text-align:center for the rest of the site's heroes; this one opts out,
+     which is what lets a 60-character measure be read from a fixed left edge. */
+  .hm-hero .pt-fluid{text-align:left}
+  .hm-hero .hm-lede p{font-size:19.2px}
+
+  .hm-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  /* A .pt-btn in a fluid cell fills the cell; hero buttons size to their label. */
+  .pt-fluid .hm-cta .pt-btn{width:auto;height:auto;min-height:56px}
+  /* On a photo the plum primary sinks into the picture, so white carries the
+     primary and the secondary is an outline rather than a second fill. */
+  .hm-cta .hm-ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8)}
+  .hm-cta .hm-ghost:hover{background:rgba(255,255,255,.14);color:#fff}
+
+  /* The proof points as figures rather than a bulleted list: the number is what
+     lands, the label explains it. Hairline dividers and no boxes, so the row
+     sits on the photo instead of on top of it. Note the stat block must not
+     also carry .pt-vb — `.pt-fluid > .pt-vb` is (0,2,0) and would beat this
+     display:grid with its flex column, stacking the three at full width. */
+  .hm-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;
+    border-top:1px solid rgba(255,255,255,.28);padding-top:26px}
+  .hm-stat{padding-right:32px}
+  .hm-stat + .hm-stat{padding-left:32px;border-left:1px solid rgba(255,255,255,.28)}
+  .hm-stat b{display:block;font-family:var(--font-display);font-weight:400;
+    font-size:36px;line-height:1.15;letter-spacing:normal;margin-bottom:6px}
+  .hm-stat span{display:block;font-size:15.5px;line-height:1.55;opacity:.88}
 
   /* ---- Ways to Walk With Us ------------------------------------------------
      Replaces the auto-rotating offering gallery: four crawlable cards, one per
@@ -65,6 +91,14 @@
   .hm-card-more{margin-top:auto;padding-top:8px;font-weight:700;color:#584364}
 
   @media (max-width:1180px){
+    /* Once the fluid grid collapses the copy fills the full width, so a
+       left-to-right scrim no longer sits under it — back to a flat one. */
+    .hm-hero{--pt-scrim:rgba(33,4,22,.46)}
+    .hm-stats{grid-template-columns:1fr;gap:20px;padding-top:20px}
+    .hm-stat{padding-right:0}
+    .hm-stat + .hm-stat{padding-left:0;border-left:0;
+      border-top:1px solid rgba(255,255,255,.22);padding-top:20px}
+
     .hm-ways{padding:64px 0 72px}
     .hm-cards{grid-template-columns:1fr;padding:32px 24px 0}
     .hm-card img{height:240px}
@@ -75,13 +109,6 @@
     .hm-card img{height:200px}
     .hm-card{border-radius:32px 0}
     .hm-card-body{padding:22px 24px 26px}
-    /* The hero's stat bullets are centred on the wide layout, where each one
-       is a single line and the flush marker reads as an ornament. On a phone
-       every one wraps to two or three lines, and centred text hanging off a
-       left-set marker just looks like a broken list — so the list goes
-       left-aligned while the heading and closing paragraph stay centred. */
-    .pt-page .hm-hero .pt-prose ul{text-align:left;max-width:30ch;margin-inline:auto}
-    .pt-page .hm-hero .pt-prose li{padding-left:22px}
   }
 </style>
 </helmet>
@@ -89,7 +116,7 @@
 <dc-import name="SiteHeader" active="home" hint-size="100%,209px"></dc-import>
 <main>
 
-  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:808px">
+  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:860px">
     <div class="pt-sec-bg">
       <img src="/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp"
            srcset="/assets/r/home/screenshot-2025-04-12-at-70237e280afpm-320w.webp 320w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-480w.webp 480w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-640w.webp 640w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-800w.webp 800w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1080w.webp 1080w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1280w.webp 1280w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1600w.webp 1600w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-2000w.webp 2000w, /assets/home/screenshot-2025-04-12-at-70237e280afpm.webp 2500w"
@@ -99,22 +126,25 @@
            decoding="async"
            alt="Sunset over the Andean mountains at the Paititi Biocultural Reserve" loading="eager" fetchpriority="high">
     </div>
-    <div class="pt-fluid" style="--pt-grid-top:256px;--pt-grid-bot:48px;--pt-rows:14">
+    <div class="pt-fluid" style="--pt-grid-top:200px;--pt-grid-bot:44px;--pt-rows:17">
 
-      <div class="pt-vb" style="grid-area:1 / 1 / 8 / 12">
+      <div class="pt-vb" style="grid-area:1 / 1 / 8 / 15">
         <h2>&ldquo;<strong>Paititi</strong>&rdquo;, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
       </div>
 
-      <div class="pt-vc pt-prose" style="grid-area:4 / 12 / 9 / 25">
-        <ul>
-          <li><p><strong>Protecting 1,516 hectares of Amazon-Andean biodiversity.</strong></p></li>
-          <li><p><strong>Preserving Indigenous wisdom through community-led education.</strong></p></li>
-          <li><p><strong>Supporting healing, conservation and cultural continuity for over 20 years.</strong></p></li>
-        </ul>
+      <div class="pt-prose hm-lede" style="grid-area:9 / 1 / 14 / 14">
+        <p>We work alongside Indigenous communities in the Peruvian Amazon and Andes to protect biodiversity, preserve cultural heritage, and advance community-led education, healthcare and ecological stewardship.</p>
       </div>
 
-      <div class="pt-prose" style="grid-area:9 / 1 / 15 / 25">
-        <p>Paititi Institute is a nonprofit organization registered in Peru and fiscally sponsored in the United States by Empowerment WORKS, a registered 501(c)(3). We work alongside Indigenous communities to protect biodiversity, preserve cultural heritage, and advance community-led education, healthcare, and ecological stewardship. Rooted in Amazonian, Andean, and Tibetan wisdom traditions, our programs help transform personal healing into compassionate service for people and the living world.Learn how your support helps protect one of the world's most biodiverse regions while strengthening Indigenous communities and preserving ancestral knowledge for future generations.</p>
+      <div class="hm-cta" style="grid-area:14 / 1 / 16 / 14">
+        <a class="pt-btn pt-btn-light" href="/initiatives">Support Our Work</a>
+        <a class="pt-btn hm-ghost" href="/about-us">About the Institute</a>
+      </div>
+
+      <div class="hm-stats" style="grid-area:17 / 1 / 19 / 21">
+        <div class="hm-stat"><b>1,516 ha</b><span>of Amazon&ndash;Andean biodiversity under protection</span></div>
+        <div class="hm-stat"><b>20+ years</b><span>of healing, conservation and cultural continuity</span></div>
+        <div class="hm-stat"><b>501(c)(3)</b><span>fiscally sponsored in the US by Empowerment WORKS</span></div>
       </div>
 
     </div>
