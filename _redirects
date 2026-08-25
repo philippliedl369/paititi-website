@@ -1,3 +1,8 @@
+# NB: host-to-host redirects cannot live here. Workers Assets rejects absolute
+# URLs in _redirects ("Only relative URLs are allowed") — that syntax is a Pages
+# feature only. The www -> apex redirect is a Redirect Rule on the zone instead;
+# see docs/cloudflare-migration.md.
+
 # Clean URLs -> Design Component pages (Cloudflare/Netlify syntax).
 # Add one line per page.
 /            /Home.dc.html    200

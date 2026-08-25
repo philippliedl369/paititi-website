@@ -20,6 +20,18 @@ import { handleApi, JSON_HEADERS } from './api.js';
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Both paititi-institute.org and www. are custom domains on this Worker, so
+    // every page can answer on two hostnames with identical content and no
+    // canonical tag to break the tie, which splits ranking between them.
+    // This only covers /api/* and paths with no matching asset: the assets layer
+    // serves real pages directly and never invokes this Worker. Actual pages are
+    // redirected by a Redirect Rule on the zone — see docs/cloudflare-migration.md.
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
+
     if (!url.pathname.startsWith('/api/')) {
       const res = await env.ASSETS.fetch(request);
       // The workers.dev preview host does get crawled, and an indexed preview

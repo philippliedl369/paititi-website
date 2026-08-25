@@ -1,0 +1,56 @@
+; paititi-institute.org — DNS records for Cloudflare
+; Built 24 Aug 2026 from the Squarespace DNS panel plus the live authoritative
+; nameservers, so every value here is the real one, not a truncated screenshot.
+;
+; Import with: Cloudflare → the zone → DNS → Records → Import and Export →
+; Import DNS records → upload this file. Leave "Proxy imported DNS records"
+; UNCHECKED — proxying mail/imap/pop breaks mailbox access, and the website
+; records get their proxying from the Worker custom domain instead.
+;
+; Deliberately NOT included, both safe to lose:
+;   HTTPS @  1 . alpn="h2,http/1.1" ipv4hint=198.49.23.144,...
+;       Squarespace's own service record. Pointing it at Squarespace IPs would
+;       fight the Worker; Cloudflare handles HTTP/2+3 advertising itself.
+;   CNAME _domainconnect → _domainconnect.domains.squarespace.com.
+;       Squarespace's one-click domain-setup helper. Useless once DNS is here.
+
+$ORIGIN paititi-institute.org.
+$TTL 3600
+
+; --- Google Workspace mail — the critical records ---
+@	3600	IN	MX	1 aspmx.l.google.com.
+@	3600	IN	MX	5 alt1.aspmx.l.google.com.
+@	3600	IN	MX	5 alt2.aspmx.l.google.com.
+@	3600	IN	MX	10 alt3.aspmx.l.google.com.
+@	3600	IN	MX	10 alt4.aspmx.l.google.com.
+
+; --- Sender authentication (SPF / DMARC / DKIM) ---
+@	3600	IN	TXT	"v=spf1 a mx include:_spf.mlsend.com ~all"
+_dmarc	3600	IN	TXT	"v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com"
+litesrv._domainkey	3600	IN	CNAME	litesrv._domainkey.mlsend.com.
+brevo1._domainkey	3600	IN	CNAME	b1.paititi-institute-org.dkim.brevo.com.
+brevo2._domainkey	3600	IN	CNAME	b2.paititi-institute-org.dkim.brevo.com.
+squarespace._domainkey	3600	IN	CNAME	squarespace-domainkey.squarespace-mail.com.
+
+; --- Domain verifications ---
+; The third google-site-verification is stored at Squarespace with a stray
+; line-feed on the end. It is written clean here.
+@	3600	IN	TXT	"google-site-verification=ivzXeym1DKcL_IvbRLC1VfM59qfEsHnv5lwseX-1kMs"
+@	3600	IN	TXT	"google-site-verification=JQ0U4i7LILgU_tP2BCaFJRzhGQSWmVQvg-Kj9mtLLYo"
+@	3600	IN	TXT	"google-site-verification=1o32nOtx_4Y5fJ18bf9sTxbY27yOpsMMSK-a21WBNZo"
+@	3600	IN	TXT	"brevo-code:268dfc87244d85fd7b18362e4bf8f193"
+@	3600	IN	TXT	"mailerlite-domain-verification=946625c1545d080d6432144ea8f498b5c06525b8"
+
+; --- Legacy Bluehost mailbox host — must stay DNS-only (grey cloud) ---
+mail	3600	IN	A	50.87.248.165
+imap	3600	IN	CNAME	mail.paititi-institute.org.
+pop	3600	IN	CNAME	mail.paititi-institute.org.
+_autodiscover._tcp	3600	IN	SRV	0 0 443 autodiscover.bluehost.com.
+
+; --- The website: Squarespace for now, so the nameserver switch changes
+; --- nothing visible. Attaching the Worker as a custom domain replaces these.
+@	300	IN	A	198.185.159.144
+@	300	IN	A	198.185.159.145
+@	300	IN	A	198.49.23.144
+@	300	IN	A	198.49.23.145
+www	300	IN	CNAME	ext-sq.squarespace.com.

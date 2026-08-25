@@ -13,6 +13,9 @@ dist/
 .cache/
 *.tsbuildinfo
 
+# Python (tools/ are run as scripts, never imported as a package)
+__pycache__/
+
 # Logs
 *.log
 

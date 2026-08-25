@@ -5,6 +5,17 @@
 	"name": "paititi-institute",
 	"main": "worker.js",
 	"compatibility_date": "2026-07-24",
+	// The live site. Declared here rather than clicked into the dashboard so the
+	// repo records where this Worker actually serves. Cloudflare issues and
+	// renews the certificates for both names automatically.
+	"routes": [
+		{ "pattern": "paititi-institute.org", "custom_domain": true },
+		{ "pattern": "www.paititi-institute.org", "custom_domain": true }
+	],
+	// Keep the *.workers.dev address alive alongside the custom domains. Adding
+	// routes silently disables it by default, which takes away the staging URL
+	// used to test changes before they are visible on the real domain.
+	"workers_dev": true,
 	"assets": {
 		"directory": ".",
 		"binding": "ASSETS",
@@ -22,23 +33,16 @@
 		// these plus the NEWSLETTER_API_KEY secret; see api.js for the options.
 		// "NEWSLETTER_PROVIDER": "mailchimp",
 		// "NEWSLETTER_LIST_ID": ""
-	}
+	},
+	// Newsletter sign-ups land here until an email provider is wired up, and
+	// keep landing here whenever a provider is named but its key isn't deployed
+	// yet — so no address is ever turned away. Created 24 Aug 2026 in the
+	// Philipp@paititi-institute.org account.
+	// Read the addresses back out with: node tools/export_subscribers.mjs
+	"kv_namespaces": [
+		{ "binding": "NEWSLETTER", "id": "6b422eeebb964ea295e57387ae4e672a" }
+	]
 	// Secrets to set before the functions go live:
 	//   npx wrangler secret put RESEND_API_KEY      (contact form email)
-	//   npx wrangler secret put STRIPE_SECRET_KEY   (store/donation checkout)
-	//   npx wrangler secret put NEWSLETTER_API_KEY  (email provider)
-	// KV holds newsletter signups until a provider is wired up. Without it the
-	// footer form has nowhere to put an address and tells the visitor sign-up is
-	// unavailable, so create it before going live:
-	//
-	//   npx wrangler kv namespace create NEWSLETTER
-	//
-	// then paste the id it prints here and uncomment:
-	//
-	// "kv_namespaces": [
-	//   { "binding": "NEWSLETTER", "id": "<the id wrangler printed>" }
-	// ]
-	//
-	// Read the addresses back out with:
-	//   node tools/export_subscribers.mjs
+	//   npx wrangler secret put NEWSLETTER_API_KEY  (email provider, later)
 }

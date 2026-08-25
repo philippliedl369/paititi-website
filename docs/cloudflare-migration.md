@@ -115,21 +115,38 @@ through Zeffy, so no cart is needed. The pages are deleted; `/store`,
 links and Google results don't hit a dead end. Recoverable from git if a shop is
 ever wanted. No Stripe key is needed for anything on the new site.
 
-### DNS records that must survive (snapshot 22 Aug 2026)
+### DNS records that must survive (re-read from the authoritative nameservers, 24 Aug 2026)
 ```
-MX   @  1  aspmx.l.google.com.           ← Google Workspace email — critical
-MX   @  5  alt1.aspmx.l.google.com.
-MX   @  5  alt2.aspmx.l.google.com.
-MX   @  10 alt3.aspmx.l.google.com.
-MX   @  10 alt4.aspmx.l.google.com.
-TXT  @  v=spf1 a mx include:_spf.mlsend.com ~all
-TXT  @  google-site-verification=ivzXeym1DKcL_IvbRLC1VfM59qfEsHnv5lwseX-1kMs
-TXT  @  google-site-verification=JQ0U4i7LILgU_tP2BCaFJRzhGQSWmVQvg-Kj9mtLLYo
-TXT  @  google-site-verification=1o32nOtx_4Y5fJ18bf9sTxbY27yOpsMMSK-a21WBNZo
-TXT  @  brevo-code:268dfc87244d85fd7b18362e4bf8f193
-TXT  @  mailerlite-domain-verification=946625c1545d080d6432144ea8f498b5c06525b8
+MX    @      1  aspmx.l.google.com.        ← Google Workspace email — critical
+MX    @      5  alt1.aspmx.l.google.com.
+MX    @      5  alt2.aspmx.l.google.com.
+MX    @      10 alt3.aspmx.l.google.com.
+MX    @      10 alt4.aspmx.l.google.com.
+TXT   @      v=spf1 a mx include:_spf.mlsend.com ~all
+TXT   @      google-site-verification=ivzXeym1DKcL_IvbRLC1VfM59qfEsHnv5lwseX-1kMs
+TXT   @      google-site-verification=JQ0U4i7LILgU_tP2BCaFJRzhGQSWmVQvg-Kj9mtLLYo
+TXT   @      google-site-verification=1o32nOtx_4Y5fJ18bf9sTxbY27yOpsMMSK-a21WBNZo
+TXT   @      brevo-code:268dfc87244d85fd7b18362e4bf8f193
+TXT   @      mailerlite-domain-verification=946625c1545d080d6432144ea8f498b5c06525b8
+TXT   _dmarc v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com
+A     mail   50.87.248.165                 ← legacy mailbox host, DNS-only
+CNAME imap   mail.paititi-institute.org.   ← DNS-only
+CNAME pop    mail.paititi-institute.org.   ← DNS-only
 ```
-Records pointing at Squarespace (`A 198.185.159.x / 198.49.23.x`, `www → ext-sq.squarespace.com`) are the ones we replace. There may be more records (DKIM, subdomains) — the screenshots are the source of truth.
+Two traps in that list. The third `google-site-verification` record is stored with
+a stray line-feed on the end — retype it clean, don't copy the mangled value. And
+`mail` / `imap` / `pop` must be **DNS-only (grey cloud)** in Cloudflare; proxying
+them breaks IMAP/SMTP, because the proxy only carries HTTP.
+
+There is no CAA record, so nothing blocks Cloudflare from issuing a certificate.
+`CNAME _domainconnect → _domainconnect.domains.squarespace.com` also exists; it is
+only Squarespace's domain-setup helper and can be dropped or copied, either way.
+
+Records pointing at Squarespace — `A @ 198.185.159.144/.145` and
+`198.49.23.144/.145`, `CNAME www → ext-sq.squarespace.com` — are the ones we
+replace, but copy them across anyway (DNS-only) so the nameserver switch changes
+nothing visible; Step 8 replaces them. The Squarespace DNS screenshots remain the
+source of truth for anything a scan misses.
 
 ### Secrets the site needs
 One to launch: `RESEND_API_KEY` (contact form). Later, when a newsletter
@@ -190,8 +207,30 @@ soon as one is fully configured, and falls back to this storage whenever the
 provider is named but its key hasn't been deployed yet — so there is no window
 where an address is turned away.
 
-**6b. Whenever the provider is settled — switch to it.** No deadline; the site
-keeps collecting in the meantime.
+**6b. The CSV route — chosen 25 Aug 2026, and it needs no work.** Sign-ups sit
+in KV; when there is a reason to mail them, export and upload:
+
+```bash
+node tools/export_subscribers.mjs --since 2026-09-01
+```
+
+`--since` makes it incremental, so each export holds only what is new. This is
+deliberately *not* the CSV loop that was rejected earlier — that one meant
+staying on Squarespace with no API to ever escape to. This one is a holding
+pattern with 6c waiting behind it whenever it is wanted.
+
+The reason to sit here for a while: **campaign templates do not transfer.**
+Whatever provider is chosen, the layout, branding and footer have to be built
+there from scratch. That work gates the first send, not the sign-up form, so
+there is nothing to gain by wiring the API early.
+
+Two things to know while in this state. New subscribers get no confirmation or
+welcome email — nothing is sending yet — so the first thing they hear from
+Paititi is whenever the first campaign goes out. And KV is not a mailing list:
+export it before it matters, and keep the CSVs.
+
+**6c. Whenever the provider is settled — switch to the API.** No deadline; the
+site keeps collecting in the meantime.
 1. Sign up (EmailOctopus Pro unless the MailerLite account turns out to exist),
    verify the domain, import the *subscribed* CSV, set the confirmation email
    and the postal footer.
@@ -219,6 +258,29 @@ Squarespace → Domains → paititi-institute.org → DNS → **Nameservers → 
 ### Step 8 — Attach the domain to the site
 Cloudflare → Workers & Pages → paititi-institute → Settings → **Domains & Routes → Add → Custom domain** → `paititi-institute.org`, then `www.paititi-institute.org`. Accept replacing the conflicting records. SSL/TLS → **Full (strict)**, **Always Use HTTPS** on. Open https://paititi-institute.org in a private window. Test the contact form and the newsletter link.
 
+### Step 8b — Redirect www to the apex
+Attaching both hostnames as custom domains means both serve the same pages, and
+the pages carry no `<link rel="canonical">`, so search engines see duplicate
+content across two hosts. Squarespace used to 301 `www`; Cloudflare does not.
+
+Neither obvious fix works. A check in `worker.js` only fires on `/api/*` and
+paths with no matching asset, because the assets layer serves real pages
+directly without invoking the Worker. And a host-to-host rule in `_redirects` is
+rejected outright — Workers Assets allows relative URLs only, unlike Pages.
+
+So it is a zone Redirect Rule: **Cloudflare → the zone → Rules → Redirect Rules
+→ Create rule**.
+
+```
+If:    Hostname equals www.paititi-institute.org
+Then:  Dynamic redirect
+       Expression:  concat("https://paititi-institute.org", http.request.uri.path)
+       Status 301, preserve query string
+```
+
+Free plan includes this. The vestigial check in `worker.js` stays as a backstop
+for the paths the rule and the assets layer both miss.
+
 ### Step 9 — Tidy up (no rush — the plan is paid into 2027)
 1. Search Console → Sitemaps → submit `https://paititi-institute.org/sitemap.xml`.
 2. Leave the Squarespace **website** subscription alone until close to renewal.
@@ -234,6 +296,19 @@ Cloudflare → Workers & Pages → paititi-institute → Settings → **Domains 
 - Email stopped: Cloudflare → DNS → compare MX + SPF with screenshots, re-add. Senders retry for 48 h.
 - Full rollback: Squarespace → Domains → Nameservers → "Use Squarespace nameservers". Old site back within an hour (as long as Step 9 hasn't happened).
 - Contact form "temporarily unavailable": Workers & Pages → paititi-institute → Logs shows why.
+- `ERR_QUIC_PROTOCOL_ERROR` in Chrome (seen 25 Aug 2026, right after the switch):
+  Cloudflare advertises HTTP/3 (`alt-svc: h3`), which Squarespace never did, so
+  Chrome now talks QUIC to the site. In the minutes between the zone going Active
+  and Universal SSL being issued (cert timestamp 01:47 UTC), a QUIC handshake
+  failed on TLS, and Chrome reports that as this error rather than a certificate
+  page. Verified afterwards with headless Chrome forced onto QUIC against
+  104.21.86.109: every page loads, every closure is code 70 (client cancel).
+  First: private window, or chrome://net-internals/#dns → Clear host cache, plus
+  `sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder` — the router
+  was still handing out Squarespace's 198.49.23.144 with TTL 0 hours later.
+  If it persists for anyone on any network: Cloudflare → the zone → Speed →
+  Settings → Protocol Optimization → **HTTP/3 (with QUIC) → Off**. Chrome then
+  stays on HTTP/2; nothing on this site needs HTTP/3.
 
 ## Order in one line
 Export the list → screenshot DNS → add domain to Cloudflare → deploy to test address → Resend key → newsletter KV → switch nameservers, check email → attach domain → sitemap. Newsletter provider whenever — nothing waits on it. The Squarespace website itself can keep running until its plan lapses in 2027.
