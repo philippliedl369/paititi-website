@@ -117,18 +117,23 @@ Give the Impact section `id="impact"` for the nav anchor.
 
 Insert a crawlable course-card section between the hero and the Retreat Guru iframe
 (keep the iframe — it is the live booking path). One card per course, 100–200 words,
-"Explore the Course →" to the existing enrollment destination. Course list **pending
-Roman #1**; build the section with the four ChatGPT-session courses and adjust:
+"Explore the Course →" to the existing enrollment destination.
 
-- Primordial Breathwork · Alchemy of Immortality Qigong — Andean Art of Being ·
-  Ancestral Remembrance · Practical Alchemy Series
+**Settled 25 Aug** by Roman's post-migration review. The catalogue is the four
+programs Retreat Guru actually sells, flagship first:
 
-Note for the catalogue conversation: the existing **"Embody True Nature Evolutionary
-Healing Home Study Course"** section on this page ("Discover the blueprint encoded in
-ancestral wisdom lineages…", Coming Soon + early-bird JotForm) is plausibly the same
-thing as Roman's favourite **"Your Evolutionary Blueprint"** — the old homepage promised
-"Breathwork · Qi Gong · Evolutionary Blueprint". Resolve the naming with Roman, don't
-duplicate it as a fifth card by accident.
+- Your Evolutionary Blueprint · Primordial Breathwork · Alchemy of Immortality
+  Qigong — Andean Art of Being · Practical Alchemy Series
+
+Two corrections that came with it. The **"Embody True Nature Evolutionary Healing
+Home Study Course"** section was *not* the same thing as Your Evolutionary Blueprint —
+Roman reads it as "an old message from the Paititidistancehealing website" about a
+course that never shipped, so the Coming Soon copy and its early-bird JotForm are
+gone. And **Ancestral Remembrance** has no enrollment page of its own: its card
+pointed at the Practical Alchemy Series program, the same destination as the
+Practical Alchemy card, which Roman flagged as two cards leading to one place. It is
+now described inside the Practical Alchemy card instead of holding a card of its own.
+If Roman wants it sold separately, that starts with a new Retreat Guru program.
 
 ### 1.4 /mentorship — new page
 
@@ -222,13 +227,10 @@ List in the working notes. Never blocks anything.
 
 ## The three remaining Roman blockers (one confirm-or-correct batch, ~10 min)
 
-1. **Course catalogue + order** — the four courses from his session (Primordial
-   Breathwork · Alchemy of Immortality Qigong · Ancestral Remembrance · Practical
-   Alchemy Series) vs the old homepage promise of "Breathwork · Qi Gong · Evolutionary
-   Blueprint"; is "Embody True Nature Home Study Course" the same as "Your Evolutionary
-   Blueprint"? What order? (Note from his transcript: the Beyond Ayahuasca page already
-   describes the Practical Alchemy Series better than the courses page — reuse that
-   copy for its card.)
+1. ~~**Course catalogue + order**~~ — **answered 25 Aug**: Your Evolutionary Blueprint
+   is the flagship and leads; "Embody True Nature Home Study Course" was a stale
+   Distance Healing promo, not the same course, and is removed; Ancestral Remembrance
+   folds into the Practical Alchemy Series card. Built — see §1.3.
 2. **Himalayan Pilgrimage** — Oct 17–31 2026 is on the page; price ($2,500–3,900?) and
    whether to show it.
 3. ~~**Distance Healing placement**~~ — **decided (12 Aug): Programs dropdown next

@@ -6,14 +6,15 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <script src="/support.js"></script>
 <script src="/anchor-scroll.js" defer></script>
+<script src="/retreatguru-deeplink.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <title>Online Courses | Paititi Institute</title>
-<meta name="description" content="Self-paced online courses from Paititi Institute: Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, Ancestral Remembrance, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
+<meta name="description" content="Self-paced online courses from Paititi Institute: Your Evolutionary Blueprint, Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
 <meta property="og:title" content="Online Courses | Paititi Institute">
-<meta property="og:description" content="Self-paced online courses from Paititi Institute: Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, Ancestral Remembrance, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
+<meta property="og:description" content="Self-paced online courses from Paititi Institute: Your Evolutionary Blueprint, Primordial Breathwork, Alchemy of Immortality Qigong — Andean Art of Being, and the Practical Alchemy Series. Every enrollment supports Indigenous education and conservation.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/retreats/online-courses-01.webp">
@@ -42,21 +43,6 @@
     var s = document.getElementById('rbg-listings');
     if (s && typeof e.data.rbgCount === 'number') s.classList.toggle('oc-list-empty', e.data.rbgCount === 0);
   });
-  // The Home Study Course early-bird signup is a JotForm embed (moved here
-  // from the absorbed paititidistancehealing.com). JotForm posts
-  // "setHeight:<px>:<frame id>" from inside the iframe; grow the frame so the
-  // form never scrolls inside a scrollbar of its own. Origin-checked, because
-  // any framed page can post to this window.
-  window.addEventListener('message', function (e) {
-    var host;
-    try { host = new URL(e.origin).hostname; } catch (err) { return; }
-    if (!/(^|\.)jotform(pro)?\.com$/.test(host)) return;
-    var args = String(e.data).split(':');
-    if (args[0] !== 'setHeight') return;
-    var px = parseInt(args[1], 10);
-    var frame = document.getElementById('oc-course-form');
-    if (frame && px > 0) frame.style.height = px + 'px';
-  });
 </script>
 <style>
   .oc-hero{--pt-hero-h:932px;--pt-bg-pos:50% 20%;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.41);--pt-hero-ink:#fff}
@@ -65,7 +51,7 @@
   /* Retreat Guru listings band — the safety net under the hand-built cards.
      Collapsed while every program in the feed is on the iframe's exclude
      list; a new posting reopens it. */
-  .oc-list{--pt-bg:#F1EAF6}
+  .oc-list{--pt-bg:#fff}
   .oc-frame{width:100%;border:0;display:block}
   .oc-list-empty .pt-fluid{padding:0;--pt-row-h:0}
   .oc-list-empty .oc-frame{height:0 !important}
@@ -93,32 +79,19 @@
   .oc-card-more a{font-weight:700;color:#584364;text-decoration:underline;text-underline-offset:5px}
   .oc-card-more a:hover{opacity:.8;color:#584364}
 
+  /* Each card carries an anchor — old paths and Retreat Guru deep links land
+     on one — so it must clear the fixed header when jumped to. */
+  .oc-card[id]{scroll-margin-top:130px}
+
   @media (max-width:1180px){
     .oc-white{padding:64px 0 72px}
     .oc-cards{grid-template-columns:1fr;padding:32px 24px 0}
     .oc-card > img{height:230px}
-  }
-
-  /* ---- Home Study Course (from the absorbed Distance Healing site) -------- */
-  .oc-dark{--pt-bg:#2A1736;color:#fff}
-  .oc-dark h2,.oc-dark h3,.oc-dark p,.oc-dark li{color:#fff}
-  .oc-center{text-align:center}
-  .oc-form{width:100%;border:0;display:block;background:#fff;border-radius:15px}
-  /* The blossom ornament is near-white line art; re-inked white via a mask so
-     it reads on the deep ground. The drawing travels as a custom property
-     because the DC runtime drops -webkit-* from inline style attributes. */
-  .oc-mark{display:block;background-color:#fff;opacity:.55;width:100%;height:var(--oc-mark-h,88px);
-    -webkit-mask-image:var(--oc-mask);mask-image:var(--oc-mask);
-    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-    -webkit-mask-position:center;mask-position:center;
-    -webkit-mask-size:contain;mask-size:contain}
-  .pt-fluid[id]{scroll-margin-top:130px}
-  @media (max-width:1180px){
-    .pt-fluid > .oc-mark{height:var(--oc-mark-h,88px) !important}
     .pt-fluid{padding-bottom:56px}
   }
-  /* The footer wave must match this page's final section colour. */
-  footer.pt-footer{--pt-footer-wave:#2A1736}
+  /* The footer wave must match this page's final section colour — the listings
+     band, which is white whether it is collapsed or open. */
+  footer.pt-footer{--pt-footer-wave:#fff}
 </style>
 </helmet>
 <div class="pt-page">
@@ -160,7 +133,25 @@
     </div>
     <div class="oc-cards">
 
-      <div class="oc-card">
+      <!-- The flagship, first. Both the old paititidistancehealing.com
+           /home-study-course path and Retreat Guru's deep links land on this
+           card's anchor. -->
+      <div class="oc-card" id="your-evolutionary-blueprint">
+        <img src="/assets/retreats/evolutionary-blueprint.jpg"
+           srcset="/assets/r/retreats/evolutionary-blueprint-320w.webp 320w, /assets/r/retreats/evolutionary-blueprint-480w.webp 480w, /assets/r/retreats/evolutionary-blueprint-640w.webp 640w, /assets/r/retreats/evolutionary-blueprint-800w.webp 800w, /assets/retreats/evolutionary-blueprint.jpg 841w"
+           sizes="(max-width:640px) 88vw, (max-width:1180px) 852px, 590px"
+           width="841"
+           height="841"
+           decoding="async" alt="Golden spiral at the heart of a flower, emblem of Your Evolutionary Blueprint" loading="lazy">
+        <div class="oc-card-body">
+          <h3>Your Evolutionary Blueprint</h3>
+          <p class="oc-card-note">Online home study course &middot; Five chapters &middot; Sliding-scale contribution</p>
+          <p>The Institute&rsquo;s flagship home-study course, facilitated by Roman Hanis and Cynthia Robinson. Across five chapters you map your own heroic journey through life &mdash; the call to evolve, crossing the line of no return, remembering the infinite, finding the way through the patterns of evolution, and emerging from the dark night of the soul. The curriculum draws intercultural bridges between Andean, Amazonian and Eastern perspectives and a Jungian transpersonal approach, working through shamanic dreamwork and sacred geometry as the archetypal language nature speaks in. Nine hours of video teaching sit alongside reading materials, reflection homework, guided meditation, Primordial Breathwork and Alchemy Qigong practice sessions, and a discussion forum you are invited into on completion. Ongoing and self-paced &mdash; begin any time.</p>
+          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/your-evolutionary-blueprint-online-home-study-course/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
+        </div>
+      </div>
+
+      <div class="oc-card" id="primordial-breathwork">
         <img src="/assets/retreats/primordial-breathwork.jpg"
            srcset="/assets/r/retreats/primordial-breathwork-320w.webp 320w, /assets/retreats/primordial-breathwork.jpg 388w"
            sizes="(max-width:640px) 88vw, (max-width:1180px) 852px, 590px"
@@ -175,7 +166,7 @@
         </div>
       </div>
 
-      <div class="oc-card">
+      <div class="oc-card" id="alchemy-of-immortality-qigong">
         <img src="/assets/retreats/qigong-stone-tower.jpg"
            srcset="/assets/r/retreats/qigong-stone-tower-320w.webp 320w, /assets/r/retreats/qigong-stone-tower-480w.webp 480w, /assets/r/retreats/qigong-stone-tower-640w.webp 640w, /assets/r/retreats/qigong-stone-tower-800w.webp 800w, /assets/retreats/qigong-stone-tower.jpg 1080w"
            sizes="(max-width:640px) 88vw, (max-width:1180px) 852px, 590px"
@@ -190,22 +181,11 @@
         </div>
       </div>
 
-      <div class="oc-card">
-        <img src="/assets/retreats/etn-circle.jpg"
-           srcset="/assets/r/retreats/etn-circle-320w.webp 320w, /assets/r/retreats/etn-circle-480w.webp 480w, /assets/r/retreats/etn-circle-640w.webp 640w, /assets/r/retreats/etn-circle-800w.webp 800w, /assets/retreats/etn-circle.jpg 801w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
-           width="801"
-           height="801"
-           decoding="async" alt="Ceremony circle gathered at the Paititi centre" loading="lazy">
-        <div class="oc-card-body">
-          <h3>Ancestral Remembrance</h3>
-          <p class="oc-card-note">Meditation practice &middot; Taught within the Practical Alchemy Series</p>
-          <p>The practice of remembrance: remembering the original, uninhibited state of being as a conduit of boundless self-realization. Where breathwork and qigong work through the body and its energy, Ancestral Remembrance Meditation turns attention to what has never been wounded &mdash; the ground of being the ancestral lineages point to beneath every technique. It is currently taught as one of the three core Indigenous practices of the Practical Alchemy Series, alongside Primordial Breathwork and the Alchemy of Immortality Qigong.</p>
-          <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/beyond-ayahuasca-book-practical-alchemy-series/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
-        </div>
-      </div>
-
-      <div class="oc-card">
+      <!-- Ancestral Remembrance has no enrollment page of its own: it is one of
+           the three practices taught inside the Practical Alchemy Series, so it
+           is described in that card rather than given a second card pointing at
+           the same Retreat Guru program. -->
+      <div class="oc-card" id="practical-alchemy-series">
         <img src="/assets/retreats/radiant-alchemy-in-the-jungle.webp"
            srcset="/assets/r/retreats/radiant-alchemy-in-the-jungle-320w.webp 320w, /assets/r/retreats/radiant-alchemy-in-the-jungle-480w.webp 480w, /assets/r/retreats/radiant-alchemy-in-the-jungle-640w.webp 640w, /assets/r/retreats/radiant-alchemy-in-the-jungle-800w.webp 800w, /assets/retreats/radiant-alchemy-in-the-jungle.webp 1024w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
@@ -215,7 +195,7 @@
         <div class="oc-card-body">
           <h3>Practical Alchemy Series</h3>
           <p class="oc-card-note">Online course &middot; Free with a Beyond Ayahuasca book purchase</p>
-          <p>A living extension of the <em>Beyond Ayahuasca</em> book &mdash; a pathway where ancient wisdom becomes embodied truth. You&rsquo;ll be guided through three core Indigenous practices rooted in the sacred traditions shared in the book: Primordial Breathwork, Alchemy of Immortality Qigong / Andean Art of Being, and Ancestral Remembrance Meditation. These practices are portals into ancestral knowledge and deep inner transformation, turning the reading of the book into a daily, lived rite of passage.</p>
+          <p>A living extension of the <em>Beyond Ayahuasca</em> book &mdash; a pathway where ancient wisdom becomes embodied truth. You&rsquo;ll be guided through three core Indigenous practices rooted in the sacred traditions shared in the book: Primordial Breathwork, Alchemy of Immortality Qigong / Andean Art of Being, and Ancestral Remembrance Meditation. Where breathwork and qigong work through the body and its energy, remembrance turns attention to what has never been wounded &mdash; the original, uninhibited state of being that the ancestral lineages point to beneath every technique. Together they are portals into ancestral knowledge and deep inner transformation, turning the reading of the book into a daily, lived rite of passage.</p>
           <p class="oc-card-more"><a href="https://paititi-institute.secure.retreat.guru/program/beyond-ayahuasca-book-practical-alchemy-series/" target="_blank" rel="noopener">Explore the Course &rarr;</a></p>
         </div>
       </div>
@@ -225,52 +205,12 @@
 
   <!-- ===== Additional course listings (Retreat Guru) ===== -->
   <!-- Every current feed entry is excluded because it already has a card
-       above (your-evolutionary-blueprint is excluded pending Roman blocker
-       #1 — it is plausibly the "Embody True Nature Home Study Course"
-       promoted below). New Retreat Guru postings appear here automatically. -->
+       above. New Retreat Guru postings appear here automatically. -->
   <section class="pt-sec oc-list oc-list-empty" id="rbg-listings">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:1">
       <div style="grid-area:1 / 1 / 2 / 25">
         <iframe class="oc-frame" id="rbg-frame" src="/rbg-widget.html?cat=online-resources&amp;exclude=primordial-breathwork-online-home-study-course-series,alchemy-of-immortality-daoist-qigong-andean-art-of-being-online-home-study-course,beyond-ayahuasca-book-practical-alchemy-series,your-evolutionary-blueprint-online-home-study-course" title="Online course listings and registration" style="height:120px" loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Home Study Course (moved here from the Distance Healing site) ===== -->
-  <section class="pt-sec oc-dark">
-    <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="home-study-course" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:9">
-      <div class="oc-center" style="grid-area:1 / 3 / 2 / 23">
-        <h2><strong>Embody True Nature<br>Evolutionary Healing Home Study Course</strong></h2>
-      </div>
-      <div class="pt-prose oc-center" style="grid-area:3 / 4 / 4 / 22">
-        <p><strong>Online interactive multimedia course from Paititi Institute</strong></p>
-        <h3><strong>Coming Soon</strong></h3>
-      </div>
-      <div class="oc-mark" style="grid-area:5 / 9 / 6 / 17;--oc-mask:url(/assets/retreats/flower-purple.webp)"></div>
-      <div class="pt-prose" style="grid-area:7 / 4 / 8 / 22">
-        <p><strong>Discover the blueprint encoded in ancestral wisdom lineages that guides you through your evolutionary healing journey.</strong></p>
-        <p><strong>To be effective, this multifaceted interactive course must be made directly relevant to your life. Which begs the question...</strong></p>
-        <p>What are you inspired by and truly passionate about that makes you appreciate this life?</p>
-        <p>Perhaps nothing inspires you, in which case, that rock bottom could become the foundation to develop your life upon.</p>
-        <p>Imagine your life is a training ground for fulfilling your greatest potential&hellip;</p>
-        <p>What if your life has all the necessary ingredients for that fulfillment to take place? Your unique blend of qualities and latent talents, all skillfully combined into a recipe of deep meaning and joyful purpose. Let&rsquo;s face it that without neither a point of reference, clear direction, nor guidance, uniting the puzzle pieces of your life can be unnecessarily long. That is why the living wisdom of ancestral lineages has existed throughout millennia as rites of passage. The blueprint answering these same questions was designed by the indigenous elders to be renewed with each generation only through realized embodiment. The landmarks on this evolutionary map can only be deciphered when the personal challenges of your life are faced with creative objectivity, uncovering the universal meaning in the situations least suspected of it.</p>
-        <p>The ancient lineages implemented in this course serve as a profound reminder that life is always a captivating adventure, an experience of discovery and fascination, even in the midst of the most mundane. The real practice is not a technique but a cultivation of a rooted sense of wonder as an essential attitude in your life.</p>
-        <p>The intention of this course is not to be a generic cookie cutter style curriculum but as a practical and effective insight relevant to the embodiment of your existential truth capable of transcending all adversities.</p>
-        <p>This is a heroic journey starting from an inconsequential speck of dust in the greater collective, and alchemically transforming into a meaningful contribution to the new emerging paradigm.</p>
-        <p>Our experiences of working with these ancestral lineages...</p>
-        <ul>
-          <li>Intercultural bridges - Indigenous evolutionary methods and perspectives from Andean, Amazonian, and Himalayan cultures to awaken the source of creative potential</li>
-          <li>Transpersonal shamanic dreamwork - Learn the language of Nature expressed through the intelligence of your own organism and all phenomena</li>
-          <li>The practice of remembrance - Remembering the original uninhibited state of being as a conduit of boundless self-realization</li>
-          <li>Inner and outer landscapes - Immerse yourself in a multifaceted integration of physical, mental, emotional and spiritual practices directly impacting every aspect of your life</li>
-          <li>Interviews and talks with various evolutionary guides, elders and healers involved with the Paititi Institute&rsquo;s work</li>
-        </ul>
-        <p><strong><em>While this course is currently in production at this time, you are invited to sign up below and receive a 20% early bird discount coupon. No purchase commitment is required. Coupons will be sent via email when the course is ready to purchase online.</em></strong></p>
-      </div>
-      <div style="grid-area:9 / 4 / 10 / 22">
-        <iframe class="oc-form" id="oc-course-form" title="Home Study Course early-bird signup" src="https://secure.jotformpro.com/form/42671479757975" style="height:487px" loading="lazy"></iframe>
       </div>
     </div>
   </section>

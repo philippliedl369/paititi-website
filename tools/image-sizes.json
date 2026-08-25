@@ -747,5 +747,12 @@
   "w390": 390,
   "w900": 900,
   "w1440": 1440
+ },
+ "/assets/retreats/evolutionary-blueprint.jpg": {
+  "nat": 841,
+  "natH": 841,
+  "w390": 342,
+  "w900": 852,
+  "w1440": 590
  }
 }
