@@ -49,7 +49,7 @@ maps clean URLs via `_redirects`).
 | Zeffy donation embed (Yagua page) | Kept as-is — plain iframe, platform-independent |
 | Retreat Guru listings (retreats / online courses) | Kept as-is — script embed + static fallback cards |
 | Distance Healing — a *separate* Squarespace 7.0 site at `paititidistancehealing.com` | Folded into this one. Its nav pages are six tab panels on `/distance-healing` (hash-driven, so the old paths 301 onto `#hashes` and the page selects the tab); the Home Study Course promo moved to `/online-courses`, and the two JotForm payment pages stay separate under `/distance-healing/*` |
-| Blog CMS (8 posts, 4 categories) | Statically generated: `tools/migrate_blog.py` pulls Squarespace `?format=json`, downloads images to `assets/blog/`, writes `Blog*.dc.html` |
+| Blog CMS (8 posts, 4 categories) | Statically generated: `tools/migrate_blog.py` renders `data/blog/posts.json` into `Blog*.dc.html` in both languages. It used to pull Squarespace `?format=json`; that feed is gone, so the posts now come from a local snapshot (`tools/blog_snapshot.py`) |
 | Announcement bar | Baked into `SiteHeader.dc.html` |
 | Clean URLs / legacy URLs | `_redirects` (incl. old encoded category URLs, `/home`, `/the-institute`, `/s/*.pdf`) |
 
@@ -101,6 +101,58 @@ The two migrations are independent, and doing them separately is much safer:
 move the list and repoint the Squarespace form at the new provider first, send
 a campaign or two to warm the domain, then cut the site over against something
 already proven.
+
+## The Spanish site
+
+Spanish lives at `/es/` as a parallel tree of `.es.dc.html` files — `Home.dc.html`
+has `Home.es.dc.html` beside it, and so on for all 32 pages. There is no runtime
+translation layer: these pages are single-file Design Components with their copy
+inline, so a second set of files is the honest mirror of that architecture. The
+cost is that a layout change has to be made twice; the blog avoids even that,
+because both trees are rendered from one generator.
+
+Slugs are translated too (`/es/quienes-somos`, `/es/retiros`, `/es/diario`) — a
+page meant to rank for Spanish queries wants a Spanish path. **In-page anchor
+ids stay in English** (`#impact`, `#packages`, `#events`) so the two trees share
+one anchor map and the `paititidistancehealing.com` 301s keep working unchanged.
+
+```bash
+python3 tools/apply_hreflang.py           # sync hreflang + sister + sitemap
+python3 tools/apply_hreflang.py --check   # fail if anything has drifted
+```
+
+`tools/i18n_pairs.json` is the single source for the English↔Spanish page pairs.
+Three things are generated from it and must never be hand-edited:
+
+- the `rel="alternate"` hreflang block in both pages' `<helmet>`,
+- the `sister` prop each page passes to `SiteHeader` / `SiteHeader.es`, which is
+  what the `EN / ES` switcher in the bar actually links to,
+- `sitemap.xml`, where every `<url>` repeats the pair as `<xhtml:link>`.
+
+A pair is only annotated once **both** halves exist, so a half-built translation
+never advertises a URL that 404s; removing a Spanish page retracts its English
+half on the next run.
+
+Things that stay in English on purpose, because they are English:
+
+- the book *Beyond Ayahuasca* and its subtitle, the film and article titles on
+  `/es/prensa`, and Roman's Substack;
+- everything served by a third party — Retreat Guru listings and registration,
+  the Zeffy donation form, the JotForm payment pages, the Living Vision PDF.
+
+**Don't label any of that as English.** An earlier draft put "(en inglés)" next
+to each and it was cut: a page announcing what language it is in reads as an
+apology, and the link destination makes it obvious anyway.
+
+The two legal pages are the one exception, and for a different reason. They
+carry a **governing-language clause** — the translation is a courtesy, the
+English text is binding — which is standard boilerplate for translated terms
+rather than a per-site decision. It is also why they link back to
+`/terms-conditions` and `/who/privacy-policy` rather than into `/es/`.
+
+`api.js` answers in English and is shared with the English site, so the Spanish
+forms pick their wording from the HTTP status rather than from `data.error` —
+see the comments in `SiteFooter.es.dc.html` and `Contact.es.dc.html`.
 
 ## Assets
 
@@ -161,7 +213,10 @@ Three things worth knowing:
   (phone / collapsed / desktop), taken in a headless browser. A guessed `sizes`
   is how `srcset` quietly serves the wrong file. Re-measure if the layout moves.
 - **Run it after `migrate_blog.py`.** That regenerates `Blog*.dc.html` from
-  scratch and would drop the attributes this adds. `assets/r/` is also skipped
+  scratch and would drop the attributes this adds. The whole blog pipeline is
+  `migrate_blog.py` → `gen_responsive.py` → `apply_hreflang.py`, in that order;
+  `migrate_blog.py --check` normalises `<img>` tags before diffing for exactly
+  this reason. `assets/r/` is also skipped
   by `dedupe_assets.py` — every file in it is deliberately a smaller copy of a
   master, so a perceptual hash pairs all of them with their originals.
 
@@ -172,7 +227,8 @@ Three things worth knowing:
 ├── paititi.css           # the shared page shell: fluid grid, sections, type scale
 ├── Home.dc.html …        # one .dc.html per page (see _redirects for the map)
 ├── DistanceHealing*.dc.html        # the absorbed paititidistancehealing.com
-├── Blog*.dc.html         # generated — edit tools/migrate_blog.py and re-run instead
+├── Blog*.dc.html         # generated — edit data/blog/*.json and re-run instead
+├── *.es.dc.html          # the Spanish tree, one file per English page
 ├── SiteHeader/SiteFooter.dc.html   # shared chrome (nav, announcement bar, newsletter)
 ├── _ds/meristem-design-system/     # tokens rethemed to Paititi (Philosopher/Lato, plum)
 ├── assets/               # all images localized from the Squarespace CDN
@@ -234,8 +290,17 @@ pages need that no other page does: `frame-src` in `_headers` lists JotForm
 re-inked via CSS `mask-image` — at watermark contrast they disappear on the
 light grounds, and here they have to work as icons.
 
-**Blog pages are generated.** Edit `tools/migrate_blog.py` and re-run it; never
-edit `Blog*.dc.html`. The migration keeps Squarespace's own block scaffolding
+**Blog pages are generated, from a local snapshot.** Edit
+`tools/migrate_blog.py` or `data/blog/*.json` and re-run; never edit
+`Blog*.dc.html`. The generator originally fetched
+`paititi-institute.org/blog?format=json`; since the Cloudflare migration that
+URL serves the static `Blog.dc.html`, so the source is now
+`data/blog/posts.json`, recovered from the generated pages by
+`tools/blog_snapshot.py`. `migrate_blog.py --check` re-renders without writing
+and diffs against what is on disk — the English tree is held to byte-identical,
+which is what proves the snapshot is a faithful copy of the posts.
+
+The migration keeps Squarespace's own block scaffolding
 verbatim, so `POST_CSS` has to reproduce that scaffolding's spacing rather than
 replace it — the 17px block gutter with the row pulled out to match, the 16px
 paragraph rhythm, image blocks as aspect-ratio boxes with the image out of

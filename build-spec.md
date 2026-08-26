@@ -272,6 +272,36 @@ Keep the Himalayan Pilgrimage block and the Retreat Guru iframe. Add:
 - Mentorship/DH intake forms replacing the mailto; distancehealing@ inbox decision.
 - Initiatives subpages if the anchor approach feels thin.
 
+### /press-media rebuilt (25 Aug)
+
+The page was a Squarespace transcription: one article thumbnail on a hero, reachable
+only from the footer. It is now the site's media home — films, then coverage, then a
+journalist block (contact, what we can provide, fast facts) — and sits in the nav
+under About, in both language trees (`/es/prensa` is wired in `_redirects` and linked
+from the Spanish header and footer; `PressMedia.es.dc.html` was written on 25 Aug
+with the rest of the Spanish tree).
+
+It exists mostly because **the current documentary had no signposted home**. *Ayahuasca:
+The Medicine of Awakening* was embedded halfway down `/beyond-ayahuasca` and
+`/initiatives/yagua-…`, and carded on `/discoverpaititi`, which is not in the nav —
+so from the front door it was unfindable. It now plays at the top of `/press-media`.
+(Its title is "…Medicine **of** Awakening"; `/discoverpaititi` said "for" and is fixed.)
+
+What is on the page is everything that could be verified against a live source:
+
+- Films — *Ayahuasca: The Medicine of Awakening* (embedded), *An Ancestral School for
+  the Yahua Tribe is Born* (short), *The Sacred Science* (2010).
+- Coverage — Artist Highlight (Talia Mercer, 25 Jul 2025) · Of Bones, Stones, Roots
+  and Earth (Monika Carless, 23 Jul 2025) · The Universe Within Ep. 158 (Jason
+  Grechanik, 14 May 2025) · The White Witch Podcast (20 Feb 2026).
+
+**Open, needs Roman.** Nothing on a press page may be invented, so these are asks, not
+build work: (a) the newspaper and magazine clippings — scans go in `assets/press/`, the
+markup template is in a comment in the page; (b) any coverage missing from the list
+above, including the Heart Mountain Wellness interview (22 May 2025) which is listed
+everywhere but has no stable public page; (c) confirmation that `info@` is the right
+inbox for media enquiries, and that the four items above are ones he wants cited.
+
 ## Phase 3 — ongoing
 
 15 cornerstone evergreen articles, 2–3/month, Roman writes or reviews; facts about the

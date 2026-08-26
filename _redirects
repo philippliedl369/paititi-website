@@ -139,3 +139,78 @@
 /distance-healing/SiteFooter.dc.html  /SiteFooter.dc.html  200
 /who/SiteHeader.dc.html             /SiteHeader.dc.html  200
 /who/SiteFooter.dc.html             /SiteFooter.dc.html  200
+
+# ---------------------------------------------------------------------------
+# Spanish site (/es/)
+#
+# A parallel tree of .es.dc.html pages, not a runtime translation layer: the
+# pages are single-file Design Components with their copy inline, so the honest
+# mirror of that architecture is a second set of files. Slugs are translated
+# too — a Spanish page ranking for Spanish queries wants a Spanish path — but
+# in-page anchor ids (#impact, #packages, ...) stay in English so the two trees
+# share one set of anchors and the paititidistancehealing.com 301s above keep
+# working without a second hash map.
+#
+# Every page here has a rel="alternate" hreflang pair in its <helmet> and passes
+# its English counterpart to SiteHeader.es as `alt`; those two must agree.
+
+# /es and /es/ are one page — collapse to the slashed form so the tree has a
+# single canonical root.
+/es                  /es/                      301
+/es/                 /Home.es.dc.html          200
+
+# El Instituto
+/es/quienes-somos    /AboutUs.es.dc.html       200
+/es/equipo           /Team.es.dc.html          200
+/es/prensa           /PressMedia.es.dc.html    200
+/es/descubre-paititi /DiscoverPaititi.es.dc.html 200
+/es/contacto         /Contact.es.dc.html       200
+
+# Programas
+/es/retiros              /Retreats.es.dc.html      200
+/es/cursos-en-linea      /OnlineCourses.es.dc.html 200
+/es/beyond-ayahuasca     /BeyondAyahuasca.es.dc.html 200
+/es/mentoria             /Mentorship.es.dc.html    200
+
+# Sanación a Distancia. The two payment pages are emailed to an applicant
+# rather than browsed to, exactly as on the English side.
+/es/sanacion-a-distancia                        /DistanceHealing.es.dc.html             200
+/es/sanacion-a-distancia/cuota-de-solicitud     /DistanceHealingFee.es.dc.html          200
+/es/sanacion-a-distancia/contribucion-final     /DistanceHealingContribution.es.dc.html 200
+
+# Iniciativas
+/es/iniciativas                                 /Initiatives.es.dc.html    200
+/es/iniciativas/escuela-ancestral-yahua         /InitiativeYagua.es.dc.html 200
+/es/iniciativas/qero-alimentos-de-emergencia    /InitiativeQero.es.dc.html  200
+
+# Legal
+/es/terminos-y-condiciones   /Terms.es.dc.html    200
+/es/politica-de-privacidad   /Privacy.es.dc.html  200
+
+# Diario
+/es/diario /Blog.es.dc.html 200
+/es/diario/como-crear-relaciones-sostenibles-para-vivir-en-comunidad /BlogPost-how-to-create-sustainable-relationships-for-living-in-community.es.dc.html 200
+/es/diario/un-rito-de-paso-vivo-hacia-los-reinos-olvidados-de-la-amazonia /BlogPost-a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest.es.dc.html 200
+/es/diario/no-culpes-al-caos-un-camino-poco-transitado-en-tiempos-dificiles /BlogPost-cant-blame-the-chaos-a-path-less-traveled-in-perilous-times.es.dc.html 200
+/es/diario/integrar-lo-fenomenal-en-lo-cotidiano /BlogPost-integration-phenomenal-into-mundane.es.dc.html 200
+/es/diario/lo-que-hace-que-la-vida-valga-la-pena-en-tiempos-de-agitacion /BlogPost-makes-life-worth-living-in-a-time-turmoil.es.dc.html 200
+/es/diario/fragmentos-del-ego-roto-que-reflejan-innumerables-brazos-de-compasion /BlogPost-shards-shattered-ego-reflecting-countless-arms-compassion.es.dc.html 200
+/es/diario/encarna-tu-verdadera-naturaleza-retiro-de-sanacion /BlogPost-embody-true-nature-healing-retreat.es.dc.html 200
+/es/diario/categoria/salud-y-bienestar /BlogCategory-health-wellness.es.dc.html 200
+/es/diario/categoria/tradiciones-indigenas /BlogCategory-indigenous-traditions.es.dc.html 200
+/es/diario/categoria/medicina-vegetal /BlogCategory-plant-medicine.es.dc.html 200
+/es/diario/categoria/transformacion /BlogCategory-transformation.es.dc.html 200
+
+# Sibling <dc-import> fetches, as for the English tree above: the runtime asks
+# for "./SiteHeader.es.dc.html" relative to the page URL, so every directory the
+# Spanish clean URLs live in needs the pair mapped back to the root files.
+/es/SiteHeader.es.dc.html                      /SiteHeader.es.dc.html  200
+/es/SiteFooter.es.dc.html                      /SiteFooter.es.dc.html  200
+/es/diario/SiteHeader.es.dc.html               /SiteHeader.es.dc.html  200
+/es/diario/SiteFooter.es.dc.html               /SiteFooter.es.dc.html  200
+/es/diario/categoria/SiteHeader.es.dc.html     /SiteHeader.es.dc.html  200
+/es/diario/categoria/SiteFooter.es.dc.html     /SiteFooter.es.dc.html  200
+/es/iniciativas/SiteHeader.es.dc.html          /SiteHeader.es.dc.html  200
+/es/iniciativas/SiteFooter.es.dc.html          /SiteFooter.es.dc.html  200
+/es/sanacion-a-distancia/SiteHeader.es.dc.html /SiteHeader.es.dc.html  200
+/es/sanacion-a-distancia/SiteFooter.es.dc.html /SiteFooter.es.dc.html  200

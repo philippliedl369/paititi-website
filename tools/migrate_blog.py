@@ -28,6 +28,92 @@ CATEGORY_SLUGS = {
     'Transformation': 'transformation',
 }
 
+# --- Languages --------------------------------------------------------------
+# The generator renders one source (data/blog/posts.json) into two trees. Only
+# the values that actually differ live here; everything structural — the fluid
+# grid coordinates, the CSS, the card markup — is shared, so a layout change is
+# made once and both languages get it.
+#
+# The English entry has to reproduce the committed pages byte for byte; that is
+# what `--check` verifies, and it is the only guarantee that the snapshot the
+# posts were recovered into is faithful.
+#
+# hreflang, <link rel=alternate> and the header's `sister` prop are deliberately
+# NOT set here: tools/apply_hreflang.py owns those for every page on the site,
+# blog pages included, and two owners would drift.
+LANGS = {
+    'en': {
+        'html_lang': 'en',
+        'file_suffix': '',                 # BlogPost-<slug>.dc.html
+        'header': 'SiteHeader',
+        'footer': 'SiteFooter',
+        'blog_base': '/blog',
+        'cat_base': '/blog/category',
+        'team_href': '/team',
+        'index_file': 'Blog.dc.html',
+        'cat_file': 'BlogCategory-{cslug}.dc.html',
+        'post_file': 'BlogPost-{slug}.dc.html',
+        'index_title': 'Journal',
+        'cat_title': '{name} — Journal',
+        'hero_title': 'Living Transmissions',
+        'hero_lede': ('A living space where ancient wisdom meets modern insight to inspire your '
+                      'journey toward personal and planetary transformation. Here, we share stories, '
+                      'reflections, and practical guidance rooted in indigenous traditions, '
+                      'ecological stewardship, and conscious living.'),
+        'meta_desc': ('A living space where ancient wisdom meets modern insight to inspire your '
+                      'journey toward personal and planetary transformation.'),
+        'substack': ('<strong>Look for more articles with Romans Substack page </strong>'
+                     '<a href="https://substack.com/@romanhanis?utm_source=global-search" '
+                     'target="_blank" rel="noopener"><strong>HERE</strong></a>'),
+        'hero_alt': 'Gathering at the Paititi retreat centre',
+        'eyes_alt': 'Stylized Buddha eyes over water with lotus petals',
+        'read_more': 'Read More',
+        'previous': 'Previous',
+        'next': 'Next',
+        'more_entries': 'More journal entries',
+        'brand': 'Paititi Institute',
+        # Identity maps: English slugs are the ones in the snapshot.
+        'post_slugs': {},
+        'cat_slugs': {},
+    },
+    'es': {
+        'html_lang': 'es',
+        'file_suffix': '.es',              # BlogPost-<slug>.es.dc.html
+        'header': 'SiteHeader.es',
+        'footer': 'SiteFooter.es',
+        'blog_base': '/es/diario',
+        'cat_base': '/es/diario/categoria',
+        'team_href': '/es/equipo',
+        'index_file': 'Blog.es.dc.html',
+        'cat_file': 'BlogCategory-{cslug}.es.dc.html',
+        'post_file': 'BlogPost-{slug}.es.dc.html',
+        'index_title': 'Diario',
+        'cat_title': '{name} — Diario',
+        'hero_title': 'Transmisiones Vivas',
+        'hero_lede': ('Un espacio vivo donde la sabiduría ancestral se encuentra con la mirada '
+                      'contemporánea para inspirar tu camino hacia la transformación personal y '
+                      'planetaria. Aquí compartimos historias, reflexiones y orientación práctica '
+                      'enraizadas en las tradiciones indígenas, el cuidado de la tierra y una vida '
+                      'consciente.'),
+        'meta_desc': ('Un espacio vivo donde la sabiduría ancestral se encuentra con la mirada '
+                      'contemporánea para inspirar tu camino hacia la transformación personal y '
+                      'planetaria.'),
+        'substack': ('<strong>Encuentra más artículos en la página de Substack de Roman </strong>'
+                     '<a href="https://substack.com/@romanhanis?utm_source=global-search" '
+                     'target="_blank" rel="noopener"><strong>AQUÍ</strong></a>'),
+        'hero_alt': 'Encuentro en el centro de retiros de Paititi',
+        'eyes_alt': 'Ojos de Buda estilizados sobre el agua, con pétalos de loto',
+        'read_more': 'Seguir leyendo',
+        'previous': 'Anterior',
+        'next': 'Siguiente',
+        'more_entries': 'Más entradas del diario',
+        'brand': 'Instituto Paititi',
+        # Filled from data/blog/es.json at load time.
+        'post_slugs': {},
+        'cat_slugs': {},
+    },
+}
+
 
 def fetch(url):
     # curl instead of urllib: the local python install lacks SSL root certs.
@@ -173,7 +259,7 @@ def clean_body(body, slug, page_url):
 
 
 PAGE_TEMPLATE = '''<!DOCTYPE html>
-<html>
+<html lang="{html_lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -184,9 +270,9 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 <body>
 <x-dc>
 <helmet>
-<title>{title} | Paititi Institute</title>
+<title>{title} | {brand}</title>
 <meta name="description" content="{description}">
-<meta property="og:title" content="{title} | Paititi Institute">
+<meta property="og:title" content="{title} | {brand}">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Paititi Institute">
@@ -208,27 +294,27 @@ PAGE_TEMPLATE = '''<!DOCTYPE html>
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="journal" hint-size="100%,209px"></dc-import>
+<dc-import name="{header}" active="journal" hint-size="100%,209px"></dc-import>
 <main>
 
   <section class="pt-sec pt-sec-flat bp-sec">
     <div class="pt-sec-bg"></div>
     <article class="bp-item">
       <h1>{title}</h1>
-      <p class="bp-meta">{cats_line}<a class="bp-author" href="/team">{author}</a><time datetime="{iso_date}">{date}</time></p>
+      <p class="bp-meta">{cats_line}<a class="bp-author" href="{team_href}">{author}</a><time datetime="{iso_date}">{date}</time></p>
       <div class="bp-body pt-prose">
 {body}
       </div>
     </article>
   </section>
 
-  <nav class="bp-pager" aria-label="More journal entries">
+  <nav class="bp-pager" aria-label="{more_entries}">
     {prev_link}
     {next_link}
   </nav>
 
 </main>
-<dc-import name="SiteFooter"></dc-import>
+<dc-import name="{footer}"></dc-import>
 </div>
 </x-dc>
 </body>
@@ -359,6 +445,8 @@ POST_CSS = """
   @media (pointer:coarse){
     .bp-meta a{display:inline-block;padding:5px 0}
   }
+  /* The footer wave must match this page's final section colour. */
+  footer.pt-footer{--pt-footer-wave:#210416}
 """
 
 
@@ -366,73 +454,164 @@ def cat_name(raw):
     return html_unescape(raw)
 
 
-def cat_href(name):
-    name = cat_name(name)
-    slug = CATEGORY_SLUGS.get(name) or re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')
-    return '/blog/category/' + slug
+def cat_href(lang, cslug):
+    """Category URL in `lang`'s tree, from the English category slug."""
+    return lang['cat_base'] + '/' + lang['cat_slugs'].get(cslug, cslug)
 
 
-def post_page(item, prev_item, next_item):
-    slug = slug_of(item)
-    date, iso_date = display_date(item)
-    title = html_unescape(item['title']).replace('\u00a0', ' ')
-    cats = item.get('categories') or []
-    # The live byline is a flat run of category links, then author, then date.
+def post_href(lang, slug):
+    """Post URL in `lang`'s tree, from the English post slug."""
+    return lang['blog_base'] + '/' + lang['post_slugs'].get(slug, slug)
+
+
+TAG_SPLIT = re.compile(r'(<[^>]+>)')
+
+
+def localize_links(body, lang):
+    """Repoint internal links inside a post body at `lang`'s tree.
+
+    Post bodies are Squarespace content and carry their own <a href> — five of
+    them link to /retreats#events. Text-node translation never touches
+    attributes, so without this a Spanish post would drop the reader back into
+    the English site mid-article. The map is read from tools/i18n_pairs.json so
+    it cannot disagree with _redirects or with the hreflang pairs.
+    """
+    if lang['html_lang'] == 'en':
+        return body
+    pairs = link_map()
+    def one(m):
+        href = m.group(1)
+        path, _, frag = href.partition('#')
+        target = pairs.get(path)
+        if not target:
+            return m.group(0)
+        return 'href="' + target + ('#' + frag if frag else '') + '"'
+    return re.sub(r'href="(/[^"]*)"', one, body)
+
+
+_link_map = None
+
+
+def link_map():
+    """English clean URL -> Spanish clean URL, from the shared pair table."""
+    global _link_map
+    if _link_map is None:
+        path = os.path.join(ROOT, 'tools', 'i18n_pairs.json')
+        with open(path, encoding='utf-8') as f:
+            cfg = json.load(f)
+        _link_map = {p['en']: p['es'] for p in cfg['pairs']}
+    return _link_map
+
+
+def translate_body(body, text_map):
+    """Swap the text nodes of a post body, leaving every tag exactly as it is.
+
+    The translation file holds text nodes rather than whole translated bodies,
+    so the Spanish page keeps whatever markup the English one has — including
+    Squarespace's nested block scaffolding, which POST_CSS is written against.
+    A node with no entry is left in English, which is visible on the page and
+    reported by `migrate_blog.py` rather than failing the build.
+
+    <style> and <script> contents are text nodes too, and must never be
+    translated: the post bodies carry per-block Squarespace CSS.
+    """
+    if not text_map:
+        return body, 0, 0
+    out, skip, done, total = [], False, 0, 0
+    for part in TAG_SPLIT.split(body):
+        if part.startswith('<'):
+            tag = part.lower()
+            if tag.startswith(('<style', '<script')):
+                skip = True
+            elif tag.startswith(('</style', '</script')):
+                skip = False
+            out.append(part)
+            continue
+        if skip or not part.strip():
+            out.append(part)
+            continue
+        total += 1
+        key = part.strip()
+        if key in text_map:
+            done += 1
+            lead = part[:len(part) - len(part.lstrip())]
+            tail = part[len(part.rstrip()):]
+            out.append(lead + text_map[key] + tail)
+        else:
+            out.append(part)
+    return ''.join(out), done, total
+
+
+_body_stats = []
+
+
+def post_page(lang, post, prev_post, next_post, tr):
+    """One post page. `tr` is this post's translation record, {} for English."""
+    slug = post['slug']
+    title = tr.get('title', post['title'])
+    body, done, total = translate_body(post['body'], tr.get('text', {}))
+    body = localize_links(body, lang)
+    if tr:
+        _body_stats.append((slug, done, total))
+    desc = tr.get('description', post['description'])
+
     cats_line = ''.join(
-        f'<a href="{cat_href(c)}">{cat_name(c).replace("&", "&amp;")}</a>' for c in cats)
+        '<a href="%s">%s</a>' % (cat_href(lang, c['slug']),
+                                 cat_title(lang, c).replace('&', '&amp;'))
+        for c in post['categories'])
 
     chevron = ('<span class="bp-pager-icon" aria-hidden="true">'
                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">'
                '<polyline points="{points}"/></svg></span>')
 
-    def link(it, label, cls):
-        if not it:
+    def link(other, label, cls):
+        if not other:
             return '<span></span>'
-        t = html_unescape(it['title']).replace('\u00a0', ' ')
+        t = translations_for(lang, other['slug']).get('title', other['title'])
         # The visible cue is the chevron; the word itself is for assistive tech.
         icon = chevron.format(points='15 4 7 12 15 20' if cls == 'bp-prev' else '9 4 17 12 9 20')
-        inner = f'<span class="bp-pager-title"><span class="bp-pager-label">{label}</span><h2>{t}</h2></span>'
-        return (f'<a class="{cls}" href="/blog/{slug_of(it)}">'
+        inner = (f'<span class="bp-pager-title"><span class="bp-pager-label">{label}</span>'
+                 f'<h2>{t}</h2></span>')
+        return (f'<a class="{cls}" href="{post_href(lang, other["slug"])}">'
                 + (icon + inner if cls == 'bp-prev' else inner + icon) + '</a>')
 
-    body = clean_body(item['body'], slug, f'/blog/{slug}')
-    desc = strip_tags(item.get('excerpt') or '')[:300].replace('"', '&quot;')
     page = PAGE_TEMPLATE.format(
+        html_lang=lang['html_lang'], header=lang['header'], footer=lang['footer'],
+        team_href=lang['team_href'], more_entries=lang['more_entries'], brand=lang['brand'],
         title=title.replace('"', '&quot;'), description=desc,
-        date=date, iso_date=iso_date, css=POST_CSS.strip(),
-        author=item['author']['displayName'], cats_line=cats_line, body=body,
-        prev_link=link(next_item, 'Previous', 'bp-prev'),
-        next_link=link(prev_item, 'Next', 'bp-next'))
-    fname = f'BlogPost-{slug}.dc.html'
-    with open(os.path.join(ROOT, fname), 'w') as f:
-        f.write(page)
-    print(f'  wrote {fname}')
-    return slug, fname
+        date=post['date'], iso_date=post['iso_date'], css=POST_CSS.strip(),
+        author=post['author'], cats_line=cats_line, body=body,
+        prev_link=link(next_post, lang['previous'], 'bp-prev'),
+        next_link=link(prev_post, lang['next'], 'bp-next'))
+    return lang['post_file'].format(slug=slug), page
 
 
-def index_card(item, thumb):
+def index_card(lang, card):
     """One card in the 2-up grid: image, 20px spacer, byline, title, excerpt."""
-    slug = slug_of(item)
-    date, iso_date = display_date(item)
-    title = html_unescape(item['title']).replace('\u00a0', ' ')
-    # Squarespace prints the excerpt field in full; don't second-guess it.
-    excerpt = strip_tags(item.get('excerpt') or '')
-    href = item.get('sourceUrl') or f'/blog/{slug}'
-    target = ' target="_blank" rel="noopener"' if item.get('sourceUrl') else ''
+    if card['source_url']:
+        # An external link-post (Roman's Substack). It has no page in either
+        # tree, so both trees point at the same outside URL.
+        href, target = card['source_url'], ' target="_blank" rel="noopener"'
+        title, excerpt = card['title'], card['excerpt']
+    else:
+        tr = translations_for(lang, card['slug'])
+        href, target = post_href(lang, card['slug']), ''
+        title = tr.get('title', card['title'])
+        excerpt = tr.get('excerpt', card['excerpt'])
     excerpt_html = f'<div class="bl-excerpt">{excerpt}</div>'
     return f'''        <article class="bl-card">
-          <a class="bl-image" href="{href}"{target}><img src="/{thumb}" alt="" loading="lazy"></a>
+          <a class="bl-image" href="{href}"{target}><img src="/{card['thumb']}" alt="" loading="lazy"></a>
           <div class="bl-text">
-            <p class="bl-meta"><span>{item['author']['displayName']}</span><time datetime="{iso_date}">{date}</time></p>
+            <p class="bl-meta"><span>{card['author']}</span><time datetime="{card['date']}">{card['date_display']}</time></p>
             <h2 class="bl-title"><a href="{href}"{target}>{title}</a></h2>
             {excerpt_html}
-            <a class="bl-more" href="{href}"{target}>Read More</a>
+            <a class="bl-more" href="{href}"{target}>{lang['read_more']}</a>
           </div>
         </article>'''
 
 
 INDEX_TEMPLATE = '''<!DOCTYPE html>
-<html>
+<html lang="{html_lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -443,10 +622,10 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
 <body>
 <x-dc>
 <helmet>
-<title>{page_title} | Paititi Institute</title>
-<meta name="description" content="A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation.">
-<meta property="og:title" content="{page_title} | Paititi Institute">
-<meta property="og:description" content="A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation.">
+<title>{page_title} | {brand}</title>
+<meta name="description" content="{meta_desc}">
+<meta property="og:title" content="{page_title} | {brand}">
+<meta property="og:description" content="{meta_desc}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Paititi Institute">
 <meta property="og:image" content="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp">
@@ -467,21 +646,21 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
 </style>
 </helmet>
 <div class="pt-page">
-<dc-import name="SiteHeader" active="journal" hint-size="100%,209px"></dc-import>
+<dc-import name="{header}" active="journal" hint-size="100%,209px"></dc-import>
 <main>
 
   <!-- ===== Hero ===== -->
   <section class="pt-sec pt-sec-flat pt-hero bl-hero">
     <div class="pt-sec-bg">
-      <img src="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp" alt="Gathering at the Paititi retreat centre" loading="eager">
+      <img src="/assets/blog/69265356-2542807292472488-6841856973810434048-n.webp" alt="{hero_alt}" loading="eager">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:304px;--pt-grid-bot:124px;--pt-rows:16;--pt-row-h:25.8906px">
       <div class="pt-hero-panel pt-prose" style="grid-area:1 / 6 / 10 / 20">
-        <h1><strong>Living Transmissions</strong></h1>
-        <p>A living space where ancient wisdom meets modern insight to inspire your journey toward personal and planetary transformation. Here, we share stories, reflections, and practical guidance rooted in indigenous traditions, ecological stewardship, and conscious living.</p>
+        <h1><strong>{hero_title}</strong></h1>
+        <p>{hero_lede}</p>
       </div>
       <div class="pt-fit" style="grid-area:9 / 10 / 15 / 16">
-        <img src="/assets/brand/icon-vision-purpose.webp" alt="Stylized Buddha eyes over water with lotus petals" loading="eager">
+        <img src="/assets/brand/icon-vision-purpose.webp" alt="{eyes_alt}" loading="eager">
       </div>
     </div>
   </section>
@@ -496,7 +675,7 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
         <img src="/assets/blog/screenshot-2025-12-03-at-115430-am.webp" alt="Substack" loading="lazy">
       </div>
       <div class="pt-prose pt-vc" style="grid-area:6 / 15 / 9 / 23">
-        <p><strong>Look for more articles with Romans Substack page </strong><a href="https://substack.com/@romanhanis?utm_source=global-search" target="_blank" rel="noopener"><strong>HERE</strong></a></p>
+        <p>{substack}</p>
       </div>
     </div>
   </section>
@@ -515,7 +694,7 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
   </section>
 
 </main>
-<dc-import name="SiteFooter"></dc-import>
+<dc-import name="{footer}"></dc-import>
 </div>
 </x-dc>
 </body>
@@ -526,7 +705,7 @@ INDEX_TEMPLATE = '''<!DOCTYPE html>
 # live /blog: a 2-up grid of 512px cards inside the 1200px column, 57.6px
 # padding, 60px column gap and 65px row gap, reversed out on near-black.
 INDEX_CSS = '''
-  .bl-hero{--pt-hero-h:1006px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49)}
+  .bl-hero{--pt-hero-h:1006px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.49);--pt-hero-ink:#fff}
   .bl-hero .pt-hero-panel{background:rgba(88,67,100,.39)}
   .bl-hero h1,.bl-hero p{text-align:center}
 
@@ -578,82 +757,167 @@ INDEX_CSS = '''
     .bl-filter a{display:inline-block;padding:6px 0}
     .bl-meta a{display:inline-block;padding:5px 0}
   }
+  /* The footer wave must match this page's final section colour. */
+  footer.pt-footer{--pt-footer-wave:#210416}
 '''
 
 
-def main():
-    print('Fetching blog index JSON…')
-    data = fetch_json(f'{SITE}/blog')
-    items = sorted(data['items'], key=lambda i: i['publishOn'], reverse=True)
-    print(f'{len(items)} posts')
+# --- Translations -----------------------------------------------------------
+_translations = {}
 
-    os.makedirs(ASSET_DIR, exist_ok=True)
-    man = manifest()
-    thumbs = {}
-    for item in items:
-        slug = slug_of(item)
-        url = item['assetUrl'].split('?')[0]
-        entry = man.get(url)
-        if entry and os.path.exists(os.path.join(ROOT, entry['local'])):
-            thumbs[slug] = entry['local']
-            continue
-        rel = f'assets/blog/thumb-{slug}.jpg'
-        path = os.path.join(ROOT, rel)
-        if not os.path.exists(path):
-            try:
-                data = fetch(url + '?format=800w')
-                with open(path, 'wb') as f:
-                    f.write(data)
-                man[url] = {'local': rel, 'original_name': url.rsplit('/', 1)[-1],
-                            'pages': [f'/blog/{slug}'], 'alt': '', 'bytes': len(data),
-                            'sha256': hashlib.sha256(data).hexdigest()[:16]}
-                print(f'  thumb {rel}')
-            except Exception as e:
-                print(f'  !! thumb failed {slug}: {e}', file=sys.stderr)
-        thumbs[slug] = rel
 
-    redirects, sitemap = [], []
-    # Post pages (skip external link-posts; they redirect to their source).
-    posts = [i for i in items if not i.get('sourceUrl')]
-    for idx, item in enumerate(posts):
-        print(f'Post: {item["title"][:60]}')
-        prev_item = posts[idx + 1] if idx + 1 < len(posts) else None  # older
-        next_item = posts[idx - 1] if idx > 0 else None               # newer
-        slug, fname = post_page(item, prev_item, next_item)
-        redirects.append(f'/blog/{slug} /{fname} 200')
-        sitemap.append(f'{SITE}/blog/{slug}')
-    for item in items:
-        if item.get('sourceUrl'):
-            redirects.append(f'/blog/{slug_of(item)} {item["sourceUrl"]} 302')
+def load_translations():
+    """data/blog/es.json — Spanish copy, keyed by the English post slug.
 
-    # Index + category pages.
-    all_cards = '\n'.join(index_card(i, thumbs[slug_of(i)]) for i in items)
-    with open(os.path.join(ROOT, 'Blog.dc.html'), 'w') as f:
-        f.write(INDEX_TEMPLATE.format(page_title='Journal', filter_note='',
-                                      css=INDEX_CSS.strip(), cards=all_cards))
-    print('  wrote Blog.dc.html')
-    redirects.append('/blog /Blog.dc.html 200')
+    Missing keys fall back to English rather than failing, so a half-finished
+    translation still produces a working page instead of blocking the build;
+    `--check` reports what is still falling back.
+    """
+    path = os.path.join(ROOT, 'data', 'blog', 'es.json')
+    try:
+        with open(path, encoding='utf-8') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f'  no {os.path.relpath(path, ROOT)} — Spanish tree will mirror English')
+        return
+    _translations['es'] = data.get('posts', {})
+    LANGS['es']['post_slugs'] = data.get('post_slugs', {})
+    LANGS['es']['cat_slugs'] = data.get('cat_slugs', {})
+    LANGS['es']['cat_names'] = data.get('cat_names', {})
 
-    for name, cslug in CATEGORY_SLUGS.items():
-        cat_items = [i for i in items if name in [cat_name(c) for c in (i.get('categories') or [])]]
-        cards = '\n'.join(index_card(i, thumbs[slug_of(i)]) for i in cat_items)
+
+def translations_for(lang, slug):
+    return _translations.get(lang['html_lang'], {}).get(slug, {})
+
+
+def cat_title(lang, cat):
+    """Display name of a category in `lang`."""
+    return lang.get('cat_names', {}).get(cat['slug'], cat['name'])
+
+
+def load_snapshot():
+    path = os.path.join(ROOT, 'data', 'blog', 'posts.json')
+    try:
+        with open(path, encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        raise SystemExit(
+            'data/blog/posts.json is missing. The Squarespace feed this script was\n'
+            'originally written against no longer exists, so the posts come from that\n'
+            'snapshot now. Rebuild it from the committed English pages with:\n'
+            '    python3 tools/blog_snapshot.py')
+
+
+def render(lang_key, snap, write=True):
+    """Render every blog page for one language. Returns {filename: html}."""
+    lang = LANGS[lang_key]
+    posts = snap['posts']
+    # Newest first, matching the order the index cards are already in.
+    order = [c['slug'] for c in snap['cards'] if c['slug']]
+    by_slug = {p['slug']: p for p in posts}
+    ordered = [by_slug[s] for s in order if s in by_slug]
+
+    pages = {}
+    for idx, post in enumerate(ordered):
+        prev_post = ordered[idx + 1] if idx + 1 < len(ordered) else None   # older
+        next_post = ordered[idx - 1] if idx > 0 else None                  # newer
+        fname, html = post_page(lang, post, prev_post, next_post,
+                                translations_for(lang, post['slug']))
+        pages[fname] = html
+
+    cards = '\n'.join(index_card(lang, c) for c in snap['cards'])
+    pages[lang['index_file']] = INDEX_TEMPLATE.format(
+        html_lang=lang['html_lang'], header=lang['header'], footer=lang['footer'],
+        page_title=lang['index_title'], meta_desc=lang['meta_desc'], brand=lang['brand'],
+        hero_title=lang['hero_title'], hero_lede=lang['hero_lede'],
+        hero_alt=lang['hero_alt'], eyes_alt=lang['eyes_alt'],
+        substack=lang['substack'], filter_note='', css=INDEX_CSS.strip(), cards=cards)
+
+    for cname, cslug in CATEGORY_SLUGS.items():
+        in_cat = [c for c in snap['cards'] if c['slug'] and any(
+            k['slug'] == cslug for k in by_slug.get(c['slug'], {}).get('categories', []))]
+        cards = '\n'.join(index_card(lang, c) for c in in_cat)
+        display = lang.get('cat_names', {}).get(cslug, cname)
         # The live category pages show the filtered grid and nothing else —
         # no "showing X" banner — so don't invent one.
-        note = ''
-        fname = f'BlogCategory-{cslug}.dc.html'
-        with open(os.path.join(ROOT, fname), 'w') as f:
-            f.write(INDEX_TEMPLATE.format(page_title=name + ' \u2014 Journal', filter_note=note,
-                                          css=INDEX_CSS.strip(), cards=cards))
-        print(f'  wrote {fname} ({len(cat_items)} posts)')
-        redirects.append(f'/blog/category/{cslug} /{fname} 200')
+        pages[lang['cat_file'].format(cslug=cslug)] = INDEX_TEMPLATE.format(
+            html_lang=lang['html_lang'], header=lang['header'], footer=lang['footer'],
+            page_title=lang['cat_title'].format(name=display), meta_desc=lang['meta_desc'], brand=lang['brand'],
+            hero_title=lang['hero_title'], hero_lede=lang['hero_lede'],
+            hero_alt=lang['hero_alt'], eyes_alt=lang['eyes_alt'],
+            substack=lang['substack'], filter_note='', css=INDEX_CSS.strip(), cards=cards)
 
-    save_manifest()
+    if write:
+        for fname, html in pages.items():
+            with open(os.path.join(ROOT, fname), 'w', encoding='utf-8') as f:
+                f.write(html)
+    return pages
 
-    print('\n--- add to _redirects ---')
-    print('\n'.join(redirects))
-    print('\n--- add to sitemap.xml ---')
-    print('\n'.join(sitemap))
+
+def main():
+    """Render data/blog/posts.json into the English and Spanish blog trees.
+
+    This used to fetch from Squarespace; that feed is gone (see the module
+    docstring). --check renders without writing and diffs against what is on
+    disk, which is how the English tree is held to "byte-identical".
+    """
+    check = '--check' in sys.argv
+    snap = load_snapshot()
+    load_translations()
+
+    def normalise(html):
+        """Strip what the *later* passes add, so --check compares this one's work.
+
+        The blog pipeline is migrate_blog.py -> gen_responsive.py ->
+        apply_hreflang.py. The second wires srcset/sizes/width/height into every
+        <img>; the third inserts a rel=alternate block and a `sister` prop.
+        Comparing raw output against a fully processed page would report all
+        three as differences and make --check useless the moment the pipeline
+        has been run once.
+        """
+        def one_img(m):
+            keep = re.findall(r'\b(?:src|alt|loading)="[^"]*"', m.group(0))
+            return '<img ' + ' '.join(keep) + '>'
+        html = re.sub(r'<img\b[^>]*>', one_img, html)
+        html = re.sub(r'<!-- i18n:hreflang.*?<!-- /i18n:hreflang -->\n?', '', html, flags=re.S)
+        html = re.sub(r'\s+sister="[^"]*"', '', html)
+        return html
+
+    failed = 0
+    for key in ('en', 'es'):
+        pages = render(key, snap, write=not check)
+        if check:
+            for fname, html in sorted(pages.items()):
+                path = os.path.join(ROOT, fname)
+                try:
+                    on_disk = open(path, encoding='utf-8').read()
+                except FileNotFoundError:
+                    print(f'  [{key}] MISSING  {fname}')
+                    failed += 1
+                    continue
+                if normalise(on_disk) != normalise(html):
+                    print(f'  [{key}] DIFFERS  {fname}')
+                    failed += 1
+        else:
+            print(f'  [{key}] wrote {len(pages)} pages')
+
+    if check:
+        print('  all generated pages match what is on disk' if not failed
+              else f'  {failed} page(s) differ')
+        return 1 if failed else 0
+
+    # Text nodes still falling back to English are worth naming: a partly
+    # translated post renders, but it renders half in the wrong language.
+    if _body_stats:
+        short = [(s, d, t) for s, d, t in _body_stats if d < t]
+        if short:
+            print('\n  Spanish text nodes still falling back to English:')
+            for s, d, t in short:
+                print(f'    {t - d:3} of {t:3} untranslated  {s}')
+        else:
+            print(f'\n  Spanish: every text node translated across {len(_body_stats)} posts')
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

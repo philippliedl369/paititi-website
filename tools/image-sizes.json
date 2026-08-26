@@ -754,5 +754,110 @@
   "w390": 342,
   "w900": 852,
   "w1440": 590
+ },
+ "/assets/healing/roman-hanis-mentor.webp": {
+  "nat": 1066,
+  "natH": 1600,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
+ },
+ "/assets/reserve/welcome-gate.webp": {
+  "nat": 1600,
+  "natH": 1066,
+  "w390": 390,
+  "w900": 900,
+  "w1440": 1440
+ },
+ "/assets/reserve/trail-above-the-gorge.webp": {
+  "nat": 1600,
+  "natH": 758,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 572
+ },
+ "/assets/reserve/cloud-forest-flowers.webp": {
+  "nat": 1600,
+  "natH": 1200,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/salad-beds.webp": {
+  "nat": 1600,
+  "natH": 1069,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/mapacho-river-bank.webp": {
+  "nat": 1600,
+  "natH": 1069,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/waterfall.webp": {
+  "nat": 1080,
+  "natH": 1485,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 572
+ },
+ "/assets/reserve/suspension-bridge.webp": {
+  "nat": 1066,
+  "natH": 1600,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/pack-horses-trail.webp": {
+  "nat": 1600,
+  "natH": 758,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 572
+ },
+ "/assets/reserve/food-forest-terraces.webp": {
+  "nat": 1600,
+  "natH": 1200,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 572
+ },
+ "/assets/reserve/river-cairn.webp": {
+  "nat": 1600,
+  "natH": 1059,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/qigong-terrace.webp": {
+  "nat": 1600,
+  "natH": 1066,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/charango-overlook.webp": {
+  "nat": 1600,
+  "natH": 1066,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/meditation-overlook.webp": {
+  "nat": 1600,
+  "natH": 1069,
+  "w390": 350,
+  "w900": 414,
+  "w1440": 384
+ },
+ "/assets/reserve/atlas-cover.webp": {
+  "nat": 1400,
+  "natH": 781,
+  "w390": 350,
+  "w900": 560,
+  "w1440": 586
  }
 }

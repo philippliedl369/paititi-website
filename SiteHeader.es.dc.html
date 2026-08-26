@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<style>
+  /* The header floats over the first section of every page — on the original,
+     every page's first section is either a full-bleed photo or the plum band,
+     so white chrome always has something dark underneath. Pages reserve the
+     space with padding-top:var(--pt-header-h) on that first section. */
+  :root{--pt-header-h:209px;--pt-announce-h:49px}
+  .pt-header,.pt-header *,.pt-header *::before,.pt-header *::after{box-sizing:border-box}
+  .pt-header{position:fixed;top:0;left:0;right:0;z-index:50;font-family:var(--font-body);
+    letter-spacing:.08em;transition:transform .3s cubic-bezier(.4,0,.2,1),background-color .2s ease}
+  .pt-header[data-hidden="1"]{transform:translateY(-100%)}
+  /* The bar carries no ground of its own so it can sit over a hero photo — the
+     logo and the nav links are white for exactly that reason. Once the bar has
+     travelled past the hero it is over ordinary page content instead, where
+     white-on-white would be unreadable and the retracting bar would return as a
+     band of transparency with the page sliding through it. Past that point it
+     takes a ground; the script below sets data-solid. */
+  .pt-header[data-solid="1"]{background:#210416}
+  .pt-announce{background:#0B0009;color:#fff;position:relative;
+    display:flex;align-items:center;justify-content:center;min-height:var(--pt-announce-h);padding:0 48px}
+  .pt-announce a.pt-announce-link{color:#fff;text-decoration:none;font-size:14px;font-weight:300;
+    line-height:1.35;text-align:center;padding:7px 0}
+  .pt-announce a.pt-announce-link:hover{text-decoration:underline;color:#fff}
+  .pt-announce-x{position:absolute;right:14px;top:50%;transform:translateY(-50%);
+    background:none;border:0;color:rgba(255,255,255,.72);font-size:19px;line-height:1;cursor:pointer;padding:6px 8px}
+  .pt-announce-x:hover{color:#fff}
+
+  .pt-bar{display:flex;align-items:center;gap:24px;padding:0 58px;height:160px}
+  .pt-logo img{height:146px;width:auto;display:block}
+
+  /* No max-width: the original keeps all five items on one row and only breaks
+     to a second when the bar actually runs out of room (one row at >=1680px,
+     two at <=1440). Letting flex decide reproduces that at every width. */
+  /* flex:1 1 auto — the nav absorbs the bar's free space itself, so it stays on
+     one row until its content genuinely exceeds the gap between logo and socials.
+     (With margin-left:auto on .pt-social instead, the socials ate the free space
+     and the nav wrapped at every width.) */
+  .pt-nav{display:flex;flex-wrap:wrap;align-items:center;column-gap:24px;row-gap:0;flex:1 1 auto;min-width:0}
+  /* .pt-folder is a wrapper div, so its <a> needs the link styling too — without
+     it "The Institute" falls back to the design system's default anchor colour. */
+  .pt-nav > *,.pt-folder > a{font-size:16px;font-weight:700;color:#fff;text-decoration:none;white-space:nowrap;
+    background:none;border:0;padding:0;font-family:var(--font-body);cursor:pointer;line-height:32px}
+  .pt-nav > *:hover,.pt-folder > a:hover{opacity:.78;color:#fff}
+  .pt-nav [data-active="1"]{box-shadow:inset 0 -2px 0 #fff}
+
+  .pt-folder{position:relative}
+  /* Solid plum card, white bold items. Opaque on purpose: the flyout opens
+     over the heroes' translucent plum panels, and translucent-on-translucent
+     read as a rendering glitch. */
+  .pt-folder-panel{position:absolute;top:calc(100% + 13px);left:-22px;min-width:330px;
+    background:#584364;box-shadow:0 14px 38px rgba(11,0,9,.28);padding:16px 22px;z-index:60;
+    /* Kept in flow but invisible rather than display:none, so leaving the menu
+       fades out over .28s instead of snapping shut the instant the pointer
+       slips off an item. */
+    opacity:0;visibility:hidden;transition:opacity .16s ease,visibility 0s linear .28s}
+  /* The 13px offset above is a dead zone the pointer has to cross on its way
+     down from "The Institute"; this invisible strip keeps :hover alive over it. */
+  .pt-folder-panel::before{content:"";position:absolute;left:0;right:0;top:-13px;height:13px}
+  .pt-folder:hover .pt-folder-panel,.pt-folder:focus-within .pt-folder-panel{
+    opacity:1;visibility:visible;transition:opacity .16s ease,visibility 0s}
+  .pt-folder-panel a{display:block;padding:2px 0;font-size:16px;font-weight:700;color:#fff;
+    text-decoration:none;line-height:30px;white-space:nowrap}
+  .pt-folder-panel a:hover{color:#fff;opacity:.78}
+
+  /* Scoped to .pt-header: SiteFooter also defines .pt-social, and both
+     components' helmet styles land in the same <head>, so an unscoped rule
+     there would win on source order and re-show these icons on mobile. */
+  .pt-header .pt-social{display:flex;align-items:center;gap:25px;flex:0 0 auto}
+  .pt-header .pt-social a{color:#fff;display:inline-flex;opacity:.92}
+  .pt-header .pt-social a:hover{opacity:1}
+
+  /* EN / ES switcher. Both languages are always shown with the current one lit,
+     rather than a single "other language" toggle: a reader scanning for their
+     own language looks for the word, not for a control that hides it. The
+     counterpart URL is a prop (`sister`) each page passes, so the pairing is
+     declared page by page and can't drift from the hreflang tags in its head. */
+  .pt-lang{display:flex;align-items:center;gap:7px;flex:0 0 auto;font-size:14px;font-weight:700;
+    letter-spacing:.08em;white-space:nowrap}
+  .pt-lang a{color:rgba(255,255,255,.62);text-decoration:none;line-height:20px}
+  .pt-lang a:hover{color:#fff}
+  .pt-lang a[aria-current="true"]{color:#fff;box-shadow:inset 0 -2px 0 #fff}
+  .pt-lang span{color:rgba(255,255,255,.38)}
+
+  .pt-donate{display:inline-flex;align-items:center;justify-content:center;height:59px;padding:0 21px;
+    background:#fff;color:#584364;border-radius:16px 0;font-size:19px;font-weight:700;letter-spacing:.02em;
+    text-decoration:none;white-space:nowrap}
+  .pt-donate:hover{background:#F1EAF6;color:#584364}
+
+  .pt-burger{display:none;margin-left:auto;width:46px;height:46px;align-items:center;justify-content:center;
+    background:none;border:1px solid rgba(255,255,255,.45);border-radius:16px 0;color:#fff;cursor:pointer}
+  .pt-mobile{background:#0B0009;padding:8px 24px 26px;max-height:calc(100vh - 100px);overflow-y:auto}
+  .pt-mobile a{display:block;color:#fff;text-decoration:none;font-size:17px;font-weight:700;
+    padding:14px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  /* Group labels mirror the desktop dropdowns' structure in the flat list. */
+  .pt-mobile-group{display:block;color:rgba(255,255,255,.55);font-size:12px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;padding:20px 0 4px}
+  /* Out-specifies .pt-mobile a, which would otherwise paint this white on white. */
+  .pt-mobile a.pt-donate{display:inline-flex;color:#584364;margin-top:20px;padding:0 21px;border-bottom:0}
+  /* The bar drops its switcher at <=1080px, so the burger menu carries it.
+     Out-specifies .pt-mobile a, which would give each language its own
+     full-width row and underline. */
+  .pt-mobile .pt-lang{padding:24px 0 0}
+  .pt-mobile .pt-lang a{display:inline-block;padding:0;border-bottom:0;font-size:15px}
+
+  @media (max-width:1180px){
+    .pt-bar{gap:20px;padding:0 28px;height:120px}
+    .pt-logo img{height:104px}
+    .pt-nav{column-gap:22px}
+    .pt-nav > *{font-size:15px}
+    .pt-header .pt-social{gap:16px}
+  }
+  @media (max-width:1080px){
+    /* Two lines of announcement (49px is the one-line desktop figure) plus the
+       100px bar. Only a starting estimate — the component measures the real
+       height into --pt-header-h-live, which is what the page shell consumes;
+       keeping the static default close to truth avoids a first-paint jump. */
+    :root{--pt-header-h:168px}
+    .pt-nav,.pt-header .pt-social,.pt-donate,.pt-bar .pt-lang{display:none}
+    .pt-burger{display:inline-flex}
+    .pt-bar{height:100px;padding:0 22px}
+    .pt-logo img{height:78px}
+  }
+
+  /* ---- Phone ---------------------------------------------------------------
+     The header is fixed, so every pixel it takes is permanently off the
+     readable area. At 390px the old bar cost 171px — a fifth of the screen —
+     because the announcement wrapped to three lines at desktop type size. */
+  @media (max-width:640px){
+    :root{--pt-header-h:124px}
+    .pt-announce{padding:0 46px 0 14px;min-height:0}
+    .pt-announce a.pt-announce-link{font-size:13px;line-height:1.32;padding:8px 0}
+    /* 44px square hit area without widening the visible glyph. */
+    .pt-announce-x{right:2px;padding:12px;font-size:20px}
+    .pt-bar{height:76px;padding:0 14px 0 16px;gap:12px}
+    .pt-logo img{height:56px}
+    .pt-burger{width:44px;height:44px}
+    .pt-mobile{padding:4px 20px 24px;max-height:calc(100dvh - var(--pt-header-h-live,124px))}
+    .pt-mobile a{font-size:16px;padding:13px 0}
+    .pt-mobile-group{padding:16px 0 2px}
+    .pt-mobile a.pt-donate{height:52px;margin-top:18px}
+  }
+
+  /* The flyout panels are hover-driven, which a touch device cannot express:
+     the first tap opens the panel and swallows the navigation, the second
+     follows the link. On coarse pointers the burger menu is the whole nav
+     anyway (<=1080px), so this only guards the 1081-1180px touch-tablet band. */
+  @media (pointer:coarse){
+    .pt-folder-panel{transition:none}
+  }
+</style>
+</helmet>
+<header class="pt-header" data-hidden="{{ hidden }}" data-solid="{{ solid }}">
+  <sc-if value="{{ announceOpen }}" hint-placeholder-val="{{ true }}">
+    <div class="pt-announce">
+      <!-- Zeffy's own form is English-only, so the link keeps its /en-US/ path;
+           only the sentence that leads to it is translated. -->
+      <a class="pt-announce-link" href="https://www.zeffy.com/en-US/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" target="_blank" rel="noopener">🌿 Apoya el crecimiento de la Escuela Ancestral Yahua y el Centro de Sabiduría Viva</a>
+      <button class="pt-announce-x" onClick="{{ closeAnnounce }}" aria-label="Cerrar el aviso">&times;</button>
+    </div>
+  </sc-if>
+
+  <div class="pt-bar">
+    <a class="pt-logo" href="/es/" aria-label="Paititi Institute — inicio">
+      <img src="/assets/brand/paititi-logo-white.png"
+           srcset="/assets/r/brand/paititi-logo-white-320w.webp 320w, /assets/r/brand/paititi-logo-white-480w.webp 480w, /assets/brand/paititi-logo-white.png 525w"
+           sizes="(max-width:640px) 44vw, (max-width:1180px) 212px, 313px"
+           width="525"
+           height="245"
+           decoding="async" alt="Paititi Institute" loading="eager" fetchpriority="high">
+    </a>
+
+    <!-- Section ids (#impact, #biocultural-reserve, ...) stay in English across
+         the Spanish tree. They are shared with the English pages' anchors and
+         with the _redirects that land old paititidistancehealing.com URLs on
+         them; translating them would fork that map for no reader-visible gain. -->
+    <nav class="pt-nav" aria-label="Principal">
+      <div class="pt-folder">
+        <a href="/es/quienes-somos" data-active="{{ activeAbout }}">Nosotros</a>
+        <div class="pt-folder-panel">
+          <a href="/es/quienes-somos">Quiénes Somos</a>
+          <a href="/es/equipo">Equipo</a>
+          <a href="/es/prensa">Prensa y Medios</a>
+        </div>
+      </div>
+      <div class="pt-folder">
+        <a href="/es/retiros" data-active="{{ activePrograms }}">Programas</a>
+        <div class="pt-folder-panel">
+          <a href="/es/retiros">Retiros</a>
+          <a href="/es/cursos-en-linea">Cursos en Línea</a>
+          <a href="/es/mentoria">Mentoría Individual y Trabajo con Sueños</a>
+          <a href="/es/sanacion-a-distancia">Sanación a Distancia</a>
+        </div>
+      </div>
+      <div class="pt-folder">
+        <a href="/es/iniciativas" data-active="{{ activeInitiatives }}">Iniciativas</a>
+        <div class="pt-folder-panel">
+          <a href="/es/iniciativas">Nuestra Visión Viva</a>
+          <a href="/es/iniciativas/escuela-ancestral-yahua">Escuela Ancestral Yahua</a>
+          <a href="/es/iniciativas/qero-alimentos-de-emergencia">Iniciativa Q&rsquo;ero</a>
+          <a href="/es/iniciativas#biocultural-reserve">Reserva Biocultural Paititi</a>
+          <a href="/es/iniciativas#community-health">Salud Comunitaria y Medicina Natural</a>
+          <a href="/es/#impact">Impacto</a>
+        </div>
+      </div>
+      <!-- "Beyond Ayahuasca" is the book's title; it is not translated. -->
+      <a href="/es/beyond-ayahuasca" data-active="{{ activeBeyond }}">Beyond Ayahuasca</a>
+      <a href="/es/diario" data-active="{{ activeJournal }}">Diario</a>
+    </nav>
+
+    <!-- Inline SVG rather than MeristemDS.Icon: Lucide dropped its brand glyphs,
+         so Facebook/Instagram/YouTube rendered as empty <svg>. -->
+    <div class="pt-social">
+      <a href="https://soundcloud.com/life-is-a-ceremony" aria-label="SoundCloud" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.2 13.1c-.1 0-.2.1-.2.2l-.2 1.6.2 1.6c0 .1.1.2.2.2s.2-.1.2-.2l.2-1.6-.2-1.6c0-.1-.1-.2-.2-.2zm1.4-.9c-.1 0-.2.1-.2.2l-.3 2.5.3 2.4c0 .1.1.2.2.2.1 0 .2-.1.2-.2l.3-2.4-.3-2.5c0-.1-.1-.2-.2-.2zm1.5-.6c-.1 0-.2.1-.2.2l-.3 3.1.3 3c0 .1.1.2.2.2.1 0 .2-.1.2-.2l.3-3-.3-3.1c0-.1-.1-.2-.2-.2zm1.5-.3c-.2 0-.3.1-.3.3l-.2 3.4.2 3c0 .2.1.3.3.3.2 0 .3-.1.3-.3l.3-3-.3-3.4c0-.2-.1-.3-.3-.3zm1.6-1.1c-.2 0-.3.1-.3.3L7 15.4l.2 3c0 .2.2.3.3.3.2 0 .3-.1.3-.3l.3-3-.3-4.9c0-.2-.2-.3-.3-.3zm1.6-.5c-.2 0-.3.2-.4.3l-.2 5.4.2 3c0 .2.2.3.4.3s.3-.2.4-.3l.2-3-.2-5.4c0-.2-.2-.3-.4-.3zm1.7 0c-.2 0-.4.2-.4.4l-.2 5.3.2 2.9c0 .2.2.4.4.4s.4-.2.4-.4l.2-2.9-.2-5.3c0-.2-.2-.4-.4-.4zm1.7-.9c-.2 0-.4.2-.4.4l-.2 6.2.2 2.9c0 .2.2.4.4.4.2 0 .4-.2.4-.4l.2-2.9-.2-6.2c0-.2-.2-.4-.4-.4zm2.1-.4c-.3 0-.5.2-.5.5l-.1 6.5.1 2.8c0 .3.2.5.5.5s.5-.2.5-.5l.2-2.8-.2-6.5c0-.3-.2-.5-.5-.5zm1.8-.2c-.3 0-.5.2-.5.5l-.1 6.7.1 2.8c0 .3.2.5.5.5s.5-.2.5-.5l.1-2.8-.1-6.7c0-.3-.2-.5-.5-.5zM21 12.6c-.4 0-.8.1-1.1.2-.2-2.7-2.5-4.9-5.3-4.9-.7 0-1.4.1-2 .4-.2.1-.3.2-.3.4v10.1c0 .2.2.4.4.4H21c1.7 0 3-1.3 3-3.1s-1.3-3.5-3-3.5z"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/0J2OKdO30oW9Q5Db1T6Km6" aria-label="Spotify" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.62.62 0 0 1-.86.21c-2.35-1.44-5.3-1.76-8.79-.96a.62.62 0 1 1-.28-1.22c3.81-.87 7.08-.5 9.72 1.11.29.18.39.57.21.86zm1.23-2.73a.78.78 0 0 1-1.07.26c-2.69-1.65-6.79-2.13-9.97-1.17a.78.78 0 1 1-.45-1.49c3.63-1.1 8.15-.56 11.24 1.33.36.23.48.71.25 1.07zm.1-2.84C14.71 8.92 9.5 8.74 6.42 9.67a.93.93 0 1 1-.54-1.79c3.54-1.07 9.29-.86 12.95 1.31a.94.94 0 0 1-.95 1.62z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/@Paititi.Institute" aria-label="Facebook" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.4 8.2h-2.1V6.8c0-.7.5-.9.8-.9h1.3V3.1L13.6 3c-2.5 0-3.1 1.9-3.1 3.1v2.1H9v2.9h1.5V21h3v-9.9h2.1l.2-2.9z"/></svg>
+      </a>
+      <a href="https://instagram.com/paititi_institute" aria-label="Instagram" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4.6c2.4 0 2.7 0 3.6.05.88.04 1.35.19 1.67.31.42.16.72.36 1.03.67.31.31.51.61.67 1.03.12.32.27.79.31 1.67.05.9.05 1.17.05 3.6s0 2.7-.05 3.6c-.04.88-.19 1.35-.31 1.67-.16.42-.36.72-.67 1.03-.31.31-.61.51-1.03.67-.32.12-.79.27-1.67.31-.9.05-1.17.05-3.6.05s-2.7 0-3.6-.05c-.88-.04-1.35-.19-1.67-.31a2.78 2.78 0 0 1-1.03-.67 2.78 2.78 0 0 1-.67-1.03c-.12-.32-.27-.79-.31-1.67C4.6 14.7 4.6 14.43 4.6 12s0-2.7.05-3.6c.04-.88.19-1.35.31-1.67.16-.42.36-.72.67-1.03.31-.31.61-.51 1.03-.67.32-.12.79-.27 1.67-.31.9-.05 1.17-.05 3.6-.05M12 3c-2.44 0-2.75.01-3.71.05-.96.05-1.61.2-2.19.42-.6.23-1.1.54-1.61 1.05-.5.5-.81 1.01-1.05 1.61-.22.57-.37 1.23-.42 2.19C3.01 9.25 3 9.56 3 12s.01 2.75.05 3.71c.05.96.2 1.61.42 2.19.23.6.54 1.1 1.05 1.61.5.5 1.01.81 1.61 1.05.57.22 1.23.37 2.19.42.96.04 1.27.05 3.71.05s2.75-.01 3.71-.05c.96-.05 1.61-.2 2.19-.42.6-.23 1.1-.54 1.61-1.05.5-.5.81-1.01 1.05-1.61.22-.57.37-1.23.42-2.19.04-.96.05-1.27.05-3.71s-.01-2.75-.05-3.71c-.05-.96-.2-1.61-.42-2.19a4.4 4.4 0 0 0-1.05-1.61 4.4 4.4 0 0 0-1.61-1.05c-.57-.22-1.23-.37-2.19-.42C14.75 3.01 14.44 3 12 3zm0 4.38a4.62 4.62 0 1 0 0 9.24 4.62 4.62 0 0 0 0-9.24zm0 7.62a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.88-7.8a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@PaititiInstitute" aria-label="YouTube" target="_blank" rel="noopener">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2s-.19-1.36-.78-1.95c-.75-.79-1.58-.79-1.96-.84C16.15 4.2 12 4.2 12 4.2h-.01s-4.14 0-6.85.21c-.38.05-1.22.05-1.96.84-.59.59-.78 1.95-.78 1.95S2.2 8.79 2.2 10.4v1.5c0 1.59.2 3.19.2 3.19s.19 1.36.78 1.95c.75.79 1.73.76 2.17.84 1.58.15 6.7.2 6.7.2s4.15-.01 6.86-.21c.38-.05 1.21-.05 1.96-.84.59-.59.78-1.95.78-1.95s.2-1.59.2-3.19v-1.5c0-1.59-.2-3.19-.2-3.19zM9.94 14.06V8.53l5.33 2.78-5.33 2.75z"/></svg>
+      </a>
+    </div>
+
+    <div class="pt-lang">
+      <a href="{{ enHref }}" hrefLang="en">EN</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ esHref }}" hrefLang="es" aria-current="true">ES</a>
+    </div>
+
+    <a class="pt-donate" href="/es/iniciativas/escuela-ancestral-yahua">Apoyar</a>
+
+    <!-- Inline SVG, like the social marks above: this component no longer pulls
+         in Lucide, and MeristemDS.Icon rendered an empty <svg> without it. -->
+    <button class="pt-burger" onClick="{{ toggleMenu }}" aria-label="Menú" aria-expanded="{{ menuExpanded }}">
+      <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </sc-if>
+      <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </sc-if>
+    </button>
+  </div>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="pt-mobile">
+      <nav aria-label="Móvil">
+        <span class="pt-mobile-group">Nosotros</span>
+        <a href="/es/quienes-somos">Quiénes Somos</a>
+        <a href="/es/equipo">Equipo</a>
+        <a href="/es/prensa">Prensa y Medios</a>
+        <span class="pt-mobile-group">Programas</span>
+        <a href="/es/retiros">Retiros</a>
+        <a href="/es/cursos-en-linea">Cursos en Línea</a>
+        <a href="/es/mentoria">Mentoría Individual y Trabajo con Sueños</a>
+        <a href="/es/sanacion-a-distancia">Sanación a Distancia</a>
+        <span class="pt-mobile-group">Iniciativas</span>
+        <a href="/es/iniciativas">Nuestra Visión Viva</a>
+        <a href="/es/iniciativas/escuela-ancestral-yahua">Escuela Ancestral Yahua</a>
+        <a href="/es/iniciativas/qero-alimentos-de-emergencia">Iniciativa Q&rsquo;ero</a>
+        <span class="pt-mobile-group">Más</span>
+        <a href="/es/beyond-ayahuasca">Beyond Ayahuasca</a>
+        <a href="/es/diario">Diario</a>
+        <a class="pt-donate" href="/es/iniciativas/escuela-ancestral-yahua">Apoyar</a>
+        <div class="pt-lang">
+          <a href="{{ enHref }}" hrefLang="en">EN</a>
+          <span aria-hidden="true">/</span>
+          <a href="{{ esHref }}" hrefLang="es" aria-current="true">ES</a>
+        </div>
+      </nav>
+    </div>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sister&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, announceOpen: true, hidden: false, solid: false };
+
+  componentDidMount() {
+    try {
+      if (localStorage.getItem('pt-announce-dismissed') === '1') this.setState({ announceOpen: false });
+    } catch (err) { /* localStorage unavailable */ }
+
+    // Publish the header's real height as --pt-header-h-live. paititi.css uses
+    // it for the hero's top clearance and for every anchor's scroll-margin, and
+    // the static --pt-header-h it falls back to can only ever be an estimate:
+    // the announcement bar is dismissable and its copy wraps to a different
+    // number of lines at every width. Measured from the announce bar and the
+    // bar itself rather than the header element, so opening the mobile menu —
+    // which makes .pt-header nearly full-screen — doesn't push every hero down.
+    this.syncHeaderHeight = () => {
+      const el = document.querySelector('.pt-header');
+      if (!el) return;
+      const announce = el.querySelector('.pt-announce');
+      const bar = el.querySelector('.pt-bar');
+      const h = (announce ? announce.offsetHeight : 0) + (bar ? bar.offsetHeight : 0);
+      if (h > 0) document.documentElement.style.setProperty('--pt-header-h-live', h + 'px');
+    };
+    this.syncHeaderHeight();
+    // The logo is the tallest thing in the bar; until it has loaded the bar can
+    // measure short. Fonts settle the announcement's line count.
+    window.addEventListener('load', this.syncHeaderHeight);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.syncHeaderHeight);
+    window.addEventListener('resize', this.syncHeaderHeight, { passive: true });
+    window.addEventListener('orientationchange', this.syncHeaderHeight);
+
+    // The bar is transparent over a hero and takes a ground past it (see the
+    // stylesheet). "Past it" is where the bar's own band stops overlapping the
+    // hero — measured, because heroes range from 700px to 932px and the bar's
+    // height moves with the announcement bar. Pages with no hero reserve the
+    // bar's height as padding on their first section, so nothing is under the
+    // bar there until you scroll; those fall back to the same 240px the retract
+    // uses, which is where the bar starts behaving as a travelling bar at all.
+    const solidFrom = () => {
+      const el = document.querySelector('.pt-header');
+      const h = el ? el.offsetHeight : 0;
+      const hero = document.querySelector('.pt-hero');
+      if (!hero) return 240;
+      return hero.getBoundingClientRect().bottom + window.scrollY - h;
+    };
+    // A deep link (/initiatives#community-health) and a browser-restored scroll
+    // position both land past the hero without a scroll event ever firing, so
+    // the state has to be settled on the same beats as the height.
+    this.syncSolid = () => {
+      const solid = window.scrollY > solidFrom();
+      if (solid !== this.state.solid) this.setState({ solid });
+    };
+    this.syncSolid();
+    window.addEventListener('load', this.syncSolid);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this.syncSolid);
+    window.addEventListener('resize', this.syncSolid, { passive: true });
+
+    // The original header is fixed and retracts while you scroll down, returning
+    // the moment you scroll back up. Small movements are ignored so the bar
+    // doesn't flicker, and it always shows again near the top of the page.
+    let last = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (Math.abs(y - last) < 8) return;
+      const hide = y > last && y > 240 && !this.state.open;
+      const solid = y > solidFrom();
+      const next = {};
+      if (hide !== this.state.hidden) next.hidden = hide;
+      if (solid !== this.state.solid) next.solid = solid;
+      if (next.hidden !== undefined || next.solid !== undefined) this.setState(next);
+      last = y;
+    }, { passive: true });
+  }
+
+  renderVals() {
+    const active = this.props.active ?? '';
+    // Mirror of the English header: `sister` is the *English* counterpart of this
+    // page, matching the rel="alternate" hreflang pair in its own <helmet>.
+    const sister = this.props.sister || '/';
+    return {
+      enHref: sister,
+      esHref: (typeof location !== 'undefined' && location.pathname) || '/es/',
+      activeAbout: active === 'about' ? '1' : '0',
+      activePrograms: active === 'programs' ? '1' : '0',
+      activeInitiatives: active === 'initiatives' ? '1' : '0',
+      activeBeyond: active === 'beyond' ? '1' : '0',
+      activeJournal: active === 'journal' ? '1' : '0',
+      announceOpen: this.state.announceOpen,
+      hidden: this.state.hidden ? '1' : '0',
+      solid: this.state.solid ? '1' : '0',
+      menuOpen: this.state.open,
+      menuClosed: !this.state.open,
+      menuExpanded: this.state.open ? 'true' : 'false',
+      toggleMenu: () => this.setState(s => {
+        const open = !s.open;
+        // The menu is a panel inside the fixed header, so without this the page
+        // behind it scrolls under the reader's thumb while the menu is up.
+        document.body.style.overflow = open ? 'hidden' : '';
+        return { open };
+      }),
+      closeAnnounce: () => {
+        this.setState({ announceOpen: false });
+        try { localStorage.setItem('pt-announce-dismissed', '1'); } catch (err) { /* ignore */ }
+        // The bar is gone on the next paint; heroes and anchor offsets below
+        // are sized off --pt-header-h-live and have to hear about it.
+        requestAnimationFrame(() => this.syncHeaderHeight && this.syncHeaderHeight());
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

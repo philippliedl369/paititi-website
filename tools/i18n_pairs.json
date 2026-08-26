@@ -1,0 +1,73 @@
+{
+  "_comment": [
+    "English <-> Spanish page pairs. One row per translated page.",
+    "",
+    "This is the single source for three things that must never disagree:",
+    "  - the rel=alternate hreflang pair in both pages' <helmet>",
+    "  - the `sister` prop each page hands to SiteHeader / SiteHeader.es",
+    "  - the hreflang annotations in sitemap.xml",
+    "Run tools/apply_hreflang.py after editing; it rewrites all three from here.",
+    "",
+    "`en` and `es` are clean URLs and must match the 200-rewrites in _redirects.",
+    "`file` is the English page; the Spanish one is the same name with .es before",
+    ".dc.html. Rows are listed in nav order, which is also sitemap order."
+  ],
+  "origin": "https://paititi-institute.org",
+  "pairs": [
+    { "file": "Home.dc.html",             "en": "/",                        "es": "/es/" },
+    { "file": "AboutUs.dc.html",          "en": "/about-us",                "es": "/es/quienes-somos" },
+    { "file": "Team.dc.html",             "en": "/team",                    "es": "/es/equipo" },
+    { "file": "PressMedia.dc.html",       "en": "/press-media",             "es": "/es/prensa" },
+    { "file": "DiscoverPaititi.dc.html",  "en": "/discoverpaititi",         "es": "/es/descubre-paititi" },
+    { "file": "Contact.dc.html",          "en": "/contact",                 "es": "/es/contacto" },
+
+    { "file": "Retreats.dc.html",         "en": "/retreats",                "es": "/es/retiros" },
+    { "file": "OnlineCourses.dc.html",    "en": "/online-courses",          "es": "/es/cursos-en-linea" },
+    { "file": "Mentorship.dc.html",       "en": "/mentorship",              "es": "/es/mentoria" },
+    { "file": "BeyondAyahuasca.dc.html",  "en": "/beyond-ayahuasca",        "es": "/es/beyond-ayahuasca" },
+
+    { "file": "DistanceHealing.dc.html",  "en": "/distance-healing",        "es": "/es/sanacion-a-distancia" },
+
+    { "file": "Initiatives.dc.html",      "en": "/initiatives",             "es": "/es/iniciativas" },
+    { "file": "InitiativeYagua.dc.html",  "en": "/initiatives/yagua-cultural-heritage-center-indigenous-school", "es": "/es/iniciativas/escuela-ancestral-yahua" },
+    { "file": "InitiativeQero.dc.html",   "en": "/initiatives/qero-nation-emergency-food-supply",                "es": "/es/iniciativas/qero-alimentos-de-emergencia" },
+
+    { "file": "Terms.dc.html",            "en": "/terms-conditions",        "es": "/es/terminos-y-condiciones" },
+    { "file": "Privacy.dc.html",          "en": "/who/privacy-policy",      "es": "/es/politica-de-privacidad" },
+
+    { "file": "Blog.dc.html",             "en": "/blog",                    "es": "/es/diario" },
+    { "file": "BlogCategory-health-wellness.dc.html",       "en": "/blog/category/health-wellness",       "es": "/es/diario/categoria/salud-y-bienestar" },
+    { "file": "BlogCategory-indigenous-traditions.dc.html", "en": "/blog/category/indigenous-traditions", "es": "/es/diario/categoria/tradiciones-indigenas" },
+    { "file": "BlogCategory-plant-medicine.dc.html",        "en": "/blog/category/plant-medicine",        "es": "/es/diario/categoria/medicina-vegetal" },
+    { "file": "BlogCategory-transformation.dc.html",        "en": "/blog/category/transformation",        "es": "/es/diario/categoria/transformacion" },
+
+    { "file": "BlogPost-how-to-create-sustainable-relationships-for-living-in-community.dc.html",
+      "en": "/blog/how-to-create-sustainable-relationships-for-living-in-community",
+      "es": "/es/diario/como-crear-relaciones-sostenibles-para-vivir-en-comunidad" },
+    { "file": "BlogPost-a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest.dc.html",
+      "en": "/blog/a-living-rite-of-passage-into-the-forgotten-kingdoms-of-the-amazon-rainforest",
+      "es": "/es/diario/un-rito-de-paso-vivo-hacia-los-reinos-olvidados-de-la-amazonia" },
+    { "file": "BlogPost-cant-blame-the-chaos-a-path-less-traveled-in-perilous-times.dc.html",
+      "en": "/blog/cant-blame-the-chaos-a-path-less-traveled-in-perilous-times",
+      "es": "/es/diario/no-culpes-al-caos-un-camino-poco-transitado-en-tiempos-dificiles" },
+    { "file": "BlogPost-integration-phenomenal-into-mundane.dc.html",
+      "en": "/blog/integration-phenomenal-into-mundane",
+      "es": "/es/diario/integrar-lo-fenomenal-en-lo-cotidiano" },
+    { "file": "BlogPost-makes-life-worth-living-in-a-time-turmoil.dc.html",
+      "en": "/blog/makes-life-worth-living-in-a-time-turmoil",
+      "es": "/es/diario/lo-que-hace-que-la-vida-valga-la-pena-en-tiempos-de-agitacion" },
+    { "file": "BlogPost-shards-shattered-ego-reflecting-countless-arms-compassion.dc.html",
+      "en": "/blog/shards-shattered-ego-reflecting-countless-arms-compassion",
+      "es": "/es/diario/fragmentos-del-ego-roto-que-reflejan-innumerables-brazos-de-compasion" },
+    { "file": "BlogPost-embody-true-nature-healing-retreat.dc.html",
+      "en": "/blog/embody-true-nature-healing-retreat",
+      "es": "/es/diario/encarna-tu-verdadera-naturaleza-retiro-de-sanacion" }
+  ],
+  "_untranslated": [
+    "DistanceHealingFee.dc.html and DistanceHealingContribution.dc.html are",
+    "emailed to an applicant rather than browsed to, and each is a wrapper",
+    "around a JotForm that only exists in English. They get Spanish pages at",
+    "/es/sanacion-a-distancia/* so the surrounding words are readable, but no",
+    "hreflang pair and no sitemap row - they are noindex on the English side too."
+  ]
+}

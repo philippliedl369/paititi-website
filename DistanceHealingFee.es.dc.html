@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script src="/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Cuota de solicitud | Sanación a Distancia | Instituto Paititi</title>
+<meta name="description" content="Envía la cuota de solicitud de 25 USD del Programa de Sanación a Distancia del Instituto Paititi. La cuota se descuenta de tu contribución total si comienzas el programa tras la llamada de orientación.">
+<meta property="og:title" content="Cuota de solicitud | Sanación a Distancia | Instituto Paititi">
+<meta property="og:description" content="Envía la cuota de solicitud de 25 USD del Programa de Sanación a Distancia del Instituto Paititi.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_LA">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Paititi Institute">
+<meta property="og:image" content="/assets/initiatives/distance-healing.webp">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<script>
+  // JotForm posts "setHeight:<px>:<frame id>" from inside the iframe. Origin-
+  // checked, because any framed page can post to this window.
+  window.addEventListener('message', function (e) {
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (err) { return; }
+    if (!/(^|\.)jotform(pro)?\.com$/.test(host)) return;
+    var args = String(e.data).split(':');
+    if (args[0] !== 'setHeight') return;
+    var px = parseInt(args[1], 10);
+    var frame = document.getElementById('dh-fee-form');
+    if (frame && px > 0) frame.style.height = px + 'px';
+  });
+</script>
+<style>
+  .dh-deep{--pt-bg:#2A1736;color:#fff}
+  .dh-deep h1,.dh-deep h2,.dh-deep p{color:#fff}
+  .dh-white{--pt-bg:#fff}
+  .dh-center{text-align:center}
+  .dh-form{width:100%;border:0;display:block;background:#fff;border-radius:15px}
+  /* The collapsed grid has no bottom padding, and the next section's wave rises
+     28px into whatever is above it. Give the stack somewhere to end. */
+  @media (max-width:1180px){ .pt-fluid{padding-bottom:56px} }
+  /* The footer wave must match this page's final section colour. */
+  footer.pt-footer{--pt-footer-wave:#fff}
+</style>
+</helmet>
+<div class="pt-page">
+<dc-import name="SiteHeader.es" active="programs" hint-size="100%,209px" sister="/distance-healing/application-fee"></dc-import>
+<main>
+
+  <!-- ===== Heading =====
+       No hero photo on the original, so the first section is the plum band and
+       has to reserve the fixed header's height itself. -->
+  <section class="pt-sec pt-sec-flat dh-deep">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:calc(var(--pt-header-h,209px) + 47px);--pt-grid-bot:124px;--pt-rows:15">
+      <div class="pt-vc dh-center" style="grid-area:1 / 3 / 6 / 23">
+        <h1><strong>Envía tu cuota de solicitud</strong></h1>
+      </div>
+      <div class="pt-prose" style="grid-area:7 / 4 / 16 / 22">
+        <p>Hemos recibido tu formulario de admisión. El siguiente paso es enviar tu cuota de solicitud de 25 USD. Esta cuota se descontará de tu contribución total si decides iniciar el programa después de la llamada de orientación.</p>
+        <p>Ten en cuenta que la cuota de solicitud es necesaria para poner en marcha el proceso de orientación. Si después de la llamada sientes que este programa no es para ti, no hay obligación de continuar.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Payment form ===== -->
+  <section class="pt-sec dh-white">
+    <div class="pt-sec-bg"></div>
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:23">
+      <div style="grid-area:1 / 4 / 24 / 22">
+        <iframe class="dh-form" id="dh-fee-form" title="Cuota de solicitud de Sanación a Distancia" src="https://secure.jotformpro.com/form/43506719365965" style="height:825px" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+<dc-import name="SiteFooter.es"></dc-import>
+</div>
+</x-dc>
+</body>
+</html>

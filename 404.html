@@ -25,18 +25,56 @@
   nav a:hover{background:#F1EAF6}
   nav a.ghost{background:none;color:#fff;border:1px solid rgba(255,255,255,.5)}
   nav a.ghost:hover{background:rgba(255,255,255,.12)}
+  /* Both languages are in the markup and the script below hides the one that
+     doesn't match the path. If the script never runs, both are shown — which is
+     still a usable 404, and is why neither is display:none to begin with. */
+  .alt{margin-top:56px;padding-top:40px;border-top:1px solid rgba(255,255,255,.18)}
 </style>
 </head>
 <body>
 <img class="logo" src="/assets/brand/paititi-logo-white.png" alt="Paititi Institute">
-<h1>This path doesn&rsquo;t lead anywhere &mdash; yet</h1>
-<p>The page you were looking for has moved or never existed. The paths below lead back to everything the Institute offers.</p>
-<nav aria-label="Main destinations">
-  <a href="/retreats">Retreats</a>
-  <a href="/online-courses">Online Courses</a>
-  <a href="/mentorship">Mentorship &amp; Dreamwork</a>
-  <a href="/initiatives">Initiatives</a>
-  <a class="ghost" href="/">Home</a>
-</nav>
+
+<!-- Workers Assets serves this one file for every 404 and never invokes
+     worker.js, so a Spanish visitor cannot be routed to a separate page. The
+     page carries both languages instead. -->
+<div id="en">
+  <h1>This path doesn&rsquo;t lead anywhere &mdash; yet</h1>
+  <p>The page you were looking for has moved or never existed. The paths below lead back to everything the Institute offers.</p>
+  <nav aria-label="Main destinations">
+    <a href="/retreats">Retreats</a>
+    <a href="/online-courses">Online Courses</a>
+    <a href="/mentorship">Mentorship &amp; Dreamwork</a>
+    <a href="/initiatives">Initiatives</a>
+    <a class="ghost" href="/">Home</a>
+  </nav>
+</div>
+
+<div id="es" class="alt" lang="es">
+  <h1>Este camino todav&iacute;a no lleva a ninguna parte</h1>
+  <p>La p&aacute;gina que buscabas se movi&oacute; o nunca existi&oacute;. Los enlaces de abajo te llevan de vuelta a todo lo que ofrece el Instituto.</p>
+  <nav aria-label="Destinos principales">
+    <a href="/es/retiros">Retiros</a>
+    <a href="/es/cursos-en-linea">Cursos en L&iacute;nea</a>
+    <a href="/es/mentoria">Mentor&iacute;a y Sue&ntilde;os</a>
+    <a href="/es/iniciativas">Iniciativas</a>
+    <a class="ghost" href="/es/">Inicio</a>
+  </nav>
+</div>
+
+<script>
+  // Show only the half that matches the tree the visitor was in. The surviving
+  // block loses its divider, since there is no longer anything to divide it from.
+  (function () {
+    var es = location.pathname === '/es' || location.pathname.indexOf('/es/') === 0;
+    var drop = document.getElementById(es ? 'en' : 'es');
+    var keep = document.getElementById(es ? 'es' : 'en');
+    if (drop) drop.remove();
+    if (keep) keep.className = '';
+    if (es) {
+      document.documentElement.lang = 'es';
+      document.title = 'Página no encontrada | Instituto Paititi';
+    }
+  })();
+</script>
 </body>
 </html>

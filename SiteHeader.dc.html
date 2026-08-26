@@ -86,6 +86,18 @@
   .pt-header .pt-social a{color:#fff;display:inline-flex;opacity:.92}
   .pt-header .pt-social a:hover{opacity:1}
 
+  /* EN / ES switcher. Both languages are always shown with the current one lit,
+     rather than a single "other language" toggle: a reader scanning for their
+     own language looks for the word, not for a control that hides it. The
+     counterpart URL is a prop (`sister`) each page passes, so the pairing is
+     declared page by page and can't drift from the hreflang tags in its head. */
+  .pt-lang{display:flex;align-items:center;gap:7px;flex:0 0 auto;font-size:14px;font-weight:700;
+    letter-spacing:.08em;white-space:nowrap}
+  .pt-lang a{color:rgba(255,255,255,.62);text-decoration:none;line-height:20px}
+  .pt-lang a:hover{color:#fff}
+  .pt-lang a[aria-current="true"]{color:#fff;box-shadow:inset 0 -2px 0 #fff}
+  .pt-lang span{color:rgba(255,255,255,.38)}
+
   .pt-donate{display:inline-flex;align-items:center;justify-content:center;height:59px;padding:0 21px;
     background:#fff;color:#584364;border-radius:16px 0;font-size:19px;font-weight:700;letter-spacing:.02em;
     text-decoration:none;white-space:nowrap}
@@ -101,6 +113,11 @@
     letter-spacing:.18em;text-transform:uppercase;padding:20px 0 4px}
   /* Out-specifies .pt-mobile a, which would otherwise paint this white on white. */
   .pt-mobile a.pt-donate{display:inline-flex;color:#584364;margin-top:20px;padding:0 21px;border-bottom:0}
+  /* The bar drops its switcher at <=1080px, so the burger menu carries it.
+     Out-specifies .pt-mobile a, which would give each language its own
+     full-width row and underline. */
+  .pt-mobile .pt-lang{padding:24px 0 0}
+  .pt-mobile .pt-lang a{display:inline-block;padding:0;border-bottom:0;font-size:15px}
 
   @media (max-width:1180px){
     .pt-bar{gap:20px;padding:0 28px;height:120px}
@@ -115,7 +132,7 @@
        height into --pt-header-h-live, which is what the page shell consumes;
        keeping the static default close to truth avoids a first-paint jump. */
     :root{--pt-header-h:168px}
-    .pt-nav,.pt-header .pt-social,.pt-donate{display:none}
+    .pt-nav,.pt-header .pt-social,.pt-donate,.pt-bar .pt-lang{display:none}
     .pt-burger{display:inline-flex}
     .pt-bar{height:100px;padding:0 22px}
     .pt-logo img{height:78px}
@@ -173,6 +190,7 @@
         <div class="pt-folder-panel">
           <a href="/about-us">About Us</a>
           <a href="/team">Team</a>
+          <a href="/press-media">Press &amp; Media</a>
         </div>
       </div>
       <div class="pt-folder">
@@ -190,7 +208,7 @@
           <a href="/initiatives">Our Living Vision</a>
           <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
           <a href="/initiatives/qero-nation-emergency-food-supply">Q&rsquo;ero Initiative</a>
-          <a href="/initiatives#biocultural-reserve">Paititi Biocultural Reserve</a>
+          <a href="/initiatives/paititi-biocultural-reserve">Paititi Biocultural Reserve</a>
           <a href="/initiatives#community-health">Community Health &amp; Natural Medicine</a>
           <a href="/#impact">Impact</a>
         </div>
@@ -219,6 +237,12 @@
       </a>
     </div>
 
+    <div class="pt-lang">
+      <a href="{{ enHref }}" hrefLang="en" aria-current="true">EN</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ esHref }}" hrefLang="es">ES</a>
+    </div>
+
     <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support</a>
 
     <!-- Inline SVG, like the social marks above: this component no longer pulls
@@ -239,6 +263,7 @@
         <span class="pt-mobile-group">About</span>
         <a href="/about-us">About Us</a>
         <a href="/team">Team</a>
+        <a href="/press-media">Press &amp; Media</a>
         <span class="pt-mobile-group">Programs</span>
         <a href="/retreats">Retreats</a>
         <a href="/online-courses">Online Courses</a>
@@ -248,16 +273,22 @@
         <a href="/initiatives">Our Living Vision</a>
         <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
         <a href="/initiatives/qero-nation-emergency-food-supply">Q&rsquo;ero Initiative</a>
+        <a href="/initiatives/paititi-biocultural-reserve">Paititi Biocultural Reserve</a>
         <span class="pt-mobile-group">More</span>
         <a href="/beyond-ayahuasca">Beyond Ayahuasca</a>
         <a href="/blog">Journal</a>
         <a class="pt-donate" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support</a>
+        <div class="pt-lang">
+          <a href="{{ enHref }}" hrefLang="en" aria-current="true">EN</a>
+          <span aria-hidden="true">/</span>
+          <a href="{{ esHref }}" hrefLang="es">ES</a>
+        </div>
       </nav>
     </div>
   </sc-if>
 </header>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sister&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/es/&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { open: false, announceOpen: true, hidden: false, solid: false };
 
@@ -334,7 +365,15 @@ class Component extends DCLogic {
 
   renderVals() {
     const active = this.props.active ?? '';
+    // The Spanish counterpart of this page. Each page passes it as `sister`,
+    // matching the rel="alternate" hreflang pair in its own <helmet> — one
+    // declaration per page rather than a path-rewriting table that would have
+    // to be kept in step with _redirects. Untranslated pages can omit it and
+    // land the reader on the Spanish home page.
+    const sister = this.props.sister || '/es/';
     return {
+      enHref: (typeof location !== 'undefined' && location.pathname) || '/',
+      esHref: sister,
       activeAbout: active === 'about' ? '1' : '0',
       activePrograms: active === 'programs' ? '1' : '0',
       activeInitiatives: active === 'initiatives' ? '1' : '0',

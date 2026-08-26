@@ -156,7 +156,10 @@ def rewrite_tag(tag, sizes, first_in_file, clean=False):
     # Strip whatever a previous run put there, then re-add.
     new = tag
     for a in MANAGED:
-        new = re.sub(r'\s%s\s*=\s*"[^"]*"' % a, '', new, flags=re.S)
+        # \s+ , not \s: a single-character bite leaves the attribute's newline
+        # and indent behind, so every re-run stacked another blank line inside
+        # the tag until the <img> was mostly whitespace.
+        new = re.sub(r'\s+%s\s*=\s*"[^"]*"' % a, '', new, flags=re.S)
     if clean:
         return (new, new != tag)
 
