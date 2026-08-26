@@ -187,20 +187,33 @@
   /* ---- Clippings ----------------------------------------------------------
      Print coverage arrives as a scan, not as a URL, so it gets its own strip:
      the scan itself at a readable size, opening to the full-resolution file.
-     The strip renders nothing until there is at least one figure inside it —
-     see the note in the markup for how to add one. */
+
+     On this side of the site the clipping is in Spanish, so a scan alone
+     would be a picture of an article rather than an article. Each clipping
+     therefore sits beside a full English translation — ours, and labelled
+     as ours — with the scan on the left as the primary source. Below 1180
+     the two stack, scan first. */
   .pm-clips{margin-top:56px}
-  .pm-clip-grid{
-    margin-top:24px;display:grid;gap:24px;
-    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  .pm-clip-row{
+    margin-top:24px;display:grid;gap:28px 52px;align-items:start;
+    grid-template-columns:minmax(0,460px) minmax(0,1fr);
   }
-  .pm-clip{margin:0}
+  .pm-clip{margin:0;max-width:760px}
   .pm-clip a{display:block;background:#F1EAF6;border-radius:24px 0;overflow:hidden;
     box-shadow:0 8px 24px rgba(33,4,22,.1);transition:transform .25s ease}
   .pm-clip a:hover{transform:translateY(-3px)}
   .pm-clip img{width:100%;height:auto;display:block}
   .pt-page main .pm-clip figcaption{font-size:14.3px;line-height:1.6;margin:12px 2px 0;
     color:rgba(33,4,22,.72)}
+
+  .pm-trans{max-width:660px}
+  .pt-page main .pm-trans-strap{font-size:15.5px;font-weight:700;letter-spacing:.02em;
+    color:#6B5378;margin:14px 0 0}
+  .pt-page main .pm-trans h3{font-family:var(--font-display);font-weight:400;
+    font-size:30px;line-height:1.24;letter-spacing:normal;color:#584364;margin:6px 0 20px}
+  .pt-page main .pm-trans p{font-weight:300;font-size:16.5px;line-height:1.72;margin:0}
+  .pt-page main .pm-trans p + p{margin-top:14px}
+  .pt-page main .pm-trans-note{font-size:14.3px;color:rgba(33,4,22,.62);margin-top:20px}
 
   /* ---- For journalists ---------------------------------------------------- */
   .pm-press{--pt-bg:#584364;color:#fff;padding:84px 0 96px}
@@ -257,6 +270,7 @@
     .pm-feature .pt-embed{height:auto}
     .pm-grid{grid-template-columns:1fr}
     .pm-item{grid-template-columns:1fr;gap:6px}
+    .pm-clip-row{grid-template-columns:1fr}
     .pm-cols{grid-template-columns:1fr;gap:44px}
   }
   @media (max-width:640px){
@@ -285,7 +299,7 @@
     .pm-grid{gap:20px}
     .pm-item{padding:24px 4px}
     .pm-item:hover{padding-left:10px;padding-right:10px}
-    .pm-clip-grid{grid-template-columns:1fr}
+    .pt-page main .pm-trans h3{font-size:26px}
   }
 
   /* The footer wave rises into the section above it, so it has to be that
@@ -410,6 +424,20 @@
           </div>
         </a>
 
+        <!-- Print, in Spanish: the row goes to the clippings strip below the
+             list, where the scan sits beside our English translation. -->
+        <a class="pm-item" href="#print">
+          <div class="pm-source">
+            <span class="pm-kicker">Diario Ahora, Loreto</span>
+            <span class="pm-date">Print, in Spanish &middot; July 2025</span>
+          </div>
+          <div>
+            <h3>First Beam Raised for the Yahua Ancestral School</h3>
+            <p>The Loreto daily&rsquo;s report on the beam-raising on the Momón River, with the Regional Government of Loreto present, and on the first 100 copies of the illustrated Yahua children&rsquo;s book reaching the community. Scan and full translation below.</p>
+            <span class="pm-go">Read our translation <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
         <a class="pm-item" href="https://artisthighlight.com/the-yahua-ancestral-school-healing-a-culture-one-child-at-a-time/" target="_blank" rel="noopener">
           <div class="pm-source">
             <span class="pm-kicker">Artist Highlight</span>
@@ -449,30 +477,53 @@
       </div>
 
       <!-- ===== Print clippings =====
-           Scans of print coverage go here. This block is deliberately empty
-           rather than filled with placeholders: an empty strip renders nothing,
-           whereas a fake clipping would be the one thing on a press page that
-           must never be invented.
+           Scans of print coverage. Only real clippings go here — a fake one
+           would be the one thing on a press page that must never be invented.
 
            To add one:
              1. put the scan in assets/press/ (a legible JPEG or WebP; the full
                 page, straightened, not a phone photo at an angle),
-             2. run `python3 tools/gen_responsive.py` to build the width ladder
+             2. add it to tools/image-sizes.json and run
+                `python3 tools/gen_responsive.py` to build the width ladder
                 and wire srcset/sizes/width/height,
-             3. uncomment .pm-clips below and copy the figure per clipping.
+             3. copy a .pm-clip-row below — figure plus translation if the
+                original is not in English — and give it a row in the list
+                above so it keeps its place in the chronology. -->
+      <div class="pm-clips" id="print">
+        <p class="pm-kicker">In print</p>
 
-           <div class="pm-clips">
-             <p class="pm-kicker">Print</p>
-             <div class="pm-clip-grid">
-               <figure class="pm-clip">
-                 <a href="/assets/press/EXAMPLE.webp" target="_blank" rel="noopener">
-                   <img src="/assets/press/EXAMPLE.webp" alt="Describe what the clipping says, not that it is a clipping" loading="lazy">
-                 </a>
-                 <figcaption>Publication name, date &mdash; headline.</figcaption>
-               </figure>
-             </div>
-           </div>
-      -->
+        <div class="pm-clip-row">
+          <figure class="pm-clip">
+            <a href="/assets/press/ahora-escuela-ancestral-yahua-2025.webp" target="_blank" rel="noopener">
+              <img src="/assets/press/ahora-escuela-ancestral-yahua-2025.webp"
+           srcset="/assets/r/press/ahora-escuela-ancestral-yahua-2025-320w.webp 320w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-480w.webp 480w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-640w.webp 640w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-800w.webp 800w, /assets/press/ahora-escuela-ancestral-yahua-2025.webp 1046w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 760px, 760px"
+           width="1046"
+           height="867"
+           decoding="async" alt="Page from the Loreto newspaper Ahora headlined “Plantan primera viga de la Escuela Ancestral Yahua”, with a photograph of members of the Yahua community, officials of the Regional Government of Loreto and the Paititi Institute team on the banks of the Momón River" loading="lazy">
+            </a>
+            <figcaption>Diario Ahora, Loreto, July 2025 &mdash; &ldquo;Plantan primera viga de la Escuela Ancestral Yahua. Un hito por la niñez y la cultura amazónica.&rdquo; Opens the full-size scan.</figcaption>
+          </figure>
+
+          <div class="pm-trans">
+            <p class="pm-kicker">Our translation</p>
+            <p class="pm-trans-strap">A milestone for children and Amazonian culture</p>
+            <h3>First beam raised for the Yahua Ancestral School</h3>
+
+            <p>The first beam of the Yahua Ancestral School &ndash; Cultural Heritage Centre has been laid: a milestone for Indigenous children and cultural preservation in the Peruvian Amazon, on the Momón River, Loreto.</p>
+            <p>With great emotion and a deep sense of purpose, today, 25 July 2025, the first beam was laid for the Yahua people&rsquo;s future ancestral school and cultural heritage centre &mdash; a decisive step in an initiative that seeks to preserve and revitalise the knowledge, language and age-old traditions of this Indigenous Amazonian community.</p>
+            <p>The symbolic act took place on Yahua territory, on the banks of the Momón River, and was attended by representatives of the Regional Government of Loreto &mdash; specifically its Regional Office for the Development of Indigenous Peoples &mdash; who expressed their full support for the project and their eagerness to collaborate in the stages to come.</p>
+            <p>&ldquo;This is a moment of profound significance. We are not just building a school; we are sowing the foundations so that future Yahua generations can grow up connected to their roots, proud of their cultural identity,&rdquo; said Roman Hanis, president of the Paititi Institute, the organisation behind the project.</p>
+            <p>As part of this first phase, the community received the first 100 copies of an illustrated children&rsquo;s book about Yahua culture, created especially so that the tribe&rsquo;s children can learn about their origins &mdash; and, at the same time, to be offered to visitors as a respectful and meaningful tool for intercultural education.</p>
+            <p>The ancestral centre will serve as an integrated space for the oral transmission of the Yahua language, creation stories, knowledge of medicinal plants, traditional dances and rites of passage, strengthening the living continuity of the Yahua worldview. It is also intended as a place of ceremony and healing, where the community&rsquo;s wise men and women can treat patients and train new apprentices.</p>
+            <p>The project has been made possible in part by funds generated by the recently published book <em>Beyond Ayahuasca</em>, which has attracted wide international interest for its profound message about healing, ancestral wisdom and reconnection with nature.</p>
+            <p>&ldquo;It fills us with hope to see how reading a book can become concrete action that directly benefits Indigenous communities that have been forgotten for so long,&rdquo; Hanis added.</p>
+            <p>With the institutional backing of the regional government and the active collaboration of the Yahua community, this effort sets a hopeful precedent for other Indigenous peoples of Peru&rsquo;s deep interior. The centre is expected to be completed in the coming months and to become a model of living ancestral education and cultural sovereignty.</p>
+
+            <p class="pm-trans-note">Translated from the Spanish by the Paititi Institute. The original text is the newspaper&rsquo;s; only the translation is ours.</p>
+          </div>
+        </div>
+      </div>
 
     </div>
   </section>
