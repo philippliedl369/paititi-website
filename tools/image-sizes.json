@@ -873,5 +873,19 @@
   "w390": 350,
   "w900": 760,
   "w1440": 760
+ },
+ "/assets/about/roman-hanis-team.webp": {
+  "nat": 720,
+  "natH": 720,
+  "w390": 350,
+  "w900": 490,
+  "w1440": 490
+ },
+ "/assets/healing/roman-hanis-mentorship.webp": {
+  "nat": 607,
+  "natH": 572,
+  "w390": 350,
+  "w900": 852,
+  "w1440": 590
  }
 }
