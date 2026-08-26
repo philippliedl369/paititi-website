@@ -28,7 +28,6 @@
 /events              /retreats#events          301
 # "Journal" is the nav label; the URL stays /blog.
 /journal             /blog                     301
-/journal/*           /blog/:splat              301
 
 # Distance Healing — the standalone paititidistancehealing.com site, absorbed.
 # Its nav pages are now tab panels of one page here; each old path lands on a
@@ -77,7 +76,6 @@
 /store                          /retreats                   301
 /store/retreats                 /retreats                   301
 /store/p/us-tour-rsvp-donation  /retreats                   301
-/store/*                        /retreats                   301
 /cart                           /                           301
 /order-confirmed                /                           301
 
@@ -214,3 +212,18 @@
 /es/iniciativas/SiteFooter.es.dc.html          /SiteFooter.es.dc.html  200
 /es/sanacion-a-distancia/SiteHeader.es.dc.html /SiteHeader.es.dc.html  200
 /es/sanacion-a-distancia/SiteFooter.es.dc.html /SiteFooter.es.dc.html  200
+
+# ---------------------------------------------------------------------------
+# Splat rules, and they must stay LAST in this file.
+#
+# Workers Assets classifies every rule *after the first splat* as dynamic and
+# only honours 100 dynamic rules; the rest are skipped with a warning that is
+# easy to miss in `wrangler dev` output. With these two sitting mid-file the
+# whole Spanish block below them was dynamic, and the last 19 lines — the
+# <dc-import> sibling maps — were dropped, so /es/ pages deployed with no
+# header and no footer. Keeping the splats here leaves every exact-match rule
+# static (limit 2000) and only these two dynamic.
+#
+# Anything added after this point is dynamic. Add exact-match rules above.
+/journal/*                      /blog/:splat                301
+/store/*                        /retreats                   301
