@@ -196,7 +196,6 @@
         <div class="pt-folder-panel">
           <a href="/es/quienes-somos">Quiénes Somos</a>
           <a href="/es/equipo">Equipo</a>
-          <a href="/es/prensa">Prensa y Medios</a>
         </div>
       </div>
       <div class="pt-folder">
@@ -222,6 +221,7 @@
       <!-- "Beyond Ayahuasca" is the book's title; it is not translated. -->
       <a href="/es/beyond-ayahuasca" data-active="{{ activeBeyond }}">Beyond Ayahuasca</a>
       <a href="/es/diario" data-active="{{ activeJournal }}">Diario</a>
+      <a href="/es/prensa" data-active="{{ activePress }}">Prensa y Medios</a>
     </nav>
 
     <!-- Inline SVG rather than MeristemDS.Icon: Lucide dropped its brand glyphs,
@@ -270,7 +270,6 @@
         <span class="pt-mobile-group">Nosotros</span>
         <a href="/es/quienes-somos">Quiénes Somos</a>
         <a href="/es/equipo">Equipo</a>
-        <a href="/es/prensa">Prensa y Medios</a>
         <span class="pt-mobile-group">Programas</span>
         <a href="/es/retiros">Retiros</a>
         <a href="/es/cursos-en-linea">Cursos en Línea</a>
@@ -284,6 +283,7 @@
         <span class="pt-mobile-group">Más</span>
         <a href="/es/beyond-ayahuasca">Beyond Ayahuasca</a>
         <a href="/es/diario">Diario</a>
+        <a href="/es/prensa">Prensa y Medios</a>
         <a class="pt-donate" href="/es/iniciativas/escuela-ancestral-yahua">Apoyar</a>
         <div class="pt-lang">
           <a href="{{ enHref }}" hrefLang="en">EN</a>
@@ -295,7 +295,7 @@
   </sc-if>
 </header>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sister&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:230},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;programs&quot;,&quot;initiatives&quot;,&quot;beyond&quot;,&quot;journal&quot;,&quot;press&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;sister&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;/&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { open: false, announceOpen: true, hidden: false, solid: false };
 
@@ -383,6 +383,7 @@ class Component extends DCLogic {
       activeInitiatives: active === 'initiatives' ? '1' : '0',
       activeBeyond: active === 'beyond' ? '1' : '0',
       activeJournal: active === 'journal' ? '1' : '0',
+      activePress: active === 'press' ? '1' : '0',
       announceOpen: this.state.announceOpen,
       hidden: this.state.hidden ? '1' : '0',
       solid: this.state.solid ? '1' : '0',
