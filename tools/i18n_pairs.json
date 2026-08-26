@@ -63,6 +63,16 @@
       "en": "/blog/embody-true-nature-healing-retreat",
       "es": "/es/diario/encarna-tu-verdadera-naturaleza-retiro-de-sanacion" }
   ],
+  "_english_only_comment": [
+    "Indexable pages that have no Spanish counterpart yet. They carry no",
+    "hreflang (there is nothing to point at) but they still belong in the",
+    "sitemap, so they are listed here rather than being silently dropped —",
+    "the sitemap is generated from this file and would otherwise only ever",
+    "contain paired pages. Move a row up into `pairs` once its .es page exists."
+  ],
+  "english_only": [
+    { "file": "InitiativeReserve.dc.html", "en": "/initiatives/paititi-biocultural-reserve" }
+  ],
   "_untranslated": [
     "DistanceHealingFee.dc.html and DistanceHealingContribution.dc.html are",
     "emailed to an applicant rather than browsed to, and each is a wrapper",
