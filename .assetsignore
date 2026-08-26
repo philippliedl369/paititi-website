@@ -13,3 +13,13 @@ server.js
 api.js
 package.json
 package-lock.json
+
+# Internal planning docs. Both were being served publicly — build-spec.md
+# quotes Roman's WhatsApp messages and lists open blockers, and nothing on the
+# site links to either.
+build-spec.md
+website-redo-spec.pdf
+
+# Blog source for tools/migrate_blog.py, build-time only. data/products.json
+# is NOT excluded: api.js fetches it through env.ASSETS at runtime.
+data/blog/
