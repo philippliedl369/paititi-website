@@ -49,9 +49,6 @@
   .ab-plum h3,.ab-plum p{color:#fff}
   .ab-white h2{color:#210416}
 
-  /* Squarespace clips this photo to a stepped octagon. */
-  .ab-clip img{clip-path:polygon(14% 0,86% 0,86% 14%,100% 14%,100% 86%,86% 86%,86% 100%,14% 100%,14% 86%,0 86%,0 14%,14% 14%)}
-
   /* ---- Opening statement ----------------------------------------------------
      The lede that reframes the page: the two-line contrast is one h2 with the
      second clause carrying the weight, so it reads as a single thought rather
@@ -65,7 +62,6 @@
      srcset — the layout is driven by width/height, so the ratio has to be
      carried over with it or the grid rows shift.                              */
   .ab-lede h2 em{font-style:normal;display:block}
-  .ab-lede .ab-pivot{text-align:center}
   .ab-lede .ab-welcome{font-family:var(--font-display);font-size:28.8px;line-height:1.35;
     margin-top:28px}
   /* A button block fills its grid cell, but this one sits inside a prose
@@ -74,13 +70,14 @@
 
   /* Letterboxed at native ratio with rounded corners, matching /initiatives. */
   .ab-photo{display:flex;flex-direction:column;justify-content:center}
-  .ab-photo>img{position:static;height:auto;border-radius:15px}
+  /* Two photographs filling one media column against a longer text column. */
+  .ab-stack{gap:24px}
+  .ab-photo>img,.ab-photo>video{position:static;height:auto;border-radius:15px}
 
-  .ab-video{width:100%;height:100%;object-fit:cover;display:block}
+  .ab-video{width:100%;height:auto;aspect-ratio:800/452;display:block;border-radius:15px}
 
   @media (max-width:1180px){
     .ab-hero h1{font-size:40px}
-    .ab-video{height:auto}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#584364}
@@ -125,16 +122,16 @@
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:54">
 
-      <div style="grid-area:1 / 3 / 5 / 22">
+      <div style="grid-area:1 / 3 / 5 / 23">
         <h2>The modern world teaches us how to make a living.
           <em><strong>Indigenous cultures teach us how to live.</strong></em></h2>
       </div>
 
-      <div class="pt-prose" style="grid-area:7 / 3 / 15 / 14">
+      <div class="pt-prose" style="grid-area:7 / 3 / 15 / 12">
         <p class="pt-lg">Today, humanity has unprecedented knowledge and technology. Yet we continue to face growing ecological, social, and personal crises.</p>
         <p>For thousands of years, Indigenous peoples have cultivated ways of living rooted in reciprocity &mdash; with one another, with the Earth, and with future generations. Their wisdom is not a relic of the past. It is a living tradition that continues to offer profound insights into what it means to be fully human.</p>
       </div>
-      <div class="ab-photo" style="grid-area:7 / 15 / 15 / 23">
+      <div class="ab-photo" style="grid-area:7 / 14 / 15 / 23">
         <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp"
            srcset="/assets/r/home/whatsapp-image-2025-11-19-at-104324-320w.webp 320w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-480w.webp 480w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-640w.webp 640w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-800w.webp 800w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-1080w.webp 1080w, /assets/home/whatsapp-image-2025-11-19-at-104324.webp 1280w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 544px"
@@ -143,24 +140,27 @@
            decoding="async" alt="Roman Hanis seated on the grass in conversation with Q&rsquo;ero elders outside a stone and thatch dwelling in the high Andes" loading="lazy">
       </div>
 
-      <div class="pt-prose ab-pivot" style="grid-area:17 / 6 / 23 / 20">
-        <p class="pt-lg">More than fifteen years ago, Paititi Institute was founded with a simple yet far-reaching vision. Neither to preserve traditions in a museum, nor to romanticize Indigenous cultures. Instead, to cultivate an integral way of living where people, communities, cultures, and ecosystems can flourish together.</p>
-      </div>
-
-      <div class="ab-photo" style="grid-area:25 / 3 / 34 / 12">
+      <div class="ab-photo ab-stack" style="grid-area:17 / 3 / 34 / 12">
         <img src="/assets/home/discoverpaititi-01.webp"
            srcset="/assets/r/home/discoverpaititi-01-320w.webp 320w, /assets/r/home/discoverpaititi-01-480w.webp 480w, /assets/r/home/discoverpaititi-01-640w.webp 640w, /assets/r/home/discoverpaititi-01-800w.webp 800w, /assets/r/home/discoverpaititi-01-1080w.webp 1080w, /assets/r/home/discoverpaititi-01-1280w.webp 1280w, /assets/r/home/discoverpaititi-01-1600w.webp 1600w, /assets/r/home/discoverpaititi-01-2000w.webp 2000w, /assets/home/discoverpaititi-01.webp 2500w"
            sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
            width="2500"
            height="1406"
            decoding="async" alt="Yagua elder and children gathered beneath the thatched roof of a community maloca" loading="lazy">
+        <img src="/assets/about/qero-expedition-group.webp"
+           srcset="/assets/r/about/qero-expedition-group-320w.webp 320w, /assets/r/about/qero-expedition-group-480w.webp 480w, /assets/r/about/qero-expedition-group-640w.webp 640w, /assets/r/about/qero-expedition-group-800w.webp 800w, /assets/r/about/qero-expedition-group-1080w.webp 1080w, /assets/r/about/qero-expedition-group-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 443px"
+           width="2500"
+           height="1875"
+           decoding="async" alt="Paititi team standing with Q&rsquo;ero families outside a thatched stone house, mist coming down the Andean valley behind them" loading="lazy">
       </div>
-      <div class="pt-prose pt-vc" style="grid-area:25 / 13 / 34 / 23">
+      <div class="pt-prose pt-vc" style="grid-area:17 / 14 / 34 / 23">
+        <p class="pt-lg">More than fifteen years ago, Paititi Institute was founded with a simple yet far-reaching vision. Neither to preserve traditions in a museum, nor to romanticize Indigenous cultures. Instead, to cultivate an integral way of living where people, communities, cultures, and ecosystems can flourish together.</p>
         <p>Working alongside Indigenous communities throughout the Andean mountains and Amazon rainforest, we believe humanity doesn&rsquo;t need another isolated solution. It needs an integral way of living.</p>
         <p>Together, we are helping regenerate living cultures, healthy ecosystems, resilient communities, meaningful education, regenerative livelihoods, and pathways of inner and collective transformation &mdash; because every part of life depends on every other.</p>
       </div>
 
-      <div class="pt-prose pt-vc" style="grid-area:36 / 3 / 45 / 13">
+      <div class="pt-prose pt-vc" style="grid-area:36 / 3 / 45 / 12">
         <p>We are committed to protecting and regenerating the living relationships between people, culture, and nature, recognizing that healthy ecosystems depend on healthy cultures, and healthy cultures flourish within healthy ecosystems.</p>
       </div>
       <div class="ab-photo" style="grid-area:36 / 14 / 45 / 23">
@@ -172,7 +172,7 @@
            decoding="async" alt="Two practitioners in white coats treating an elderly patient at a free natural medicine clinic in the Andes" loading="lazy">
       </div>
 
-      <div class="pt-prose" style="grid-area:47 / 5 / 55 / 21">
+      <div class="pt-prose" style="grid-area:47 / 3 / 55 / 19">
         <p class="pt-lg">Paititi is not simply preserving ancestral wisdom. We are helping cultivate a future where humanity remembers how to live in right relationship: with ourselves, with one another, and with the living Earth.</p>
         <p class="ab-welcome"><strong>Welcome to Paititi.</strong></p>
         <div class="pt-btn-row">
@@ -186,15 +186,14 @@
   <!-- ===== Founding vision ===== -->
   <section class="pt-sec" style="--pt-bg:#F1EAF6">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:46">
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:49">
       <div style="grid-area:1 / 3 / 5 / 23">
         <h2><strong>&ldquo;Paititi&rdquo;</strong>, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
       </div>
-      <div class="pt-prose" style="grid-area:5 / 6 / 16 / 20">
-        <p class="pt-lg">Through the awakened spirit of the individual comes the greatest potential for the transformation of the planet. <strong>The Paititi Institute for the Preservation of Ecology and Indigenous Culture</strong> is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.</p>
-        <p>The founding vision of our organization is to be a conduit for innermost heart values to manifest into material realm. Throughout all our programs and initiatives, our efforts focus on supporting a society rooted in true values. In recognition of timeless, essential human values, ancestral wisdom is translated into practical and relevant modern circumstances</p>
+      <div class="pt-prose" style="grid-area:6 / 3 / 14 / 17">
+        <p class="pt-lg"><strong>The Paititi Institute for the Preservation of Ecology and Indigenous Culture</strong> is committed to embodying this paradigm shift and demonstrating what is possible through ordinary, grassroots human efforts, in service to Mother Nature and the infinite human potential.</p>
       </div>
-      <div class="pt-fit" style="grid-area:13 / 19 / 18 / 25">
+      <div class="pt-fit" style="grid-area:16 / 10 / 21 / 16">
         <img src="/assets/brand/icon-donate.webp"
            srcset="/assets/r/brand/icon-donate-320w.webp 320w, /assets/r/brand/icon-donate-480w.webp 480w, /assets/r/brand/icon-donate-640w.webp 640w, /assets/brand/icon-donate.webp 700w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 292px"
@@ -202,13 +201,12 @@
            height="348"
            decoding="async" alt="Outline of two hands forming a heart shape" loading="lazy">
       </div>
-      <div style="grid-area:17 / 3 / 33 / 23">
+      <div style="grid-area:23 / 3 / 39 / 23">
         <div class="pt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/mAh0kK0JBQM?start=1" title="The Heart of Paititi Institute" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="pt-prose" style="grid-area:34 / 4 / 47 / 22">
-        <p>As humans, we are inexorably linked to the earth and each other. The intercultural bridges our organization is dedicated to developing are based on the essential nature of reciprocity and interconnectedness that this planet is sustained by. As part of this magnificent symbiotic organism, we are dedicated to co-creating the possibility of a meaningful life and a beautiful world for our children and future generations.</p>
+      <div class="pt-prose" style="grid-area:41 / 3 / 50 / 19">
         <p>Dedication to self-realization of highest potential, while humbly sharing it with each other for the greatest benefit of all, reflects the symbiotic quality of Nature&rsquo;s organic intelligence we are all a part of. This is a core value of Paititi and informs the essence of all our projects, such as healing serious health conditions, consciousness transformation, land stewardship, community gardening and permaculture, free natural medicine campaigns for rural communities or social development initiatives. <em>Being a responsible, hearted-centered human being is the key to the blossoming of life on our planet.</em></p>
       </div>
     </div>
@@ -230,10 +228,10 @@
   <section class="pt-sec ab-dark">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:20">
-      <div style="grid-area:2 / 1 / 4 / 25">
+      <div style="grid-area:2 / 3 / 4 / 23">
         <h2>Paititi&rsquo;s Initiatives Key Areas:</h2>
       </div>
-      <div style="grid-area:4 / 1 / 21 / 25">
+      <div style="grid-area:4 / 3 / 21 / 23">
         <div class="pt-acc">
 
           <details class="pt-acc-item">
@@ -317,16 +315,16 @@
   <section class="pt-sec ab-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:124px;--pt-rows:25">
-      <div style="grid-area:1 / 1 / 5 / 19">
+      <div style="grid-area:1 / 3 / 5 / 23">
         <h2>How do we Embody <strong>our highest potential</strong> and live in harmony with each other and the planet?</h2>
       </div>
-      <div class="pt-prose" style="grid-area:5 / 13 / 26 / 25">
+      <div class="pt-prose" style="grid-area:6 / 3 / 27 / 12">
         <p class="pt-lg"><strong>From the awakened spirit of the individual comes the greatest potential for the transformation of the planet.</strong></p>
         <p class="pt-lg">We believe that the only way forward is to be the change. Our work as an institute is rooted in our efforts to embody this and to share tools for others to do the same. Through the practical application of the ancient wisdom of humanity within the modern lives, we build bridges for the physical, emotional, and spiritual healing of our ecology from the inside and out.</p>
         <p>In this natural way, we channel the healing and rejuvenation of the planet herself. Using holistic models based upon our points of focus listed above, we engage as a community to improve social and environmental life via spiritual evolution and maturation on the collective and individual levels. We utilize the planetary wisdom of humanity to become fully conscious and responsible human beings embracing our shared heart.</p>
         <p>The ancient, unbroken, and living lineages of direct consciousness transmission are here to help all of us fully realize our true nature in the current turbulent times. By sharing our life experiences with each other we create synergistic networks among all the like-hearted people in the world who are motivated by the freedom and liberation from suffering for all beings.</p>
       </div>
-      <div class="ab-clip" style="grid-area:6 / 1 / 16 / 9">
+      <div class="ab-photo" style="grid-area:6 / 14 / 16 / 23">
         <img src="/assets/home/whatsapp-image-2024-05-06-at-174328.webp"
            srcset="/assets/r/home/whatsapp-image-2024-05-06-at-174328-320w.webp 320w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-480w.webp 480w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-640w.webp 640w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-800w.webp 800w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-1080w.webp 1080w, /assets/r/home/whatsapp-image-2024-05-06-at-174328-1280w.webp 1280w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 393px"
@@ -334,15 +332,7 @@
            height="1366"
            decoding="async" alt="Two people hugging outdoors, one wearing a colorful striped sweater and a hat, with green foliage and a rustic building in the background." loading="lazy">
       </div>
-      <div class="pt-fit" style="grid-area:15 / 7 / 21 / 13">
-        <img src="/assets/brand/icon-vision-purpose.webp"
-           srcset="/assets/r/brand/icon-vision-purpose-320w.webp 320w, /assets/r/brand/icon-vision-purpose-480w.webp 480w, /assets/brand/icon-vision-purpose.webp 601w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 292px"
-           width="601"
-           height="500"
-           decoding="async" alt="Stylized Buddha eyes over water with lotus petals" loading="lazy">
-      </div>
-      <div style="grid-area:19 / 4 / 26 / 12">
+      <div class="ab-photo" style="grid-area:18 / 14 / 27 / 23">
         <video class="ab-video" src="/assets/video/about-vision.mp4" poster="/assets/video/about-vision-poster.jpg" autoplay loop muted playsinline preload="metadata" aria-label="Looping footage from the Paititi Biocultural Reserve"></video>
       </div>
     </div>
@@ -351,8 +341,8 @@
   <!-- ===== Closing quote ===== -->
   <section class="pt-sec ab-plum">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:11">
-      <div class="pt-fit" style="grid-area:1 / 4 / 4 / 6">
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:13">
+      <div class="pt-fit" style="grid-area:1 / 3 / 4 / 5">
         <img src="/assets/brand/icon-quotemark.webp"
            srcset="/assets/brand/icon-quotemark.webp 181w"
            sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 90px"
@@ -360,7 +350,7 @@
            height="142"
            decoding="async" alt="" loading="lazy">
       </div>
-      <div class="pt-prose" style="grid-area:2 / 5 / 12 / 21">
+      <div class="pt-prose" style="grid-area:4 / 3 / 13 / 21">
         <h3>&ldquo;We but mirror the world. All the tendencies present in the outer world are to be found in the world of our body. If we could change ourselves, the tendencies in the world would also change. As a man changes his own nature, so does the attitude of the world change towards him. This is the divine mystery supreme. A wonderful thing it is and the source of our happiness. We need not wait to see what others do.&rdquo;</h3>
         <p>&ndash; Mahatma Gandhi</p>
       </div>
