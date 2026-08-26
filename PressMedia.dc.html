@@ -55,18 +55,34 @@
      in flow and reflows on its own.
      ========================================================================== */
 
-  /* ---- Hero --------------------------------------------------------------- */
+  /* ---- Hero ---------------------------------------------------------------
+     Two things decide the geometry here, and both are about the photograph:
+     Roman and Ancelmo are in the top third of it, and their heads run to the
+     very edge — Ancelmo's headdress feathers reach within a percent of the top
+     of the frame.
+
+     So the crop is anchored to the top (--pt-bg-pos), not centred: `cover` at
+     1440 renders the 4:3 master 1080px tall, and a centred 620px window threw
+     away 230px from the top, which is exactly where both faces were. And the
+     window is taller, because with the crop pinned to the top the hero height
+     is now the only thing deciding how far down the picture reaches.
+
+     The title then sits at the foot of the hero rather than in the middle of
+     it: centred, it landed across the two of them. Bottom-aligned it sits over
+     the chest and the book, which is also where the scrim is heaviest. */
   .pm-hero{
     --pt-bg:#210416;
-    --pt-scrim:linear-gradient(to bottom,rgba(33,4,22,.38) 0%,rgba(33,4,22,.56) 50%,rgba(33,4,22,.8) 100%);
+    --pt-scrim:linear-gradient(to bottom,rgba(33,4,22,.30) 0%,rgba(33,4,22,.34) 34%,rgba(33,4,22,.62) 70%,rgba(33,4,22,.86) 100%);
     --pt-hero-ink:#fff;
-    --pt-hero-h:620px;
-    display:flex;flex-direction:column;justify-content:center;
+    --pt-hero-h:800px;
+    --pt-bg-pos:50% 0%;
+    display:flex;flex-direction:column;justify-content:flex-end;
   }
-  /* The header floats over the hero, so its clearance is reserved here. */
+  /* The header floats over the hero, so its clearance is reserved here — it is
+     a floor, not the actual offset, now that the block is bottom-aligned. */
   .pm-hero-in{
     width:100%;max-width:1020px;margin:0 auto;text-align:center;
-    padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 44px) 24px 52px;
+    padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 44px) 24px 56px;
   }
   /* Every rule below that sets margin, font-size or colour on a p or an h*
      carries `.pt-page main`: the base scale in paititi.css is written
@@ -217,8 +233,19 @@
 
   @media (max-width:1180px){
     /* paititi.css gives .pt-hero its own header clearance below this width, so
-       the inner block must not reserve it a second time. */
-    .pm-hero{--pt-hero-h:0}
+       the inner block must not reserve it a second time.
+
+       It also drops min-height to 0, which on a phone is what breaks this
+       particular photograph. Narrow enough and `cover` scales the master by
+       height instead of width, so the picture always fills the hero top to
+       bottom and the two faces land at a fixed 6–28% of it — under the title
+       block unless the hero is tall enough to seat the copy below them. Hence
+       an explicit floor rather than the inherited 0.
+
+       The same scaling crops the sides instead, and Ancelmo is the one on the
+       right, so the crop is biased off-centre to hold both of them in frame.
+       Above ~800px the master is width-driven again and the X is inert. */
+    .pt-page .pm-hero{min-height:700px;--pt-bg-pos:60% 0%}
     .pm-hero-in{padding:0 24px}
 
     .pm-in{padding:0 24px}
@@ -232,7 +259,20 @@
     .pm-cols{grid-template-columns:1fr;gap:44px}
   }
   @media (max-width:640px){
-    .pm-hero-in{padding:0 20px}
+    /* On a phone the two of them cannot both survive a crop. `cover` is
+       height-driven at this width, and the window it leaves is about 42% of the
+       master — narrower than the 46% Roman and Ancelmo occupy side by side, so
+       whichever way it is biased, one of them loses their face to an edge.
+       Below 640 the photo therefore stops being a background to write on and
+       becomes a picture: `contain`, whole and uncropped, seated below the
+       header, with the copy on the plum ground underneath it rather than over
+       it. 75vw is the master's own 4:3 height at this width. */
+    .pt-page .pm-hero{min-height:0;padding:0}
+    .pm-hero .pt-sec-bg img{
+      object-fit:contain;
+      object-position:50% calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 14px);
+    }
+    .pm-hero-in{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 75vw + 34px) 20px 46px}
     .pm-in{padding:0 20px}
     .pm-films{padding:48px 0 56px}
     .pm-cover,.pm-press{padding:48px 0 56px}
