@@ -16,6 +16,7 @@ README.md
 /tools/
 server.js
 api.js
+worker.js
 package.json
 package-lock.json
 

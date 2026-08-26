@@ -34,15 +34,29 @@ export default {
 
     if (!url.pathname.startsWith('/api/')) {
       const res = await env.ASSETS.fetch(request);
+      const headers = new Headers(res.headers);
+      let changed = false;
+
+      // _headers gives /assets/* a week-long Cache-Control, and the assets layer
+      // stamps it on the 404 page too when an asset is missing. The edge and
+      // every browser then hold that 404 for a week even after the file is
+      // uploaded — which is how the reserve atlas stayed dead after its
+      // .assetsignore fix shipped. Missing files always reach this Worker
+      // (existing assets are served without it), so this is the one place to
+      // keep an error from being cached.
+      if (res.status >= 400) {
+        headers.set('Cache-Control', 'no-store');
+        changed = true;
+      }
       // The workers.dev preview host does get crawled, and an indexed preview
       // would compete with paititi-institute.org after the DNS switch. The
       // header covers every page and asset without touching the HTML.
       if (url.hostname.endsWith('.workers.dev')) {
-        const headers = new Headers(res.headers);
         headers.set('X-Robots-Tag', 'noindex');
-        return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+        changed = true;
       }
-      return res;
+      if (!changed) return res;
+      return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
     }
 
     const origin = env.SITE_ORIGIN || url.origin;
