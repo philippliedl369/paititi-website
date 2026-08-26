@@ -31,6 +31,7 @@
     { "file": "Initiatives.dc.html",      "en": "/initiatives",             "es": "/es/iniciativas" },
     { "file": "InitiativeYagua.dc.html",  "en": "/initiatives/yagua-cultural-heritage-center-indigenous-school", "es": "/es/iniciativas/escuela-ancestral-yahua" },
     { "file": "InitiativeQero.dc.html",   "en": "/initiatives/qero-nation-emergency-food-supply",                "es": "/es/iniciativas/qero-alimentos-de-emergencia" },
+    { "file": "InitiativeReserve.dc.html","en": "/initiatives/paititi-biocultural-reserve",                      "es": "/es/iniciativas/reserva-biocultural-paititi" },
 
     { "file": "Terms.dc.html",            "en": "/terms-conditions",        "es": "/es/terminos-y-condiciones" },
     { "file": "Privacy.dc.html",          "en": "/who/privacy-policy",      "es": "/es/politica-de-privacidad" },
@@ -70,9 +71,7 @@
     "the sitemap is generated from this file and would otherwise only ever",
     "contain paired pages. Move a row up into `pairs` once its .es page exists."
   ],
-  "english_only": [
-    { "file": "InitiativeReserve.dc.html", "en": "/initiatives/paititi-biocultural-reserve" }
-  ],
+  "english_only": [],
   "_untranslated": [
     "DistanceHealingFee.dc.html and DistanceHealingContribution.dc.html are",
     "emailed to an applicant rather than browsed to, and each is a wrapper",

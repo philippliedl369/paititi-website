@@ -172,6 +172,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/qero-nation-emergency-food-supply"/>
   </url>
   <url>
+    <loc>https://paititi-institute.org/initiatives/paititi-biocultural-reserve</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/initiatives/paititi-biocultural-reserve"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/reserva-biocultural-paititi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/paititi-biocultural-reserve"/>
+  </url>
+  <url>
+    <loc>https://paititi-institute.org/es/iniciativas/reserva-biocultural-paititi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/initiatives/paititi-biocultural-reserve"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/reserva-biocultural-paititi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/paititi-biocultural-reserve"/>
+  </url>
+  <url>
     <loc>https://paititi-institute.org/terms-conditions</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/terms-conditions"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/terminos-y-condiciones"/>
@@ -338,8 +350,5 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/blog/embody-true-nature-healing-retreat"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/diario/encarna-tu-verdadera-naturaleza-retiro-de-sanacion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/blog/embody-true-nature-healing-retreat"/>
-  </url>
-  <url>
-    <loc>https://paititi-institute.org/initiatives/paititi-biocultural-reserve</loc>
   </url>
 </urlset>

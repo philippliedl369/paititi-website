@@ -1,14 +1,19 @@
 # Files in the repo that must NOT be uploaded as public site assets.
 # The built /islands/*.js bundles ARE served; their source toolchain is not.
-islands-src/
-docs/
+#
+# Directory patterns are anchored with a leading slash. These are gitignore
+# rules, so an unanchored `docs/` matches a directory of that name at *any*
+# depth — which silently excluded assets/docs/ too, and the site atlas linked
+# from /initiatives/paititi-biocultural-reserve had been 404ing because of it.
+/islands-src/
+/docs/
 .git/
 .gitignore
 .assetsignore
 wrangler.jsonc
 README.md
 .wrangler/
-tools/
+/tools/
 server.js
 api.js
 package.json
@@ -22,4 +27,8 @@ website-redo-spec.pdf
 
 # Blog source for tools/migrate_blog.py, build-time only. data/products.json
 # is NOT excluded: api.js fetches it through env.ASSETS at runtime.
-data/blog/
+/data/blog/
+
+# Scratch probe harnesses. Untracked, but `wrangler deploy` uploads the folder
+# rather than the commit, so anything left lying here would be served.
+_probe*.html
