@@ -4,9 +4,10 @@
 Three things have to agree for the two trees to be one bilingual site, and all
 three are derived from the pair table rather than typed out per page:
 
-  1. rel="alternate" hreflang in each page's <helmet>. Google ignores the whole
-     annotation unless *both* pages name *both* URLs, so they are written as a
-     block into the English page and its .es counterpart alike.
+  1. a self-referencing rel="canonical" plus rel="alternate" hreflang in each
+     page's <helmet>. Google ignores the whole hreflang annotation unless *both*
+     pages name *both* URLs, so they are written as a block into the English
+     page and its .es counterpart alike.
   2. the `sister` prop on the <dc-import> of SiteHeader / SiteHeader.es, which
      is what the EN/ES switcher in the bar actually links to.
   3. sitemap.xml, where each <url> repeats the same pair as <xhtml:link>.
@@ -36,16 +37,23 @@ def es_file(name: str) -> str:
     return name.replace(".dc.html", ".es.dc.html")
 
 
-def block(origin: str, en: str, es: str) -> str:
-    return (
-        f"{MARK}\n"
-        f'<link rel="alternate" hreflang="en" href="{origin}{en}">\n'
-        f'<link rel="alternate" hreflang="es" href="{origin}{es}">\n'
-        # x-default is English: the older tree, the better-linked one, and the
-        # right landing place for a reader whose language we do not publish.
-        f'<link rel="alternate" hreflang="x-default" href="{origin}{en}">\n'
-        f"{END}"
-    )
+def block(origin: str, self_url: str, en: str, es: str | None = None) -> str:
+    # Every page names itself as canonical, so a crawler that arrives via
+    # ?utm_source=… or a stray query string files it under the clean URL
+    # instead of indexing the variant as a separate page. The alternates only
+    # follow when both halves of the pair exist.
+    lines = [MARK, f'<link rel="canonical" href="{origin}{self_url}">']
+    if es is not None:
+        lines += [
+            f'<link rel="alternate" hreflang="en" href="{origin}{en}">',
+            f'<link rel="alternate" hreflang="es" href="{origin}{es}">',
+            # x-default is English: the older tree, the better-linked one, and
+            # the right landing place for a reader whose language we do not
+            # publish.
+            f'<link rel="alternate" hreflang="x-default" href="{origin}{en}">',
+        ]
+    lines.append(END)
+    return "\n".join(lines)
 
 
 def set_block(html: str, new: str) -> str:
@@ -112,7 +120,6 @@ def main() -> int:
     drift, missing = [], []
 
     for p in pairs:
-        blk = block(origin, p["en"], p["es"])
         # Both halves are annotated only once both halves exist. Announcing a
         # Spanish URL that is not built yet would point hreflang, the sitemap
         # and the header's ES link at a 404 — worse than saying nothing, since
@@ -120,34 +127,47 @@ def main() -> int:
         if not (ROOT / es_file(p["file"])).exists():
             missing.append(es_file(p["file"]))
             # Retract an annotation written by an earlier run, so removing or
-            # renaming a Spanish page cleans up its English half too.
+            # renaming a Spanish page cleans up its English half too. The
+            # canonical stays: it is about this page, not the pair.
             path = ROOT / p["file"]
             if path.exists():
                 before = path.read_text(encoding="utf-8")
                 # lang is set either way: every page should declare the language
                 # it is written in, whether or not it has a counterpart yet.
-                after = set_lang(before, "en")
-                after = re.sub(re.escape(MARK) + r".*?" + re.escape(END) + r"\n?", "", after, flags=re.S)
+                after = set_block(set_lang(before, "en"), block(origin, p["en"], p["en"]))
                 after = re.sub(r'\s+sister="[^"]*"', "", after, count=1)
                 if after != before:
                     drift.append(p["file"] + " (retracted)")
                     if not check:
                         path.write_text(after, encoding="utf-8")
             continue
-        for name, lang, component, sister in (
-            (p["file"], "en", "SiteHeader", p["es"]),
-            (es_file(p["file"]), "es", "SiteHeader.es", p["en"]),
+        for name, lang, component, self_url, sister in (
+            (p["file"], "en", "SiteHeader", p["en"], p["es"]),
+            (es_file(p["file"]), "es", "SiteHeader.es", p["es"], p["en"]),
         ):
             path = ROOT / name
             if not path.exists():
                 missing.append(name)
                 continue
+            blk = block(origin, self_url, p["en"], p["es"])
             before = path.read_text(encoding="utf-8")
             after = set_sister(set_block(set_lang(before, lang), blk), component, sister)
             if after != before:
                 drift.append(name)
                 if not check:
                     path.write_text(after, encoding="utf-8")
+
+    # Pages with no Spanish counterpart by design still get lang + canonical.
+    for p in cfg.get("english_only", []):
+        path = ROOT / p["file"]
+        if not path.exists():
+            continue
+        before = path.read_text(encoding="utf-8")
+        after = set_block(set_lang(before, "en"), block(origin, p["en"], p["en"]))
+        if after != before:
+            drift.append(p["file"])
+            if not check:
+                path.write_text(after, encoding="utf-8")
 
     sm = ROOT / "sitemap.xml"
     english_only = [p for p in cfg.get("english_only", []) if (ROOT / p["file"]).exists()]
