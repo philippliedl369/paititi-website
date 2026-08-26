@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<script src="/support.js"></script>
+<script src="/anchor-scroll.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Paititi Biocultural Reserve | Paititi Institute</title>
+<meta name="description" content="1,516 hectares in the Mapacho Valley, where the high Peruvian Andes give way to cloud rainforest. Three ecological horizons from 1,800m to 3,500m, dozens of springs, and a buffer to the Manu Reserve — with the full site atlas to download.">
+<meta property="og:title" content="Paititi Biocultural Reserve | Paititi Institute">
+<meta property="og:description" content="1,516 hectares in the Mapacho Valley, where the high Peruvian Andes give way to cloud rainforest. Three ecological horizons from 1,800m to 3,500m, dozens of springs, and a buffer to the Manu Reserve — with the full site atlas to download.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="/assets/reserve/welcome-gate.webp">
+<meta property="og:site_name" content="Paititi Institute">
+<meta name="theme-color" content="#2A1736">
+<link rel="icon" href="/assets/brand/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/fonts.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/colors.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/typography.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/spacing.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/tokens/effects.css">
+<link rel="stylesheet" href="/_ds/meristem-design-system/styles.css">
+<link rel="stylesheet" href="/paititi.css">
+<script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
+<style>
+  /* ==========================================================================
+     /initiatives/paititi-biocultural-reserve
+
+     The reserve had one paragraph and one photo inside the /initiatives
+     narrative, which is the right weight for a chapter but the wrong weight for
+     the thing the whole vision stands on. This page is where the land gets
+     described at its own scale: the elevation bands, the water, the twenty
+     structures, the photographs, and the site atlas as a download.
+
+     Like /discoverpaititi this page has no live Squarespace original, so it is
+     built in flow rather than on the fluid engine — the grids reflow on their
+     own instead of needing a hand-written grid-area per block plus a second set
+     of rules to undo them below 1180px.
+
+     Card shape (48px 0 corners, white on lavender, lift on hover) and the
+     hairline fact row are the house pattern from Home and /discoverpaititi.
+
+     Every rule that sets margin, font-size or colour on a p or an h* carries
+     `.pt-page main`. The base scale in paititi.css is written `.pt-page main p`
+     — (0,1,2) — so a bare `.rs-lede` (0,1,0) loses to it and the declaration
+     silently does nothing. Same specificity trap paititi.css documents for
+     `color`.
+     ========================================================================== */
+
+  /* ---- Hero ---------------------------------------------------------------
+     The gate photo is bright across the top third, so the scrim is heaviest
+     where the type and the fact row actually sit. */
+  .rs-hero{
+    --pt-bg:#210416;
+    --pt-scrim:linear-gradient(to bottom,rgba(33,4,22,.30) 0%,rgba(33,4,22,.52) 46%,rgba(33,4,22,.80) 100%);
+    --pt-hero-ink:#fff;
+    --pt-hero-h:760px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  /* The header floats over the hero, so its clearance is reserved here. */
+  .rs-hero-in{
+    width:100%;max-width:1060px;margin:0 auto;text-align:center;
+    padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 44px) 24px 54px;
+  }
+  .rs-kicker{display:block;font-size:13px;font-weight:700;letter-spacing:.2em;
+    text-transform:uppercase;opacity:.82;margin-bottom:18px}
+  .pt-page main .rs-hero h1{margin:0}
+  .pt-page main .rs-hero-lede{max-width:740px;margin:22px auto 0;font-size:19.2px;opacity:.94}
+
+  /* Four figures set as facts rather than a sentence. Hairlines, no boxes, so
+     the row sits on the photograph. */
+  .rs-facts{
+    display:flex;flex-wrap:wrap;justify-content:center;
+    max-width:960px;margin:38px auto 0;padding-top:26px;
+    border-top:1px solid rgba(255,255,255,.28);
+  }
+  .rs-fact{flex:1 1 190px;padding:0 22px}
+  .rs-fact + .rs-fact{border-left:1px solid rgba(255,255,255,.28)}
+  .rs-fact b{display:block;font-family:var(--font-display);font-weight:400;
+    font-size:31px;line-height:1.15;letter-spacing:normal;margin-bottom:5px}
+  .rs-fact span{display:block;font-size:14.5px;line-height:1.55;opacity:.88}
+
+  /* ---- Shared section furniture ------------------------------------------ */
+  .rs-in{max-width:1248px;margin:0 auto;padding:0 24px}
+  .rs-in-narrow{max-width:900px;margin:0 auto;padding:0 24px}
+  .rs-band{--pt-bg:#F1EAF6;padding:88px 0 96px}
+  .rs-white{--pt-bg:#fff;padding:88px 0 96px}
+  .rs-plum{--pt-bg:#584364;color:#fff;padding:88px 0 96px}
+  .rs-deep{--pt-bg:#2A1736;color:#fff;padding:88px 0 96px}
+  .pt-page main .rs-band h2,.pt-page main .rs-white h2{color:#584364}
+  .pt-page main .rs-plum h2,.pt-page main .rs-deep h2,
+  .pt-page main .rs-plum h3,.pt-page main .rs-deep h3{color:#fff}
+  .rs-head{text-align:center;max-width:820px;margin:0 auto}
+  .pt-page main .rs-head p{margin-top:18px;font-size:19.2px}
+
+  /* Two-up: prose beside a photograph, reversible. */
+  .rs-split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:56px;align-items:center;margin-top:52px}
+  .rs-split img{width:100%;height:auto;display:block;border-radius:24px 0}
+  .rs-split-flip .rs-split-media{order:-1}
+
+  /* ---- Elevation bands ----------------------------------------------------
+     Three horizons stacked high-to-low, so the column reads down the mountain
+     the way the mountain is. The metre figure is the anchor, not the name. */
+  .rs-bands{margin-top:52px;display:flex;flex-direction:column;gap:22px}
+  .rs-bandrow{
+    display:grid;grid-template-columns:220px 1fr;gap:0;
+    background:#fff;border-radius:48px 0;overflow:hidden;
+    box-shadow:0 10px 30px rgba(33,4,22,.08);
+  }
+  .rs-bandmedia{position:relative;min-height:210px;background:#2A1736}
+  .rs-bandmedia img{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;display:block}
+  .rs-bandbody{padding:30px 36px;display:flex;flex-direction:column;
+    justify-content:center;gap:10px}
+  .rs-alt{font-family:var(--font-display);font-weight:400;font-size:31px;
+    line-height:1.15;letter-spacing:normal;color:#584364}
+  .rs-alt span{font-size:15px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:#6B5378;display:block;margin-top:6px;
+    font-family:var(--font-body)}
+  .pt-page main .rs-bandbody p{font-weight:300;line-height:1.75}
+
+  /* ---- Fact tiles (water, off-grid) -------------------------------------- */
+  .rs-tiles{margin-top:48px;display:grid;gap:24px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .rs-tile{padding:30px 30px 32px;border-radius:32px 0;
+    background:rgba(255,255,255,.09);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.20)}
+  .pt-page main .rs-tile h3{font-size:22.5px;margin-bottom:12px}
+  .pt-page main .rs-tile p{font-size:16px;line-height:1.7;opacity:.9}
+  /* Light-ground variant for the white sections. */
+  .rs-white .rs-tile{background:#F1EAF6;box-shadow:none}
+  .pt-page main .rs-white .rs-tile h3{color:#584364}
+  .pt-page main .rs-white .rs-tile p{opacity:1}
+
+  /* ---- Gallery ------------------------------------------------------------
+     Masonry by CSS columns rather than grid: the set mixes 3:2 landscape,
+     2:3 portrait and 2:1 panoramas, and columns let every photograph keep its
+     native ratio instead of being cover-cropped to a common cell. Captions sit
+     under the frame so the picture is never covered. */
+  .rs-gal{margin-top:52px;columns:3;column-gap:24px}
+  .rs-shot{break-inside:avoid;margin:0 0 24px;display:block}
+  .rs-shot img{width:100%;height:auto;display:block;border-radius:24px 0;
+    background:#2A1736}
+  .pt-page main .rs-shot figcaption{
+    margin-top:10px;font-size:14.272px;line-height:1.6;opacity:.78}
+  .rs-credit{margin-top:32px;font-size:14.272px;opacity:.7;text-align:center}
+
+  /* ---- The atlas ----------------------------------------------------------
+     A download, so it is presented as one object with its own cover rather than
+     as a link in a paragraph: the cover carries the contour map that is the
+     most legible thing about the document at a glance. */
+  .rs-atlas{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+    gap:56px;align-items:center;margin-top:52px}
+  .rs-atlas-cover{display:block;border-radius:24px 0;overflow:hidden;
+    box-shadow:0 18px 44px rgba(0,0,0,.34);
+    transition:transform .25s ease,box-shadow .25s ease}
+  .rs-atlas-cover:hover{transform:translateY(-4px);
+    box-shadow:0 24px 56px rgba(0,0,0,.42)}
+  .rs-atlas-cover img{width:100%;height:auto;display:block}
+  .rs-contents{list-style:none;margin:22px 0 0;padding:0}
+  .pt-page main .rs-contents li{
+    padding:13px 0;font-size:16px;line-height:1.6;
+    border-bottom:1px solid rgba(255,255,255,.22)}
+  .pt-page main .rs-contents li:first-child{
+    border-top:1px solid rgba(255,255,255,.22)}
+  /* The button sits inside .pt-prose, which underlines every descendant link. */
+  .pt-prose a.rs-dl{display:inline-flex;align-items:center;gap:10px;
+    margin-top:28px;text-decoration:none}
+  .rs-meta{margin-top:14px;font-size:14.272px;opacity:.72}
+
+  /* ---- Closing triad ------------------------------------------------------ */
+  .rs-triad{margin-top:48px;display:grid;gap:24px;
+    grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rs-pillar{background:#fff;border-radius:48px 0;padding:34px 32px 36px;
+    box-shadow:0 10px 30px rgba(33,4,22,.08)}
+  .pt-page main .rs-pillar h3{color:#584364;margin-bottom:12px}
+  .pt-page main .rs-pillar p{font-weight:300;line-height:1.75}
+  .rs-cta{margin-top:52px;text-align:center;display:flex;gap:18px;
+    justify-content:center;flex-wrap:wrap}
+
+  @media (max-width:1180px){
+    /* paititi.css gives .pt-hero its own header clearance below this width, so
+       the inner block must not reserve it a second time. */
+    .rs-hero{--pt-hero-h:0}
+    .rs-hero-in{padding:0 24px}
+    .rs-facts{max-width:560px}
+    .rs-fact{flex:1 1 45%;padding:0 16px}
+    .rs-fact:nth-child(odd){border-left:0}
+    .rs-fact:nth-child(n+3){margin-top:20px;padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.22)}
+
+    .rs-band,.rs-white,.rs-plum,.rs-deep{padding:64px 0 72px}
+    .rs-split{gap:36px;margin-top:40px}
+    .rs-gal{columns:2}
+    .rs-atlas{grid-template-columns:1fr;gap:36px}
+    .rs-atlas-media{max-width:560px;margin:0 auto;width:100%}
+    .rs-triad{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    .rs-hero-in{padding:0 20px}
+    .rs-in,.rs-in-narrow{padding:0 20px}
+    .rs-band,.rs-white,.rs-plum,.rs-deep{padding:48px 0 56px}
+    .rs-fact{flex:1 1 100%;padding:0}
+    /* border-left has to be cleared on this selector, not on .rs-fact: the
+       two-up rule above is `.rs-fact + .rs-fact` (0,2,0) and a bare .rs-fact
+       (0,1,0) loses to it, which left a hairline down facts 2 and 4. */
+    .rs-fact + .rs-fact{border-left:0;margin-top:18px;padding-top:18px;
+      border-top:1px solid rgba(255,255,255,.22)}
+    /* A single column below 640: two 150px-wide photos read as thumbnails. */
+    .rs-gal{columns:1;column-gap:0}
+    .rs-split{grid-template-columns:1fr}
+    /* Flipped rows must stack picture-under-prose like the unflipped ones,
+       or every other section reads in a different order on a phone. */
+    .rs-split-flip .rs-split-media{order:0}
+    /* A 220px media rail is most of a phone's width — stack the band instead. */
+    .rs-bandrow{grid-template-columns:1fr;border-radius:32px 0}
+    .rs-bandmedia{min-height:0;height:180px}
+    .rs-bandbody{padding:24px 24px 28px}
+    .rs-shot img,.rs-split img,.rs-atlas-cover{border-radius:20px 0}
+    .rs-pillar{border-radius:32px 0;padding:28px 26px 30px}
+    .rs-cta{flex-direction:column;align-items:stretch}
+  }
+
+  /* The footer wave rises into the section above it, so it has to be that
+     section's colour. */
+  footer.pt-footer{--pt-footer-wave:#F1EAF6}
+</style>
+</helmet>
+<div class="pt-page">
+<dc-import name="SiteHeader" active="initiatives" hint-size="100%,209px"></dc-import>
+<main>
+
+  <!-- ===== Hero ===== -->
+  <section class="pt-sec pt-sec-flat pt-hero rs-hero">
+    <div class="pt-sec-bg">
+      <img src="/assets/reserve/welcome-gate.webp"
+           srcset="/assets/r/reserve/welcome-gate-320w.webp 320w, /assets/r/reserve/welcome-gate-480w.webp 480w, /assets/r/reserve/welcome-gate-640w.webp 640w, /assets/r/reserve/welcome-gate-800w.webp 800w, /assets/r/reserve/welcome-gate-1080w.webp 1080w, /assets/r/reserve/welcome-gate-1280w.webp 1280w, /assets/reserve/welcome-gate.webp 1600w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="1600"
+           height="1066"
+           decoding="async" alt="A hand-painted &ldquo;Welcome to Paititi&rdquo; heart sign on the wooden gate at the entrance to the reserve, with the Mapacho valley beyond" loading="eager" fetchpriority="high">
+    </div>
+
+    <div class="rs-hero-in">
+      <span class="rs-kicker">Our Initiatives &middot; The Land</span>
+      <h1><strong>Paititi Biocultural Reserve</strong></h1>
+      <p class="rs-hero-lede">1,516 hectares in the Mapacho Valley, at the exact seam where the high Peruvian Andes give way to cloud rainforest &mdash; held in trust as a buffer to the Manu Reserve, and stewarded as a living laboratory rather than a landholding.</p>
+
+      <div class="rs-facts">
+        <div class="rs-fact"><b>1,516 ha</b><span>3,746 acres of unified, contiguous landscape</span></div>
+        <div class="rs-fact"><b>1,800&ndash;3,500</b><span>metres of elevation, holding three ecological horizons</span></div>
+        <div class="rs-fact"><b>20+</b><span>waterfalls fed by dozens of mountain springs</span></div>
+        <div class="rs-fact"><b>Since 2014</b><span>under the Institute&rsquo;s stewardship, title affirmed 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Where it is ===== -->
+  <section class="pt-sec rs-band" id="where">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>An ecological bridge</strong></h2>
+        <p>The reserve sits where two of the world&rsquo;s great biomes meet, which is why the land is worth protecting as one piece.</p>
+      </div>
+
+      <div class="rs-split">
+        <div class="pt-prose">
+          <p>The land lies in the <strong>Mapacho Valley</strong> in the Paucartambo region &mdash; four and a half hours by road from Cusco, three and a half from the Sacred Valley. It is positioned exactly where the high Peruvian Andes give way to the cloud rainforest, and it operates as a protective buffer to the <strong>Manu Reserve</strong>, one of the most biodiverse regions on Earth.</p>
+          <p>The boundaries are drawn by water rather than by fence: the <strong>Mapacho River</strong> borders the lower elevations and the <strong>Yuracmayo River</strong> runs along the adjacent flank, bracketing a single contiguous landholding that covers a major watershed segment end to end. The reserve also safeguards archaeological sites and sections of the ancient Qhapaq &Ntilde;an, the Royal Inca Road.</p>
+          <p>In 2026, after more than a decade of stewardship and legal proceedings, the <strong>Supreme Court of Lima affirmed Paititi Institute&rsquo;s ownership</strong> &mdash; clean title, and with it the ability to manage the whole watershed as one system.</p>
+        </div>
+        <div class="rs-split-media">
+          <img src="/assets/reserve/trail-above-the-gorge.webp"
+           srcset="/assets/r/reserve/trail-above-the-gorge-320w.webp 320w, /assets/r/reserve/trail-above-the-gorge-480w.webp 480w, /assets/r/reserve/trail-above-the-gorge-640w.webp 640w, /assets/r/reserve/trail-above-the-gorge-800w.webp 800w, /assets/r/reserve/trail-above-the-gorge-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="758"
+           decoding="async" alt="Four walkers strung out along a steep green slope high above the river gorge that bounds the reserve" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Three horizons ===== -->
+  <section class="pt-sec rs-white" id="horizons">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>Three ecological horizons</strong></h2>
+        <p>The elevation change across the property is extreme enough that the reserve holds three distinct climates &mdash; and therefore three distinct ways of growing, building and living &mdash; stacked one above the other.</p>
+      </div>
+
+      <div class="rs-bands">
+
+        <div class="rs-bandrow">
+          <div class="rs-bandmedia">
+            <img src="/assets/reserve/cloud-forest-flowers.webp"
+           srcset="/assets/r/reserve/cloud-forest-flowers-320w.webp 320w, /assets/r/reserve/cloud-forest-flowers-480w.webp 480w, /assets/r/reserve/cloud-forest-flowers-640w.webp 640w, /assets/r/reserve/cloud-forest-flowers-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1200"
+           decoding="async" alt="Wildflowers on an exposed high ridge of the reserve, with cloud spilling through the valley below" loading="lazy">
+          </div>
+          <div class="rs-bandbody">
+            <p class="rs-alt">3,500 m<span>High Sierra</span></p>
+            <p>Exposed, cool alpine climate. This is where the headwaters begin and where the primary habitat corridors run &mdash; the part of the reserve kept under absolute conservation.</p>
+          </div>
+        </div>
+
+        <div class="rs-bandrow">
+          <div class="rs-bandmedia">
+            <img src="/assets/reserve/salad-beds.webp"
+           srcset="/assets/r/reserve/salad-beds-320w.webp 320w, /assets/r/reserve/salad-beds-480w.webp 480w, /assets/r/reserve/salad-beds-640w.webp 640w, /assets/r/reserve/salad-beds-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1069"
+           decoding="async" alt="Rows of young lettuce mulched with straw in the upper gardens, the far side of the valley rising behind" loading="lazy">
+          </div>
+          <div class="rs-bandbody">
+            <p class="rs-alt">2,400 m<span>Temperate</span></p>
+            <p>A moderate climate zone, and the core of daily life: the main basecamp, the upper gardens, and temperate crops &mdash; potatoes, brassicas, root vegetables, tomatoes, squashes and medicinal herbs.</p>
+          </div>
+        </div>
+
+        <div class="rs-bandrow">
+          <div class="rs-bandmedia">
+            <img src="/assets/reserve/mapacho-river-bank.webp"
+           srcset="/assets/r/reserve/mapacho-river-bank-320w.webp 320w, /assets/r/reserve/mapacho-river-bank-480w.webp 480w, /assets/r/reserve/mapacho-river-bank-640w.webp 640w, /assets/r/reserve/mapacho-river-bank-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1069"
+           decoding="async" alt="A group resting on the boulder-strewn bank of the Mapacho River at the foot of the reserve" loading="lazy">
+          </div>
+          <div class="rs-bandbody">
+            <p class="rs-alt">1,800 m<span>Sub-tropical</span></p>
+            <p>The warm valley floor along the Mapacho. Shade-grown coffee runs across the lower slopes, interplanted with papaya, bananas, pineapples, mangoes and avocados, and the river beaches are reachable from here.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Water ===== -->
+  <section class="pt-sec rs-deep" id="water">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>A hydrological engine</strong></h2>
+        <p>Everything the reserve protects upstream eventually reaches the Amazon. Water is the reason the boundaries are drawn where they are.</p>
+      </div>
+
+      <div class="rs-tiles">
+        <div class="rs-tile">
+          <h3>Unpolluted catchment</h3>
+          <p>A primary, unpolluted catchment area whose waters ultimately feed the wider Amazon basin &mdash; protected at the source rather than treated downstream.</p>
+        </div>
+        <div class="rs-tile">
+          <h3>Dozens of springs</h3>
+          <p>Fed by dozens of crystalline mountain springs, which together support more than twenty small waterfalls inside the property boundaries.</p>
+        </div>
+        <div class="rs-tile">
+          <h3>High drainage density</h3>
+          <p>A dense mesh of micro-drainages channels water rapidly down the steep slopes into the Mapacho and Yuracmayo rivers &mdash; which is also why erosion control governs every new trail.</p>
+        </div>
+      </div>
+
+      <div class="rs-split rs-split-flip">
+        <div class="pt-prose">
+          <p>The same steepness that makes the reserve difficult to build on makes it hydrologically rich. Rainfall reaches up to <strong>200&nbsp;mm a month</strong> in the wet season between December and March, driving explosive growth; the dry season from June to August brings near-zero rainfall and clear skies, with freezing nights in the high zones and mild daytime highs around 14&nbsp;&deg;C year-round.</p>
+          <p>Managing that swing &mdash; holding water in the wet months, keeping it clear in the dry ones &mdash; is the practical core of stewarding this land.</p>
+        </div>
+        <div class="rs-split-media">
+          <img src="/assets/reserve/river-cairn.webp"
+           srcset="/assets/r/reserve/river-cairn-320w.webp 320w, /assets/r/reserve/river-cairn-480w.webp 480w, /assets/r/reserve/river-cairn-640w.webp 640w, /assets/r/reserve/river-cairn-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1059"
+           decoding="async" alt="A balanced stone cairn on the black sand of the Mapacho river bank, the fast green water and cliffs behind it" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Gallery ===== -->
+  <section class="pt-sec rs-band" id="gallery">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>The reserve, photographed</strong></h2>
+        <p>The gate, the gardens, the river, the trails, and the people who keep them.</p>
+      </div>
+
+      <div class="rs-gal">
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/welcome-gate.webp"
+           srcset="/assets/r/reserve/welcome-gate-320w.webp 320w, /assets/r/reserve/welcome-gate-480w.webp 480w, /assets/r/reserve/welcome-gate-640w.webp 640w, /assets/r/reserve/welcome-gate-800w.webp 800w, /assets/r/reserve/welcome-gate-1080w.webp 1080w, /assets/r/reserve/welcome-gate-1280w.webp 1280w, /assets/reserve/welcome-gate.webp 1600w"
+           sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
+           width="1600"
+           height="1066"
+           decoding="async" alt="A hand-painted &ldquo;Welcome to Paititi&rdquo; heart sign on the wooden entrance gate, the valley opening behind it" loading="lazy">
+          <figcaption>The gate at the entrance to the reserve.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/suspension-bridge.webp"
+           srcset="/assets/r/reserve/suspension-bridge-320w.webp 320w, /assets/r/reserve/suspension-bridge-480w.webp 480w, /assets/r/reserve/suspension-bridge-640w.webp 640w, /assets/r/reserve/suspension-bridge-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1066"
+           height="1600"
+           decoding="async" alt="A narrow wooden suspension footbridge crossing a stream into dense green forest" loading="lazy">
+          <figcaption>One of the footbridges linking the trails across the drainages.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/pack-horses-trail.webp"
+           srcset="/assets/r/reserve/pack-horses-trail-320w.webp 320w, /assets/r/reserve/pack-horses-trail-480w.webp 480w, /assets/r/reserve/pack-horses-trail-640w.webp 640w, /assets/r/reserve/pack-horses-trail-800w.webp 800w, /assets/r/reserve/pack-horses-trail-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="758"
+           decoding="async" alt="Two loaded pack horses and walkers on a narrow trail through waist-high wildflowers, cloud-covered ridges beyond" loading="lazy">
+          <figcaption>Supplies still come in the way they always have.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/food-forest-terraces.webp"
+           srcset="/assets/r/reserve/food-forest-terraces-320w.webp 320w, /assets/r/reserve/food-forest-terraces-480w.webp 480w, /assets/r/reserve/food-forest-terraces-640w.webp 640w, /assets/r/reserve/food-forest-terraces-800w.webp 800w, /assets/r/reserve/food-forest-terraces-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="1200"
+           decoding="async" alt="Someone carrying a cut log along a planted terrace in the food forest, the valley falling away behind" loading="lazy">
+          <figcaption>Work in the food forest on the terraced slopes.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/waterfall.webp"
+           srcset="/assets/r/reserve/waterfall-320w.webp 320w, /assets/r/reserve/waterfall-480w.webp 480w, /assets/r/reserve/waterfall-640w.webp 640w, /assets/r/reserve/waterfall-800w.webp 800w, /assets/reserve/waterfall.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1080"
+           height="1485"
+           decoding="async" alt="Three people beneath a waterfall in a mossy rock cleft on the reserve" loading="lazy">
+          <figcaption>One of more than twenty waterfalls inside the boundaries.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/salad-beds.webp"
+           srcset="/assets/r/reserve/salad-beds-320w.webp 320w, /assets/r/reserve/salad-beds-480w.webp 480w, /assets/r/reserve/salad-beds-640w.webp 640w, /assets/r/reserve/salad-beds-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1069"
+           decoding="async" alt="Young lettuces mulched with straw in the upper gardens at 2,400 metres, mountains behind" loading="lazy">
+          <figcaption>The upper gardens at 2,400&nbsp;m.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/river-cairn.webp"
+           srcset="/assets/r/reserve/river-cairn-320w.webp 320w, /assets/r/reserve/river-cairn-480w.webp 480w, /assets/r/reserve/river-cairn-640w.webp 640w, /assets/r/reserve/river-cairn-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1059"
+           decoding="async" alt="A balanced stone cairn on the black sand and cobbles of the Mapacho river bank, cliffs rising opposite" loading="lazy">
+          <figcaption>The Mapacho river beach at the foot of the land.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/qigong-terrace.webp"
+           srcset="/assets/r/reserve/qigong-terrace-320w.webp 320w, /assets/r/reserve/qigong-terrace-480w.webp 480w, /assets/r/reserve/qigong-terrace-640w.webp 640w, /assets/r/reserve/qigong-terrace-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1066"
+           decoding="async" alt="A group practising Qigong together on a grassy terrace overlooking the valley" loading="lazy">
+          <figcaption>Morning practice on the terrace.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/trail-above-the-gorge.webp"
+           srcset="/assets/r/reserve/trail-above-the-gorge-320w.webp 320w, /assets/r/reserve/trail-above-the-gorge-480w.webp 480w, /assets/r/reserve/trail-above-the-gorge-640w.webp 640w, /assets/r/reserve/trail-above-the-gorge-800w.webp 800w, /assets/r/reserve/trail-above-the-gorge-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="758"
+           decoding="async" alt="Walkers spread along a steep green slope high above the river gorge" loading="lazy">
+          <figcaption>The trail along the high slope above the gorge.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/cloud-forest-flowers.webp"
+           srcset="/assets/r/reserve/cloud-forest-flowers-320w.webp 320w, /assets/r/reserve/cloud-forest-flowers-480w.webp 480w, /assets/r/reserve/cloud-forest-flowers-640w.webp 640w, /assets/r/reserve/cloud-forest-flowers-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1200"
+           decoding="async" alt="Orange and pink wildflowers on a high ridge with cloud pouring through the valley below" loading="lazy">
+          <figcaption>Cloud moving through the valley at the upper boundary.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/mapacho-river-bank.webp"
+           srcset="/assets/r/reserve/mapacho-river-bank-320w.webp 320w, /assets/r/reserve/mapacho-river-bank-480w.webp 480w, /assets/r/reserve/mapacho-river-bank-640w.webp 640w, /assets/r/reserve/mapacho-river-bank-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1069"
+           decoding="async" alt="A group gathered on the boulders at the edge of the fast-flowing Mapacho River" loading="lazy">
+          <figcaption>Down at the river, 1,800&nbsp;m.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/charango-overlook.webp"
+           srcset="/assets/r/reserve/charango-overlook-320w.webp 320w, /assets/r/reserve/charango-overlook-480w.webp 480w, /assets/r/reserve/charango-overlook-640w.webp 640w, /assets/r/reserve/charango-overlook-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1066"
+           decoding="async" alt="A man playing a charango on a wooden platform built out over the valley" loading="lazy">
+          <figcaption>The overlook platform above the valley.</figcaption>
+        </figure>
+
+        <figure class="rs-shot">
+          <img src="/assets/reserve/meditation-overlook.webp"
+           srcset="/assets/r/reserve/meditation-overlook-320w.webp 320w, /assets/r/reserve/meditation-overlook-480w.webp 480w, /assets/r/reserve/meditation-overlook-640w.webp 640w, /assets/r/reserve/meditation-overlook-800w.webp 800w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 384px"
+           width="1600"
+           height="1069"
+           decoding="async" alt="A woman sitting in meditation on a hillside clearing above the forested valley" loading="lazy">
+          <figcaption>Sitting above the valley in the early sun.</figcaption>
+        </figure>
+
+      </div>
+
+      <p class="rs-credit">River beach photograph by Katia Alferova.</p>
+    </div>
+  </section>
+
+  <!-- ===== Living on the land ===== -->
+  <section class="pt-sec rs-white" id="living">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>A closed-loop laboratory</strong></h2>
+        <p>Twenty weather-proof structures are distributed across the mountain&rsquo;s climate zones, integrated into the terrain without clear-cutting. What runs them is the point.</p>
+      </div>
+
+      <div class="rs-tiles">
+        <div class="rs-tile">
+          <h3>Energy &amp; connectivity</h3>
+          <p>Mains 220V electricity from installed solar arrays, paired with fully functional satellite internet &mdash; remote, but not cut off.</p>
+        </div>
+        <div class="rs-tile">
+          <h3>Water &amp; heat</h3>
+          <p>Gravity-fed passive solar showers, heated by 100-metre black hose coils set in corrugated acrylic niches to maximise solar gain.</p>
+        </div>
+        <div class="rs-tile">
+          <h3>Sanitation</h3>
+          <p>High-capacity four-chamber composting toilets. Chambers rotate every twelve months, turning humanure into rich, odourless soil.</p>
+        </div>
+        <div class="rs-tile">
+          <h3>Soil generation</h3>
+          <p>Dedicated composting bins feed the orchards, which range from peaches and figs to passion fruit and mandarins.</p>
+        </div>
+      </div>
+
+      <div class="rs-split">
+        <div class="pt-prose">
+          <p>The basecamp at 2,400&nbsp;m holds the communal spaces, the main house, the harvest house, the carpenter&rsquo;s balcony and a fully restored <strong>hundred-year-old chapel</strong>, rebuilt to honour its original design. Four residential houses with kitchens sit in the upper gardens near the village of Ichiu &mdash; one of them directly next door to the local children&rsquo;s school. The lower gardens at the river are a future build site with real micro-hydro potential.</p>
+          <p>The constraints are honest ones. Remote access limits heavy machinery and demands local materials and resilient emergency planning; the extreme slopes rule out large earthworks and dictate a light-touch architecture; and intense seasonal rainfall means any new trail or hydro infrastructure needs meticulous surface-water management and geotechnical verification first.</p>
+        </div>
+        <div class="rs-split-media">
+          <img src="/assets/reserve/food-forest-terraces.webp"
+           srcset="/assets/r/reserve/food-forest-terraces-320w.webp 320w, /assets/r/reserve/food-forest-terraces-480w.webp 480w, /assets/r/reserve/food-forest-terraces-640w.webp 640w, /assets/r/reserve/food-forest-terraces-800w.webp 800w, /assets/r/reserve/food-forest-terraces-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="1200"
+           decoding="async" alt="A worker carrying a log along a planted terrace in the reserve&rsquo;s food forest" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== The atlas ===== -->
+  <section class="pt-sec rs-plum" id="atlas">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>The site atlas</strong></h2>
+        <p>A fifteen-part orientation to the reserve as a living system &mdash; landform, water, ecology and regenerative stewardship &mdash; prepared to give collaborators, researchers and designers a shared baseline before anyone proposes anything.</p>
+      </div>
+
+      <div class="rs-atlas">
+        <div class="rs-atlas-media">
+          <a class="rs-atlas-cover" href="/assets/docs/paititi-ecological-atlas.pdf" target="_blank" rel="noopener">
+            <img src="/assets/reserve/atlas-cover.webp"
+           srcset="/assets/r/reserve/atlas-cover-320w.webp 320w, /assets/r/reserve/atlas-cover-480w.webp 480w, /assets/r/reserve/atlas-cover-640w.webp 640w, /assets/r/reserve/atlas-cover-800w.webp 800w, /assets/r/reserve/atlas-cover-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 560px, 586px"
+           width="1400"
+           height="781"
+           decoding="async" alt="Cover of the Paititi site atlas: a contour and watershed map of the reserve titled &ldquo;The Paititi Project: A Holistic Site Overview&rdquo;" loading="lazy">
+          </a>
+        </div>
+        <div class="pt-prose">
+          <p>It reads the site through the <em>Scale of Permanence</em> &mdash; putting the immovable forces of climate, topography and water ahead of human infrastructure, so that what gets built follows the land instead of fighting it.</p>
+          <ul class="rs-contents">
+            <li>Location, boundaries and the 1,516-hectare landholding</li>
+            <li>Terrain, relief and the microclimates the folds create</li>
+            <li>Hydrology, drainage density and the seasonal climate cycle</li>
+            <li>Vertical wildlife corridors and the genetic bridge to Manu</li>
+            <li>Structures, off-grid systems and agroforestry by elevation</li>
+            <li>Constraints, community relations, and next steps</li>
+          </ul>
+          <a class="pt-btn pt-btn-light rs-dl" href="/assets/docs/paititi-ecological-atlas.pdf" target="_blank" rel="noopener">Download the atlas (PDF)</a>
+          <p class="rs-meta">15 pages &middot; 2.3&nbsp;MB &middot; opens in a new tab</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stewardship ===== -->
+  <section class="pt-sec rs-white" id="stewardship">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>Stewards, not landowners</strong></h2>
+      </div>
+
+      <div class="rs-split">
+        <div class="pt-prose">
+          <p>The property shares a physical and social border with the village of <strong>Ichiu</strong>, and the reserve&rsquo;s structures sit immediately adjacent to the local children&rsquo;s school. That proximity sets the terms: the Institute operates not merely as a landholder but as an integrated steward supporting local ecological and cultural integrity.</p>
+          <p>The reserve is both <strong>pantry and classroom</strong>. As pantry: food forests, seed nurseries and demonstration plots grow organic food and medicinal plants for community kitchens, the school and local markets. As classroom: the land itself is the curriculum &mdash; youth capstones and farmer trainings run on its plots, and elders teach beside master gardeners.</p>
+          <p>Because it works in one place, it can be replicated by other communities in Peru and beyond &mdash; always Indigenous-led, locally adapted, and paced by elders&rsquo; consent.</p>
+        </div>
+        <div class="rs-split-media">
+          <img src="/assets/reserve/pack-horses-trail.webp"
+           srcset="/assets/r/reserve/pack-horses-trail-320w.webp 320w, /assets/r/reserve/pack-horses-trail-480w.webp 480w, /assets/r/reserve/pack-horses-trail-640w.webp 640w, /assets/r/reserve/pack-horses-trail-800w.webp 800w, /assets/r/reserve/pack-horses-trail-1080w.webp 1080w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 414px, 572px"
+           width="1600"
+           height="758"
+           decoding="async" alt="Pack horses and walkers on a flower-lined trail between the reserve and the neighbouring village" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Closing ===== -->
+  <section class="pt-sec rs-band" id="support">
+    <div class="pt-sec-bg"></div>
+    <div class="rs-in">
+      <div class="rs-head">
+        <h2><strong>A living blueprint</strong></h2>
+        <p>What the next decade of stewardship is for.</p>
+      </div>
+
+      <div class="rs-triad">
+        <div class="rs-pillar">
+          <h3>Protect</h3>
+          <p>Absolute conservation of the headwaters, the steep slopes and the vertical forest corridors that serve the Manu Reserve buffer.</p>
+        </div>
+        <div class="rs-pillar">
+          <h3>Regenerate</h3>
+          <p>Expanding closed-loop agroforestry and off-grid living systems as a working laboratory for resilient human habitation.</p>
+        </div>
+        <div class="rs-pillar">
+          <h3>Educate</h3>
+          <p>Collaborating with researchers, designers and local partners to study and document this unique ecological interface.</p>
+        </div>
+      </div>
+
+      <div class="rs-cta">
+        <a class="pt-btn" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support this work</a>
+        <a class="pt-btn pt-btn-light" href="/initiatives">Back to Our Living Vision</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<dc-import name="SiteFooter"></dc-import>
+</div>
+</x-dc>
+</body>
+</html>
