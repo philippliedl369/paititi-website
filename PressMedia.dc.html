@@ -163,7 +163,9 @@
   /* ---- Coverage -----------------------------------------------------------
      Rows, not cards. An article, a magazine interview and a podcast episode
      are the same kind of object here — someone outside the Institute wrote or
-     recorded something — and a row carries the publication, the date and the
+     recorded something, or chose to publish something of Roman's, in which
+     case the date line says "Featured article" rather than letting it pass
+     as reporting — and a row carries the publication, the date and the
      headline without needing a picture we would have to borrow from our own
      photo library to fill. */
   .pm-cover{--pt-bg:#fff;padding:88px 0 96px}
@@ -214,6 +216,27 @@
   .pt-page main .pm-trans p{font-weight:300;font-size:16.5px;line-height:1.72;margin:0}
   .pt-page main .pm-trans p + p{margin-top:14px}
   .pt-page main .pm-trans-note{font-size:14.3px;color:rgba(33,4,22,.62);margin-top:20px}
+
+  /* ---- On camera ----------------------------------------------------------
+     A filmed interview is watched, not clicked away to, so like the print
+     clipping it gets a strip of its own under the list: the player beside a
+     line of context, with a row in the list above pointing down to it. */
+  .pm-vid{margin-top:56px}
+  /* Cards on the lilac of the clipping, two across, so six players take the
+     height of three rather than six. Each card is the player on top and the
+     record underneath; the links row sits at the foot whatever the copy. */
+  .pm-vid-grid{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .pm-vid-card{
+    display:flex;flex-direction:column;background:#F1EAF6;border-radius:32px 0;overflow:hidden;
+    box-shadow:0 8px 24px rgba(33,4,22,.1);
+  }
+  .pm-vid-card .pt-embed{flex:none;background:#2A1736}
+  .pm-vid-body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .pt-page main .pm-vid-body h3{font-family:var(--font-display);font-weight:400;
+    font-size:24px;line-height:1.28;letter-spacing:normal;color:#584364;margin:0}
+  .pt-page main .pm-vid-body p{font-weight:300;font-size:16px;line-height:1.72;margin:0}
+  .pm-vid-links{margin-top:auto;padding-top:8px;display:flex;flex-wrap:wrap;gap:8px 22px}
+  .pm-vid-links a{font-size:15.5px;font-weight:700;color:#584364}
 
   /* ---- For journalists ---------------------------------------------------- */
   .pm-press{--pt-bg:#584364;color:#fff;padding:84px 0 96px}
@@ -270,7 +293,7 @@
     .pm-feature .pt-embed{height:auto}
     .pm-grid{grid-template-columns:1fr}
     .pm-item{grid-template-columns:1fr;gap:6px}
-    .pm-clip-row{grid-template-columns:1fr}
+    .pm-clip-row,.pm-vid-grid{grid-template-columns:1fr}
     .pm-cols{grid-template-columns:1fr;gap:44px}
   }
   @media (max-width:640px){
@@ -300,6 +323,8 @@
     .pm-item{padding:24px 4px}
     .pm-item:hover{padding-left:10px;padding-right:10px}
     .pt-page main .pm-trans h3{font-size:26px}
+    .pm-vid-card{border-radius:24px 0}
+    .pm-vid-body{padding:22px 22px 24px}
   }
 
   /* The footer wave rises into the section above it, so it has to be that
@@ -324,7 +349,7 @@
 
     <div class="pm-hero-in">
       <h1><strong>Press &amp; Media</strong></h1>
-      <p class="pm-hero-lede">The films, articles and conversations about this work made by people outside it &mdash; and everything a journalist needs to write about the Institute, the reserve and the communities we work alongside.</p>
+      <p class="pm-hero-lede">The films, articles and conversations about this work made by people outside it, the writing Roman has published elsewhere &mdash; and everything a journalist needs to write about the Institute, the reserve and the communities we work alongside.</p>
       <div class="pm-jump">
         <a href="#films">Watch the films <span aria-hidden="true">&darr;</span></a>
         <a href="#coverage">In the press <span aria-hidden="true">&darr;</span></a>
@@ -389,7 +414,7 @@
           <div class="pm-card-body">
             <span class="pm-kicker">Documentary &middot; 2010</span>
             <h3>The Sacred Science</h3>
-            <p>The award-winning film that first brought this work to a wider audience, following eight people with chronic illness who travel to the Amazon to work with Indigenous healers. Roman Hanis appears throughout, and the Institute&rsquo;s early clinical work is part of what it documents.</p>
+            <p>The award-winning film that first brought this work to a wider audience, following eight people with chronic illness who travel to the Amazon to work with Indigenous healers. Filmed in 2010 at the Institute&rsquo;s first healing centre in the Amazon, before the reserve; Roman Hanis is the film&rsquo;s lead healer.</p>
             <span class="pm-go">Watch it <span aria-hidden="true">&#8599;</span></span>
           </div>
         </a>
@@ -405,12 +430,24 @@
 
       <p class="pm-kicker">Written &amp; recorded elsewhere</p>
       <h2><strong>In the press</strong></h2>
-      <p class="pm-lead">Coverage of the Institute, the Yahua Ancestral School and <em>Beyond Ayahuasca</em>, newest first. Everything here links to the original; nothing has been edited or excerpted beyond a line of context.</p>
+      <p class="pm-lead">Coverage of the Institute and its work, from the years after the first film to <em>Beyond Ayahuasca</em>, newest first. Everything here links to the original; nothing has been edited or excerpted beyond a line of context. Where a piece was written by Roman rather than about him, it is labelled a featured article.</p>
 
       <!-- Newest first. To add an item, copy one <a class="pm-item"> block:
            publication in .pm-kicker, date in .pm-date, headline in the h3, one
            sentence of context in the p. Keep the order by date. -->
       <div class="pm-list">
+
+        <a class="pm-item" href="#video-san-qing">
+          <div class="pm-source">
+            <span class="pm-kicker">Consciousness of The Way 126</span>
+            <span class="pm-date">Filmed interview, episode 475 with San Qing &middot; 11 June 2026</span>
+          </div>
+          <div>
+            <h3>Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis</h3>
+            <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school and cultural-heritage work the Institute stewards. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
 
         <a class="pm-item" href="https://bleav.com/shows/the-white-witch-podcast/episodes/beyond-ayahuasca-with-roman-hanis/" target="_blank" rel="noopener">
           <div class="pm-source">
@@ -421,6 +458,82 @@
             <h3>Beyond Ayahuasca with Roman Hanis</h3>
             <p>A conversation that stays with the unglamorous part: integration, nervous-system safety and what happens after the ceremony rather than during it.</p>
             <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <!-- Filmed, so the row points down to the player below the list. -->
+        <a class="pm-item" href="#video-conscious-collective">
+          <div class="pm-source">
+            <span class="pm-kicker">Conscious Collective</span>
+            <span class="pm-date">Filmed interview by Joseph P. Kauffman &middot; 8 February 2026</span>
+          </div>
+          <div>
+            <h3>Healing, Indigenous Wisdom, and the Authentic Spiritual Path</h3>
+            <p>Fifty-four minutes on the difference between genuine transformation and spiritual ego &mdash; why awakening is less about peak experiences than about returning to the heart. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="#video-liminal">
+          <div class="pm-source">
+            <span class="pm-kicker">LIMINAL NEWS with Daniel Pinchbeck</span>
+            <span class="pm-date">Filmed interview &middot; 12 November 2025</span>
+          </div>
+          <div>
+            <h3>Roman Hanis | Beyond Ayahuasca: Indigenous Wisdom, Healing &amp; the Forgotten Heart</h3>
+            <p>Daniel Pinchbeck with the author of <em>Beyond Ayahuasca</em> and co-founder of the Institute, on two decades of apprenticeship with Amazonian and Andean elders, sacred reciprocity, and what a civilisation forgets when it forgets its heart. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="#video-hora-ambiental">
+          <div class="pm-source">
+            <span class="pm-kicker">La Hora Ambiental, Mexico</span>
+            <span class="pm-date">Live interview, in Spanish &middot; 31 October 2025</span>
+          </div>
+          <div>
+            <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
+            <p>Part two of Roman&rsquo;s interview on the Mexican Network of Environmental Journalists&rsquo; weekly stream, on ecological preservation and Indigenous knowledge in the Peruvian Amazon. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://creators.spotify.com/pod/profile/yasha12/episodes/Roman-Hanis-International-Bestselling-Author--Paititi-Institute-Co-Founder---Amazonian-Ancestral-Knowledge-e39e1gf" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The InterWorld Podcast</span>
+            <span class="pm-date">Interview by Yasha &middot; 12 October 2025</span>
+          </div>
+          <div>
+            <h3>Roman Hanis: International Bestselling Author &amp; Paititi Institute Co-Founder &mdash; Amazonian Ancestral Knowledge</h3>
+            <p>From a serious case of Crohn&rsquo;s disease to remission in the rainforest, and from there to twenty years with Amazonian and Andean elders and the 4,000 acres the Institute stewards beside Manu National Park.</p>
+            <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="#video-hora-ambiental">
+          <div class="pm-source">
+            <span class="pm-kicker">La Hora Ambiental, Mexico</span>
+            <span class="pm-date">Live interview, in Spanish &middot; 10 October 2025</span>
+          </div>
+          <div>
+            <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
+            <p>Part one: Roman&rsquo;s first appearance on the stream, three weeks before the second. Linked from the player below.</p>
+            <span class="pm-go">See below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+        <!-- Written by Roman rather than about him, so it is labelled a
+             featured article, not coverage. It stays in the list because it
+             is still an outside publication choosing to run the work. -->
+        <a class="pm-item" href="https://grahamhancock.com/hanisr1/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Graham Hancock</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 12 September 2025</span>
+          </div>
+          <div>
+            <h3>Sacred Activism and the Memory of a Forgotten Rainforest Civilization</h3>
+            <p>Roman&rsquo;s own essay for Graham Hancock&rsquo;s site: the memory of an Amazonian civilisation carried in the traditions he has apprenticed in since 2001, and what it asks of the present. Contributed rather than reported, and labelled as such.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
           </div>
         </a>
 
@@ -462,6 +575,20 @@
           </div>
         </a>
 
+        <!-- The show's own site lists the episode but has no page for it, so
+             this is the one row that has to link to Spotify. -->
+        <a class="pm-item" href="https://open.spotify.com/episode/27E2heKvlJDpVNO8LCEU9C" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Heart Mountain Wellness</span>
+            <span class="pm-date">Interview by Joanna Wiley &middot; 22 May 2025</span>
+          </div>
+          <div>
+            <h3>Beyond Ayahuasca &mdash; with Roman Hanis</h3>
+            <p>On the book, ancestral wisdom and integration: what it means to remember who we are, and what Indigenous medicine traditions ask of the person who comes to them.</p>
+            <span class="pm-go">Listen on Spotify <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
         <a class="pm-item" href="https://jasongrechanik.com/podcast/roman-hanis-25" target="_blank" rel="noopener">
           <div class="pm-source">
             <span class="pm-kicker">The Universe Within Podcast</span>
@@ -474,6 +601,336 @@
           </div>
         </a>
 
+        <a class="pm-item" href="#video-permaculture">
+          <div class="pm-source">
+            <span class="pm-kicker">Sustainable Kashi</span>
+            <span class="pm-date">Online class, filmed &middot; 1 May 2021</span>
+          </div>
+          <div>
+            <h3>Inner Landscapes of Permaculture</h3>
+            <p>Free Permaculture Class #47: permaculture&rsquo;s principles turned inward, on the awakening of natural human potential. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://jasongrechanik.com/podcast/roman-hanis" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Universe Within Podcast</span>
+            <span class="pm-date">Episode 44 with Jason Grechanik &middot; 14 April 2021</span>
+          </div>
+          <div>
+            <h3>Paititi Institute, Sacred Science &amp; Medicines, Esoteric Knowledge &amp; Healing</h3>
+            <p>Roman&rsquo;s first conversation with Jason Grechanik, four years before the book: the Institute, the years of apprenticeship behind it, and the traditions it works within.</p>
+            <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.crazywisdomjournal.com/thecrazywisdomjournalonline/2019/4/26/from-ann-arbor-to-the-peruvian-rainforest-the-ancient-mystery-of-being-practical" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Crazy Wisdom Community Journal, Ann Arbor</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; Issue 72, May 2019</span>
+          </div>
+          <div>
+            <h3>From Ann Arbor to the Peruvian Rainforest: The Ancient Mystery of Being Practical</h3>
+            <p>Written for the community journal of the Ann Arbor bookshop where the Institute&rsquo;s story partly began: why ancestral knowledge only counts once it is lived in ordinary days, and how 4,000 acres beside Manu National Park came into the Institute&rsquo;s care.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <!-- The original post on sutra.co is gone and was never archived; the
+             Listen Notes page still carries the episode's audio and its
+             description, so the row says so instead of pretending. -->
+        <a class="pm-item" href="https://www.listennotes.com/podcasts/whats-possible/roman-hanis-on-indigenous-W5n7F4MZ0RO/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">What&rsquo;s Possible Podcast</span>
+            <span class="pm-date">Interview by Lorenz Sell &middot; 9 July 2018</span>
+          </div>
+          <div>
+            <h3>Roman Hanis &mdash; On Indigenous Wisdom in Practice</h3>
+            <p>On holding a safe space and meeting conflict in community, and a line Roman offers about his own path: &ldquo;everything is perfect, with infinite room for improvement.&rdquo; The original page is gone; this opens an archived listing with the audio.</p>
+            <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://happiness.info/ep-56-roman-hanis/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Artificial Happiness</span>
+            <span class="pm-date">Interview by Duncan CJ &middot; 9 November 2015</span>
+          </div>
+          <div>
+            <h3>Episode 56: Roman Hanis</h3>
+            <p>Twenty-six minutes on the illness that took Roman to the Amazon in 2002 and the path from patient to curandero, pledged by the Huitoto in 2004.</p>
+            <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.elephantjournal.com/2015/08/the-role-of-privilege-in-global-poverty/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Elephant Journal</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 25 August 2015</span>
+          </div>
+          <div>
+            <h3>The Role of Privilege in Global Poverty</h3>
+            <p>Why handouts entrench the poverty they mean to relieve, and what staying long enough to be useful looked like with the Amazonian communities Roman first visited in 2001.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.elephantjournal.com/2015/07/transcending-the-wounds-of-conquest-colonization/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Elephant Journal</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 8 July 2015</span>
+          </div>
+          <div>
+            <h3>Transcending the Wounds of Conquest &amp; Colonization</h3>
+            <p>What Huitoto, Yahua, Andean, Lakota and Tibetan teachers have in common on the question of old wounds: that they close through forgiveness, not through hatred.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/lost-in-translation-communications-from-spirit/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 5 July 2015</span>
+          </div>
+          <div>
+            <h3>Lost in Translation: Communications From Spirit</h3>
+            <p>The last of the five-part series: on how easily what a ceremony shows is misread, and what reading it honestly asks of the person who saw it.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/the-shamanic-symptomatic-dance/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 12 April 2015</span>
+          </div>
+          <div>
+            <h3>The Shamanic Symptomatic Dance</h3>
+            <p>Movement as a conduit for healing in the Amazon and the Andes, told through one retreat participant who danced a physical symptom until its emotional root showed itself.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/evolutionary-keys-of-shamanic-healing-the-dreaming-wave/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 6 March 2015</span>
+          </div>
+          <div>
+            <h3>Shamanic Healing Keys: The Dreaming Wave</h3>
+            <p>Dreams as a healing language shared across shamanic traditions, opening with the illness Roman had been told was incurable.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/evolutionary-keys-of-shamanic-healing-sacred-breathwork/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 20 February 2015</span>
+          </div>
+          <div>
+            <h3>Shamanic Healing Keys: Sacred Breathwork</h3>
+            <p>How Amazonian and Andean traditions use conscious breathing to work through trauma and to bridge the physical and the spiritual.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/shamanic-keys-to-your-unlimited-human-potential/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Featured article by Roman Hanis &middot; 12 February 2015</span>
+          </div>
+          <div>
+            <h3>Shamanic Keys to Your Unlimited Human Potential</h3>
+            <p>Opens a five-part series for the film&rsquo;s own site, five years after <em>The Sacred Science</em> was filmed at the Institute&rsquo;s healing centre: the plants are only tools, and it is the lineage practice around them that heals &mdash; or fails to.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://www.thesacredscience.com/a-shamans-perspective-on-health-and-purity-of-heart" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">The Sacred Science</span>
+            <span class="pm-date">Article by Nick Polizzi &middot; 12 December 2013</span>
+          </div>
+          <div>
+            <h3>A Shaman&rsquo;s Perspective on Health and Purity of Heart</h3>
+            <p>The director of <em>The Sacred Science</em> on how a healer stays well while treating others, drawing on what Roman, the film&rsquo;s lead healer, taught him about not taking on a patient&rsquo;s illness.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://whyshamanismnow.com/2013/06/healing-in-the-amazon-with-roman-hanis-part-one/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">Why Shamanism Now?</span>
+            <span class="pm-date">Radio interview by Christina Pratt &middot; 21 June 2013</span>
+          </div>
+          <div>
+            <h3>Healing in the Amazon with Roman Hanis: Part One</h3>
+            <p>An hour with the shaman and teacher Christina Pratt on Amazonian plant medicine as a system of healing, and on the Institute&rsquo;s team of healers and permaculturists building bridges between cultures. The earliest interview here; no second part followed.</p>
+            <span class="pm-go">Listen <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <!-- The three MAPS rows and the Horizons talk are the Institute's
+             earliest external record. The research wording is the sources'
+             own — a collaboration begun, a pilot study being developed — and
+             must stay that way: nothing here was a completed trial. -->
+        <a class="pm-item" href="https://maps.org/news/media/ayahuasca-track-sunday/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">MAPS &middot; Psychedelic Science 2013</span>
+            <span class="pm-date">Research reference &middot; Conference talk, 21 April 2013</span>
+          </div>
+          <div>
+            <h3>Ayahuasca for PTSD: Integrating Psychedelic Therapeutic Strategies for Neurotrauma into a Bioinformatics Framework</h3>
+            <p>Jessica L. Nielson and Julie D. Megler of UCSF present &ldquo;a pilot study currently being developed in collaboration with the Paititi Institute in Peru&rdquo; to collect outcome data from people with PTSD who had travelled for ayahuasca ceremonies. A study being designed, not a completed one.</p>
+            <span class="pm-go">Read the abstract <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://maps.org/2013/01/29/films/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">MAPS &middot; Psychedelic Science 2013</span>
+            <span class="pm-date">Screening and discussion &middot; 20 April 2013</span>
+          </div>
+          <div>
+            <h3>The Sacred Science &mdash; Film and Discussion with Roman Hanis and Cynthia Robinson</h3>
+            <p>The conference&rsquo;s film programme, Oakland: a screening followed by discussion with &ldquo;Roman Hanis and Cynthia Robinson of Paititi Institute where Sacred Science was filmed.&rdquo;</p>
+            <span class="pm-go">Read the programme <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <a class="pm-item" href="https://maps.org/news/bulletin/consideration-of-ayahuasca-for-the-treatment-of-posttraumatic-stress-disorder-2/" target="_blank" rel="noopener">
+          <div class="pm-source">
+            <span class="pm-kicker">MAPS Bulletin</span>
+            <span class="pm-date">Research reference &middot; Winter 2012, Vol. 22 No. 3</span>
+          </div>
+          <div>
+            <h3>Consideration of Ayahuasca for the Treatment of Posttraumatic Stress Disorder</h3>
+            <p>Nielson and Megler, in the MAPS annual report, describe a collaboration begun with &ldquo;the Paititi Institute near Iquitos, Peru&rdquo; to gather retrospective data as grounds for a possible observational study. The Institute&rsquo;s earliest citation in the research literature &mdash; a proposal, not a trial.</p>
+            <span class="pm-go">Read the article <span aria-hidden="true">&#8599;</span></span>
+          </div>
+        </a>
+
+        <!-- Filmed, so the row points down to the player below the list. The
+             conference's own pages are gone; the talk survives on its channel. -->
+        <a class="pm-item" href="#video-horizons">
+          <div class="pm-source">
+            <span class="pm-kicker">Horizons: Perspectives on Psychedelics, New York</span>
+            <span class="pm-date">Conference talk &middot; 13&ndash;14 October 2012</span>
+          </div>
+          <div>
+            <h3>Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies</h3>
+            <p>Roman, listed as Director of the Paititi Institute, Iquitos, on grassroots research into plant-medicine healing of physical illness &mdash; the Institute&rsquo;s first conference appearance on record. Plays below.</p>
+            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- ===== On camera =====
+           Filmed pieces embed here rather than linking out, on the same
+           youtube-nocookie player as the films: one card per video, newest
+           first, each with its own id. Every video also has a dated row in
+           the list above (href="#video-…") so it keeps its place in the
+           chronology; the row is the record, the card is the player. -->
+      <div class="pm-vid" id="video">
+        <p class="pm-kicker">On camera</p>
+        <div class="pm-vid-grid">
+
+          <div class="pm-vid-card" id="video-san-qing">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/LTLfi0Fwvq0" title="Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis (The Way 126 Experience with San Qing)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">Consciousness of The Way 126 &middot; 11 June 2026</span>
+              <h3>Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis</h3>
+              <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school the Institute stewards.</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=LTLfi0Fwvq0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+                <a href="https://consciousnessofthewaypodcast.buzzsprout.com/2207061/episodes/19331411-beyond-ayahuasca-indigenous-amazonian-wisdom-with-roman-hanis" target="_blank" rel="noopener">Episode page <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-vid-card" id="video-conscious-collective">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/bf4mJoXID-c" title="Healing, Indigenous Wisdom, and the Authentic Spiritual Path | Roman Hanis (Conscious Collective)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">Conscious Collective &middot; Episode 3 &middot; 8 February 2026</span>
+              <h3>Healing, Indigenous Wisdom, and the Authentic Spiritual Path</h3>
+              <p>Joseph P. Kauffman with Roman on coming to the Amazon for healing from Crohn&rsquo;s disease, on what the medicine, the forest and the lineages taught him about spirituality beyond concepts and identity &mdash; and on telling genuine transformation from spiritual ego.</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=bf4mJoXID-c" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-vid-card" id="video-liminal">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/y6QYJf5ok1s" title="Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis (LIMINAL NEWS)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">LIMINAL NEWS with Daniel Pinchbeck &middot; Recorded October 2025</span>
+              <h3>Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis</h3>
+              <p>How ayahuasca is an integral but not a central element of the traditions &mdash; a wider weave of myth, story and ceremony carrying healing into daily life. Released as a LIMINAL NEWS episode on 12 November 2025.</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=y6QYJf5ok1s" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+                <a href="https://open.spotify.com/episode/5kdu4pr4mMA1anBGPArXaS" target="_blank" rel="noopener">Listen on Spotify <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- A live stream; ?start= drops the viewer at Roman's segment. -->
+          <div class="pm-vid-card" id="video-hora-ambiental">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/dwAZPrVzMgU?start=2393" title="La Hora Ambiental, 31 October 2025 — Román Hanis on ecological preservation and Indigenous knowledge in the Peruvian Amazon (in Spanish)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">La Hora Ambiental, Mexico &middot; 10 and 31 October 2025 &middot; In Spanish</span>
+              <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
+              <p>Roman&rsquo;s two-part interview on the weekly environmental news stream of the Instituto Mexicano de Fauna, Flora y Sustentabilidad Social, Voluntarios Informados and the Mexican Network of Environmental Journalists, presented by Juan Jorge Avilés. The player holds part two and starts at his segment; part one is the stream of 10 October.</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=dwAZPrVzMgU&amp;t=2393s" target="_blank" rel="noopener">Part two on YouTube <span aria-hidden="true">&#8599;</span></a>
+                <a href="https://www.youtube.com/watch?v=REpOCxIpYzI" target="_blank" rel="noopener">Part one, 10 October <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-vid-card" id="video-permaculture">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/HKpJ8DmxDi0" title="Inner Landscapes of Permaculture — Roman Hanis, Sustainable Kashi Free Permaculture Class #47" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">Sustainable Kashi &middot; Free Permaculture Class #47 &middot; 1 May 2021</span>
+              <h3>Inner Landscapes of Permaculture</h3>
+              <p>An eighty-minute class on how permaculture principles apply to the awakening of natural human potential &mdash; the same principles by which ancient traditions thrived in hard conditions.</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=HKpJ8DmxDi0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- The conference's own upload is embedded because it is the
+               outside source; the Institute's copy of the same recording is
+               linked beside it. -->
+          <div class="pm-vid-card" id="video-horizons">
+            <div class="pt-embed">
+              <iframe src="https://www.youtube-nocookie.com/embed/Fv3Ap57YiyU" title="Roman Hanis at Horizons: Perspectives on Psychedelics, 2012 — Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="pm-vid-body">
+              <span class="pm-kicker">Horizons: Perspectives on Psychedelics &middot; New York &middot; October 2012</span>
+              <h3>Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies</h3>
+              <p>Roman&rsquo;s talk at the conference&rsquo;s sixth year, Judson Memorial Church, filmed and published by Horizons. The programme listed him as Director of the Paititi Institute, Iquitos, and described the work in his words: &ldquo;to implement the original, indigenous healing and spiritual practices of the sacred and medicinal plants as a viable healing alternative in the western society.&rdquo;</p>
+              <div class="pm-vid-links">
+                <a href="https://www.youtube.com/watch?v=Fv3Ap57YiyU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+                <a href="https://www.youtube.com/watch?v=ZpRtNeD5vQo" target="_blank" rel="noopener">The Institute&rsquo;s own upload <span aria-hidden="true">&#8599;</span></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
 
       <!-- ===== Print clippings =====
