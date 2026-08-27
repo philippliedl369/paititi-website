@@ -46,10 +46,16 @@
      /initiatives/yagua-… and carded on /discoverpaititi, which is not in the
      nav. Nobody arriving at the site could find it.
 
-     Order is deliberate. Film first (it is the thing most people will actually
-     watch), then coverage, then what a journalist needs. Coverage is one list
-     rather than separate article/interview/podcast grids: there are a handful
-     of items today, and four half-empty grids look worse than one honest list.
+     Order is deliberate, and it groups by what a visitor does rather than by
+     who published the thing: everything watchable first — the films made about
+     this work, then Roman on camera — then everything readable — the coverage
+     list, then the print scans — then what a journalist needs. Films and On
+     camera used to sit at opposite ends of the page with the whole coverage
+     list between them, which made two video sections read as unrelated; they
+     are neighbours now, and the distinction between them is stated rather than
+     implied. Coverage is one list rather than separate article/interview/
+     podcast grids: a row is a row, and four half-empty grids look worse than
+     one honest list.
 
      Like /discoverpaititi and unlike every transcribed page, nothing here uses
      the fluid engine — there is no measured original to match, so it is built
@@ -92,15 +98,34 @@
      documents for `color`. */
   .pt-page main .pm-hero h1{margin:0}
   .pt-page main .pm-hero-lede{max-width:720px;margin:20px auto 0;font-size:19.2px;opacity:.94}
-  .pm-jump{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:34px}
-  .pm-jump a{
-    display:inline-flex;align-items:center;gap:10px;
-    font-size:15.5px;font-weight:700;letter-spacing:.06em;color:#fff;
-    text-decoration:none;padding:13px 24px;border-radius:16px 0;
-    box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.8);
-    transition:background .2s ease;
-  }
-  .pm-jump a:hover{background:rgba(255,255,255,.14)}
+
+  /* ---- Sticky section nav --------------------------------------------------
+     The same component as /distance-healing and /initiatives, and it replaces
+     the row of jump pills that used to sit in the hero. Those pills were
+     wrong twice over: they named three of the five sections, so On camera and
+     In print had no way in at all, and they scrolled away after the first
+     screen — on a page this long (three films, six players, twenty-eight rows
+     of coverage, a scan and a translation) the index has to travel with the
+     reader.
+
+     Direct child of <main> so position:sticky holds for the whole scroll; the
+     top offset follows the retracting header (script below) on the header's
+     own transition curve, and z-index stays under the header's 50. The wave
+     seam into the hero belongs to the zero-height section right above the bar
+     — the bar itself must stay a plain rectangle, or content shows through the
+     wave gap while it is stuck. The active underline is the header nav's
+     active mark (inset box-shadow). */
+  .pm-navwave{--pt-bg:#F1EAF6}
+  .pm-subnav{position:sticky;top:var(--pm-nav-top,209px);z-index:40;background:#F1EAF6;
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    transition:top .3s cubic-bezier(.4,0,.2,1)}
+  .pm-subnav::-webkit-scrollbar{display:none}
+  .pm-subnav-in{display:flex;width:max-content;margin:0 auto;column-gap:38px;padding:0 24px}
+  .pm-subnav a{display:block;padding:17px 2px 15px;white-space:nowrap;
+    font-family:var(--font-display);font-size:19.2px;line-height:1.3;letter-spacing:normal;
+    color:#584364;text-decoration:none;transition:color .15s ease}
+  .pm-subnav a:hover{color:#210416}
+  .pm-subnav a[data-active="1"]{color:#210416;box-shadow:inset 0 -2px 0 #584364}
 
   /* ---- Shared section furniture ------------------------------------------- */
   .pm-in{max-width:1324px;margin:0 auto;padding:0 58px}
@@ -108,12 +133,23 @@
   .pm-kicker{font-size:12.5px;font-weight:700;letter-spacing:.16em;
     text-transform:uppercase;color:#6B5378;line-height:1.4}
 
+  /* Five sections, alternating lilac and white down to the plum footer band,
+     so each one reads as its own thing rather than as a strip inside the one
+     above it. On camera sits on white and its cards on lilac; In the press
+     sits on lilac and its rows lift to white on hover — the same two colours
+     swapping roles, which is what keeps the two halves of the page from
+     looking like four different pages. */
+  .pm-films{--pt-bg:#F1EAF6;padding:92px 0 100px}
+  .pm-oncam{--pt-bg:#fff;padding:88px 0 96px}
+  .pm-print{--pt-bg:#fff;padding:88px 0 96px}
+  .pt-page main .pm-films h2,
+  .pt-page main .pm-oncam h2,
+  .pt-page main .pm-print h2{color:#584364}
+
   /* ---- Films --------------------------------------------------------------
      The current documentary is the feature: a real player rather than a card
      that sends people off-site, because "watch it here" is the whole point of
      giving the film a home. The two older films sit below it as cards. */
-  .pm-films{--pt-bg:#F1EAF6;padding:92px 0 100px}
-  .pt-page main .pm-films h2{color:#584364}
 
   .pm-feature{
     margin-top:44px;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);
@@ -168,7 +204,7 @@
      as reporting — and a row carries the publication, the date and the
      headline without needing a picture we would have to borrow from our own
      photo library to fill. */
-  .pm-cover{--pt-bg:#fff;padding:88px 0 96px}
+  .pm-cover{--pt-bg:#F1EAF6;padding:88px 0 96px}
   .pt-page main .pm-cover h2{color:#584364}
 
   .pm-list{margin-top:40px;border-top:1px solid rgba(88,67,100,.24)}
@@ -178,7 +214,9 @@
     text-decoration:none;color:inherit;
     transition:background .2s ease,padding .2s ease;
   }
-  .pm-item:hover{background:#F7F2FA;padding-left:18px;padding-right:18px}
+  /* White, not a lilac tint: the list sits on lilac now, so the row has to
+     lift out of the ground rather than settle a shade deeper into it. */
+  .pm-item:hover{background:#fff;padding-left:18px;padding-right:18px}
   .pm-source{display:flex;flex-direction:column;gap:6px}
   .pm-date{font-size:14.3px;color:rgba(33,4,22,.62)}
   .pt-page main .pm-item h3{font-family:var(--font-display);font-weight:400;
@@ -186,20 +224,21 @@
   .pt-page main .pm-item p{font-weight:300;font-size:16.5px;line-height:1.72;margin:10px 0 0}
   .pm-item .pm-go{margin-top:12px;padding-top:0;display:block}
 
-  /* ---- Clippings ----------------------------------------------------------
-     Print coverage arrives as a scan, not as a URL, so it gets its own strip:
-     the scan itself at a readable size, opening to the full-resolution file.
+  /* ---- In print -----------------------------------------------------------
+     Print coverage arrives as a scan, not as a URL, so it gets its own
+     section: the scan itself at a readable size, opening to the
+     full-resolution file.
 
      On this side of the site the clipping is in Spanish, so a scan alone
      would be a picture of an article rather than an article. Each clipping
      therefore sits beside a full English translation — ours, and labelled
      as ours — with the scan on the left as the primary source. Below 1180
      the two stack, scan first. */
-  .pm-clips{margin-top:56px}
   .pm-clip-row{
-    margin-top:24px;display:grid;gap:28px 52px;align-items:start;
+    margin-top:40px;display:grid;gap:28px 52px;align-items:start;
     grid-template-columns:minmax(0,460px) minmax(0,1fr);
   }
+  .pm-clip-row + .pm-clip-row{margin-top:52px}
   .pm-clip{margin:0;max-width:760px}
   .pm-clip a{display:block;background:#F1EAF6;border-radius:24px 0;overflow:hidden;
     box-shadow:0 8px 24px rgba(33,4,22,.1);transition:transform .25s ease}
@@ -218,14 +257,19 @@
   .pt-page main .pm-trans-note{font-size:14.3px;color:rgba(33,4,22,.62);margin-top:20px}
 
   /* ---- On camera ----------------------------------------------------------
-     A filmed interview is watched, not clicked away to, so like the print
-     clipping it gets a strip of its own under the list: the player beside a
-     line of context, with a row in the list above pointing down to it. */
-  .pm-vid{margin-top:56px}
-  /* Cards on the lilac of the clipping, two across, so six players take the
+     A filmed interview is watched, not clicked away to, so it gets a section
+     of its own rather than a link out: the player beside a line of context,
+     with a dated row in the coverage list below pointing back up to it.
+
+     It sits next to Films because both are things you press play on, and the
+     line between them is about who made the thing, not about the format: a
+     film in the section above was made about this work, a video here is Roman
+     in someone else's conversation.
+
+     Lilac cards on the white ground, two across, so six players take the
      height of three rather than six. Each card is the player on top and the
      record underneath; the links row sits at the foot whatever the copy. */
-  .pm-vid-grid{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+  .pm-vid-grid{margin-top:40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
   .pm-vid-card{
     display:flex;flex-direction:column;background:#F1EAF6;border-radius:32px 0;overflow:hidden;
     box-shadow:0 8px 24px rgba(33,4,22,.1);
@@ -285,9 +329,11 @@
     .pt-page .pm-hero{min-height:700px;--pt-bg-pos:60% 0%}
     .pm-hero-in{padding:0 24px}
 
+    .pm-subnav-in{column-gap:24px}
+    .pm-subnav a{font-size:17px;padding:14px 2px 12px}
+
     .pm-in{padding:0 24px}
-    .pm-films{padding:64px 0 72px}
-    .pm-cover,.pm-press{padding:64px 0 72px}
+    .pm-films,.pm-oncam,.pm-cover,.pm-print,.pm-press{padding:64px 0 72px}
     /* A 1fr player beside a 1fr column of copy is a 300px video. Stack. */
     .pm-feature{grid-template-columns:1fr;margin-top:34px}
     .pm-feature .pt-embed{height:auto}
@@ -312,8 +358,9 @@
     }
     .pm-hero-in{padding:calc(var(--pt-header-h-live,var(--pt-header-h,124px)) + 75vw + 34px) 20px 46px}
     .pm-in{padding:0 20px}
-    .pm-films{padding:48px 0 56px}
-    .pm-cover,.pm-press{padding:48px 0 56px}
+    .pm-films,.pm-oncam,.pm-cover,.pm-print,.pm-press{padding:48px 0 56px}
+    .pm-subnav-in{column-gap:20px;padding:0 20px}
+    .pm-subnav a{font-size:16px;padding:13px 2px 11px}
     .pm-feature,.pm-card{border-radius:32px 0}
     .pm-feature-body{padding:28px 24px 30px}
     .pt-page main .pm-feature-body h3{font-size:27px}
@@ -350,22 +397,34 @@
     <div class="pm-hero-in">
       <h1><strong>Press &amp; Media</strong></h1>
       <p class="pm-hero-lede">The films, articles and conversations about this work made by people outside it, the writing Roman has published elsewhere &mdash; and everything a journalist needs to write about the Institute, the reserve and the communities we work alongside.</p>
-      <div class="pm-jump">
-        <a href="#films">Watch the films <span aria-hidden="true">&darr;</span></a>
-        <a href="#coverage">In the press <span aria-hidden="true">&darr;</span></a>
-        <a href="#enquiries">Media enquiries <span aria-hidden="true">&darr;</span></a>
-      </div>
     </div>
   </section>
 
+  <!-- ===== Sticky section nav =====
+       Replaces the three jump pills that used to sit in the hero, and names
+       all five sections rather than three of them. The wave seam belongs to
+       the zero-height section above the bar, so Films below it runs flat.
+       Every id is always in the DOM, so anchor-scroll.js handles direct visits
+       (/press-media#on-camera) as well as in-page jumps. -->
+  <section class="pt-sec pm-navwave"><div class="pt-sec-bg"></div></section>
+  <nav class="pm-subnav" id="pm-subnav" aria-label="Press and media sections">
+    <div class="pm-subnav-in">
+      <a href="#films">Films</a>
+      <a href="#on-camera">On camera</a>
+      <a href="#coverage">In the press</a>
+      <a href="#print">In print</a>
+      <a href="#enquiries">Media enquiries</a>
+    </div>
+  </nav>
+
   <!-- ===== Films ===== -->
-  <section class="pt-sec pm-films" id="films" aria-label="Films">
+  <section class="pt-sec pt-sec-flat pm-films" id="films" aria-label="Films">
     <div class="pt-sec-bg"></div>
     <div class="pm-in">
 
-      <p class="pm-kicker">Watch</p>
+      <p class="pm-kicker">Watch &middot; Films about this work</p>
       <h2><strong>Films</strong></h2>
-      <p class="pm-lead">Three films span twenty years of this work: the one that first brought it to a wider audience, the one about the school being built now, and the current documentary, shot at the reserve and with the communities themselves.</p>
+      <p class="pm-lead">Three films span twenty years of this work, newest first: the current documentary, shot at the reserve and with the communities themselves; the short about the school being built now; and the one that first brought this work to a wider audience. Roman&rsquo;s own filmed conversations and talks are in the section below.</p>
 
       <!-- The feature plays in place. youtube-nocookie, like every other embed
            on the site, so a visitor is not tracked for watching it. -->
@@ -423,6 +482,119 @@
     </div>
   </section>
 
+  <!-- ===== On camera =====
+       Filmed pieces embed here rather than linking out, on the same
+       youtube-nocookie player as the films above: one card per video, newest
+       first, each with its own id. Every video also has a dated row in the
+       coverage list below (href="#video-…") so it keeps its place in the
+       chronology; the row is the record, the card is the player. -->
+  <section class="pt-sec pm-oncam" id="on-camera" aria-label="On camera">
+    <div class="pt-sec-bg"></div>
+    <div class="pm-in">
+
+      <p class="pm-kicker">Watch &middot; Roman in conversation</p>
+      <h2><strong>On camera</strong></h2>
+      <p class="pm-lead">Three filmed interviews, a live environmental news stream, an online class and a conference talk, embedded from the channels of the people who recorded them, newest first. Where the films above were made <em>about</em> this work, these are Roman answering someone else&rsquo;s questions. Each one keeps its dated place in the list below.</p>
+
+      <div class="pm-vid-grid">
+
+
+        <div class="pm-vid-card" id="video-san-qing">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/LTLfi0Fwvq0" title="Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis (The Way 126 Experience with San Qing)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">Consciousness of The Way 126 &middot; 11 June 2026</span>
+            <h3>Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis</h3>
+            <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school the Institute stewards.</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=LTLfi0Fwvq0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+              <a href="https://consciousnessofthewaypodcast.buzzsprout.com/2207061/episodes/19331411-beyond-ayahuasca-indigenous-amazonian-wisdom-with-roman-hanis" target="_blank" rel="noopener">Episode page <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pm-vid-card" id="video-conscious-collective">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/bf4mJoXID-c" title="Healing, Indigenous Wisdom, and the Authentic Spiritual Path | Roman Hanis (Conscious Collective)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">Conscious Collective &middot; Episode 3 &middot; 8 February 2026</span>
+            <h3>Healing, Indigenous Wisdom, and the Authentic Spiritual Path</h3>
+            <p>Joseph P. Kauffman with Roman on coming to the Amazon for healing from Crohn&rsquo;s disease, on what the medicine, the forest and the lineages taught him about spirituality beyond concepts and identity &mdash; and on telling genuine transformation from spiritual ego.</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=bf4mJoXID-c" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pm-vid-card" id="video-liminal">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/y6QYJf5ok1s" title="Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis (LIMINAL NEWS)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">LIMINAL NEWS with Daniel Pinchbeck &middot; Recorded October 2025</span>
+            <h3>Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis</h3>
+            <p>How ayahuasca is an integral but not a central element of the traditions &mdash; a wider weave of myth, story and ceremony carrying healing into daily life. Released as a LIMINAL NEWS episode on 12 November 2025.</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=y6QYJf5ok1s" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+              <a href="https://open.spotify.com/episode/5kdu4pr4mMA1anBGPArXaS" target="_blank" rel="noopener">Listen on Spotify <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- A live stream; ?start= drops the viewer at Roman's segment. -->
+        <div class="pm-vid-card" id="video-hora-ambiental">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/dwAZPrVzMgU?start=2393" title="La Hora Ambiental, 31 October 2025 — Román Hanis on ecological preservation and Indigenous knowledge in the Peruvian Amazon (in Spanish)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">La Hora Ambiental, Mexico &middot; 10 and 31 October 2025 &middot; In Spanish</span>
+            <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
+            <p>Roman&rsquo;s two-part interview on the weekly environmental news stream of the Instituto Mexicano de Fauna, Flora y Sustentabilidad Social, Voluntarios Informados and the Mexican Network of Environmental Journalists, presented by Juan Jorge Avilés. The player holds part two and starts at his segment; part one is the stream of 10 October.</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=dwAZPrVzMgU&amp;t=2393s" target="_blank" rel="noopener">Part two on YouTube <span aria-hidden="true">&#8599;</span></a>
+              <a href="https://www.youtube.com/watch?v=REpOCxIpYzI" target="_blank" rel="noopener">Part one, 10 October <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pm-vid-card" id="video-permaculture">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/HKpJ8DmxDi0" title="Inner Landscapes of Permaculture — Roman Hanis, Sustainable Kashi Free Permaculture Class #47" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">Sustainable Kashi &middot; Free Permaculture Class #47 &middot; 1 May 2021</span>
+            <h3>Inner Landscapes of Permaculture</h3>
+            <p>An eighty-minute class on how permaculture principles apply to the awakening of natural human potential &mdash; the same principles by which ancient traditions thrived in hard conditions.</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=HKpJ8DmxDi0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- The conference's own upload is embedded because it is the
+             outside source; the Institute's copy of the same recording is
+             linked beside it. -->
+        <div class="pm-vid-card" id="video-horizons">
+          <div class="pt-embed">
+            <iframe src="https://www.youtube-nocookie.com/embed/Fv3Ap57YiyU" title="Roman Hanis at Horizons: Perspectives on Psychedelics, 2012 — Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="pm-vid-body">
+            <span class="pm-kicker">Horizons: Perspectives on Psychedelics &middot; New York &middot; October 2012</span>
+            <h3>Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies</h3>
+            <p>Roman&rsquo;s talk at the conference&rsquo;s sixth year, Judson Memorial Church, filmed and published by Horizons. The programme listed him as Director of the Paititi Institute, Iquitos, and described the work in his words: &ldquo;to implement the original, indigenous healing and spiritual practices of the sacred and medicinal plants as a viable healing alternative in the western society.&rdquo;</p>
+            <div class="pm-vid-links">
+              <a href="https://www.youtube.com/watch?v=Fv3Ap57YiyU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
+              <a href="https://www.youtube.com/watch?v=ZpRtNeD5vQo" target="_blank" rel="noopener">The Institute&rsquo;s own upload <span aria-hidden="true">&#8599;</span></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Coverage ===== -->
   <section class="pt-sec pm-cover" id="coverage" aria-label="In the press">
     <div class="pt-sec-bg"></div>
@@ -430,7 +602,7 @@
 
       <p class="pm-kicker">Written &amp; recorded elsewhere</p>
       <h2><strong>In the press</strong></h2>
-      <p class="pm-lead">Coverage of the Institute and its work, from the years after the first film to <em>Beyond Ayahuasca</em>, newest first. Everything here links to the original; nothing has been edited or excerpted beyond a line of context. Where a piece was written by Roman rather than about him, it is labelled a featured article.</p>
+      <p class="pm-lead">Coverage of the Institute and its work, from the years after the first film to <em>Beyond Ayahuasca</em>, newest first. Everything here links to the original; nothing has been edited or excerpted beyond a line of context. Where a piece was written by Roman rather than about him, it is labelled a featured article. Rows for filmed pieces point back up to their player in On camera; the print row points down to its scan.</p>
 
       <!-- Newest first. To add an item, copy one <a class="pm-item"> block:
            publication in .pm-kicker, date in .pm-date, headline in the h3, one
@@ -444,8 +616,8 @@
           </div>
           <div>
             <h3>Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis</h3>
-            <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school and cultural-heritage work the Institute stewards. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school and cultural-heritage work the Institute stewards. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -461,7 +633,7 @@
           </div>
         </a>
 
-        <!-- Filmed, so the row points down to the player below the list. -->
+        <!-- Filmed, so the row points up to its player in On camera. -->
         <a class="pm-item" href="#video-conscious-collective">
           <div class="pm-source">
             <span class="pm-kicker">Conscious Collective</span>
@@ -469,8 +641,8 @@
           </div>
           <div>
             <h3>Healing, Indigenous Wisdom, and the Authentic Spiritual Path</h3>
-            <p>Fifty-four minutes on the difference between genuine transformation and spiritual ego &mdash; why awakening is less about peak experiences than about returning to the heart. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>Fifty-four minutes on the difference between genuine transformation and spiritual ego &mdash; why awakening is less about peak experiences than about returning to the heart. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -481,8 +653,8 @@
           </div>
           <div>
             <h3>Roman Hanis | Beyond Ayahuasca: Indigenous Wisdom, Healing &amp; the Forgotten Heart</h3>
-            <p>Daniel Pinchbeck with the author of <em>Beyond Ayahuasca</em> and co-founder of the Institute, on two decades of apprenticeship with Amazonian and Andean elders, sacred reciprocity, and what a civilisation forgets when it forgets its heart. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>Daniel Pinchbeck with the author of <em>Beyond Ayahuasca</em> and co-founder of the Institute, on two decades of apprenticeship with Amazonian and Andean elders, sacred reciprocity, and what a civilisation forgets when it forgets its heart. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -493,8 +665,8 @@
           </div>
           <div>
             <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
-            <p>Part two of Roman&rsquo;s interview on the Mexican Network of Environmental Journalists&rsquo; weekly stream, on ecological preservation and Indigenous knowledge in the Peruvian Amazon. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>Part two of Roman&rsquo;s interview on the Mexican Network of Environmental Journalists&rsquo; weekly stream, on ecological preservation and Indigenous knowledge in the Peruvian Amazon. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -517,8 +689,8 @@
           </div>
           <div>
             <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
-            <p>Part one: Roman&rsquo;s first appearance on the stream, three weeks before the second. Linked from the player below.</p>
-            <span class="pm-go">See below <span aria-hidden="true">&darr;</span></span>
+            <p>Part one: Roman&rsquo;s first appearance on the stream, three weeks before the second. Linked from the player above.</p>
+            <span class="pm-go">See above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -608,8 +780,8 @@
           </div>
           <div>
             <h3>Inner Landscapes of Permaculture</h3>
-            <p>Free Permaculture Class #47: permaculture&rsquo;s principles turned inward, on the awakening of natural human potential. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>Free Permaculture Class #47: permaculture&rsquo;s principles turned inward, on the awakening of natural human potential. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
@@ -812,7 +984,7 @@
           </div>
         </a>
 
-        <!-- Filmed, so the row points down to the player below the list. The
+        <!-- Filmed, so the row points up to its player in On camera. The
              conference's own pages are gone; the talk survives on its channel. -->
         <a class="pm-item" href="#video-horizons">
           <div class="pm-source">
@@ -821,167 +993,67 @@
           </div>
           <div>
             <h3>Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies</h3>
-            <p>Roman, listed as Director of the Paititi Institute, Iquitos, on grassroots research into plant-medicine healing of physical illness &mdash; the Institute&rsquo;s first conference appearance on record. Plays below.</p>
-            <span class="pm-go">Watch below <span aria-hidden="true">&darr;</span></span>
+            <p>Roman, listed as Director of the Paititi Institute, Iquitos, on grassroots research into plant-medicine healing of physical illness &mdash; the Institute&rsquo;s first conference appearance on record. Plays above.</p>
+            <span class="pm-go">Watch above <span aria-hidden="true">&uarr;</span></span>
           </div>
         </a>
 
       </div>
+    </div>
+  </section>
 
-      <!-- ===== On camera =====
-           Filmed pieces embed here rather than linking out, on the same
-           youtube-nocookie player as the films: one card per video, newest
-           first, each with its own id. Every video also has a dated row in
-           the list above (href="#video-…") so it keeps its place in the
-           chronology; the row is the record, the card is the player. -->
-      <div class="pm-vid" id="video">
-        <p class="pm-kicker">On camera</p>
-        <div class="pm-vid-grid">
+  <!-- ===== In print =====
+       Scans of print coverage. Only real clippings go here — a fake one would
+       be the one thing on a press page that must never be invented.
 
-          <div class="pm-vid-card" id="video-san-qing">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/LTLfi0Fwvq0" title="Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis (The Way 126 Experience with San Qing)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">Consciousness of The Way 126 &middot; 11 June 2026</span>
-              <h3>Beyond Ayahuasca: Indigenous Amazonian Wisdom with Roman Hanis</h3>
-              <p>An hour and a half with the Daoist teacher San Qing on apprenticeship with Amazonian and Andean elders, the illness that first brought Roman to the rainforest, and the ancestral school the Institute stewards.</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=LTLfi0Fwvq0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
-                <a href="https://consciousnessofthewaypodcast.buzzsprout.com/2207061/episodes/19331411-beyond-ayahuasca-indigenous-amazonian-wisdom-with-roman-hanis" target="_blank" rel="noopener">Episode page <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
+       To add one:
+         1. put the scan in assets/press/ (a legible JPEG or WebP; the full
+            page, straightened, not a phone photo at an angle),
+         2. add it to tools/image-sizes.json and run
+            `python3 tools/gen_responsive.py` to build the width ladder and
+            wire srcset/sizes/width/height,
+         3. copy a .pm-clip-row below — figure plus translation if the original
+            is not in English — and give it a row in the list above so it keeps
+            its place in the chronology. -->
+  <section class="pt-sec pm-print" id="print" aria-label="In print">
+    <div class="pt-sec-bg"></div>
+    <div class="pm-in">
 
-          <div class="pm-vid-card" id="video-conscious-collective">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/bf4mJoXID-c" title="Healing, Indigenous Wisdom, and the Authentic Spiritual Path | Roman Hanis (Conscious Collective)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">Conscious Collective &middot; Episode 3 &middot; 8 February 2026</span>
-              <h3>Healing, Indigenous Wisdom, and the Authentic Spiritual Path</h3>
-              <p>Joseph P. Kauffman with Roman on coming to the Amazon for healing from Crohn&rsquo;s disease, on what the medicine, the forest and the lineages taught him about spirituality beyond concepts and identity &mdash; and on telling genuine transformation from spiritual ego.</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=bf4mJoXID-c" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
+      <p class="pm-kicker">Read &middot; Scans and translations</p>
+      <h2><strong>In print</strong></h2>
+      <p class="pm-lead">Coverage that arrived as a printed page rather than a link. The scan is the source and opens at full size; where the original is not in English it sits beside a complete translation of ours, labelled as ours.</p>
 
-          <div class="pm-vid-card" id="video-liminal">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/y6QYJf5ok1s" title="Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis (LIMINAL NEWS)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">LIMINAL NEWS with Daniel Pinchbeck &middot; Recorded October 2025</span>
-              <h3>Beyond Ayahuasca: Conversation with Daniel Pinchbeck &amp; Roman Hanis</h3>
-              <p>How ayahuasca is an integral but not a central element of the traditions &mdash; a wider weave of myth, story and ceremony carrying healing into daily life. Released as a LIMINAL NEWS episode on 12 November 2025.</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=y6QYJf5ok1s" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
-                <a href="https://open.spotify.com/episode/5kdu4pr4mMA1anBGPArXaS" target="_blank" rel="noopener">Listen on Spotify <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
+      <div class="pm-clip-row">
+        <figure class="pm-clip">
+          <a href="/assets/press/ahora-escuela-ancestral-yahua-2025.webp" target="_blank" rel="noopener">
+            <img src="/assets/press/ahora-escuela-ancestral-yahua-2025.webp"
+         srcset="/assets/r/press/ahora-escuela-ancestral-yahua-2025-320w.webp 320w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-480w.webp 480w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-640w.webp 640w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-800w.webp 800w, /assets/press/ahora-escuela-ancestral-yahua-2025.webp 1046w"
+         sizes="(max-width:640px) 90vw, (max-width:1180px) 760px, 760px"
+         width="1046"
+         height="867"
+         decoding="async" alt="Page from the Loreto newspaper Ahora headlined “Plantan primera viga de la Escuela Ancestral Yahua”, with a photograph of members of the Yahua community, officials of the Regional Government of Loreto and the Paititi Institute team on the banks of the Momón River" loading="lazy">
+          </a>
+          <figcaption>Diario Ahora, Loreto, July 2025 &mdash; &ldquo;Plantan primera viga de la Escuela Ancestral Yahua. Un hito por la niñez y la cultura amazónica.&rdquo; Opens the full-size scan.</figcaption>
+        </figure>
 
-          <!-- A live stream; ?start= drops the viewer at Roman's segment. -->
-          <div class="pm-vid-card" id="video-hora-ambiental">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/dwAZPrVzMgU?start=2393" title="La Hora Ambiental, 31 October 2025 — Román Hanis on ecological preservation and Indigenous knowledge in the Peruvian Amazon (in Spanish)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">La Hora Ambiental, Mexico &middot; 10 and 31 October 2025 &middot; In Spanish</span>
-              <h3>Preservación ecológica y de saberes originarios en el Amazonas peruano</h3>
-              <p>Roman&rsquo;s two-part interview on the weekly environmental news stream of the Instituto Mexicano de Fauna, Flora y Sustentabilidad Social, Voluntarios Informados and the Mexican Network of Environmental Journalists, presented by Juan Jorge Avilés. The player holds part two and starts at his segment; part one is the stream of 10 October.</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=dwAZPrVzMgU&amp;t=2393s" target="_blank" rel="noopener">Part two on YouTube <span aria-hidden="true">&#8599;</span></a>
-                <a href="https://www.youtube.com/watch?v=REpOCxIpYzI" target="_blank" rel="noopener">Part one, 10 October <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
+        <div class="pm-trans">
+          <p class="pm-kicker">Our translation</p>
+          <p class="pm-trans-strap">A milestone for children and Amazonian culture</p>
+          <h3>First beam raised for the Yahua Ancestral School</h3>
 
-          <div class="pm-vid-card" id="video-permaculture">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/HKpJ8DmxDi0" title="Inner Landscapes of Permaculture — Roman Hanis, Sustainable Kashi Free Permaculture Class #47" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">Sustainable Kashi &middot; Free Permaculture Class #47 &middot; 1 May 2021</span>
-              <h3>Inner Landscapes of Permaculture</h3>
-              <p>An eighty-minute class on how permaculture principles apply to the awakening of natural human potential &mdash; the same principles by which ancient traditions thrived in hard conditions.</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=HKpJ8DmxDi0" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
+          <p>The first beam of the Yahua Ancestral School &ndash; Cultural Heritage Centre has been laid: a milestone for Indigenous children and cultural preservation in the Peruvian Amazon, on the Momón River, Loreto.</p>
+          <p>With great emotion and a deep sense of purpose, today, 25 July 2025, the first beam was laid for the Yahua people&rsquo;s future ancestral school and cultural heritage centre &mdash; a decisive step in an initiative that seeks to preserve and revitalise the knowledge, language and age-old traditions of this Indigenous Amazonian community.</p>
+          <p>The symbolic act took place on Yahua territory, on the banks of the Momón River, and was attended by representatives of the Regional Government of Loreto &mdash; specifically its Regional Office for the Development of Indigenous Peoples &mdash; who expressed their full support for the project and their eagerness to collaborate in the stages to come.</p>
+          <p>&ldquo;This is a moment of profound significance. We are not just building a school; we are sowing the foundations so that future Yahua generations can grow up connected to their roots, proud of their cultural identity,&rdquo; said Roman Hanis, president of the Paititi Institute, the organisation behind the project.</p>
+          <p>As part of this first phase, the community received the first 100 copies of an illustrated children&rsquo;s book about Yahua culture, created especially so that the tribe&rsquo;s children can learn about their origins &mdash; and, at the same time, to be offered to visitors as a respectful and meaningful tool for intercultural education.</p>
+          <p>The ancestral centre will serve as an integrated space for the oral transmission of the Yahua language, creation stories, knowledge of medicinal plants, traditional dances and rites of passage, strengthening the living continuity of the Yahua worldview. It is also intended as a place of ceremony and healing, where the community&rsquo;s wise men and women can treat patients and train new apprentices.</p>
+          <p>The project has been made possible in part by funds generated by the recently published book <em>Beyond Ayahuasca</em>, which has attracted wide international interest for its profound message about healing, ancestral wisdom and reconnection with nature.</p>
+          <p>&ldquo;It fills us with hope to see how reading a book can become concrete action that directly benefits Indigenous communities that have been forgotten for so long,&rdquo; Hanis added.</p>
+          <p>With the institutional backing of the regional government and the active collaboration of the Yahua community, this effort sets a hopeful precedent for other Indigenous peoples of Peru&rsquo;s deep interior. The centre is expected to be completed in the coming months and to become a model of living ancestral education and cultural sovereignty.</p>
 
-          <!-- The conference's own upload is embedded because it is the
-               outside source; the Institute's copy of the same recording is
-               linked beside it. -->
-          <div class="pm-vid-card" id="video-horizons">
-            <div class="pt-embed">
-              <iframe src="https://www.youtube-nocookie.com/embed/Fv3Ap57YiyU" title="Roman Hanis at Horizons: Perspectives on Psychedelics, 2012 — Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="pm-vid-body">
-              <span class="pm-kicker">Horizons: Perspectives on Psychedelics &middot; New York &middot; October 2012</span>
-              <h3>Amazonian Grass Roots Research on Entheogen-based Healing of Physical Pathologies</h3>
-              <p>Roman&rsquo;s talk at the conference&rsquo;s sixth year, Judson Memorial Church, filmed and published by Horizons. The programme listed him as Director of the Paititi Institute, Iquitos, and described the work in his words: &ldquo;to implement the original, indigenous healing and spiritual practices of the sacred and medicinal plants as a viable healing alternative in the western society.&rdquo;</p>
-              <div class="pm-vid-links">
-                <a href="https://www.youtube.com/watch?v=Fv3Ap57YiyU" target="_blank" rel="noopener">Watch on YouTube <span aria-hidden="true">&#8599;</span></a>
-                <a href="https://www.youtube.com/watch?v=ZpRtNeD5vQo" target="_blank" rel="noopener">The Institute&rsquo;s own upload <span aria-hidden="true">&#8599;</span></a>
-              </div>
-            </div>
-          </div>
-
+          <p class="pm-trans-note">Translated from the Spanish by the Paititi Institute. The original text is the newspaper&rsquo;s; only the translation is ours.</p>
         </div>
       </div>
-
-      <!-- ===== Print clippings =====
-           Scans of print coverage. Only real clippings go here — a fake one
-           would be the one thing on a press page that must never be invented.
-
-           To add one:
-             1. put the scan in assets/press/ (a legible JPEG or WebP; the full
-                page, straightened, not a phone photo at an angle),
-             2. add it to tools/image-sizes.json and run
-                `python3 tools/gen_responsive.py` to build the width ladder
-                and wire srcset/sizes/width/height,
-             3. copy a .pm-clip-row below — figure plus translation if the
-                original is not in English — and give it a row in the list
-                above so it keeps its place in the chronology. -->
-      <div class="pm-clips" id="print">
-        <p class="pm-kicker">In print</p>
-
-        <div class="pm-clip-row">
-          <figure class="pm-clip">
-            <a href="/assets/press/ahora-escuela-ancestral-yahua-2025.webp" target="_blank" rel="noopener">
-              <img src="/assets/press/ahora-escuela-ancestral-yahua-2025.webp"
-           srcset="/assets/r/press/ahora-escuela-ancestral-yahua-2025-320w.webp 320w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-480w.webp 480w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-640w.webp 640w, /assets/r/press/ahora-escuela-ancestral-yahua-2025-800w.webp 800w, /assets/press/ahora-escuela-ancestral-yahua-2025.webp 1046w"
-           sizes="(max-width:640px) 90vw, (max-width:1180px) 760px, 760px"
-           width="1046"
-           height="867"
-           decoding="async" alt="Page from the Loreto newspaper Ahora headlined “Plantan primera viga de la Escuela Ancestral Yahua”, with a photograph of members of the Yahua community, officials of the Regional Government of Loreto and the Paititi Institute team on the banks of the Momón River" loading="lazy">
-            </a>
-            <figcaption>Diario Ahora, Loreto, July 2025 &mdash; &ldquo;Plantan primera viga de la Escuela Ancestral Yahua. Un hito por la niñez y la cultura amazónica.&rdquo; Opens the full-size scan.</figcaption>
-          </figure>
-
-          <div class="pm-trans">
-            <p class="pm-kicker">Our translation</p>
-            <p class="pm-trans-strap">A milestone for children and Amazonian culture</p>
-            <h3>First beam raised for the Yahua Ancestral School</h3>
-
-            <p>The first beam of the Yahua Ancestral School &ndash; Cultural Heritage Centre has been laid: a milestone for Indigenous children and cultural preservation in the Peruvian Amazon, on the Momón River, Loreto.</p>
-            <p>With great emotion and a deep sense of purpose, today, 25 July 2025, the first beam was laid for the Yahua people&rsquo;s future ancestral school and cultural heritage centre &mdash; a decisive step in an initiative that seeks to preserve and revitalise the knowledge, language and age-old traditions of this Indigenous Amazonian community.</p>
-            <p>The symbolic act took place on Yahua territory, on the banks of the Momón River, and was attended by representatives of the Regional Government of Loreto &mdash; specifically its Regional Office for the Development of Indigenous Peoples &mdash; who expressed their full support for the project and their eagerness to collaborate in the stages to come.</p>
-            <p>&ldquo;This is a moment of profound significance. We are not just building a school; we are sowing the foundations so that future Yahua generations can grow up connected to their roots, proud of their cultural identity,&rdquo; said Roman Hanis, president of the Paititi Institute, the organisation behind the project.</p>
-            <p>As part of this first phase, the community received the first 100 copies of an illustrated children&rsquo;s book about Yahua culture, created especially so that the tribe&rsquo;s children can learn about their origins &mdash; and, at the same time, to be offered to visitors as a respectful and meaningful tool for intercultural education.</p>
-            <p>The ancestral centre will serve as an integrated space for the oral transmission of the Yahua language, creation stories, knowledge of medicinal plants, traditional dances and rites of passage, strengthening the living continuity of the Yahua worldview. It is also intended as a place of ceremony and healing, where the community&rsquo;s wise men and women can treat patients and train new apprentices.</p>
-            <p>The project has been made possible in part by funds generated by the recently published book <em>Beyond Ayahuasca</em>, which has attracted wide international interest for its profound message about healing, ancestral wisdom and reconnection with nature.</p>
-            <p>&ldquo;It fills us with hope to see how reading a book can become concrete action that directly benefits Indigenous communities that have been forgotten for so long,&rdquo; Hanis added.</p>
-            <p>With the institutional backing of the regional government and the active collaboration of the Yahua community, this effort sets a hopeful precedent for other Indigenous peoples of Peru&rsquo;s deep interior. The centre is expected to be completed in the coming months and to become a model of living ancestral education and cultural sovereignty.</p>
-
-            <p class="pm-trans-note">Translated from the Spanish by the Paititi Institute. The original text is the newspaper&rsquo;s; only the translation is ours.</p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -1019,5 +1091,68 @@
 <dc-import name="SiteFooter"></dc-import>
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+// This component only runs the sticky section nav — same behaviour as the ones
+// on the Distance Healing and Our Living Vision pages.
+class Component extends DCLogic {
+  componentDidMount() {
+    const nav = document.getElementById('pm-subnav');
+    if (!nav) return;
+    const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+
+    // The fixed header retracts on scroll-down and returns on scroll-up
+    // (SiteHeader sets data-hidden). The nav sticks below the header while it
+    // shows and at the viewport top while it hides; any gap this leaves above
+    // the nav is exactly the strip the header itself covers. Height is
+    // measured, not assumed: the announcement bar is dismissable and the bar
+    // shrinks at the breakpoints.
+    let header = null;
+    const syncTop = () => {
+      const hidden = header && header.dataset.hidden === '1';
+      nav.style.setProperty('--pm-nav-top', (!header || hidden ? 0 : header.offsetHeight) + 'px');
+    };
+    const bindHeader = () => {
+      header = document.querySelector('.pt-header');
+      if (!header) return false;
+      new MutationObserver(syncTop).observe(header,
+        { attributes: true, attributeFilter: ['data-hidden'], childList: true, subtree: true });
+      syncTop();
+      return true;
+    };
+    if (!bindHeader()) {
+      // The header is a dc-import and can finish rendering after this mount.
+      const mo = new MutationObserver(() => { if (bindHeader()) mo.disconnect(); });
+      mo.observe(document.getElementById('dc-root') || document.body, { childList: true, subtree: true });
+    }
+    window.addEventListener('resize', syncTop, { passive: true });
+
+    // Scrollspy: active = the last nav target whose section top has passed
+    // under the stuck nav (140 ≈ the sections' 130px scroll-margin). Direct DOM
+    // writes — a setState here would re-render the page per scroll frame.
+    let current = -1;
+    const spy = () => {
+      let active = -1;
+      for (let i = 0; i < links.length; i++) {
+        const el = document.getElementById(links[i].getAttribute('href').slice(1));
+        if (el && el.getBoundingClientRect().top <= 140) active = i;
+      }
+      if (active === current) return;
+      current = active;
+      links.forEach((a, i) => { a.dataset.active = i === active ? '1' : '0'; });
+      // Keep the active label in view when the bar overflows (narrow screens).
+      if (active >= 0 && nav.scrollWidth > nav.clientWidth) {
+        const a = links[active];
+        nav.scrollTo({ left: a.offsetLeft - (nav.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+      }
+    };
+    let raf = 0;
+    window.addEventListener('scroll', () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; spy(); });
+    }, { passive: true });
+    spy();
+  }
+}
+</script>
 </body>
 </html>
