@@ -58,6 +58,7 @@
 # "project-one-f5w4d-4nex6" (the URL the old site shipped with) 301s onto it.
 /initiatives/qero-nation-emergency-food-supply                 /InitiativeQero.dc.html   200
 /initiatives/project-one-f5w4d-4nex6                           /initiatives/qero-nation-emergency-food-supply  301
+/initiatives/uniting-elders-and-children                       /InitiativeElders.dc.html 200
 /initiatives/paititi-biocultural-reserve                       /InitiativeReserve.dc.html  200
 # The reserve used to be reachable only as a chapter anchor on /initiatives.
 # That anchor still resolves (the chapter is still there), but the deep link
@@ -184,6 +185,7 @@
 /es/iniciativas                                 /Initiatives.es.dc.html    200
 /es/iniciativas/escuela-ancestral-yahua         /InitiativeYagua.es.dc.html 200
 /es/iniciativas/qero-alimentos-de-emergencia    /InitiativeQero.es.dc.html  200
+/es/iniciativas/uniendo-mayores-y-ninos         /InitiativeElders.es.dc.html 200
 /es/iniciativas/reserva-biocultural-paititi     /InitiativeReserve.es.dc.html 200
 
 # Legal

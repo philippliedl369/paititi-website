@@ -184,6 +184,15 @@
   .dp-card-c .dp-play::after{margin-left:4px;border-left-width:15px;
     border-top-width:9px;border-bottom-width:9px}
 
+  /* ---- Seed of the Heart -------------------------------------------------
+     El minidocumental del propio Instituto, reproducido aquí mismo. */
+  .dp-seed{--pt-bg:#fff;padding:88px 0 96px}
+  .pt-page main .dp-seed h2{color:#584364}
+  .pt-page main .dp-seed .dp-kicker{margin:0 0 14px}
+  .dp-seed .pt-embed{margin-top:40px;border-radius:24px 0;overflow:hidden;background:#2A1736}
+  .dp-seed-links{display:flex;flex-wrap:wrap;gap:14px 36px;margin-top:28px}
+  .dp-seed .dp-go{color:#584364;text-decoration:underline;text-underline-offset:4px}
+
   /* ---- What the name means ------------------------------------------------ */
   .dp-meaning{--pt-bg:#2A1736;color:#fff;padding:88px 0 96px}
   .pt-page main .dp-meaning h2{color:#fff}
@@ -219,7 +228,7 @@
     .dp-grid-2{grid-template-columns:1fr}
     .dp-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
 
-    .dp-meaning,.dp-areas{padding:64px 0 72px}
+    .dp-meaning,.dp-areas,.dp-seed{padding:64px 0 72px}
     .dp-close{padding:64px 0 72px}
   }
   @media (max-width:640px){
@@ -235,7 +244,7 @@
        the padding at both ends and it is portrait. */
     .dp-card-f .dp-media-fit{height:290px}
     .dp-card-f .dp-body{padding:24px 24px 28px}
-    .dp-card,.dp-meaning .pt-embed{border-radius:32px 0}
+    .dp-card,.dp-meaning .pt-embed,.dp-seed .pt-embed{border-radius:32px 0}
     .dp-card-c .dp-media{height:190px}
   }
 
@@ -401,6 +410,25 @@
         </div>
       </a>
 
+    </div>
+  </section>
+
+  <!-- ===== Seed of the Heart ===== -->
+  <section class="pt-sec dp-seed" id="seed-of-the-heart" aria-label="Uniendo a los mayores y a los niños del mundo">
+    <div class="pt-sec-bg"></div>
+    <div class="dp-in">
+      <p class="dp-kicker">Minidocumental &middot; Seed of the Heart &middot; En inglés</p>
+      <h2><strong>Uniendo a los mayores y a los niños del mundo</strong></h2>
+      <div class="pt-prose dp-in-narrow" style="margin-top:24px">
+        <p class="pt-lg">Una iniciativa que empezó con los mayores yahua en la Amazonía y ha crecido hasta ser un movimiento de talleres y escuelas ancestrales que unen a mayores y niños, en la Amazonía, los Andes y más allá. Dos minutos sobre el porqué.</p>
+      </div>
+      <div class="pt-embed">
+        <iframe src="https://www.youtube-nocookie.com/embed/tPmqXtte86M" title="Seed of the Heart Prophecy: uniendo a los mayores y a los niños de todo el mundo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="dp-seed-links">
+        <a class="dp-go" href="/es/iniciativas/uniendo-mayores-y-ninos">Conoce la iniciativa &rarr;</a>
+        <a class="dp-go" href="/es/iniciativas/escuela-ancestral-yahua#donate">Apoya las escuelas ancestrales &rarr;</a>
+      </div>
     </div>
   </section>
 

@@ -77,11 +77,13 @@
   .in-flows li:first-child{border-top:1px solid rgba(255,255,255,.25)}
   .in-flows strong{display:block;margin-bottom:6px}
 
-  /* Portfolio grid: two project cards, 648px wide, 28px apart. */
-  .in-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
+  /* Portfolio grid: the three initiative pages, 28px apart. Was two 648px
+     cards with 432px photos; three across, the photo drops to 300px so the
+     row keeps the same proportions. */
+  .in-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;
     max-width:1324px;margin:0 auto;padding:0 58px}
   .in-card{display:block;text-decoration:none;color:inherit}
-  .in-card img{width:100%;height:432px;object-fit:cover;display:block}
+  .in-card img{width:100%;height:300px;object-fit:cover;display:block}
   .in-card span{display:block;margin-top:16px;text-align:center;
     font-family:var(--font-display);font-size:19.2px;font-weight:400;color:#210416;letter-spacing:normal}
   .in-card:hover img{opacity:.9}
@@ -186,7 +188,7 @@
   <!-- ===== Culture & Learning ===== -->
   <section class="pt-sec in-band" id="culture-learning">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:44">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:63">
       <div class="pt-prose" style="grid-area:1 / 3 / 10 / 23">
         <h2>Culture &amp; Learning &mdash; Keeping Wisdom Alive</h2>
         <p>Cultural healing programs across the Amazon and the Andes have helped neighbors who drifted from their roots recognize the worth of their inheritance&mdash;language, songs, ceremony, plant knowledge. These circles also change how locals see visitors: not &ldquo;gringos consuming an experience,&rdquo; but human beings in reciprocity. That social honesty is the ground everything else stands on. Our relationships with Indigenous communities have been tended for more than two decades, and that continuity keeps the work clean.</p>
@@ -200,16 +202,32 @@
            decoding="async" alt="Yahua elder and children gathered beneath the thatched roof of a community maloca" loading="lazy">
       </div>
       <div class="pt-prose pt-vc" style="grid-area:10 / 14 / 22 / 23">
-        <p>The <strong>Yahua Ancestral School</strong>&mdash;with the Yahua people in the lower Amazon basin near Iquitos&mdash;is our keystone. The first maloca stands complete, built entirely through proceeds from <em>Beyond Ayahuasca</em>. Inside it lives an eco-socio-emotional curriculum: breath and body presence, story and song, craft and play, tending seeds and water, language revival, and the ability to turn conflict into listening. Elders teach; children carry. As it matures, the model is intended to travel to other rainforest nations and, in time, to the Q&rsquo;ero in the Andes.</p>
+        <p>The <strong>Yahua Ancestral School</strong>&mdash;with the Yahua people in the lower Amazon basin near Iquitos&mdash;is our keystone. The first maloca stands complete, built entirely through proceeds from <em>Beyond Ayahuasca</em>. Inside it lives an eco-socio-emotional curriculum: breath and body presence, story and song, craft and play, tending seeds and water, language revival, and the ability to turn conflict into listening. Elders teach; children carry. The model is now extending to the Andes, where an <a href="/initiatives/qero-nation-emergency-food-supply">ancestral school for the Q&rsquo;ero Nation</a> is in development, and in time to other rainforest nations.</p>
         <p><a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Support the school&rsquo;s growth &rarr;</a></p>
       </div>
       <div class="pt-prose" style="grid-area:23 / 3 / 32 / 23">
         <p>Learning doesn&rsquo;t require leaving. The <strong>community e-campus</strong>&mdash;now in pilot design&mdash;keeps higher education in rural life so youth don&rsquo;t have to abandon home to grow: capstone projects like seed banks, clean-water systems, biodiversity monitoring, and language programs, guided by local mentors and partner institutions. Alongside it, independent <strong>organic certification</strong> and story-based market paths help regional farmers earn fairly without leaving their land. Economics stops eroding culture and starts protecting it.</p>
       </div>
-      <div style="grid-area:33 / 5 / 45 / 21">
+      <!-- The outward half of this chapter. The ancestral schools (above) and
+           the Living Wisdom School are the two movements of one idea, and this
+           is the only place on the site where a reader meets both at once —
+           which is also what keeps "Living Wisdom Center" (the Yahua building)
+           and "Living Wisdom School" (the educational body) from reading as
+           the same thing. Everything here is framed as forming, because it is. -->
+      <div class="pt-prose" style="grid-area:33 / 3 / 48 / 23">
+        <h3>Two Schools, One Movement</h3>
+        <p>Keeping wisdom alive asks two things at once, and Paititi is building both. The ancestral schools face inward: they help elders teach their own language, songs, ceremony and plant knowledge directly to the children of their own communities, in their own territory and on their own terms. The Yahua school is the first of them.</p>
+        <p>The <strong>Living Wisdom School</strong> faces outward. Now taking shape, it is the educational body through which people from anywhere can meet these traditions honestly &mdash; with the worldview, relationship, practice and integration that have always surrounded them, rather than as techniques lifted out of their context. Its founding principle is that living traditions are represented by their own teachers and elders wherever possible, instead of being described on their behalf.</p>
+        <p>The two hold each other up. What participants contribute helps sustain the ancestral schools, and the ancestral schools keep alive the very traditions the school exists to introduce. Neither stands on its own. The school&rsquo;s first materials are already running &mdash; the online courses, the retreats and individual mentorship &mdash; and the rest of it is being built in the open.</p>
+        <p><a href="/online-courses">Explore the courses</a> &nbsp;&middot;&nbsp; <a href="/retreats">Explore the retreats</a></p>
+      </div>
+      <div style="grid-area:49 / 5 / 61 / 21">
         <div class="pt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/tPmqXtte86M" title="Seed of the Heart Prophecy - Uniting the Elders and Children across the World" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+      </div>
+      <div class="pt-prose in-center" style="grid-area:61 / 5 / 64 / 21">
+        <p><em>Seed of the Heart</em> &mdash; the Institute&rsquo;s mini-documentary on uniting the elders and children of the world. <a href="/initiatives/uniting-elders-and-children">Read about the initiative &rarr;</a></p>
       </div>
     </div>
   </section>
@@ -243,21 +261,22 @@
   <!-- ===== One Living System ===== -->
   <section class="pt-sec in-plum" id="living-system">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:30">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:36">
       <div class="pt-prose" style="grid-area:1 / 5 / 6 / 21">
         <h2>One Living System</h2>
         <p>Personal transformation and planetary service are not two different activities&mdash;one matures into the other. Each thread of this vision holds the others:</p>
       </div>
-      <div style="grid-area:6 / 5 / 24 / 21">
+      <div style="grid-area:6 / 5 / 30 / 21">
         <ul class="in-flows pt-prose">
           <li><strong>Culture &harr; Clinics.</strong> Healing gatherings restore trust in natural medicine; trust makes health work effective and ethical.</li>
           <li><strong>School &harr; Land.</strong> Children study, sing, and plant in the same place; the land feeds the school, and the school raises caretakers for the land.</li>
+          <li><strong>Ancestral schools &harr; Living Wisdom School.</strong> Elders teach their own children at home, and teach students who come from elsewhere; what those students contribute helps keep the first classroom open.</li>
           <li><strong>Learning &harr; Village futures.</strong> Youth projects repair water, soil, language, and livelihoods; a thriving village deters logging and mining.</li>
           <li><strong>Livelihoods &harr; Culture.</strong> Fair income reduces the push to migrate; families stay, culture breathes, forests stand.</li>
           <li><strong>Retreats &harr; Everything.</strong> Inner work awakens the will to serve&mdash;and for twenty years, proceeds from our retreats have funded every nonprofit initiative at Paititi.</li>
         </ul>
       </div>
-      <div class="pt-prose" style="grid-area:25 / 5 / 31 / 21">
+      <div class="pt-prose" style="grid-area:31 / 5 / 37 / 21">
         <p>Roman&rsquo;s book <em>Beyond Ayahuasca</em>, an international bestseller in Shamanism, ties the threads together: 100% of Roman Hanis&rsquo; author royalties from <em>Beyond Ayahuasca</em> support Paititi Institute&rsquo;s Indigenous education and cultural preservation initiatives. A children&rsquo;s book, <em>Seed of the Heart</em>, is already in circulation with the Yahua community and on its way to publication.</p>
         <p><a href="/retreats">Explore our retreats</a> &nbsp;&middot;&nbsp; <a href="/beyond-ayahuasca">About the book</a> &nbsp;&middot;&nbsp; <a href="/#impact">See our impact in numbers</a></p>
       </div>
@@ -267,12 +286,12 @@
   <!-- ===== Walk with us ===== -->
   <section class="pt-sec in-white">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:55px;--pt-rows:22">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:55px;--pt-rows:19">
       <div class="pt-prose in-center" style="grid-area:1 / 5 / 5 / 21">
         <h2>Walk With Us</h2>
         <p>Every thread of this vision is open to participation&mdash;as a supporter, a reader, a retreat participant, or a friend of the work.</p>
       </div>
-      <div style="grid-area:5 / 1 / 19 / 25">
+      <div style="grid-area:5 / 1 / 17 / 25">
         <div class="in-grid">
           <a class="in-card" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
             <img src="/assets/retreats/beyond-ayahuasca-01.webp"
@@ -284,17 +303,26 @@
             <span>Yahua Cultural Heritage Center &amp; Indigenous School</span>
           </a>
           <a class="in-card" href="/initiatives/qero-nation-emergency-food-supply">
-            <img src="/assets/initiatives/covidaid-fbarticleimage.webp"
-           srcset="/assets/r/initiatives/covidaid-fbarticleimage-320w.webp 320w, /assets/r/initiatives/covidaid-fbarticleimage-480w.webp 480w, /assets/r/initiatives/covidaid-fbarticleimage-640w.webp 640w, /assets/r/initiatives/covidaid-fbarticleimage-800w.webp 800w, /assets/r/initiatives/covidaid-fbarticleimage-1080w.webp 1080w, /assets/initiatives/covidaid-fbarticleimage.webp 1200w"
-           sizes="(max-width:640px) 78vw, (max-width:1180px) 624px, 528px"
-           width="1200"
-           height="630"
-           decoding="async" alt="Q'ero Nation Emergency Food Supply During COVID" loading="lazy">
-            <span>Q'ero Nation Emergency Food Supply During COVID</span>
+            <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp"
+           srcset="/assets/r/home/whatsapp-image-2025-11-19-at-104324-320w.webp 320w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-480w.webp 480w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-640w.webp 640w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-800w.webp 800w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-1080w.webp 1080w, /assets/home/whatsapp-image-2025-11-19-at-104324.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 400px"
+           width="1280"
+           height="825"
+           decoding="async" alt="Q'ero community elders gathered outside a stone dwelling in the Andes" loading="lazy">
+            <span>An Ancestral School for the Q&rsquo;ero Nation</span>
+          </a>
+          <a class="in-card" href="/initiatives/uniting-elders-and-children">
+            <img src="/assets/home/discoverpaititi-01.webp"
+           srcset="/assets/r/home/discoverpaititi-01-320w.webp 320w, /assets/r/home/discoverpaititi-01-480w.webp 480w, /assets/r/home/discoverpaititi-01-640w.webp 640w, /assets/r/home/discoverpaititi-01-800w.webp 800w, /assets/r/home/discoverpaititi-01-1080w.webp 1080w, /assets/r/home/discoverpaititi-01-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 400px"
+           width="2500"
+           height="1406"
+           decoding="async" alt="Yahua elder and children gathered beneath the thatched roof of a community maloca" loading="lazy">
+            <span>Uniting the Elders and Children of the World</span>
           </a>
         </div>
       </div>
-      <div style="grid-area:20 / 8 / 22 / 18">
+      <div style="grid-area:18 / 8 / 20 / 18">
         <a class="pt-btn" href="/s/Paititi-living-vision-mindmap.pdf" target="_blank" rel="noopener">Download Paititi Living Vision Mind-map</a>
       </div>
     </div>

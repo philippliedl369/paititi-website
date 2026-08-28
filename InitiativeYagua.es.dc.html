@@ -63,8 +63,28 @@
 
   .ya-zeffy{width:100%;height:100%;min-height:541px;border:0;display:block}
 
+  /* ---- Donate, directly under the hero ------------------------------------
+     This is where the header's Support button lands (#donate). The form used
+     to be the last thing on the page, under two videos and the whole appeal;
+     the appeal is still below, the form is now first. In flow, not on the
+     fluid grid: a form beside a column of copy needs no measured rows. */
+  .ya-give{--pt-bg:#F1EAF6;padding:80px 0 88px}
+  .ya-give-in{max-width:1324px;margin:0 auto;padding:0 58px;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+  .pt-page main .ya-kicker{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;line-height:1.4;color:#6B5378;margin:0 0 16px}
+  .pt-page main .ya-give h2{color:#584364}
+  .pt-page main .ya-give .ya-fine{font-size:15px}
+  .ya-give-form{background:#fff;border-radius:32px 0;overflow:hidden;box-shadow:0 10px 30px rgba(33,4,22,.08)}
+
   @media (max-width:1180px){
     .ya-hero h1{font-size:36px}
+    .ya-give{padding:64px 0 72px}
+    .ya-give-in{grid-template-columns:1fr;padding:0 24px;gap:32px}
+  }
+  @media (max-width:640px){
+    .ya-give{padding:48px 0 56px}
+    .ya-give-in{padding:0 20px}
   }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#210416}
@@ -99,6 +119,24 @@
            width="500"
            height="382"
            decoding="async" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Donar ===== -->
+  <section class="pt-sec ya-give" id="donate" aria-label="Donar">
+    <div class="pt-sec-bg"></div>
+    <div class="ya-give-in">
+      <div class="pt-prose">
+        <span class="ya-kicker">Donar</span>
+        <h2>Apoya el crecimiento de la Escuela Ancestral Yahua y el Centro de Sabiduría Viva</h2>
+        <p>La primera maloca ya está terminada. Tu aporte construye el campus a su alrededor: cabañas de dieta donde los jóvenes vivan ritos de paso con sus mayores, baños secos compostables, sistemas de agua con energía solar, un currículo con raíces culturales y guardianes de la sabiduría traídos de comunidades yahua más adentradas en la selva. <a href="#expanding">Lee el llamado completo &darr;</a></p>
+        <p>Zeffy no cobra comisiones de plataforma, de modo que tu aporte va directamente al crecimiento de la escuela. El Instituto Paititi está registrado en el Perú y cuenta con el patrocinio fiscal de Empowerment WORKS, una entidad sin fines de lucro 501(c)(3) de los Estados Unidos, por lo que las donaciones son deducibles de impuestos en ese país.</p>
+        <p class="ya-fine"><em>Para no dejar propina a Zeffy, edita el importe en la casilla de propina del formulario.</em></p>
+        <p>También abierta: <a href="/es/iniciativas/qero-alimentos-de-emergencia#donate">la campaña de la escuela ancestral q&rsquo;ero &rarr;</a></p>
+      </div>
+      <div class="ya-give-form">
+        <iframe class="ya-zeffy" title="Formulario de donación de Zeffy" src="https://www.zeffy.com/embed/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" allowtransparency="true" loading="lazy"></iframe>
       </div>
     </div>
   </section>
@@ -141,10 +179,12 @@
     </div>
   </section>
 
-  <!-- ===== Support the growth ===== -->
-  <section class="pt-sec ya-band">
+  <!-- ===== Support the growth (el llamado) =====
+       El formulario de Zeffy que cerraba esta sección está ahora bajo el hero
+       (#donate); el llamado termina en un botón que vuelve a él. -->
+  <section class="pt-sec ya-band" id="expanding">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:75">
+    <div class="pt-fluid" style="--pt-grid-top:48px;--pt-grid-bot:76px;--pt-rows:64">
       <div class="pt-vc" style="grid-area:1 / 1 / 8 / 25">
         <h2 style="text-align:center">Apoya el crecimiento de la Escuela Ancestral Yahua y el <br>Centro de Sabiduría Viva</h2>
       </div>
@@ -158,7 +198,7 @@
           <iframe src="https://www.youtube-nocookie.com/embed/QSP8Jw5y0fk" title="Ayahuasca: The Medicine of Awakening (documental)" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="pt-prose" style="grid-area:31 / 4 / 76 / 22">
+      <div class="pt-prose" style="grid-area:31 / 4 / 61 / 22">
         <p><strong><em>El pueblo amazónico Yahua, reubicado por el gobierno en los años setenta en una pequeña reserva cerca de la ciudad de Iquitos, enfrenta enormes dificultades para preservar su cultura ancestral y sostener su modo de vida. La escasez de tierra y de recursos ha obligado a muchos a depender del turismo para sobrevivir, con el riesgo de que sus ricas tradiciones se vayan apagando.</em></strong></p>
         <p>En el corazón de la Amazonía peruana, la <strong>primera maloca de la Escuela Ancestral Yahua ya está terminada.</strong> Se levantó enteramente con lo recaudado por Beyond Ayahuasca, el éxito de ventas internacional de Roman Hanis en la categoría de chamanismo. Cada página leída, cada palabra compartida, ayudó a transformar un relato en un espacio ceremonial de aprendizaje para los niños de la comunidad.</p>
         <p><strong>Expandiendo la visión&hellip;</strong></p>
@@ -171,17 +211,10 @@
           <li>Traer a guardianes de la sabiduría de comunidades yahua más adentradas en la selva, para que los niños reciban enseñanzas preservadas lejos de la vida del asentamiento.</li>
           <li>Cada uno de estos pasos lleva a la escuela más allá de una construcción, hacia un santuario vivo de cultura, aprendizaje y vínculo entre generaciones.</li>
         </ul>
-        <p>&#10084;&#65039; Dona a través de Zeffy: el Instituto Paititi está registrado en el Perú y cuenta con patrocinio fiscal en los Estados Unidos bajo una entidad sin fines de lucro 501(c)(3), de modo que todas las donaciones hechas por Zeffy son deducibles de impuestos en los Estados Unidos.</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
+        <p>&#10084;&#65039; Dona a través de Zeffy: el Instituto Paititi está registrado en el Perú y cuenta con patrocinio fiscal en los Estados Unidos bajo una entidad sin fines de lucro 501(c)(3), de modo que todas las donaciones hechas por Zeffy son deducibles de impuestos en los Estados Unidos. Zeffy nos permite recibir contribuciones sin comisiones de plataforma, de modo que tu aporte va directamente al crecimiento de la escuela.</p>
       </div>
-      <div style="grid-area:61 / 12 / 76 / 21">
-        <iframe class="ya-zeffy" title="Formulario de donación de Zeffy" src="https://www.zeffy.com/embed/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" allowtransparency="true" loading="lazy"></iframe>
-      </div>
-      <div class="pt-prose" style="grid-area:63 / 5 / 72 / 11">
-        <p>Zeffy nos permite recibir contribuciones sin comisiones de plataforma, de modo que tu aporte va directamente al crecimiento de la escuela.</p>
-        <p><em>Ten en cuenta que, para no pagar comisión a Zeffy, debes editar manualmente el importe de la propina en la casilla correspondiente.</em></p>
+      <div style="grid-area:62 / 9 / 64 / 17">
+        <a class="pt-btn" href="#donate">Donar a través de Zeffy</a>
       </div>
     </div>
   </section>

@@ -172,6 +172,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/qero-nation-emergency-food-supply"/>
   </url>
   <url>
+    <loc>https://paititi-institute.org/initiatives/uniting-elders-and-children</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/initiatives/uniting-elders-and-children"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/uniendo-mayores-y-ninos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/uniting-elders-and-children"/>
+  </url>
+  <url>
+    <loc>https://paititi-institute.org/es/iniciativas/uniendo-mayores-y-ninos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/initiatives/uniting-elders-and-children"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/uniendo-mayores-y-ninos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/uniting-elders-and-children"/>
+  </url>
+  <url>
     <loc>https://paititi-institute.org/initiatives/paititi-biocultural-reserve</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/initiatives/paititi-biocultural-reserve"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/reserva-biocultural-paititi"/>

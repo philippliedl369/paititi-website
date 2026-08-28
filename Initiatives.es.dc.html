@@ -79,11 +79,13 @@
   .in-flows li:first-child{border-top:1px solid rgba(255,255,255,.25)}
   .in-flows strong{display:block;margin-bottom:6px}
 
-  /* Portfolio grid: two project cards, 648px wide, 28px apart. */
-  .in-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;
+  /* Portfolio grid: the three initiative pages, 28px apart. Was two 648px
+     cards with 432px photos; three across, the photo drops to 300px so the
+     row keeps the same proportions. */
+  .in-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;
     max-width:1324px;margin:0 auto;padding:0 58px}
   .in-card{display:block;text-decoration:none;color:inherit}
-  .in-card img{width:100%;height:432px;object-fit:cover;display:block}
+  .in-card img{width:100%;height:300px;object-fit:cover;display:block}
   .in-card span{display:block;margin-top:16px;text-align:center;
     font-family:var(--font-display);font-size:19.2px;font-weight:400;color:#210416;letter-spacing:normal}
   .in-card:hover img{opacity:.9}
@@ -188,7 +190,7 @@
   <!-- ===== Culture & Learning ===== -->
   <section class="pt-sec in-band" id="culture-learning">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:44">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:64">
       <div class="pt-prose" style="grid-area:1 / 3 / 10 / 23">
         <h2>Cultura y aprendizaje &mdash; Mantener viva la sabiduría</h2>
         <p>Los programas de sanación cultural en la Amazonía y los Andes han ayudado a vecinos que se habían alejado de sus raíces a reconocer el valor de su herencia: la lengua, los cantos, la ceremonia, el conocimiento de las plantas. Estos círculos también cambian la manera en que la gente del lugar ve a quienes llegan de fuera: no &ldquo;gringos consumiendo una experiencia&rdquo;, sino seres humanos en reciprocidad. Esa honestidad social es el suelo sobre el que se apoya todo lo demás. Nuestras relaciones con las comunidades indígenas se han cuidado durante más de dos décadas, y esa continuidad mantiene limpio el trabajo.</p>
@@ -202,16 +204,33 @@
            decoding="async" alt="Un mayor yagua y varios niños reunidos bajo el techo de paja de una maloca comunitaria" loading="lazy">
       </div>
       <div class="pt-prose pt-vc" style="grid-area:10 / 14 / 22 / 23">
-        <p>La <strong>Escuela Ancestral Yahua</strong> &mdash;junto al pueblo Yahua, en la cuenca baja del Amazonas cerca de Iquitos&mdash; es nuestra piedra angular. La primera maloca está terminada, construida enteramente con lo recaudado por <em>Beyond Ayahuasca</em>. Dentro vive un currículo eco-socio-emocional: el aliento y la presencia corporal, el relato y el canto, el oficio y el juego, el cuidado de las semillas y del agua, la revitalización de la lengua y la capacidad de convertir el conflicto en escucha. Los mayores enseñan; los niños llevan adelante. A medida que madure, la intención es que el modelo viaje a otras naciones de la selva y, con el tiempo, al pueblo Q&rsquo;ero en los Andes.</p>
+        <p>La <strong>Escuela Ancestral Yahua</strong> &mdash;junto al pueblo Yahua, en la cuenca baja del Amazonas cerca de Iquitos&mdash; es nuestra piedra angular. La primera maloca está terminada, construida enteramente con lo recaudado por <em>Beyond Ayahuasca</em>. Dentro vive un currículo eco-socio-emocional: el aliento y la presencia corporal, el relato y el canto, el oficio y el juego, el cuidado de las semillas y del agua, la revitalización de la lengua y la capacidad de convertir el conflicto en escucha. Los mayores enseñan; los niños llevan adelante. El modelo se extiende ahora a los Andes, donde está en desarrollo una <a href="/es/iniciativas/qero-alimentos-de-emergencia">escuela ancestral para la Nación Q&rsquo;ero</a>, y con el tiempo a otras naciones de la selva.</p>
         <p><a href="/es/iniciativas/escuela-ancestral-yahua">Apoya el crecimiento de la escuela &rarr;</a></p>
       </div>
       <div class="pt-prose" style="grid-area:23 / 3 / 32 / 23">
         <p>Aprender no exige marcharse. El <strong>campus virtual comunitario</strong> &mdash;hoy en fase de diseño piloto&mdash; mantiene la educación superior dentro de la vida rural, para que los jóvenes no tengan que abandonar su casa para crecer: proyectos finales como bancos de semillas, sistemas de agua potable, monitoreo de biodiversidad y programas de lengua, acompañados por mentores locales e instituciones aliadas. Junto a él, la <strong>certificación orgánica</strong> independiente y rutas de mercado basadas en el relato ayudan a los agricultores de la región a obtener ingresos justos sin dejar su tierra. La economía deja de erosionar la cultura y empieza a protegerla.</p>
       </div>
-      <div style="grid-area:33 / 5 / 45 / 21">
+      <!-- La mitad hacia fuera de este capítulo. Las escuelas ancestrales (arriba)
+           y la Escuela de Sabiduría Viva son los dos movimientos de una misma
+           idea, y este es el único lugar del sitio donde el lector encuentra
+           ambos a la vez — que es también lo que impide que "Centro de Sabiduría
+           Viva" (el edificio Yahua) y "Escuela de Sabiduría Viva" (el cuerpo
+           educativo) se lean como lo mismo. Todo aquí se presenta como algo en
+           formación, porque lo es. -->
+      <div class="pt-prose" style="grid-area:33 / 3 / 49 / 23">
+        <h3>Dos escuelas, un mismo movimiento</h3>
+        <p>Mantener viva la sabiduría exige dos cosas a la vez, y Paititi está construyendo ambas. Las escuelas ancestrales miran hacia dentro: acompañan a los mayores para que enseñen su propia lengua, sus cantos, su ceremonia y su conocimiento de las plantas directamente a los niños de sus propias comunidades, en su territorio y en sus propios términos. La escuela Yahua es la primera de ellas.</p>
+        <p>La <strong>Escuela de Sabiduría Viva</strong> mira hacia fuera. Hoy en formación, es el cuerpo educativo a través del cual personas de cualquier lugar pueden acercarse a estas tradiciones con honestidad &mdash; con la cosmovisión, la relación, la práctica y la integración que siempre las han rodeado, y no como técnicas separadas de su contexto. Su principio fundacional es que las tradiciones vivas sean representadas por sus propios maestros y mayores siempre que sea posible, en lugar de ser descritas en su nombre.</p>
+        <p>Las dos se sostienen mutuamente. Lo que aportan quienes participan ayuda a sostener las escuelas ancestrales, y las escuelas ancestrales mantienen vivas las tradiciones mismas que la escuela existe para presentar. Ninguna se sostiene sola. Los primeros materiales de la escuela ya están en marcha &mdash; los cursos en línea, los retiros y la mentoría individual&mdash; y el resto se está construyendo a la vista de todos.</p>
+        <p><a href="/es/cursos-en-linea">Explora los cursos</a> &nbsp;&middot;&nbsp; <a href="/es/retiros">Explora los retiros</a></p>
+      </div>
+      <div style="grid-area:50 / 5 / 62 / 21">
         <div class="pt-embed">
           <iframe src="https://www.youtube-nocookie.com/embed/tPmqXtte86M" title="Seed of the Heart Prophecy: uniendo a los mayores y a los niños de todo el mundo" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+      </div>
+      <div class="pt-prose in-center" style="grid-area:62 / 5 / 65 / 21">
+        <p><em>Seed of the Heart</em>: el minidocumental del Instituto sobre unir a los mayores y a los niños del mundo. <a href="/es/iniciativas/uniendo-mayores-y-ninos">Conoce la iniciativa &rarr;</a></p>
       </div>
     </div>
   </section>
@@ -245,21 +264,22 @@
   <!-- ===== One Living System ===== -->
   <section class="pt-sec in-plum" id="living-system">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:30">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:37">
       <div class="pt-prose" style="grid-area:1 / 5 / 6 / 21">
         <h2>Un solo sistema vivo</h2>
         <p>La transformación personal y el servicio al planeta no son dos actividades distintas: una madura hasta volverse la otra. Cada hilo de esta visión sostiene a los demás:</p>
       </div>
-      <div style="grid-area:6 / 5 / 24 / 21">
+      <div style="grid-area:6 / 5 / 31 / 21">
         <ul class="in-flows pt-prose">
           <li><strong>Cultura &harr; Clínicas.</strong> Los encuentros de sanación restauran la confianza en la medicina natural; esa confianza hace que el trabajo en salud sea eficaz y ético.</li>
           <li><strong>Escuela &harr; Tierra.</strong> Los niños estudian, cantan y siembran en el mismo lugar; la tierra alimenta a la escuela, y la escuela cría a quienes cuidarán la tierra.</li>
+          <li><strong>Escuelas ancestrales &harr; Escuela de Sabiduría Viva.</strong> Los mayores enseñan a sus propios niños en casa, y enseñan a estudiantes que llegan de otros lugares; lo que esos estudiantes aportan ayuda a mantener abierta la primera aula.</li>
           <li><strong>Aprendizaje &harr; Futuro de las comunidades.</strong> Los proyectos de los jóvenes reparan el agua, el suelo, la lengua y los medios de vida; una comunidad próspera desalienta la tala y la minería.</li>
           <li><strong>Medios de vida &harr; Cultura.</strong> Un ingreso justo reduce la presión de migrar; las familias se quedan, la cultura respira, los bosques siguen en pie.</li>
           <li><strong>Retiros &harr; Todo lo demás.</strong> El trabajo interior despierta la voluntad de servir, y durante veinte años lo recaudado en nuestros retiros ha financiado cada iniciativa sin fines de lucro de Paititi.</li>
         </ul>
       </div>
-      <div class="pt-prose" style="grid-area:25 / 5 / 31 / 21">
+      <div class="pt-prose" style="grid-area:32 / 5 / 38 / 21">
         <p>El libro de Roman <em>Beyond Ayahuasca</em>, éxito de ventas internacional en la categoría de chamanismo, une todos los hilos: el 100 % de las regalías de autor de Roman Hanis por <em>Beyond Ayahuasca</em> sostiene las iniciativas de educación indígena y preservación cultural del Instituto Paititi. Un libro infantil, <em>Seed of the Heart</em>, ya circula en la comunidad Yahua y va camino de publicarse.</p>
         <p><a href="/es/retiros">Conoce nuestros retiros</a> &nbsp;&middot;&nbsp; <a href="/es/beyond-ayahuasca">Sobre el libro</a> &nbsp;&middot;&nbsp; <a href="/es/#impact">Nuestro impacto en cifras</a></p>
       </div>
@@ -269,12 +289,12 @@
   <!-- ===== Walk with us ===== -->
   <section class="pt-sec in-white">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:55px;--pt-rows:22">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:55px;--pt-rows:19">
       <div class="pt-prose in-center" style="grid-area:1 / 5 / 5 / 21">
         <h2>Camina con nosotros</h2>
         <p>Cada hilo de esta visión está abierto a la participación: como donante, como lector, como participante de un retiro o como amigo de este trabajo.</p>
       </div>
-      <div style="grid-area:5 / 1 / 19 / 25">
+      <div style="grid-area:5 / 1 / 17 / 25">
         <div class="in-grid">
           <a class="in-card" href="/es/iniciativas/escuela-ancestral-yahua">
             <img src="/assets/retreats/beyond-ayahuasca-01.webp"
@@ -286,17 +306,26 @@
             <span>Centro de Patrimonio Cultural y Escuela Indígena Yahua</span>
           </a>
           <a class="in-card" href="/es/iniciativas/qero-alimentos-de-emergencia">
-            <img src="/assets/initiatives/covidaid-fbarticleimage.webp"
-           srcset="/assets/r/initiatives/covidaid-fbarticleimage-320w.webp 320w, /assets/r/initiatives/covidaid-fbarticleimage-480w.webp 480w, /assets/r/initiatives/covidaid-fbarticleimage-640w.webp 640w, /assets/r/initiatives/covidaid-fbarticleimage-800w.webp 800w, /assets/r/initiatives/covidaid-fbarticleimage-1080w.webp 1080w, /assets/initiatives/covidaid-fbarticleimage.webp 1200w"
-           sizes="(max-width:640px) 78vw, (max-width:1180px) 624px, 528px"
-           width="1200"
-           height="630"
-           decoding="async" alt="Ayuda alimentaria de emergencia para la Nación Q'ero durante la COVID" loading="lazy">
-            <span>Ayuda alimentaria de emergencia para la Nación Q'ero durante la COVID</span>
+            <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp"
+           srcset="/assets/r/home/whatsapp-image-2025-11-19-at-104324-320w.webp 320w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-480w.webp 480w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-640w.webp 640w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-800w.webp 800w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-1080w.webp 1080w, /assets/home/whatsapp-image-2025-11-19-at-104324.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 400px"
+           width="1280"
+           height="825"
+           decoding="async" alt="Mayores de la comunidad q'ero reunidos frente a una vivienda de piedra en los Andes" loading="lazy">
+            <span>Una escuela ancestral para la Nación Q&rsquo;ero</span>
+          </a>
+          <a class="in-card" href="/es/iniciativas/uniendo-mayores-y-ninos">
+            <img src="/assets/home/discoverpaititi-01.webp"
+           srcset="/assets/r/home/discoverpaititi-01-320w.webp 320w, /assets/r/home/discoverpaititi-01-480w.webp 480w, /assets/r/home/discoverpaititi-01-640w.webp 640w, /assets/r/home/discoverpaititi-01-800w.webp 800w, /assets/r/home/discoverpaititi-01-1080w.webp 1080w, /assets/r/home/discoverpaititi-01-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 400px"
+           width="2500"
+           height="1406"
+           decoding="async" alt="Un mayor yahua y varios niños reunidos bajo el techo de paja de una maloca comunitaria" loading="lazy">
+            <span>Uniendo a los mayores y a los niños del mundo</span>
           </a>
         </div>
       </div>
-      <div style="grid-area:20 / 8 / 22 / 18">
+      <div style="grid-area:18 / 8 / 20 / 18">
         <!-- The mind-map PDF itself is in English; only the label around it is translated. -->
         <a class="pt-btn" href="/s/Paititi-living-vision-mindmap.pdf" target="_blank" rel="noopener">Descarga el mapa mental de la Visión Viva</a>
       </div>

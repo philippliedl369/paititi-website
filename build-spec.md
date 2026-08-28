@@ -326,6 +326,203 @@ build work: (a) further newspaper and magazine clippings — scans go in `assets
 the markup template is in a comment in the page; (b) any coverage still missing from
 the list; (c) confirmation that `info@` is the right inbox for media enquiries.
 
+## The Living Wisdom School (opened 27 Aug 2026)
+
+Source: *Living Wisdom School — Updated Working Overview for Roman, Kelly & Joseph*,
+Paititi Institute, August 2026 (PDF, internal). It describes an umbrella educational
+ecosystem — the Evolutionary Blueprint as its map, lineage streams, a four-rite
+passage path, layered online learning, physical hubs, a council, membership stages —
+with a development sequence that puts **public launch in 2027** and 2026 as
+"Foundation and Story". Its §18 says the building of the school is itself the story,
+which is what licenses anything appearing on the site now.
+
+So this pass seeds the idea into pages that already exist. It does **not** build the
+school as a product.
+
+### The naming collision — decide before anything else ships
+
+"Living Wisdom" is now on the site in three senses, and two of them predate the doc:
+
+| Sense | Where | What it means |
+|---|---|---|
+| Living Wisdom **Center** | `SiteHeader.dc.html:172` (announcement bar), `InitiativeYagua.dc.html:147` + its meta description | a **building** at the Yahua site, and the current donation ask |
+| Living Wisdom **Courses** | `OnlineCourses.dc.html:137`, `Home.dc.html:192`, `DiscoverPaititi.dc.html:379` | the four Retreat Guru courses |
+| Living Wisdom **School** | the doc; now the new copy below | the umbrella body containing retreats, courses, mentorship |
+
+A donor who reads the announcement bar and then a school page cannot tell which one
+their money builds. The new copy mitigates this by defining the Center and the School
+against each other in the one place a reader meets both (`/initiatives#culture-learning`),
+but that is a patch, not the decision. Spanish carries the identical collision:
+*Centro de Sabiduría Viva* / *Cursos de Sabiduría Viva* / *Escuela de Sabiduría Viva*.
+
+**Proposed, pending Roman:** Center stays the Yahua building; School is the umbrella;
+"Living Wisdom Courses" as a section heading retires to plain "Courses" once the
+school has a page of its own. Not applied — it touches six files in two languages.
+
+### The Evolutionary Blueprint has two versions
+
+The doc's Blueprint is **seven** stages: Conditioning → The Call → Descent →
+Remembrance → Integration → Reciprocity → Service. The Blueprint course sold on
+`OnlineCourses.dc.html:150` is **five** chapters ("the call to evolve, crossing the
+line of no return, remembering the infinite, finding the way through the patterns of
+evolution, emerging from the dark night of the soul"). Same framework, earlier
+version — consistent with the doc's own 2027 line, "refine and relaunch the
+Evolutionary Blueprint". The additions at the front (Conditioning) and back
+(Reciprocity, Service) are exactly the turn toward the nonprofit work.
+
+Consequence: **no page may state a stage count until Roman settles it**, or the school
+copy and the course card contradict each other. Nothing shipped here names either.
+
+### Built, 27 Aug — six files, both language trees
+
+1. `/initiatives#culture-learning` — new "Two Schools, One Movement" block
+   (`Initiatives.dc.html`, `Initiatives.es.dc.html`). The chapter previously held only
+   the inward half (Yahua school, e-campus); this is the doc's §13 reciprocal
+   architecture, and the only place both "Living Wisdom" senses are defined together.
+   Grid: new block at rows 33–47 (EN) / 33–48 (ES), video pushed down, `--pt-rows`
+   44 → 60 (EN) / 61 (ES). Measured, not guessed.
+2. `/initiatives#living-system` — sixth flow line, "Ancestral schools ↔ Living Wisdom
+   School". `--pt-rows` 30 → 36 (EN) / 37 (ES).
+3. `/online-courses` — one paragraph under the catalogue heading naming these four as
+   the school's first materials, linking to the Initiatives chapter.
+4. `/retreats` — **The Rites of Passage Path**, four cards inside the existing framing
+   section (so the framing → Himalayan wave rhythm is untouched), plus new section ids
+   `#amazon-immersion` and `#himalayan-pilgrimage`, plus a closing note on §9 ("the
+   school happens between the rites").
+
+The rites section only works because two of the four rites are *already running*:
+Rite I is the Amazon 16-day immersion further down the page, Rite IV is the Himalayan
+Pilgrimage. Rites II and III carry explicit "In development" / "A longer horizon"
+markers and must never become bookable-looking without a real program behind them.
+
+**One editorial decision is load-bearing there.** The doc frames Rite IV as being for
+people "who have established greater grounding through practice and earlier
+experiences" — a prerequisite. The Himalayan Pilgrimage on the same page takes open
+registration with no prerequisite, so the copy says the ordering "describes how they
+relate to one another rather than a set of requirements". If Roman wants the
+prerequisites to be real, that sentence changes first, and registration has to change
+with it.
+
+Verified: no grid overlap and no horizontal scroll at 1440, 1190 and 390px in both
+trees; `apply_hreflang.py --check` in step; all six new internal links resolve.
+
+### Deliberately not built
+
+- **No `/living-wisdom-school` page.** Waiting on the naming decision and on how much
+  of the 2027 sequence Roman wants public. When it is built it follows the
+  `/initiatives` pattern (hero + sticky chapter subnav + chapters) and needs a Spanish
+  twin, `_redirects`, `sitemap.xml` and `tools/i18n_pairs.json`.
+- **No nav entry.** The school is a *parent* of Programs, not a sibling, so promoting
+  it before the page exists would restructure the header around nothing. Intended
+  placement: first item in Programs ▾, above the four programs.
+- **No dates on the site.** The 2027 launch and the 2028–2030 sequence stay internal;
+  published roadmaps age badly and this one has no committed resourcing.
+- **Kelly and Joseph are not named.** The Team page is Roman-only by his own 11 Aug
+  decision, and there are no bios, photos or consent. The copy says nothing about who
+  staffs the school.
+- **No named elders or teachers.** §19 says the council should grow through real
+  relationships rather than be assembled for appearance; a website faculty grid is the
+  same mistake in another form. No individuals, no consent, nothing published.
+- **No membership tiers, hubs or Rite III specifics.** Participant/Practitioner/
+  Steward/Mentor, the Peru / Bay Area / Korea / Thailand / Nepal hub list, and the deep
+  rainforest initiation are all speculative; only Rite III appears at all, marked as a
+  horizon with its safety preconditions stated.
+- **The doc itself is not published.** It is addressed to three named people and reads
+  as internal. A public-facing version would be a separate artifact, in the manner of
+  the Living Vision mind-map PDF.
+
+### Open — needs Roman
+
+1. **The naming decision above.** Blocks the dedicated page.
+2. **Blueprint stage count** — 7 stages, or keep the course's 5? Blocks any page that
+   describes the framework, and decides whether the course card gets rewritten.
+3. **Rite prerequisites** — map or gate? Decides whether the Himalayan registration
+   stays open to anyone.
+4. **How public is the roadmap?** Whether "2027" may appear on the site at all.
+5. **Kelly and Joseph** — named publicly as part of this, or not yet? If yes, bios,
+   photos and their own sign-off, and it reopens the Roman-only Team page decision.
+6. **Announcement bar** — it currently sells the Yahua Center. Does it stay that way
+   through the school's introduction, or does the school get its own moment?
+7. **Rite II (Andes)** — is the horseback pilgrimage real enough to name as in
+   development, or should it come off the page until there is a date?
+
+### Further work, in order
+
+1. Roman answers 1–3 above (the rest can wait).
+2. `/living-wisdom-school` — vision page on the `/initiatives` pattern; chapters from
+   §§1–5, 8–9, 13, 15, 18. Both languages, plus the four registration files.
+3. Nav entry in Programs ▾; re-point the four grafted links at the new page.
+4. Journal post — §18 is a content brief, "why we are building a school", website
+   first and Substack after with a canonical link back. Roman writes or reviews.
+   It also seeds the Phase 3 evergreen set, which is still empty.
+5. Only after all of that: anything resembling enrollment, and only once Retreat Guru
+   has a program behind it.
+
+## Elders & children, the Q'ero school, and reachable donations (27 Aug 2026)
+
+Philipp's batch of 27 Aug, all built in both language trees:
+
+1. **Third initiative page** — `/initiatives/uniting-elders-and-children`
+   (`InitiativeElders.dc.html`, ES `/es/iniciativas/uniendo-mayores-y-ninos`). The Seed of
+   the Heart initiative, sitting beside the Yahua and Q'ero pages: hero, the mini-documentary
+   (YouTube `tPmqXtte86M`, Nov 2025) with the prophecy framing, three "where the seed is
+   planted" cards (Yahua school, Q'ero school, the travelling workshops), a plum support
+   section with both Zeffy campaigns, and a pager. Built in flow like `/discoverpaititi` —
+   no fluid grid, nothing to measure. Every fact comes from the Institute's own published
+   copy: the video description (workshop reach — Amazon, Andes, Mexico, Oregon, Colorado,
+   New Mexico; collaborators in South America, US, Nepal, India, Africa, Australia) and the
+   existing site (children's book, royalties line). Nothing invented. Wired into the
+   Initiatives ▾ dropdown and mobile menu (both headers), `_redirects`, `tools/i18n_pairs.json`,
+   hreflang blocks and `sitemap.xml` via `apply_hreflang.py`.
+2. **The Q'ero page is no longer a 2021 COVID page.** `InitiativeQero.dc.html` keeps its URL
+   (`/initiatives/qero-nation-emergency-food-supply` — the slug is what's indexed and
+   linked; changing it buys nothing) but is retitled *An Ancestral School for the Q'ero
+   Nation*. New first section, in flow: the Feb 2026 short film (`UswFoaw2xPc`), the lead
+   from its description, the "what the school will support" list and the "how you can take
+   part" list from the Zeffy campaign page, the Q'ero elders photo, and the Zeffy link. The
+   2021 journey section is untouched below it, its first paragraph now opening "How it
+   began." — the title was left alone because a two-line title in that cell overlaps the
+   video (the one-line title already nearly touches it on the live replica).
+   **The old donation panel was dead**: it posted to `/api/checkout`, which `api.js` answers
+   with "unavailable" because `STRIPE_SECRET_KEY` is not set (Stripe went with the store).
+   It is now the Q'ero campaign's Zeffy embed
+   (`developing-ancestral-schools-for-the-qero-nation-in-the-peruvian-highlands`), section
+   id `#donate`, rows 13 → 16 for the 541px iframe; the DC component script is gone with it.
+   Hero gained a "Donate to the Q'ero school" button (rows 14–16). Pager now has Previous
+   (Yahua) *and* Next (Elders & children).
+3. **Donations are reachable.** The header Support/Apoyar button now lands on
+   `…yagua-…#donate`, and on the Yahua page that anchor is a new lilac strip *directly under
+   the hero* — copy left, the Zeffy embed right, in flow — instead of the form that used to
+   sit at row 61 of a 75-row section under two videos and the whole appeal. The appeal
+   section (`#expanding`) lost its duplicate iframe + note, the three `&nbsp;` paragraphs
+   went, and it ends on a "Donate through Zeffy" button back up to `#donate`; rows 75 → 64,
+   prose cell 31–61 (ink 986px in a 1093px cell at 1440, measured). The strip also
+   cross-links the Q'ero campaign, and the Q'ero donate section links back.
+4. **The elders video is back on `/discoverpaititi`** — a white section between "Choose
+   where to begin" and the name section (`#seed-of-the-heart`): kicker, title, one
+   paragraph, the embed, and two links (initiative page, `#donate`). It was never in
+   `DiscoverPaititi.dc.html` in git; it was on the Yahua page and `/initiatives` only.
+5. **`/press-media` Films** has a fourth card for the mini-documentary, placed second (the
+   Apr 2026 documentary is still the newest); `.pm-grid` is three across now so there is no
+   orphan. The film lead says "Four films". Lesson recorded: a `.pm-card` is an `<a>`, so no
+   links inside its copy — the parser closes the card at a nested anchor and the grid gets
+   four items.
+6. `/initiatives`: the Yahua paragraph's "in time, to the Q'ero" became "now extending to
+   the Andes … in development" with a link; the Seed of the Heart embed gained a caption
+   row linking the new page (`#culture-learning` rows 60 → 63 EN / 61 → 64 ES); Walk With
+   Us is three cards across (`.in-grid` 3 columns, photos 432 → 300px, section rows 22 →
+   19), the Q'ero card retitled and re-photographed (the Q'ero elders at the stone hut
+   instead of the COVID aid graphic).
+
+Verified over CDP at 1440, 1190 and 390 on every touched page in both languages: no
+horizontal overflow, no cell spill; the only sibling overlaps reported are the two the
+live replica already had (Q'ero journey title/video, the Yahua flower graphic).
+
+Open for Roman, non-blocking: (a) the Q'ero campaign's own photos — the page reuses the
+Nov 2025 Home/About shot; (b) whether the Seed of the Heart *book* should get a card of
+its own once it is published; (c) the announcement bar still sells only the Yahua Center
+now that two campaigns are open.
+
 ## Phase 3 — ongoing
 
 15 cornerstone evergreen articles, 2–3/month, Roman writes or reviews; facts about the
@@ -345,6 +542,11 @@ List in the working notes. Never blocks anything.
    distancehealing@paititi-institute.org; keep the separate inbox?
 
 Everything else in Phase 1 is buildable without him.
+
+A second, separate batch is now open on the Living Wisdom School — naming, the
+Blueprint stage count and whether the rites are a map or a gate are the three that
+block further build. See **The Living Wisdom School** above; the rest of that list can
+wait, and nothing already shipped depends on the answers.
 
 ## Roman-only: the Retreat Guru website field
 

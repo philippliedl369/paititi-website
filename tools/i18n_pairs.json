@@ -31,6 +31,7 @@
     { "file": "Initiatives.dc.html",      "en": "/initiatives",             "es": "/es/iniciativas" },
     { "file": "InitiativeYagua.dc.html",  "en": "/initiatives/yagua-cultural-heritage-center-indigenous-school", "es": "/es/iniciativas/escuela-ancestral-yahua" },
     { "file": "InitiativeQero.dc.html",   "en": "/initiatives/qero-nation-emergency-food-supply",                "es": "/es/iniciativas/qero-alimentos-de-emergencia" },
+    { "file": "InitiativeElders.dc.html", "en": "/initiatives/uniting-elders-and-children",                      "es": "/es/iniciativas/uniendo-mayores-y-ninos" },
     { "file": "InitiativeReserve.dc.html","en": "/initiatives/paititi-biocultural-reserve",                      "es": "/es/iniciativas/reserva-biocultural-paititi" },
 
     { "file": "Terms.dc.html",            "en": "/terms-conditions",        "es": "/es/terminos-y-condiciones" },

@@ -10,10 +10,10 @@
 <body>
 <x-dc>
 <helmet>
-<title>Ayuda alimentaria de emergencia para la Nación Q'ero durante la COVID | Instituto Paititi</title>
-<meta name="description" content="Durante los confinamientos por la COVID de 2021 en el Perú, el Instituto Paititi entregó alimentos esenciales a más de 600 familias en todo el país, entre ellas los mayores q'ero de los altos Andes y los pueblos Yahua y Bora de la Amazonía.">
-<meta property="og:title" content="Ayuda alimentaria de emergencia para la Nación Q'ero durante la COVID | Instituto Paititi">
-<meta property="og:description" content="Durante los confinamientos por la COVID de 2021 en el Perú, el Instituto Paititi entregó alimentos esenciales a más de 600 familias en todo el país, entre ellas los mayores q'ero de los altos Andes y los pueblos Yahua y Bora de la Amazonía.">
+<title>Una escuela ancestral para la Nación Q'ero | Instituto Paititi</title>
+<meta name="description" content="El Instituto Paititi extiende su iniciativa de escuelas ancestrales, del pueblo Yahua en la Amazonía a la Nación Q'ero en los altos Andes: un espacio vivo donde mayores y niños permanecen en continuidad cotidiana. Cómo empezó: ayuda alimentaria de emergencia a más de 600 familias durante los confinamientos de 2021.">
+<meta property="og:title" content="Una escuela ancestral para la Nación Q'ero | Instituto Paititi">
+<meta property="og:description" content="El Instituto Paititi extiende su iniciativa de escuelas ancestrales, del pueblo Yahua en la Amazonía a la Nación Q'ero en los altos Andes: un espacio vivo donde mayores y niños permanecen en continuidad cotidiana.">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="es_LA">
 <meta property="og:locale:alternate" content="en_US">
@@ -24,7 +24,7 @@
 <link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/iniciativas/qero-alimentos-de-emergencia">
 <link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/initiatives/qero-nation-emergency-food-supply">
 <!-- /i18n:hreflang -->
-<meta property="og:image" content="/assets/initiatives/screenshot-2025-08-01-at-95612-pm.webp">
+<meta property="og:image" content="/assets/home/whatsapp-image-2025-11-19-at-104324.webp">
 <meta name="theme-color" content="#2A1736">
 <link rel="icon" href="/assets/brand/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png">
@@ -38,72 +38,64 @@
 <link rel="stylesheet" href="/paititi.css">
 <script src="/_ds/meristem-design-system/_ds_bundle.js"></script>
 <style>
+  /* Gemela de InitiativeQero.dc.html — mismas reglas; solo cambia el texto. */
   .qe-hero{--pt-hero-h:1132px;--pt-bg:#210416;--pt-scrim:rgba(33,4,22,.15);--pt-hero-ink:#fff}
   .qe-hero h1{text-align:center}
-  /* The live title block carries backdrop-filter:blur(8px) and blends with
-     mix-blend-mode:screen — the soft frosted band behind the heading. */
   .qe-title{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);mix-blend-mode:screen}
+
+  .qe-school{--pt-bg:#F1EAF6;padding:88px 0 96px}
+  .qe-in{max-width:1324px;margin:0 auto;padding:0 58px}
+  .pt-page main .qe-kicker{display:block;font-size:13px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;line-height:1.4;color:#6B5378;margin:0 0 16px}
+  .pt-page main .qe-school h2{color:#584364}
+  .pt-page main .qe-lead{max-width:860px;margin:18px 0 0;font-size:19.2px}
+  .qe-feature{
+    margin-top:44px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);
+    background:#fff;border-radius:48px 0;overflow:hidden;
+    box-shadow:0 10px 30px rgba(33,4,22,.08);
+  }
+  .qe-feature .pt-embed{aspect-ratio:16/9;height:100%;background:#2A1736}
+  .qe-feature-body{padding:38px 40px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .pt-page main .qe-feature-body h3{font-family:var(--font-display);font-weight:400;
+    font-size:27px;line-height:1.28;letter-spacing:normal;color:#584364;margin:0}
+  .pt-page main .qe-feature-body p{font-weight:300;line-height:1.75;margin:0}
+  .qe-feature-body .pt-btn{align-self:flex-start;margin-top:8px;min-height:56px}
+  .qe-cols{margin-top:52px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+  .qe-photo{margin:0 0 24px}
+  .qe-photo img{width:100%;height:auto;display:block;border-radius:24px 0}
 
   .qe-story{--pt-bg:#584364;color:#fff}
   .qe-story h1,.qe-story p{color:#fff}
 
   .qe-give{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.25)}
 
-  /* Squarespace clips these three photos into different shapes. On the live
-     page they are unstretched fluid images: a square whose side is the cell's
-     shorter edge, centred in the cell, the photo cover-cropped into it and
-     the clip drawn on that square — not stretched over the whole cell. */
   .qe-circle img,.qe-squircle img,.qe-star img{
     inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);
     width:auto;height:auto;max-width:100%;max-height:100%;
     aspect-ratio:1;object-fit:cover}
   .qe-circle img{clip-path:circle(50% at 50% 50%)}
-  /* The squircle is the live page's bezier superellipse (#qe-squircle below). */
   .qe-squircle img{clip-path:url(#qe-squircle)}
   .qe-star img{clip-path:polygon(0 33%,16.5% 33%,16.5% 16.5%,33% 16.5%,33% 0,66% 0,66% 16.5%,83.5% 16.5%,83.5% 33%,100% 33%,100% 66%,83.5% 66%,83.5% 83.5%,66% 83.5%,66% 100%,33% 100%,33% 83.5%,16.5% 83.5%,16.5% 66%,0 66%)}
 
-  /* Donation panel — the Squarespace donation block, backed by Stripe here.
-     Translucent over the photo, with the amounts as inline pills. */
-  .qe-panel{background:rgba(241,234,246,.55);padding:36px 32px;min-height:519px;
-    display:flex;flex-direction:column;justify-content:center;gap:28px}
-  .qe-panel select{width:100%;height:34px;border:0;border-radius:0;background:transparent;
-    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416;
-    appearance:none;-webkit-appearance:none;cursor:pointer;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='12'%3E%3Cpath fill='%23210416' d='M0.44 1.5L1.56.5 9 8.87 16.44.5l1.12 1z'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 4px center}
-  .qe-amounts{display:flex;flex-wrap:wrap;gap:10px}
-  .qe-amounts button{padding:7px 18px;border:0;border-radius:999px;background:rgba(255,255,255,.75);
-    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416;cursor:pointer}
-  .qe-amounts button[data-on="1"]{background:#210416;color:#fff}
-  .qe-custom{width:100%;height:44px;padding:0 14px;border:1px solid rgba(33,4,22,.25);background:rgba(255,255,255,.75);
-    font-family:var(--font-body);font-size:17.6px;font-weight:300;letter-spacing:.08em;color:#210416}
-  .qe-fees{display:flex;align-items:flex-start;gap:10px;font-size:17.6px;font-weight:300;color:#210416}
-  .qe-fees input{margin-top:6px}
-  /* Full panel width like the selects above it, but only as tall as a normal
-     button: the fluid engine's fill-the-cell rule would otherwise stretch it
-     down the panel's whole remaining height. */
-  .qe-panel .qe-donate{width:100%;height:auto;min-height:63px;align-self:stretch;
-    padding:0 30px;font-size:19px;letter-spacing:.02em}
-  .qe-err{color:#A33;font-size:14.272px;margin:0}
+  .qe-zeffy{width:100%;height:100%;min-height:541px;border:0;display:block;
+    background:#fff;border-radius:32px 0;box-shadow:0 10px 30px rgba(33,4,22,.08)}
+  .qe-give .pt-prose a{color:#210416}
 
-  /* Portfolio pagination below the sections. */
-  .qe-pager{background:#fff;padding:44px 58px}
+  .qe-pager{background:#fff;padding:44px 58px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
   .qe-pager a{display:inline-block;text-decoration:none;color:#210416}
   .qe-pager .qe-pager-label{font-size:14.272px;display:block;margin-bottom:6px}
   .qe-pager h2{font-size:28.8px;line-height:1.3552;font-family:var(--font-display);font-weight:400;
     color:#210416;margin:0;letter-spacing:normal}
+  .qe-pager a:last-child{text-align:right}
 
   @media (max-width:1180px){
     .qe-hero h1{font-size:40px}
-    /* The 519px floor is the live block's height on desktop; on one column it
-       just adds dead space under a form that is already the right height. */
-    .qe-panel{min-height:0;padding:28px 22px;gap:22px}
-    /* The three clipped photos are centred in their grid cell by top/left 50%
-       plus a translate. Once the grid collapses and the shell puts images back
-       in flow, top/left stop applying but the translate does not — each photo
-       jumped half its own size up and to the left, over the paragraph above it.
-       On one column there is no cell to centre in: they are simply full-width
-       squares carrying the same clip shape. */
+    .qe-in{padding:0 24px}
+    .qe-school{padding:64px 0 72px}
+    .qe-feature{grid-template-columns:1fr;margin-top:34px}
+    .qe-feature .pt-embed{height:auto}
+    .qe-cols{grid-template-columns:1fr;gap:36px}
+    .qe-pager{padding:36px 24px}
     .qe-circle img,.qe-squircle img,.qe-star img{
       top:auto;left:auto;transform:none;
       width:100%;height:auto;max-width:100%;max-height:none;
@@ -111,25 +103,13 @@
   }
   @media (max-width:640px){
     .qe-hero h1{font-size:34px}
-    /* Presets to a two-up grid: as a wrapping flex row the five pills broke
-       2/2/1 with a ragged last line. */
-    .qe-amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .qe-amounts button:last-child{grid-column:1 / -1}
+    .qe-in{padding:0 20px}
+    .qe-school{padding:48px 0 56px}
+    .qe-feature{border-radius:32px 0}
+    .qe-feature-body{padding:28px 24px 30px}
+    .pt-page main .qe-feature-body h3{font-size:24px}
+    .qe-pager a:last-child{text-align:left}
   }
-
-  /* This is the page that takes money, so its controls are the ones that most
-     need to be thumb-sized. Measured at 390px before this: the presets were
-     35px tall, both selects 34px, and the fee checkbox 13px square. */
-  @media (pointer:coarse){
-    .qe-panel select{height:48px;padding-right:26px;background-position:right 4px center}
-    .qe-amounts button{min-height:48px;padding:7px 20px}
-    .qe-custom{height:48px}
-    /* A 13px checkbox is not reliably hittable; the whole label is a target
-       anyway, so give it a real row height too. */
-    .qe-fees{align-items:center;gap:14px;padding:6px 0}
-    .qe-fees input{width:22px;height:22px;margin-top:0;flex:0 0 auto;accent-color:#584364}
-  }
-  /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#fff}
 </style>
 </helmet>
@@ -148,17 +128,69 @@
            sizes="(max-width:640px) 100vw, (max-width:1180px) 100vw, 1440px"
            width="2500"
            height="1631"
-           decoding="async" alt="La comunidad q'ero recibiendo alimentos de emergencia en los altos Andes" loading="eager" fetchpriority="high">
+           decoding="async" alt="Integrantes de la comunidad q'ero reunidos en los altos Andes" loading="eager" fetchpriority="high">
     </div>
     <div class="pt-fluid" style="--pt-grid-top:228px;--pt-grid-bot:105px;--pt-rows:22">
       <div class="pt-vc qe-title" style="grid-area:8 / 4 / 13 / 22">
-        <h1><strong>Ayuda alimentaria de emergencia para la Nación Andina Q&rsquo;</strong>ero</h1>
+        <h1><strong>Una escuela ancestral para la Nación Q&rsquo;ero</strong></h1>
+      </div>
+      <div style="grid-area:14 / 9 / 16 / 17">
+        <a class="pt-btn" href="#donate">Donar a la escuela q&rsquo;ero</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== Journey ===== -->
-  <section class="pt-sec qe-story">
+  <!-- ===== La escuela ancestral ===== -->
+  <section class="pt-sec qe-school" id="ancestral-school" aria-label="Una escuela ancestral para la Nación Q'ero">
+    <div class="pt-sec-bg"></div>
+    <div class="qe-in">
+      <span class="qe-kicker">En desarrollo &middot; La iniciativa hoy</span>
+      <h2><strong>La escuela ancestral se extiende a la Nación Q&rsquo;ero</strong></h2>
+      <p class="qe-lead">Lo que empezó en la selva amazónica con la Escuela Ancestral Yahua se extiende ahora a los Andes. Nos preparamos para desarrollar una escuela ancestral para la Nación Q&rsquo;ero: un espacio vivo donde mayores y niños permanecen en continuidad cotidiana, y donde la lengua, la cosmovisión, el cuidado de la tierra y los ritos de paso se transmiten como responsabilidad vivida y no como espectáculo.</p>
+
+      <div class="qe-feature">
+        <div class="pt-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/UswFoaw2xPc" title="La escuela ancestral se extiende a la Nación Q'ero en los altos Andes" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="qe-feature-body">
+          <span class="qe-kicker">Cortometraje &middot; Febrero de 2026 &middot; En inglés</span>
+          <h3>La escuela ancestral se extiende a la Nación Q&rsquo;ero en los altos Andes</h3>
+          <p>Momentos de nuestro tiempo junto a nuestro querido mayor q&rsquo;ero, el Pampamesayoq Juan Gabriel Apaza Lunasco, que partió de este mundo en 2024 y cuya presencia sigue viva en las montañas, y junto a su hermano, el mayor q&rsquo;ero Pampamesayoq Benito Apaza, que nos acompañó de regreso a la aldea y ofreció sus bendiciones para la continuidad de este trabajo. La escuela está dedicada a la memoria de Juan Gabriel.</p>
+          <a class="pt-btn" href="https://www.zeffy.com/en-US/donation-form/developing-ancestral-schools-for-the-qero-nation-in-the-peruvian-highlands" target="_blank" rel="noopener">Apoya la escuela en Zeffy</a>
+        </div>
+      </div>
+
+      <div class="qe-cols">
+        <div class="pt-prose">
+          <h3>Qué sostendrá la Escuela Ancestral Q&rsquo;ero</h3>
+          <ul>
+            <li>Un espacio físico propio para la transmisión de los mayores a los jóvenes</li>
+            <li>La preservación de la lengua quechua y del conocimiento ceremonial</li>
+            <li>Educación en la tierra, arraigada en la ecología andina</li>
+            <li>Talleres intergeneracionales para niños y familias</li>
+            <li>Mejoras de infraestructura que den estabilidad a la comunidad</li>
+            <li>Continuidad cultural a largo plazo, más allá de los ingresos del turismo</li>
+          </ul>
+          <p>Esto no es un museo, ni preservación para espectadores. Las escuelas ancestrales restauran el puente entre generaciones, y la iniciativa q&rsquo;ero es el siguiente paso para unir la Amazonía y los Andes mediante una reciprocidad práctica, no romántica.</p>
+        </div>
+        <div class="pt-prose">
+          <div class="qe-photo">
+            <img src="/assets/home/whatsapp-image-2025-11-19-at-104324.webp"
+           srcset="/assets/r/home/whatsapp-image-2025-11-19-at-104324-320w.webp 320w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-480w.webp 480w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-640w.webp 640w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-800w.webp 800w, /assets/r/home/whatsapp-image-2025-11-19-at-104324-1080w.webp 1080w, /assets/home/whatsapp-image-2025-11-19-at-104324.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 852px, 590px"
+           width="1280"
+           height="825"
+           decoding="async" alt="Roman Hanis sentado en la hierba conversando con mayores q'ero frente a una vivienda de piedra y paja en los altos Andes" loading="lazy">
+          </div>
+          <h3>Cómo puedes participar</h3>
+          <p>Tu aporte va directamente a la preparación del terreno y los materiales de construcción, los materiales educativos, los viajes y la coordinación con los mayores q&rsquo;ero, un currículo arraigado en la tradición andina y la planificación de su sostenibilidad a largo plazo. El Instituto Paititi trabaja directamente con los líderes q&rsquo;ero para que la comunidad guíe cada paso, desde el diseño de la escuela hasta el aprendizaje de cada día. Cada donación, grande o pequeña, pasa a formar parte de un puente vivo entre generaciones. <a href="#donate">Dona más abajo &darr;</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Cómo empezó: el viaje de 2021 ===== -->
+  <section class="pt-sec qe-story" id="journey">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:63px;--pt-grid-bot:150px;--pt-rows:45">
       <div class="pt-vc" style="grid-area:1 / 1 / 6 / 14">
@@ -170,8 +202,8 @@
         </div>
       </div>
       <div class="pt-prose" style="grid-area:23 / 1 / 36 / 25">
-        <p>Durante los confinamientos por la COVID decretados por el gobierno del Perú en 2021, cuando el mundo se sentía más aislado que nunca, nuestro equipo del Instituto Paititi se reunió para servir en el espíritu de la Pachamama. Con el apoyo de nuestra comunidad global, entregamos alimentos esenciales a más de 600 familias en todo el Perú, entre ellas nuestros queridos mayores q&rsquo;ero de los altos Andes y los pueblos Yahua y Bora, en lo profundo de la selva amazónica.</p>
-        <p>Este video muestra un fragmento de nuestro viaje a la nación Q&rsquo;ero, donde llevamos más de una tonelada de alimentos de emergencia a dos de las aldeas de montaña más remotas, guiados por la petición sentida del mayor q'ero Juan Gabriel Apaza, fallecido hace dos años, y de su hijo Julián.</p>
+        <p><strong>Cómo empezó.</strong> Durante los confinamientos por la COVID decretados por el gobierno del Perú en 2021, cuando el mundo se sentía más aislado que nunca, nuestro equipo del Instituto Paititi se reunió para servir en el espíritu de la Pachamama. Con el apoyo de nuestra comunidad global, entregamos alimentos esenciales a más de 600 familias en todo el Perú, entre ellas nuestros queridos mayores q&rsquo;ero de los altos Andes y los pueblos Yahua y Bora, en lo profundo de la selva amazónica.</p>
+        <p>Este video muestra un fragmento de nuestro viaje a la nación Q&rsquo;ero, donde llevamos más de una tonelada de alimentos de emergencia a dos de las aldeas de montaña más remotas, guiados por la petición sentida del mayor q'ero Juan Gabriel Apaza, ya fallecido, y de su hijo Julián.</p>
         <p>Los q&rsquo;ero eligieron hace siglos las altitudes más frías y elevadas para preservar su libertad y su forma de vida. Pese a las duras condiciones, siguen viviendo con generosidad, valentía y una integridad profunda, encarnando valores que nuestro mundo moderno corre el riesgo de olvidar.</p>
         <p>Nos recibieron con los brazos abiertos y comidas compartidas, nos trataron con cuidado y nos recordaron lo que significa vivir en comunión con la Tierra y entre nosotros. A todas las personas que hicieron posible esta misión: gracias. Sus ofrendas se volvieron oraciones vivas en acción. Esto es activismo sagrado: recordar, responder y regenerar.</p>
       </div>
@@ -202,8 +234,8 @@
     </div>
   </section>
 
-  <!-- ===== Donate ===== -->
-  <section class="pt-sec qe-give">
+  <!-- ===== Donar ===== -->
+  <section class="pt-sec qe-give" id="donate" aria-label="Donar">
     <div class="pt-sec-bg">
       <img src="/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp"
            srcset="/assets/r/initiatives/unsplash-image-uo1hwtgi6ze-320w.webp 320w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-480w.webp 480w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-640w.webp 640w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-800w.webp 800w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1080w.webp 1080w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1280w.webp 1280w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1600w.webp 1600w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-2000w.webp 2000w, /assets/initiatives/unsplash-image-uo1hwtgi6ze.webp 2500w"
@@ -212,47 +244,28 @@
            height="1667"
            decoding="async" alt="" loading="lazy">
     </div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:13;--pt-row-h:28.4531px">
-      <div class="pt-prose pt-vc" style="grid-area:1 / 1 / 9 / 13">
+    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:16;--pt-row-h:28.4531px">
+      <div class="pt-prose pt-vc" style="grid-area:1 / 1 / 17 / 13">
         <h1>Genera un <span>impacto</span> hoy</h1>
-        <p>Apoya nuestra misión con una donación.</p>
+        <p>Tu aporte llega a la escuela ancestral q&rsquo;ero a través de Zeffy, que no cobra comisiones de plataforma. El Instituto Paititi está registrado en el Perú y cuenta con el patrocinio fiscal de Empowerment WORKS, una entidad sin fines de lucro 501(c)(3) de los Estados Unidos, por lo que las donaciones son deducibles de impuestos en ese país.</p>
+        <p><em>Para no dejar propina a Zeffy, edita el importe en la casilla de propina del formulario.</em></p>
+        <p>También abierta: <a href="/es/iniciativas/escuela-ancestral-yahua#donate">la campaña de la Escuela Ancestral Yahua &rarr;</a></p>
       </div>
-      <div class="qe-panel" style="grid-area:1 / 15 / 13 / 24">
-        <select id="q-fund" aria-label="Elige una iniciativa" onChange="{{ pickFund }}">
-          <option value="donation-qero">Iniciativa Nación Q'ero</option>
-          <option value="donation-yagua">Iniciativa Yahua</option>
-        </select>
-
-        <div class="qe-amounts">
-          <sc-for list="{{ amounts }}" as="a" hint-placeholder-count="5">
-            <button type="button" data-on="{{ a.active }}" onClick="{{ a.pick }}">{{ a.label }}</button>
-          </sc-for>
-        </div>
-        <sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}">
-          <input class="qe-custom" type="number" min="1" step="1" placeholder="Otro importe (USD)" onInput="{{ setCustom }}">
-        </sc-if>
-
-        <select id="q-freq" aria-label="Frecuencia de la donación" onChange="{{ pickFreq }}">
-          <option value="one_time">Donación única</option>
-          <option value="weekly">Donación semanal</option>
-          <option value="monthly" selected>Donación mensual</option>
-          <option value="quarterly">Donación trimestral</option>
-          <option value="yearly">Donación anual</option>
-        </select>
-
-        <label class="qe-fees"><input type="checkbox" onChange="{{ toggleFees }}"> <span>Ayúdanos cubriendo las comisiones que debemos pagar</span></label>
-
-        <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}"><p class="qe-err">{{ errorMsg }}</p></sc-if>
-        <button class="pt-btn qe-donate" type="button" onClick="{{ donate }}">Donar</button>
+      <div style="grid-area:1 / 14 / 17 / 24">
+        <iframe class="qe-zeffy" title="Formulario de donación de Zeffy" src="https://www.zeffy.com/embed/donation-form/developing-ancestral-schools-for-the-qero-nation-in-the-peruvian-highlands" allowtransparency="true" loading="lazy"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- ===== Previous project ===== -->
+  <!-- ===== Las otras iniciativas ===== -->
   <nav class="qe-pager" aria-label="Otras iniciativas">
     <a href="/es/iniciativas/escuela-ancestral-yahua">
       <span class="qe-pager-label">Anterior</span>
       <h2>Centro de Patrimonio Cultural y Escuela Indígena Yahua</h2>
+    </a>
+    <a href="/es/iniciativas/uniendo-mayores-y-ninos">
+      <span class="qe-pager-label">Siguiente</span>
+      <h2>Uniendo a los mayores y a los niños del mundo</h2>
     </a>
   </nav>
 
@@ -260,51 +273,5 @@
 <dc-import name="SiteFooter.es"></dc-import>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1400}}">
-class Component extends DCLogic {
-  state = { fund: 'donation-qero', amount: 5, custom: false, freq: 'monthly', fees: false, error: '' };
-  renderVals() {
-    const presets = [5, 10, 25, 50];
-    const amounts = presets.map((v) => ({
-      label: '$' + v.toFixed(2) + ' ',
-      active: !this.state.custom && this.state.amount === v ? '1' : '0',
-      pick: () => this.setState({ amount: v, custom: false, error: '' }),
-    }));
-    amounts.push({
-      label: 'Otro importe',
-      active: this.state.custom ? '1' : '0',
-      pick: () => this.setState({ custom: true, error: '' }),
-    });
-    return {
-      amounts,
-      isCustom: this.state.custom,
-      error: !!this.state.error,
-      errorMsg: this.state.error,
-      pickFund: (e) => this.setState({ fund: e.target.value }),
-      pickFreq: (e) => this.setState({ freq: e.target.value }),
-      toggleFees: (e) => this.setState({ fees: e.target.checked }),
-      setCustom: (e) => this.setState({ amount: Number(e.target.value) || 0 }),
-      donate: async () => {
-        const amount = Number(this.state.amount);
-        if (!amount || amount < 1) { this.setState({ error: 'Elige un importe para donar.' }); return; }
-        try {
-          const res = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({ items: [{ id: this.state.fund, qty: 1, amount, frequency: this.state.freq, coverFees: this.state.fees }] }),
-          });
-          const data = await res.json().catch(() => ({}));
-          if (res.ok && data.url) { location.href = data.url; return; }
-          // api.js answers in English and is shared with the English site, so
-          // the Spanish wording is chosen here rather than read from data.error.
-          this.setState({ error: 'No pudimos iniciar el pago. Inténtalo de nuevo en unos minutos.' });
-        } catch (err) {
-          this.setState({ error: 'No pudimos iniciar el pago. Inténtalo de nuevo en unos minutos.' });
-        }
-      },
-    };
-  }
-}
-</script>
 </body>
 </html>
