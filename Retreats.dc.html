@@ -196,12 +196,20 @@
        all point here. The iframe's exclude list hides programs that already
        have a hand-built section below, so nothing is listed twice; anything
        newly posted on Retreat Guru appears here automatically. Starts
-       collapsed and opens only when unlisted programs exist. -->
+       collapsed and opens only when unlisted programs exist.
+
+       cat= lists every in-person category Retreat Guru offers, not just
+       "retreat": the widget filters on category, and a program shows only if
+       it carries one of these. The Redding breathwork immersion (28 Aug 2026)
+       was posted as breathwork-retreat / transformation-retreats /
+       us-mexico-programs with no "retreat" tag and so was invisible here.
+       "breathwork" and "online-resources" are deliberately left out — those
+       are the online courses' categories, and they belong on /online-courses. -->
   <section class="pt-sec rt-listings rt-listings-empty" id="rbg-listings">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:1">
       <div style="grid-area:1 / 1 / 2 / 25">
-        <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat&amp;exclude=amazon-16-day-embodying-true-nature-immersion" title="Upcoming retreats and events" style="height:120px" loading="lazy"></iframe>
+        <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat,breathwork-retreat,transformation-retreats,embodying-true-nature-retreats,peru-programs,us-mexico-programs&amp;exclude=amazon-16-day-embodying-true-nature-immersion" title="Upcoming retreats and events" style="height:120px" loading="lazy"></iframe>
       </div>
     </div>
   </section>

@@ -27,6 +27,7 @@
     638: '/online-courses#primordial-breathwork',          // Primordial Breathwork
     997: '/online-courses#practical-alchemy-series',       // Beyond Ayahuasca book Practical Alchemy Series
     1046: '/retreats',                                     // Amazon: 16-day Embodying True Nature Immersion
+    1075: '/retreats#events',                              // Redding, CA: Primordial Breathwork Immersion (listed by the widget, no hand-built section)
   };
 
   var id = new URLSearchParams(location.search).get('program');
