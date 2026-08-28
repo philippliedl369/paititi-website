@@ -22,6 +22,9 @@
 /online-courses      /OnlineCourses.dc.html    200
 /beyond-ayahuasca    /BeyondAyahuasca.dc.html  200
 /mentorship          /Mentorship.dc.html       200
+# Unpublished 28 Aug 2026 — the page is finished but held back. Uncomment both
+# lines (and see the note at the top of LivingWisdomSchool.dc.html) to restore.
+#/living-wisdom-school  /LivingWisdomSchool.dc.html  200
 # The old /courses path 404'd on the live site but still has external links.
 /courses             /online-courses           301
 # Old Squarespace events page, still linked from migrated blog posts.
@@ -174,6 +177,7 @@
 /es/cursos-en-linea      /OnlineCourses.es.dc.html 200
 /es/beyond-ayahuasca     /BeyondAyahuasca.es.dc.html 200
 /es/mentoria             /Mentorship.es.dc.html    200
+#/es/escuela-de-sabiduria-viva  /LivingWisdomSchool.es.dc.html  200
 
 # Sanación a Distancia. The two payment pages are emailed to an applicant
 # rather than browsed to, exactly as on the English side.

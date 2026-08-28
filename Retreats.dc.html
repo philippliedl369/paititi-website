@@ -79,33 +79,6 @@
   .rt-copy{max-width:960px;margin:0 auto;padding:95px 24px;text-align:center}
   .rt-copy h2{color:#584364}
   @media (max-width:1180px){.rt-copy{padding:64px 24px}}
-
-  /* ---- The rites of passage path --------------------------------------------
-     Four passages in one column, inside the framing section rather than a new
-     one, so the framing -> Himalayan wave rhythm is untouched. Each carries a
-     status marker and this is load-bearing: Rites I and IV are programs that
-     are actually running further down this page, II and III are not offered
-     and must never read as though a reader could book them. The heading margin
-     is restated at (0,2,2) because .pt-prose > h3 sets 32px and the rite
-     number, not the heading, is the first child — see the specificity note at
-     the top of paititi.css. */
-  .rt-copy-tight{padding-bottom:36px}
-  .rt-rites{max-width:960px;margin:0 auto;padding:0 24px 95px;
-    display:grid;gap:20px;text-align:left}
-  .rt-rite{background:#F1EAF6;border-radius:32px 0;padding:26px 32px}
-  /* .pt-prose > * adds a 16px bottom margin that would stack on top of the
-     grid gap; the gap owns the rhythm here. */
-  .pt-page main .rt-rites > .rt-rite{margin:0}
-  .rt-rite-n{display:block;font-family:var(--font-display);font-size:15.5px;
-    letter-spacing:.09em;text-transform:uppercase;color:#584364;margin-bottom:4px}
-  .pt-page main .rt-rite > h3{margin:0 0 10px}
-  .rt-rite-status{margin-top:16px;font-size:16px;color:#584364}
-  .rt-rite-status b{font-weight:700}
-  @media (max-width:1180px){
-    .rt-copy-tight{padding-bottom:28px}
-    .rt-rites{padding:0 24px 64px}
-    .rt-rite{padding:22px 24px;border-radius:28px 0}
-  }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#F1EAF6}
 </style>
@@ -144,49 +117,8 @@
   <!-- ===== What a retreat here is ===== -->
   <section class="pt-sec rt-white">
     <div class="pt-sec-bg"></div>
-    <div class="rt-copy rt-copy-tight pt-prose">
-      <p class="pt-lg">Retreats at Paititi are not an escape from ordinary life. They are immersive spaces for remembering what becomes possible when ancestral practice, contemplative inquiry, nature and community are brought together, and for learning to carry that remembrance back into relationship, family, work and service.</p>
-      <h2><strong>The Rites of Passage Path</strong></h2>
-      <!-- The ordering is a map, not a gate. Said plainly here because the
-           Himalayan journey below takes open registration with no prerequisite,
-           and a page that implies a required sequence would contradict its own
-           booking links. If prerequisites ever become real, this line changes
-           first. -->
-      <p>Our journeys are being drawn together into a longer path &mdash; four passages, each asking something different of the person who walks it. The ordering describes how they relate to one another rather than a set of requirements: each is open on its own terms, and two of them are running now.</p>
-    </div>
-    <div class="rt-rites pt-prose">
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rite I &mdash; Amazon</span>
-        <h3>Embodying True Nature</h3>
-        <p>The foundational immersion: body, breath, nature, shadow, dream, community, Indigenous worldview, ceremony, and the relationship between healing and self-recognition. Sacred plant practices sit inside a much larger frame of worldview, responsibility and integration rather than standing on their own.</p>
-        <p class="rt-rite-status"><b>Running now.</b> <a href="#amazon-immersion">See the 16-day immersion below &darr;</a></p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rite II &mdash; Andes</span>
-        <h3>The Hero&rsquo;s Journey</h3>
-        <p>An extended pilgrimage through Andean landscapes, turning on courage, intention, uncertainty, relationship with the mountains, discipline, offering and embodied prayer.</p>
-        <p class="rt-rite-status"><b>In development.</b> Not yet open for registration.</p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rite III &mdash; Deep rainforest</span>
-        <h3>Radical Relationship</h3>
-        <p>A wilderness initiation undertaken with experienced Indigenous guidance. The principle is not survival against nature but the recognition that human life has always depended on relationship with a living ecosystem.</p>
-        <p class="rt-rite-status"><b>A longer horizon.</b> It would require Indigenous leadership, careful participant selection, health screening and substantial safety planning before it could ever be offered.</p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rite IV &mdash; Himalayas</span>
-        <h3>Nature of Mind</h3>
-        <p>Pilgrimage, contemplative practice, silence and mind training, alongside encounters with Himalayan teachers and lineages. The Himalayas are not placed above the Indigenous traditions here; they open another face of the same map.</p>
-        <p class="rt-rite-status"><b>Running now.</b> <a href="#himalayan-pilgrimage">See the Nepal pilgrimage below &darr;</a></p>
-      </div>
-
-    </div>
     <div class="rt-copy pt-prose">
-      <p>Between the journeys is where most of the work happens &mdash; practice, integration and community in ordinary life, when nothing extraordinary is going on. Holding that continuity is what the <strong>Living Wisdom School</strong> is being built to do. <a href="/initiatives#culture-learning">How it fits together &rarr;</a></p>
+      <p class="pt-lg">Retreats at Paititi are not an escape from ordinary life. They are immersive spaces for remembering what becomes possible when ancestral practice, contemplative inquiry, nature and community are brought together, and for learning to carry that remembrance back into relationship, family, work and service.</p>
     </div>
   </section>
 
@@ -215,8 +147,7 @@
   </section>
 
   <!-- ===== Himalayan Pilgrimage ===== -->
-  <!-- id: target of the Rite IV link in the rites path above. -->
-  <section class="pt-sec rt-band" id="himalayan-pilgrimage">
+  <section class="pt-sec rt-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:24">
       <div class="pt-prose" style="grid-area:1 / 1 / 25 / 12">
@@ -242,8 +173,7 @@
   </section>
 
   <!-- ===== Amazon December immersion ===== -->
-  <!-- id: target of the Rite I link in the rites path above. -->
-  <section class="pt-sec rt-white" id="amazon-immersion">
+  <section class="pt-sec rt-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:15">
       <div class="pt-fit" style="grid-area:1 / 1 / 14 / 11">

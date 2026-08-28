@@ -81,33 +81,6 @@
   .rt-copy{max-width:960px;margin:0 auto;padding:95px 24px;text-align:center}
   .rt-copy h2{color:#584364}
   @media (max-width:1180px){.rt-copy{padding:64px 24px}}
-
-  /* ---- El camino de los ritos de paso ----------------------------------------
-     Cuatro pasajes en una columna, dentro de la sección de encuadre y no en una
-     nueva, para no alterar el ritmo de olas encuadre -> Himalaya. Cada uno lleva
-     un marcador de estado, y eso es esencial: los ritos I y IV son programas que
-     realmente están en marcha más abajo en esta página; el II y el III no se
-     ofrecen y nunca deben leerse como si se pudieran reservar. El margen del
-     encabezado se vuelve a declarar con (0,2,2) porque .pt-prose > h3 fija 32px
-     y el primer hijo es el número del rito, no el encabezado — véase la nota
-     sobre especificidad al inicio de paititi.css. */
-  .rt-copy-tight{padding-bottom:36px}
-  .rt-rites{max-width:960px;margin:0 auto;padding:0 24px 95px;
-    display:grid;gap:20px;text-align:left}
-  .rt-rite{background:#F1EAF6;border-radius:32px 0;padding:26px 32px}
-  /* .pt-prose > * añade un margen inferior de 16px que se sumaría al gap de la
-     grilla; aquí el ritmo lo define el gap. */
-  .pt-page main .rt-rites > .rt-rite{margin:0}
-  .rt-rite-n{display:block;font-family:var(--font-display);font-size:15.5px;
-    letter-spacing:.09em;text-transform:uppercase;color:#584364;margin-bottom:4px}
-  .pt-page main .rt-rite > h3{margin:0 0 10px}
-  .rt-rite-status{margin-top:16px;font-size:16px;color:#584364}
-  .rt-rite-status b{font-weight:700}
-  @media (max-width:1180px){
-    .rt-copy-tight{padding-bottom:28px}
-    .rt-rites{padding:0 24px 64px}
-    .rt-rite{padding:22px 24px;border-radius:28px 0}
-  }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#F1EAF6}
 </style>
@@ -146,49 +119,8 @@
   <!-- ===== What a retreat here is ===== -->
   <section class="pt-sec rt-white">
     <div class="pt-sec-bg"></div>
-    <div class="rt-copy rt-copy-tight pt-prose">
-      <p class="pt-lg">Los retiros en Paititi no son una huida de la vida cotidiana. Son espacios inmersivos para recordar lo que se vuelve posible cuando la práctica ancestral, la indagación contemplativa, la naturaleza y la comunidad se reúnen, y para aprender a llevar ese recuerdo de vuelta a los vínculos, la familia, el trabajo y el servicio.</p>
-      <h2><strong>El camino de los ritos de paso</strong></h2>
-      <!-- El orden es un mapa, no una puerta. Se dice con claridad porque el
-           viaje al Himalaya de más abajo tiene inscripción abierta sin requisito
-           previo, y una página que insinuara una secuencia obligatoria se
-           contradiría con sus propios enlaces de reserva. Si alguna vez existen
-           requisitos reales, esta línea es la primera que cambia. -->
-      <p>Nuestros viajes se están reuniendo en un camino más largo: cuatro pasajes, cada uno con una exigencia distinta para quien lo recorre. El orden describe cómo se relacionan entre sí, no una serie de requisitos: cada uno está abierto en sus propios términos, y dos de ellos ya están en marcha.</p>
-    </div>
-    <div class="rt-rites pt-prose">
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rito I &mdash; Amazonía</span>
-        <h3>Encarnar la verdadera naturaleza</h3>
-        <p>La inmersión fundacional: cuerpo, respiración, naturaleza, sombra, sueño, comunidad, cosmovisión indígena, ceremonia y la relación entre la sanación y el reconocimiento de uno mismo. Las prácticas con plantas sagradas se sostienen dentro de un marco mucho más amplio de cosmovisión, responsabilidad e integración, y no por sí solas.</p>
-        <p class="rt-rite-status"><b>En marcha.</b> <a href="#amazon-immersion">Ver la inmersión de 16 días más abajo &darr;</a></p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rito II &mdash; Andes</span>
-        <h3>El viaje del héroe</h3>
-        <p>Un peregrinaje extenso por los paisajes andinos, en torno al coraje, la intención, la incertidumbre, la relación con las montañas, la disciplina, la ofrenda y la oración encarnada.</p>
-        <p class="rt-rite-status"><b>En desarrollo.</b> Aún no está abierto a inscripción.</p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rito III &mdash; Selva profunda</span>
-        <h3>Relación radical</h3>
-        <p>Una iniciación en la naturaleza silvestre, guiada por personas indígenas con experiencia. El principio no es sobrevivir contra la naturaleza, sino reconocer que la vida humana siempre ha dependido de su relación con un ecosistema vivo.</p>
-        <p class="rt-rite-status"><b>Un horizonte más lejano.</b> Requeriría liderazgo indígena, una selección cuidadosa de participantes, evaluación de salud y una preparación sustancial de seguridad antes de poder ofrecerse.</p>
-      </div>
-
-      <div class="rt-rite">
-        <span class="rt-rite-n">Rito IV &mdash; Himalaya</span>
-        <h3>La naturaleza de la mente</h3>
-        <p>Peregrinaje, práctica contemplativa, silencio y entrenamiento de la mente, junto a encuentros con maestros y linajes del Himalaya. El Himalaya no se sitúa por encima de las tradiciones indígenas: abre otra cara del mismo mapa.</p>
-        <p class="rt-rite-status"><b>En marcha.</b> <a href="#himalayan-pilgrimage">Ver el peregrinaje a Nepal más abajo &darr;</a></p>
-      </div>
-
-    </div>
     <div class="rt-copy pt-prose">
-      <p>Entre un viaje y otro ocurre la mayor parte del trabajo: la práctica, la integración y la comunidad en la vida cotidiana, cuando no sucede nada extraordinario. Sostener esa continuidad es lo que la <strong>Escuela de Sabiduría Viva</strong> se está construyendo para hacer. <a href="/es/iniciativas#culture-learning">Cómo encaja todo &rarr;</a></p>
+      <p class="pt-lg">Los retiros en Paititi no son una huida de la vida cotidiana. Son espacios inmersivos para recordar lo que se vuelve posible cuando la práctica ancestral, la indagación contemplativa, la naturaleza y la comunidad se reúnen, y para aprender a llevar ese recuerdo de vuelta a los vínculos, la familia, el trabajo y el servicio.</p>
     </div>
   </section>
 
@@ -211,8 +143,7 @@
   </section>
 
   <!-- ===== Himalayan Pilgrimage ===== -->
-  <!-- id: destino del enlace del Rito IV en el camino de ritos de arriba. -->
-  <section class="pt-sec rt-band" id="himalayan-pilgrimage">
+  <section class="pt-sec rt-band">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:24">
       <div class="pt-prose" style="grid-area:1 / 1 / 25 / 12">
@@ -238,8 +169,7 @@
   </section>
 
   <!-- ===== Amazon December immersion ===== -->
-  <!-- id: destino del enlace del Rito I en el camino de ritos de arriba. -->
-  <section class="pt-sec rt-white" id="amazon-immersion">
+  <section class="pt-sec rt-white">
     <div class="pt-sec-bg"></div>
     <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:15">
       <div class="pt-fit" style="grid-area:1 / 1 / 14 / 11">

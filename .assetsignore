@@ -33,3 +33,10 @@ website-redo-spec.pdf
 # Scratch probe harnesses. Untracked, but `wrangler deploy` uploads the folder
 # rather than the commit, so anything left lying here would be served.
 _probe*.html
+
+# Held back, 28 Aug 2026. The Living Wisdom School introduction is finished and
+# kept in the repo, but must not reach the live site yet — Roman wants to settle
+# how it is introduced first. Anchored with a leading slash: an unanchored name
+# would match at any depth (see the note at the top of this file).
+/LivingWisdomSchool.dc.html
+/LivingWisdomSchool.es.dc.html
