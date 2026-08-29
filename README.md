@@ -51,6 +51,7 @@ maps clean URLs via `_redirects`).
 | Distance Healing — a *separate* Squarespace 7.0 site at `paititidistancehealing.com` | Folded into this one. Its nav pages are six tab panels on `/distance-healing` (hash-driven, so the old paths 301 onto `#hashes` and the page selects the tab); the Home Study Course promo moved to `/online-courses`, and the two JotForm payment pages stay separate under `/distance-healing/*` |
 | Blog CMS (8 posts, 4 categories) | Statically generated: `tools/migrate_blog.py` renders `data/blog/posts.json` into `Blog*.dc.html` in both languages. It used to pull Squarespace `?format=json`; that feed is gone, so the posts now come from a local snapshot (`tools/blog_snapshot.py`) |
 | Announcement bar | Baked into `SiteHeader.dc.html` |
+| Link previews (title + social card in the raw `<head>`) | `tools/apply_head_meta.py`. Every page declares its meta inside `<x-dc><helmet>`, which `support.js` only moves into the head at *runtime* — invisible to WhatsApp, Messages, Slack, Facebook and LinkedIn, none of which run JavaScript. It moves those tags into the real `<head>`, absolutises `og:image` onto a JPEG card under `assets/social/`, and gives the blog posts the card image they never had. Runs last in the pipeline; idempotent |
 | Clean URLs / legacy URLs | `_redirects` (incl. old encoded category URLs, `/home`, `/the-institute`, `/s/*.pdf`) |
 
 ## Going live — secrets to set

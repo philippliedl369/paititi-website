@@ -49,6 +49,11 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# One wording for why the meta is in <head>, shared with the tool that puts
+# it there on every other page.
+from apply_head_meta import NOTE
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://paititi-institute.org'
 RG = 'https://paititi-institute.secure.retreat.guru'
@@ -307,14 +312,7 @@ PAGE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<!-- The title and the social card sit in the real <head>, not in <helmet>
-     below, and that is deliberate. <helmet> is appended to the head by
-     support.js *at runtime*; the crawlers that build a link preview — WhatsApp,
-     Messages, Slack, Facebook, LinkedIn — read the HTML as it arrives and run
-     no JavaScript. A page whose og:title only exists after render pastes into a
-     chat as a bare URL, which is precisely what these pages exist to avoid.
-     Every other page on the site still declares its meta inside <helmet>; see
-     the note in docs/seo.md. -->
+{note}
 <title>{title} | Paititi Institute</title>
 <meta name="description" content="{description}">
 <meta property="og:title" content="{title} | Paititi Institute">
@@ -654,6 +652,7 @@ def render(p, others):
     }, ensure_ascii=False)
 
     return PAGE.format(
+        note=NOTE,
         site=SITE, url=url, title=esc(title),
         description=htmllib.escape(desc, quote=True),
         photo=photo,

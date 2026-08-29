@@ -113,6 +113,13 @@ body { margin: 0; background: #F1EAF6 }
 .pt-btn:hover { background: #2A1736; color: #fff }
 .pt-btn-light { background: #fff; color: #000 }
 .pt-btn-light:hover { background: #F1EAF6; color: #000 }
+/* Keeps the label white on dark photos and plum bands, where .pt-btn-light's
+   white fill forces the label black. Same shape and weight as .pt-btn — only
+   the fill changes. These are the values the home hero's own ghost button has
+   used since the replica was built; this promotes them to the shared set so
+   every "support" CTA can carry a white label. */
+.pt-btn-ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.8) }
+.pt-btn-ghost:hover { background: rgba(255,255,255,.14); color: #fff }
 /* A button block fills its grid cell rather than sizing to its label. */
 .pt-fluid .pt-btn { width: 100%; height: 100%; padding: 0 20.8px; font-size: 19.2px; letter-spacing: .384px }
 

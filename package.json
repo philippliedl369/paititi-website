@@ -12,7 +12,8 @@
     "deploy:cloudflare": "wrangler deploy",
     "sync-assets": "python3 tools/sync_assets.py",
     "migrate-blog": "python3 tools/migrate_blog.py",
-    "gen-retreats": "python3 tools/gen_retreats.py && python3 tools/apply_hreflang.py"
+    "gen-retreats": "python3 tools/gen_retreats.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py",
+    "head-meta": "python3 tools/apply_head_meta.py"
   },
   "engines": {
     "node": ">=20"

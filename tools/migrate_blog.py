@@ -865,15 +865,21 @@ def main():
     snap = load_snapshot()
     load_translations()
 
-    def normalise(html):
+    def normalise(html, fname):
         """Strip what the *later* passes add, so --check compares this one's work.
 
         The blog pipeline is migrate_blog.py -> gen_responsive.py ->
-        apply_hreflang.py. The second wires srcset/sizes/width/height into every
-        <img>; the third inserts a rel=alternate block and a `sister` prop.
-        Comparing raw output against a fully processed page would report all
-        three as differences and make --check useless the moment the pipeline
-        has been run once.
+        apply_hreflang.py -> apply_head_meta.py. The second wires
+        srcset/sizes/width/height into every <img>; the third inserts a
+        rel=alternate block and a `sister` prop; the fourth moves the title and
+        the social card out of <helmet> and into the real <head>. Comparing raw
+        output against a fully processed page would report all four as
+        differences and make --check useless the moment the pipeline has been
+        run once.
+
+        The last one is *applied* rather than stripped: it is a pure function of
+        the page, so running it over this pass's fresh output puts both sides in
+        the same shape without this file having to know what it does.
         """
         def one_img(m):
             keep = re.findall(r'\b(?:src|alt|loading)="[^"]*"', m.group(0))
@@ -881,7 +887,13 @@ def main():
         html = re.sub(r'<img\b[^>]*>', one_img, html)
         html = re.sub(r'<!-- i18n:hreflang.*?<!-- /i18n:hreflang -->\n?', '', html, flags=re.S)
         html = re.sub(r'\s+sister="[^"]*"', '', html)
-        return html
+        # og:url is copied from the canonical, which the line above just took
+        # out — so on a processed page it survives while this pass, which never
+        # writes a canonical, cannot produce one.
+        html = re.sub(r'[ \t]*<meta property="og:url"[^>]*>\n?', '', html)
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from apply_head_meta import transform
+        return transform(html, fname)
 
     failed = 0
     for key in ('en', 'es'):
@@ -895,7 +907,7 @@ def main():
                     print(f'  [{key}] MISSING  {fname}')
                     failed += 1
                     continue
-                if normalise(on_disk) != normalise(html):
+                if normalise(on_disk, fname) != normalise(html, fname):
                     print(f'  [{key}] DIFFERS  {fname}')
                     failed += 1
         else:
