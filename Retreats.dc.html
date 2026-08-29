@@ -79,6 +79,14 @@
   .rt-copy{max-width:960px;margin:0 auto;padding:95px 24px;text-align:center}
   .rt-copy h2{color:#584364}
   @media (max-width:1180px){.rt-copy{padding:64px 24px}}
+  /* While Retreat Guru has a program to list, the framing copy sits directly
+     above the listings heading, and two full bands of air read as a hole.
+     Scoped to the open state only: collapsed, the framing section runs into
+     the Himalayan band and keeps the wider rhythm. */
+  .pt-sec:has(+ .rt-listings:not(.rt-listings-empty)) .rt-copy{padding-bottom:48px}
+  @media (max-width:1180px){
+    .pt-sec:has(+ .rt-listings:not(.rt-listings-empty)) .rt-copy{padding-bottom:32px}
+  }
   /* The footer wave must match this page's final section colour. */
   footer.pt-footer{--pt-footer-wave:#F1EAF6}
 </style>
@@ -139,7 +147,7 @@
        are the online courses' categories, and they belong on /online-courses. -->
   <section class="pt-sec rt-listings rt-listings-empty" id="rbg-listings">
     <div class="pt-sec-bg"></div>
-    <div class="pt-fluid" id="events" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:1">
+    <div class="pt-fluid" id="events" style="--pt-grid-top:40px;--pt-grid-bot:95px;--pt-rows:1">
       <div style="grid-area:1 / 1 / 2 / 25">
         <iframe class="rt-frame" id="rbg-frame" src="/rbg-widget.html?cat=events,retreat,breathwork-retreat,transformation-retreats,embodying-true-nature-retreats,peru-programs,us-mexico-programs&amp;exclude=amazon-16-day-embodying-true-nature-immersion" title="Upcoming retreats and events" style="height:120px" loading="lazy"></iframe>
       </div>
