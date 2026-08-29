@@ -76,6 +76,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/contact"/>
   </url>
   <url>
+    <loc>https://paititi-institute.org/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/support"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/support"/>
+  </url>
+  <url>
+    <loc>https://paititi-institute.org/es/apoyar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/support"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/apoyar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://paititi-institute.org/support"/>
+  </url>
+  <url>
     <loc>https://paititi-institute.org/retreats</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://paititi-institute.org/retreats"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://paititi-institute.org/es/retiros"/>

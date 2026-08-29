@@ -124,8 +124,8 @@ redirects for existing pages** — the strongest possible SEO position. Policy:
   path with live external links), `/journal → /blog`, plus the ancient paths in row 11
   above, targeted at their nearest current page.
 - Nav labels are free to say "Journal" while the URL stays `/blog` (Roman decision #5).
-- `/support` only if Roman wants a support page later; the Donate button targets the
-  Yagua initiative page today and keeps doing so.
+- `/support` exists since 28 Aug 2026 (Roman asked for all initiatives behind the
+  Support button, not only Yahua); see **The Support page** below. `/donate` 301s there.
 
 ## Phase 1 — everything before 20 August
 
@@ -447,6 +447,40 @@ Open for Roman, non-blocking: (a) the Q'ero campaign's own photos — the page r
 Nov 2025 Home/About shot; (b) whether the Seed of the Heart *book* should get a card of
 its own once it is published; (c) the announcement bar still sells only the Yahua Center
 now that two campaigns are open.
+
+## The Support page (28 Aug 2026)
+
+Roman, 28 Aug: the Support button "should present all our initiatives … not just the
+Yahua — people should be able to donate to the Q'ero or Yahua campaigns for now"; a
+reserve-maintenance Zeffy campaign comes next, then Uniting Elders & Children.
+
+Built: **`/support`** (`Support.dc.html`) and **`/es/apoyar`** (`Support.es.dc.html`),
+in flow like the elders page. Hero with two buttons → `#yahua` / `#qero`; a four-card
+row (Yahua *campaign open* → `#yahua`, Q'ero *campaign open* → `#qero`, Reserve
+*campaign coming soon* → its page, Elders & Children *campaign coming soon* → its page);
+then one section per open campaign with its Zeffy embed beside the copy; then "How your
+gift travels" (no Zeffy fees, 501(c)(3) via Empowerment WORKS, the book royalties and
+retreat proceeds as the other ways to give). Copy is assembled from the two initiative
+pages and the elders page — nothing new is claimed.
+
+Rewired: header Support/Apoyar (desktop + burger) → `/support` / `/es/apoyar`;
+`/discoverpaititi`'s "Support the ancestral schools" card → the same; `/donate` 301 →
+`/support`, new `/es/donar` → `/es/apoyar`. Pair row added to `tools/i18n_pairs.json`
+(hreflang + sitemap regenerated). The Yahua `#donate` strip and the Q'ero `#donate`
+section stay as they are, so every old deep link still lands on a form.
+
+**When Roman opens the next campaign** (reserve, then elders): in both `Support*.dc.html`
+flip that card's kicker to "Campaign open" (add class `sp-open`), point its `href` at a
+new in-page id, and copy one of the two `.sp-give` sections with the new embed URL;
+alternate `sp-give-white` / `sp-give-band` so the bands keep alternating. Nothing else
+needs to change.
+
+Verified over CDP at 1440, 1190 and 390 in both languages: no horizontal overflow, both
+Zeffy forms render, the four cards stay one row down to 1181px, two columns to 641px,
+then stack.
+
+Still open for Roman: the announcement bar still names only the Yahua Center (it could
+say "Support our initiatives" and point at `/support`).
 
 ## Phase 3 — ongoing
 

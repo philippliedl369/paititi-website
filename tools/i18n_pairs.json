@@ -20,6 +20,7 @@
     { "file": "PressMedia.dc.html",       "en": "/press-media",             "es": "/es/prensa" },
     { "file": "DiscoverPaititi.dc.html",  "en": "/discoverpaititi",         "es": "/es/descubre-paititi" },
     { "file": "Contact.dc.html",          "en": "/contact",                 "es": "/es/contacto" },
+    { "file": "Support.dc.html",          "en": "/support",                 "es": "/es/apoyar" },
 
     { "file": "Retreats.dc.html",         "en": "/retreats",                "es": "/es/retiros" },
     { "file": "OnlineCourses.dc.html",    "en": "/online-courses",          "es": "/es/cursos-en-linea" },
