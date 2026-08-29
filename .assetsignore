@@ -29,6 +29,11 @@ website-redo-spec.pdf
 # Blog source for tools/migrate_blog.py, build-time only. data/products.json
 # is NOT excluded: api.js fetches it through env.ASSETS at runtime.
 /data/blog/
+# Likewise the Retreat Guru snapshot and the hand-written programs that are not
+# on Retreat Guru: input to tools/gen_retreats.py, already baked into the
+# /retreats/<slug> pages, and read by nothing at runtime.
+/data/retreats.json
+/data/retreats-extra.json
 
 # Scratch probe harnesses. Untracked, but `wrangler deploy` uploads the folder
 # rather than the commit, so anything left lying here would be served.
