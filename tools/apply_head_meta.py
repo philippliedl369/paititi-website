@@ -50,6 +50,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://paititi-institute.org'
 SOCIAL_DIR = ROOT / 'assets' / 'social'
 CARD_MAX = 1200
+# What a page shares when it has no picture of its own — the home page's, so the
+# fallback is the site's signature image rather than an arbitrary one.
+DEFAULT_IMAGE = '/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp'
 
 NOTE = (
     '<!-- The title and the social card sit in the real <head>, not in <helmet>\n'
@@ -139,6 +142,12 @@ def transform(html, name=''):
     def has(pat):
         return re.search(pat, existing) is not None
 
+    # SiteHeader/SiteFooter are imported fragments, not pages: they have a head
+    # and a helmet but no title, and nobody ever shares a link to one. Without
+    # this they would each pick up a card of their own.
+    if not (moved or '<title>' in head_body):
+        return html
+
     extra = []
     img = re.search(r'<meta property="og:image" content="([^"]+)">', existing)
     if img:
@@ -147,12 +156,14 @@ def transform(html, name=''):
             fixed = SITE + card_for(src)
             moved = [l.replace(src, fixed) if 'og:image' in l else l for l in moved]
             existing = existing.replace(src, fixed)
-    elif name.startswith('BlogPost-') or name.startswith('Blog'):
-        # The posts shipped with no card image at all, and they are the pages
-        # people actually send each other.
-        src = first_body_image(html)
-        if src:
-            extra.append(meta('og:image', SITE + card_for(src)))
+    else:
+        # The blog posts shipped with no card image at all, and they are the
+        # pages people actually send each other; each takes the first photograph
+        # in its own body. The legal pages have no photograph of their own, so
+        # they fall back to the site's — a preview with no image at all is a
+        # bare grey box, which reads as a broken link rather than a plain one.
+        src = first_body_image(html) or DEFAULT_IMAGE
+        extra.append(meta('og:image', SITE + card_for(src)))
 
     canon = re.search(r'<link rel="canonical" href="([^"]+)">', existing)
     if canon and not has(r'property="og:url"'):
