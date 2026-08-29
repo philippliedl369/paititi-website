@@ -70,6 +70,27 @@ ask Roman for originals (≥2880w where they'll go full-bleed):
 | Yahua school in use — children learning inside the maloca | school photos are all of the empty building | `initiatives/school-…webp` |
 | Q'ero present-day (not COVID relief) — despacho, elders, village | Q'ero imagery is all 2021 food-drive | `initiatives/qero-…webp` |
 
+## 5. Too small to be a link preview (29 Aug 2026)
+
+Each program now has its own page at `/retreats/<slug>`, and the point of those
+pages is that the link can be sent to one person — so the program photo is also
+the Open Graph card. `tools/gen_retreats.py` mirrors it and writes a JPEG card
+beside it at up to 1200px; it never upscales, so a small source stays small.
+
+Facebook, WhatsApp and LinkedIn only render the **large** card above roughly
+600×315. Below that they fall back to a thumbnail beside the text, or to
+nothing.
+
+| program | card is | want | save as |
+|---|---|---|---|
+| Himalayan Pilgrimage (Nepal) | 478×532 — the only Nepal photo in the mirror, and it carries burnt-in "Nepal Retreat · October 17-31st 2026" text that will be wrong next year | ≥1200×1200, no burnt-in dates | `retreats/himalayan-pilgrimage-nepal.jpg` |
+
+Retreat Guru holds the photos for the programs it lists, so those are fixed by
+uploading a better image to the program in Retreat Guru and re-running
+`npm run gen-retreats` — not by dropping a file in `assets/`. This one is ours:
+it comes from `data/retreats-extra.json`, which points at a path under
+`assets/`.
+
 ## Naming
 
 Lowercase kebab-case, subject first, no dates, no capture-app prefixes

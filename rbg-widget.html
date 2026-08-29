@@ -21,6 +21,39 @@
   // hand-built sections: their cards are hidden so nothing is listed twice.
   // Matched against each card's HTML, which carries the slug in its links.
   var exclude = (params.get('exclude') || '').split(',').filter(Boolean);
+  // ?pages= names the slugs that have a page of their own on this site
+  // (tools/gen_retreats.py keeps the list in step). Every card links there
+  // instead of to "#/event/<id>/<slug>", which is a route *inside this iframe*:
+  // clicking it opened the program in place and left the parent URL saying
+  // /retreats, so there was no link to a single retreat to send anybody.
+  // A slug with no page yet — posted on Retreat Guru since the last run of the
+  // generator — goes to Retreat Guru's own program page rather than to a 404.
+  var pages = (params.get('pages') || '').split(',').filter(Boolean);
+  var EVENT_HREF = /#\/event\/(\d+)\/([A-Za-z0-9._-]+)/;
+
+  function destination(href) {
+    var m = EVENT_HREF.exec(href || '');
+    if (!m) return null;
+    var slug = m[2];
+    return pages.indexOf(slug) !== -1
+      ? { url: '/retreats/' + slug, top: true }
+      : { url: 'https://paititi-institute.secure.retreat.guru/program/' + slug + '/', top: false };
+  }
+
+  // Two halves, because the widget is a React app of its own: rewriting href
+  // gives the reader a real URL to hover, copy or open in a new tab, and the
+  // capture-phase handler beats React's delegated click listener, which would
+  // otherwise preventDefault and route in place.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var to = destination(a.getAttribute('data-rbg-href') || a.getAttribute('href'));
+    if (!to) return;
+    e.preventDefault();
+    e.stopPropagation();
+    if (to.top) parent.location.href = to.url;
+    else window.open(to.url, '_blank', 'noopener');
+  }, true);
   rbgOptions = { retreatType: "Retreat", customer: "paititi-institute", eventCategory: cat, buttonColor: "", defaultRoute: "" };
   !function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://s3.amazonaws.com/rbgconnect.retreat.guru/public/rbg-connect.min.js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}"complete"===document.readyState?t():window.attachEvent?window.attachEvent("onload",t):window.addEventListener("load",t,!1)}();
   // Hide excluded cards, then report height and the visible-card count so the
@@ -33,6 +66,19 @@
       var c = cards[i];
       if (c.style.display !== 'none' && exclude.some(function (s) { return c.innerHTML.indexOf(s) !== -1; })) c.style.display = 'none';
       if (c.style.display !== 'none') visible++;
+    }
+    // React rewrites these back on every re-render, so re-apply each tick. The
+    // original hash is kept on data-rbg-href: it is what names the program.
+    var links = document.querySelectorAll('a.rsEventLinkGo');
+    for (var j = 0; j < links.length; j++) {
+      var a = links[j];
+      var raw = a.getAttribute('data-rbg-href') || a.getAttribute('href');
+      var to = destination(raw);
+      if (!to) continue;
+      if (!a.getAttribute('data-rbg-href')) a.setAttribute('data-rbg-href', raw);
+      if (a.getAttribute('href') !== to.url) a.setAttribute('href', to.url);
+      a.setAttribute('target', to.top ? '_top' : '_blank');
+      if (!to.top) a.setAttribute('rel', 'noopener');
     }
     var rendered = !!document.querySelector('.rs-events-container');
     parent.postMessage({ rbgHeight: document.documentElement.scrollHeight, rbgCount: rendered ? visible : null, cat: cat }, location.origin);

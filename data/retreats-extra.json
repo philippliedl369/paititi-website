@@ -1,0 +1,42 @@
+{
+  "_comment": [
+    "Programs that belong on /retreats but are not posted on Retreat Guru, so",
+    "tools/gen_retreats.py cannot pull them. They render through exactly the",
+    "same template as the Retreat Guru ones and get the same /retreats/<slug>",
+    "URL — the point being that every retreat on the site has a link of its own,",
+    "whoever happens to be taking the registrations.",
+    "",
+    "Fields mirror Retreat Guru's own program JSON so the template needs no",
+    "special case. There is no `ID`: that is what marks an entry as ours, and it",
+    "is what tells the page not to try to refresh itself from the RG feed.",
+    "",
+    "The extra `_cta*` fields exist because the call to action is not always",
+    "'apply on Retreat Guru' — the Nepal pilgrimage registers with the Karuna",
+    "Project, our partner on it.",
+    "",
+    "Keep the copy here in step with the hand-built section on Retreats.dc.html;",
+    "both describe the same program to the same reader."
+  ],
+  "programs": [
+    {
+      "slug": "himalayan-pilgrimage-nepal",
+      "title": "Himalayan Pilgrimage: An Indigenous Wisdom Journey Through Nepal",
+      "date": "October 17 - 31, 2026",
+      "start": 1792195200,
+      "end": 1793404800,
+      "location": "Kathmandu and the Langtang Himal, Nepal",
+      "teacher_list": "In collaboration with the Karuna Project",
+      "prices": "See the Karuna Project for pricing",
+      "categories": [{ "name": "Retreat", "slug": "retreat" }],
+      "photo": "/assets/retreats/signal-2026-07-08-172812.webp",
+      "_photo_alt": "Himalayan Pilgrimage through Nepal with the Karuna Project",
+      "excerpt": "A 15-day pilgrimage through the sacred landscapes of Nepal, weaving Himalayan trekking, Tibetan Buddhist philosophy and the indigenous wisdom traditions of the Amazon and Andes into one living path of inner transformation.",
+      "text_full": "<p>Join us for a unique collaboration between Paititi Institute and the Karuna Project on a 15-day pilgrimage through the sacred landscapes of Nepal.</p><p>This immersive journey weaves together Himalayan trekking, Tibetan Buddhist philosophy, and the indigenous wisdom traditions of the Amazon and Andes. Through Primordial Breathwork, Qigong, dreamwork, meditation, and meaningful cultural exchange, participants will experience Nepal not only as a destination, but as a living path of inner transformation.</p><p>From the sacred temples of Kathmandu to the breathtaking Langtang Himal, this pilgrimage combines contemplative practice, ethical adventure, and service to local communities, creating an experience that nourishes body, mind, and spirit.</p><p>We are honored to partner with the Karuna Project in offering this extraordinary journey.</p>",
+      "registration_link": "https://www.karuna-project.com/nepal-15-day-langtang",
+      "registration_status": "open",
+      "_cta": "See the itinerary &amp; register",
+      "_cta_heading": "Walk with us in Nepal",
+      "_cta_note": "The Karuna Project, our partner on this pilgrimage, holds the full itinerary, pricing and registration."
+    }
+  ]
+}

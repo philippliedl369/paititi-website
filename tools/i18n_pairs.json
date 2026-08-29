@@ -73,7 +73,12 @@
     "the sitemap is generated from this file and would otherwise only ever",
     "contain paired pages. Move a row up into `pairs` once its .es page exists."
   ],
-  "english_only": [],
+  "english_only": [
+    { "file": "Retreat-redding-ca-primordial-breathwork-immersion-retreat.dc.html", "en": "/retreats/redding-ca-primordial-breathwork-immersion-retreat" },
+    { "file": "Retreat-san-francisco-bay-beyond-psychedelics-yet-not-without.dc.html", "en": "/retreats/san-francisco-bay-beyond-psychedelics-yet-not-without" },
+    { "file": "Retreat-himalayan-pilgrimage-nepal.dc.html", "en": "/retreats/himalayan-pilgrimage-nepal" },
+    { "file": "Retreat-amazon-16-day-embodying-true-nature-immersion.dc.html", "en": "/retreats/amazon-16-day-embodying-true-nature-immersion" }
+  ],
   "_untranslated": [
     "DistanceHealingFee.dc.html and DistanceHealingContribution.dc.html are",
     "emailed to an applicant rather than browsed to, and each is a wrapper",
