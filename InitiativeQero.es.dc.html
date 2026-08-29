@@ -67,7 +67,11 @@
   .qe-story{--pt-bg:#584364;color:#fff}
   .qe-story h1,.qe-story p{color:#fff}
 
-  .qe-give{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.25)}
+  /* The copy used to sit in the left column beside the form, over the darker
+     side of the photo. Centred, it crosses the bright snow peaks, so the
+     scrim carries the contrast now: the mountains still read, the text is
+     legible over them. */
+  .qe-give{--pt-bg:#fff;--pt-scrim:rgba(255,255,255,.76)}
 
   .qe-circle img,.qe-squircle img,.qe-star img{
     inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -77,8 +81,13 @@
   .qe-squircle img{clip-path:url(#qe-squircle)}
   .qe-star img{clip-path:polygon(0 33%,16.5% 33%,16.5% 16.5%,33% 16.5%,33% 0,66% 0,66% 16.5%,83.5% 16.5%,83.5% 33%,100% 33%,100% 66%,83.5% 66%,83.5% 83.5%,66% 83.5%,66% 100%,33% 100%,33% 83.5%,16.5% 83.5%,16.5% 66%,0 66%)}
 
-  .qe-zeffy{width:100%;height:100%;min-height:541px;border:0;display:block;
-    background:#fff;border-radius:32px 0;box-shadow:0 10px 30px rgba(33,4,22,.08)}
+  /* The closing support band. It used to carry the Q'ero Zeffy form on the
+     fluid grid; since 29 Aug 2026 both campaign forms live on /support, so
+     this is one centred hand-off in flow — no measured rows to keep in step
+     with the copy, and no exit to zeffy.com from this page. The id stays
+     `donate` so links shared before the change still land here. */
+  .qe-give-in{max-width:860px;margin:0 auto;padding:95px 58px;text-align:center}
+  .qe-give-in .pt-btn-row{justify-content:center}
   .qe-give .pt-prose a{color:#210416}
 
   .qe-pager{background:#fff;padding:44px 58px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -92,6 +101,7 @@
     .qe-hero h1{font-size:40px}
     .qe-in{padding:0 24px}
     .qe-school{padding:64px 0 72px}
+    .qe-give-in{padding:64px 24px}
     .qe-feature{grid-template-columns:1fr;margin-top:34px}
     .qe-feature .pt-embed{height:auto}
     .qe-cols{grid-template-columns:1fr;gap:36px}
@@ -105,6 +115,7 @@
     .qe-hero h1{font-size:34px}
     .qe-in{padding:0 20px}
     .qe-school{padding:48px 0 56px}
+    .qe-give-in{padding:48px 20px}
     .qe-feature{border-radius:32px 0}
     .qe-feature-body{padding:28px 24px 30px}
     .pt-page main .qe-feature-body h3{font-size:24px}
@@ -135,7 +146,7 @@
         <h1><strong>Una escuela ancestral para la Nación Q&rsquo;ero</strong></h1>
       </div>
       <div style="grid-area:14 / 9 / 16 / 17">
-        <a class="pt-btn" href="#donate">Donar a la escuela q&rsquo;ero</a>
+        <a class="pt-btn" href="/es/apoyar#qero">Apoya la escuela q&rsquo;ero</a>
       </div>
     </div>
   </section>
@@ -156,7 +167,6 @@
           <span class="qe-kicker">Cortometraje &middot; Febrero de 2026 &middot; En inglés</span>
           <h3>La escuela ancestral se extiende a la Nación Q&rsquo;ero en los altos Andes</h3>
           <p>Momentos de nuestro tiempo junto a nuestro querido mayor q&rsquo;ero, el Pampamesayoq Juan Gabriel Apaza Lunasco, que partió de este mundo en 2024 y cuya presencia sigue viva en las montañas, y junto a su hermano, el mayor q&rsquo;ero Pampamesayoq Benito Apaza, que nos acompañó de regreso a la aldea y ofreció sus bendiciones para la continuidad de este trabajo. La escuela está dedicada a la memoria de Juan Gabriel.</p>
-          <a class="pt-btn" href="https://www.zeffy.com/en-US/donation-form/developing-ancestral-schools-for-the-qero-nation-in-the-peruvian-highlands" target="_blank" rel="noopener">Apoya la escuela en Zeffy</a>
         </div>
       </div>
 
@@ -183,7 +193,7 @@
            decoding="async" alt="Roman Hanis sentado en la hierba conversando con mayores q'ero frente a una vivienda de piedra y paja en los altos Andes" loading="lazy">
           </div>
           <h3>Cómo puedes participar</h3>
-          <p>Tu aporte va directamente a la preparación del terreno y los materiales de construcción, los materiales educativos, los viajes y la coordinación con los mayores q&rsquo;ero, un currículo arraigado en la tradición andina y la planificación de su sostenibilidad a largo plazo. El Instituto Paititi trabaja directamente con los líderes q&rsquo;ero para que la comunidad guíe cada paso, desde el diseño de la escuela hasta el aprendizaje de cada día. Cada donación, grande o pequeña, pasa a formar parte de un puente vivo entre generaciones. <a href="#donate">Dona más abajo &darr;</a></p>
+          <p>Tu aporte va directamente a la preparación del terreno y los materiales de construcción, los materiales educativos, los viajes y la coordinación con los mayores q&rsquo;ero, un currículo arraigado en la tradición andina y la planificación de su sostenibilidad a largo plazo. El Instituto Paititi trabaja directamente con los líderes q&rsquo;ero para que la comunidad guíe cada paso, desde el diseño de la escuela hasta el aprendizaje de cada día. Cada donación, grande o pequeña, pasa a formar parte de un puente vivo entre generaciones. <a href="/es/apoyar#qero">Apoya la escuela &rarr;</a></p>
         </div>
       </div>
     </div>
@@ -235,7 +245,7 @@
   </section>
 
   <!-- ===== Donar ===== -->
-  <section class="pt-sec qe-give" id="donate" aria-label="Donar">
+  <section class="pt-sec qe-give" id="donate" aria-label="Apoya esta escuela">
     <div class="pt-sec-bg">
       <img src="/assets/initiatives/unsplash-image-uo1hwtgi6ze.webp"
            srcset="/assets/r/initiatives/unsplash-image-uo1hwtgi6ze-320w.webp 320w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-480w.webp 480w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-640w.webp 640w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-800w.webp 800w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1080w.webp 1080w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1280w.webp 1280w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-1600w.webp 1600w, /assets/r/initiatives/unsplash-image-uo1hwtgi6ze-2000w.webp 2000w, /assets/initiatives/unsplash-image-uo1hwtgi6ze.webp 2500w"
@@ -244,15 +254,11 @@
            height="1667"
            decoding="async" alt="" loading="lazy">
     </div>
-    <div class="pt-fluid" style="--pt-grid-top:95px;--pt-grid-bot:95px;--pt-rows:16;--pt-row-h:28.4531px">
-      <div class="pt-prose pt-vc" style="grid-area:1 / 1 / 17 / 13">
-        <h1>Genera un <span>impacto</span> hoy</h1>
-        <p>Tu aporte llega a la escuela ancestral q&rsquo;ero a través de Zeffy, que no cobra comisiones de plataforma. El Instituto Paititi está registrado en el Perú y cuenta con el patrocinio fiscal de Empowerment WORKS, una entidad sin fines de lucro 501(c)(3) de los Estados Unidos, por lo que las donaciones son deducibles de impuestos en ese país.</p>
-        <p><em>Para no dejar propina a Zeffy, edita el importe en la casilla de propina del formulario.</em></p>
-        <p>También abierta: <a href="/es/iniciativas/escuela-ancestral-yahua#donate">la campaña de la Escuela Ancestral Yahua &rarr;</a></p>
-      </div>
-      <div style="grid-area:1 / 14 / 17 / 24">
-        <iframe class="qe-zeffy" title="Formulario de donación de Zeffy" src="https://www.zeffy.com/embed/donation-form/developing-ancestral-schools-for-the-qero-nation-in-the-peruvian-highlands" allowtransparency="true" loading="lazy"></iframe>
+    <div class="qe-give-in pt-prose">
+      <h2>Genera un impacto hoy</h2>
+      <p>Tu aporte ayuda a desarrollar la escuela ancestral q&rsquo;ero: la preparaci&oacute;n del terreno y los materiales de construcci&oacute;n, los materiales educativos, los viajes y la coordinaci&oacute;n con los mayores, y un curr&iacute;culo arraigado en la tradici&oacute;n andina. Cada donaci&oacute;n, grande o peque&ntilde;a, pasa a formar parte de un puente vivo entre generaciones.</p>
+      <div class="pt-btn-row">
+        <a class="pt-btn" href="/es/apoyar#qero">Apoya la escuela q&rsquo;ero</a>
       </div>
     </div>
   </section>

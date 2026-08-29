@@ -482,6 +482,38 @@ then stack.
 Still open for Roman: the announcement bar still names only the Yahua Center (it could
 say "Support our initiatives" and point at `/support`).
 
+### One hand-off per initiative page (29 Aug 2026)
+
+Philipp, reading the live site: the Yahua page had "a button on the top that leads us to
+the buttons at the bottom of the page, and then those buttons lead us to the Zeffy thing,
+which is external to the page" — smooth it by having fewer buttons and going straight to
+the support page, without routing off the site.
+
+That chain existed on all three initiative pages, so all three were changed the same way.
+**The initiative pages tell the story; `/support` is where giving happens.** Every
+donation CTA on them is now a direct link to `/support#yahua` / `#qero` (`/es/apoyar#…`),
+no page bounces a reader to zeffy.com, and the campaign forms exist in exactly one place.
+
+- **Yahua** — the `#donate` band under the hero was where the header's Support button used
+  to land; that reason is gone, so it drops the embed, the fee/tax paragraph and the tip
+  note (all of which now live on `/support`) and becomes a centred band with one button.
+  The appeal's closing "Donate through Zeffy" button (which only scrolled back up to the
+  form) becomes the same direct link.
+- **Q'ero** — the hero button went to `#donate` at the foot of the page; it now goes
+  straight to `/support#qero`. The external "Support the school on Zeffy" button is gone
+  from the film card, "Donate below ↓" became "Support the school →", and the closing
+  `#donate` section moved off the fluid grid into a centred flow band. Its scrim went
+  from `rgba(255,255,255,.25)` to `.76`: the copy used to sit in the left column over the
+  darker side of the photo, and centred it crosses the bright snow peaks.
+- **Elders** — the hero's "Support the ancestral schools" went to `#support` at the foot,
+  whose two buttons opened zeffy.com; the hero now goes to `/support` and the section
+  carries one button to the same place.
+
+`id="donate"` / `id="support"` are kept on every rebuilt band, so links shared before the
+change still land where they used to. Verified over CDP at 1440, 1190 and 390 in both
+languages: no overflow, and across the six pages 0 external Zeffy links, 0 in-page
+anchor hops and 0 leftover embeds.
+
 ## Phase 3 — ongoing
 
 15 cornerstone evergreen articles, 2–3/month, Roman writes or reviews; facts about the
