@@ -75,6 +75,14 @@
      which is what lets a 60-character measure be read from a fixed left edge. */
   .hm-hero .pt-fluid{text-align:left}
   .hm-hero .hm-lede p{font-size:19.2px}
+  /* The hero headline is the page's h1, so the homepage has one at all — it was
+     the only page without. It keeps the h2 size it was measured at: this clamp
+     reproduces the base h2 scale at every width (41.6px above 1180px, 27px at
+     390px), so the hero geometry is unchanged to the pixel. Two classes plus the
+     element (0,2,1) outranks the base scale's .pt-page main h1 (0,1,2) at every
+     width, mobile block included — written any shorter it would silently lose.
+     See the specificity note at the top of paititi.css. */
+  .hm-hero .pt-vb h1{font-size:clamp(27px, 19.79px + 1.848vw, 41.6px);line-height:1.3104}
 
   .hm-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
   /* A .pt-btn in a fluid cell fills the cell; hero buttons size to their label. */
@@ -158,7 +166,7 @@
     <div class="pt-fluid" style="--pt-grid-top:200px;--pt-grid-bot:44px;--pt-rows:17">
 
       <div class="pt-vb" style="grid-area:1 / 1 / 8 / 15">
-        <h2>&ldquo;<strong>Paititi</strong>&rdquo;, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h2>
+        <h1>&ldquo;<strong>Paititi</strong>&rdquo;, in Quechua, is an enlightened realm manifested through the awakening of our shared human heart.</h1>
       </div>
 
       <div class="pt-prose hm-lede" style="grid-area:9 / 1 / 14 / 14">
