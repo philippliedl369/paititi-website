@@ -94,6 +94,13 @@ None of these throw an error. All of them have shipped at least once.
    and inherited as px. Setting it anywhere else rescales it, rewraps every
    paragraph, and moves all vertical geometry below.
 5. **Data-URI SVGs in CSS get their `viewBox` mangled.** Use a file.
+6. **Inline `onclick` does not survive the DC render.** The runtime strips
+   event-handler attributes, so a handler written into a `.dc.html` file is
+   simply gone from the rendered page — no error, no warning, a link that
+   does nothing. Bind from a script instead, and prefer a delegated listener
+   on `document`: the page is re-rendered out of `<x-dc>` after load, which
+   detaches anything bound directly to an element. `consent.js` is the worked
+   example.
 
 ## Layout: the geometry is measured, not chosen
 
