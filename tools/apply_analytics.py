@@ -41,6 +41,15 @@ Consent:
   granted it. consent.js only draws the banner and records the answer, so if it
   fails to load the site stays denied rather than quietly measuring.
 
+Conversions:
+
+  conversions.js rides along in the same block. It reports the Google Ads
+  conversions — clicks through to Retreat Guru and Zeffy, and the two forms —
+  which is what the Ad Grant requires and what tells Roman whether an ad click
+  became a booking rather than merely a visit. It needs window.gtag, which the
+  inline block above defines, so it must stay after it. Deferred: nothing on
+  the page depends on it.
+
 Not tagged, deliberately:
   rbg-widget.html   the Retreat Guru iframe — it loads *inside* a retreat page
                     that is already counted, so tagging it doubles every view
@@ -94,6 +103,7 @@ BLOCK = f"""{BEGIN}
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id={TAG_ID}"></script>
 <script src="/consent.js" defer></script>
+<script src="/conversions.js" defer></script>
 {END}"""
 
 # Pages that are real destinations a visitor can land on. Everything else in

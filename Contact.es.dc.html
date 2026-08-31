@@ -37,6 +37,7 @@
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=GT-MBL4BMP"></script>
 <script src="/consent.js" defer></script>
+<script src="/conversions.js" defer></script>
 <!-- END google tag -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -226,6 +227,9 @@ class Component extends DCLogic {
             }),
           });
           if (res.ok) {
+            // Counted only once the server has taken the message — a form that
+            // was filled in and then failed is not a conversion. conversions.js.
+            if (window.ptConversion) window.ptConversion('contact');
             // The opt-in rides along with the message but does not gate it: a
             // newsletter provider that is down must not lose the enquiry.
             if (f.subscribe.checked) {

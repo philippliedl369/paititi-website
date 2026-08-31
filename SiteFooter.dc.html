@@ -224,7 +224,11 @@ class Component extends DCLogic {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ email, website: form.website.value, source: location.pathname }),
           });
-          if (res.ok) this.setState({ subscribed: true, error: '' });
+          if (res.ok) {
+            // Counted only on a signup the provider accepted — see conversions.js.
+            if (window.ptConversion) window.ptConversion('subscribe');
+            this.setState({ subscribed: true, error: '' });
+          }
           else {
             const data = await res.json().catch(() => ({}));
             this.setState({ error: data.error || 'Signup failed, please try again.' });

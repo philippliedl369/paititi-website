@@ -72,6 +72,18 @@ installed?" check reads the HTML as it arrives, the same way link-preview
 crawlers do, and reports *Not detected* for anything that only appears after
 JavaScript runs. Re-run it after adding a page; `--remove` takes it back out.
 
+**Google Ads conversions live in `conversions.js`,** loaded by that same block.
+It counts clicks through to Retreat Guru and Zeffy plus the two form
+submissions — the Ad Grant requires at least one conversion, and does not
+accept a bare page view as the only one. Three of its four label slots are
+still `null` until Roman creates those actions in Ads; a `null` slot sends
+nothing and breaks nothing. Two traps it is already written around, both of
+them in the list below: Google's own snippet expects an inline `onclick`, which
+the DC runtime strips, and a listener bound to an element does not survive the
+re-render — so it delegates from `document`. Don't hardcode `value`/`currency`
+either; that belongs on the action in the Ads UI, where changing it is not a
+deploy.
+
 ## The silent failures
 
 None of these throw an error. All of them have shipped at least once.
