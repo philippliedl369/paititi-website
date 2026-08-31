@@ -12,6 +12,7 @@
 .assetsignore
 wrangler.jsonc
 README.md
+CLAUDE.md
 .wrangler/
 /tools/
 server.js
