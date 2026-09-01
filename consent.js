@@ -93,11 +93,16 @@
          on `.pt-page main` (and again on the header and footer, which are also
          outside it), so chrome components have to declare their own. .08em
          against this font size is the footer's rule, not a new value.
-       - It is a card in the corner, not a modal and not a full-bleed strip.
-         Nothing on the page moves, nothing is behind an overlay, and the
-         window it covers is a corner rather than the whole bottom band. */
+       - It is a card in the bottom-right corner, not a modal and not a
+         full-bleed strip. Nothing on the page moves, nothing is behind an
+         overlay, and the window it covers is a corner rather than the whole
+         bottom band. Bottom-*right* specifically: on the home hero that is
+         the one corner clear of the headline, the lede, both CTA buttons and
+         two of the three stat figures. The 40px/0 shape is not mirrored to
+         suit the side — it is the site's fixed corner, the same way .pt-btn
+         keeps its 16px/0 wherever it lands. */
   var STYLE = [
-    '.pt-consent{position:fixed;left:24px;bottom:24px;z-index:' + Z + ';',
+    '.pt-consent{position:fixed;right:24px;bottom:24px;z-index:' + Z + ';',
     '  width:min(430px,calc(100vw - 48px));',
     '  font-family:var(--font-body,"Lato",system-ui,-apple-system,"Segoe UI",sans-serif);',
     /* 17.6px only so `.08em` resolves to the site's 1.408px and is inherited as
@@ -145,8 +150,8 @@
     '.pt-consent button.is-primary:hover{background:#fff;color:#210416;box-shadow:none}',
     '.pt-consent button:focus-visible{outline:2px solid #fff;outline-offset:3px}',
 
-    /* Phones: a corner card at 390px is a card with no corner left, so it
-       becomes a sheet with side margins — full-measure buttons, the smaller
+    /* Phones: at 390px there is no corner to sit in, so it becomes a sheet
+       with side margins — full-measure buttons, the smaller
        32px/0 corner the footer panel uses at this width, and clearance for
        the iOS home bar. */
     '@media (max-width:640px){',
