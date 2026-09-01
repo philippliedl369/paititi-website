@@ -496,7 +496,7 @@
       "early_bird_discount": "",
       "contact": "",
       "teacher_details": {
-        "teacher_list": "Facilitated by Roman Hanis",
+        "teacher_list": "Facilitated by Roman Hanis and Joshua Lundell",
         "teacher_objects": [
           {
             "ID": 13,
@@ -525,6 +525,34 @@
             },
             "post_title": "Roman Hanis",
             "post_content": "<h2>Roman Hanis</h2>\n<p class=\"isSelectedEnd\"><strong>Roman Hanis</strong> is an international bestselling author, healer, educator, and co-founder of <strong>Paititi Institute</strong>, a nonprofit organization dedicated to Indigenous cultural preservation, healing, education, and ecological stewardship.</p>\n<p class=\"isSelectedEnd\">Since arriving in the Peruvian Amazon in 2001, Roman has spent decades studying, practicing, and collaborating with Indigenous knowledge holders of the Amazon and Andes. His path has included long-term apprenticeship and relationship with Yahua, Huitoto, Ashuar, Shipibo and other Amazonian traditions, alongside ongoing study and practice within Andean lineages. In 2004, following several years of apprenticeship in the Amazon, he was formally recognized as a <strong>curandero by Yahua elders</strong>, a responsibility he continues to honor through healing work, cultural exchange, education, and community initiatives.</p>\n<p class=\"isSelectedEnd\">Roman is the author of <strong><em>Beyond Ayahuasca: Unlocking the Evolutionary Science of Indigenous Amazonian Wisdom to Access Your Highest Potential</em></strong>, published by Hay House. Drawing upon more than two decades of lived experience in the Amazon, the book brings ancestral approaches to healing into dialogue with Jungian psychology, trauma resolution, Eastern medicine, and contemplative practice. <strong>100% of Roman’s author proceeds from the book support the development of the Yahua Ancestral School and Cultural Heritage Center in the Peruvian Amazon.</strong></p>\n<p class=\"isSelectedEnd\">As co-founder of <strong>Paititi Institute</strong>, Roman has helped develop intercultural healing retreats, Indigenous community health and cultural exchange initiatives, educational programs, and ecological conservation projects in Peru and internationally. The Institute also stewards a <strong>1,516-hectare biocultural reserve</strong> spanning Andean foothills and cloud rainforest near Manu National Park, protecting a landscape where biological and cultural diversity remain deeply interconnected.</p>\n<p class=\"isSelectedEnd\">Alongside his Amazonian and Andean apprenticeships, Roman has spent decades studying and practicing <strong>Jungian psychology, Tibetan Buddhist and Bön traditions, Daoist internal arts, and Traditional Chinese Medicine</strong>. His work explores the resonances between these distinct traditions without reducing their differences, bringing their practical methods into an experiential approach to healing, self-knowledge, and the realization of our intrinsic relationship with the living world.</p>\n<p>Roman’s own recovery from a severe, life-threatening period of Crohn’s disease in 2002 became an important turning point in this path. Today, his work is centered on creating experiential bridges through which ancestral knowledge can remain a living transmission while supporting both individual transformation and the communities and ecosystems from which these traditions arise.</p>\n"
+          },
+          {
+            "ID": 1094,
+            "name": "Joshua Lundell",
+            "slug": "joshua-lundell",
+            "text": "Joshua Lundell is an ERYT-500/YACEP, Reiki practitioner, and Paititi Institute certified Primordial Breathwork™ facilitator with 25 years practice in embodied healing arts.",
+            "photo_details": {
+              "thumbnail": {
+                "url": "https://paititi-institute.secure.retreat.guru/wp-content/uploads/sites/12/2026/08/WhatsApp-Image-2026-08-30-at-13.56.09-150x150.jpeg",
+                "width": 150,
+                "height": 150,
+                "alt": ""
+              },
+              "medium": {
+                "url": "https://paititi-institute.secure.retreat.guru/wp-content/uploads/sites/12/2026/08/WhatsApp-Image-2026-08-30-at-13.56.09-225x300.jpeg",
+                "width": 225,
+                "height": 300,
+                "alt": ""
+              },
+              "large": {
+                "url": "https://paititi-institute.secure.retreat.guru/wp-content/uploads/sites/12/2026/08/WhatsApp-Image-2026-08-30-at-13.56.09.jpeg",
+                "width": 1200,
+                "height": 1600,
+                "alt": ""
+              }
+            },
+            "post_title": "Joshua Lundell",
+            "post_content": "<p>Joshua Lundell is an ERYT-500/YACEP, Reiki practitioner, and Paititi Institute certified Primordial Breathwork™ facilitator with 25 years practice in embodied healing arts.</p>\n"
           }
         ],
         "teacher_settings": {
@@ -534,9 +562,10 @@
         }
       },
       "teachers": [
-        "https://paititi-institute.secure.retreat.guru/teacher/roman-hanis/"
+        "https://paititi-institute.secure.retreat.guru/teacher/roman-hanis/",
+        "https://paititi-institute.secure.retreat.guru/teacher/joshua-lundell/"
       ],
-      "teacher_list": "Facilitated by Roman Hanis",
+      "teacher_list": "Facilitated by Roman Hanis and Joshua Lundell",
       "registration_action": "<div class=\"rs-registration-open rs-register-link\"><a href=\"https://paititi-institute.secure.retreat.guru/program/san-francisco-ca-amazonian-ashuar-based-indigenous-dreamwork/?form=1&lang=en\">Apply Now</a></div>",
       "registration_link": "https://paititi-institute.secure.retreat.guru/program/san-francisco-ca-amazonian-ashuar-based-indigenous-dreamwork/?form=1&lang=en",
       "registration_status": "open",
