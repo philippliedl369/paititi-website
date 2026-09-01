@@ -122,6 +122,15 @@ None of these throw an error. All of them have shipped at least once.
    on `document`: the page is re-rendered out of `<x-dc>` after load, which
    detaches anything bound directly to an element. `consent.js` is the worked
    example.
+7. **Anything appended to `<body>` inherits none of the site's type.** The type
+   scale, the colour and the load-bearing tracking are all declared on
+   `.pt-page main`, so a component that lives outside it — the cookie banner,
+   anything else built in JS and appended to the body — starts from the
+   browser's defaults and renders in Times. It does not look broken enough to
+   notice, which is how the consent banner sat in a default serif from the day
+   it shipped until 1 Sep. Chrome declares its own: SiteHeader, SiteFooter and
+   `consent.js` each set `font-family: var(--font-body)` and their own
+   `letter-spacing` in em, and a new one has to as well.
 
 ## Layout: the geometry is measured, not chosen
 
