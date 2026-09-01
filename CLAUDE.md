@@ -63,7 +63,16 @@ generator run erases it.
 `apply_hreflang.py` → `apply_head_meta.py` → `apply_analytics.py`. The last two
 are idempotent and rewrite `<head>`, so they run in that order and at the end.
 `apply_hreflang.py --check`, `migrate_blog.py --check` and
-`apply_analytics.py --check` verify without writing.
+`apply_analytics.py --check` verify without writing — **`npm run check` runs all
+four**, and a clean run is the cheapest thing you can do before deploying.
+
+`npm run gen-retreats` and `npm run migrate-blog` each run that whole chain,
+ending in `apply_analytics.py`, and you should use the npm script rather than
+the bare generator. Calling `python3 tools/gen_retreats.py` on its own rebuilds
+those pages from a template that has no `<head>` block, so the Google tag, the
+consent defaults and `conversions.js` come off all six retreat pages — or all
+24 blog pages — and nothing says so. Both generators now compare *without* that
+block, so `--check` stays honest instead of reporting permanent drift.
 
 **A new page needs the Google tag.** `apply_analytics.py` puts the GA4 tag
 (`GT-MBL4BMP`) in the real `<head>` of all 80 pages. It has to be in the source
