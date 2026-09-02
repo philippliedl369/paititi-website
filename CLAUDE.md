@@ -98,10 +98,27 @@ npm run check-retreats                      # does the snapshot match Retreat Gu
 
 `npm run check` now runs both. `--check-live` names the programs and the exact
 fields that moved, and treats an unreachable feed as "not verified" rather than
-as drift, so it stays usable offline. A daily cloud routine runs it and emails
-Philipp when it finds anything; it is a nudge, not an auto-deploy — a Retreat
-Guru description goes live word for word as it was typed, so somebody reads it
-first.
+as drift, so it stays usable offline.
+
+`tools/watch_retreats.py` asks the same question at 7am on Philipp's Mac and
+puts a notification on screen when the answer is "you're behind", logging every
+run to `tools/.retreat-watch.log` so a watcher that died is distinguishable
+from a quiet morning. Install it with the plist in `tools/launchd/`. It is a
+nudge, not an auto-deploy — a Retreat Guru description goes live word for word
+as it was typed, so somebody reads it first.
+
+Two things about that watcher, both load-bearing:
+
+- **It must stay Python, and the plist must name
+  `/Library/Frameworks/Python.framework/Versions/3.13/bin/python3` in full.**
+  Under launchd, macOS TCC refuses `/bin/bash` any read under `~/Desktop`, so
+  the shell version of this died with `Operation not permitted` before its
+  first line — exit 126, no output, nothing in the log to say why. That
+  interpreter already has Full Disk Access.
+- **A cloud routine cannot do this job.** One was built and disabled: the
+  sandbox's network allowlist doesn't include
+  `paititi-institute.secure.retreat.guru`, so it reported "not verified" every
+  morning and never checked anything.
 
 One trap the check now also catches: `IN_PERSON` in `gen_retreats.py` and the
 `cat=` list on the `/retreats` widget iframe are supposed to agree, and don't —

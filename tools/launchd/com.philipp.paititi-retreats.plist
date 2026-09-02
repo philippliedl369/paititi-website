@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Asks Retreat Guru once each morning whether the site is behind it.
+
+  Install:
+    cp tools/launchd/com.philipp.paititi-retreats.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.philipp.paititi-retreats.plist
+
+  Stop:
+    launchctl unload ~/Library/LaunchAgents/com.philipp.paititi-retreats.plist
+
+  The interpreter is named in full, and it has to be this one. Under launchd
+  a job gets almost no PATH, and — the part that actually bites — macOS TCC
+  refuses /bin/bash any read under ~/Desktop, so a shell-script version of
+  this dies with "Operation not permitted" before its first line. This
+  python3 has Full Disk Access already; it is what the trading hub runs.
+
+  StartCalendarInterval, not StartInterval: this is a 7am habit, not an
+  every-N-seconds poll. If the Mac is asleep at 7 the job runs once on wake
+  rather than being skipped, which is what we want — a missed morning would
+  otherwise be invisible.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.philipp.paititi-retreats</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Library/Frameworks/Python.framework/Versions/3.13/bin/python3</string>
+    <string>/Users/philippliedl/Desktop/paititi website/tools/watch_retreats.py</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>7</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>RunAtLoad</key><false/>
+  <key>StandardOutPath</key><string>/Users/philippliedl/Desktop/paititi website/tools/.retreat-watch.out.log</string>
+  <key>StandardErrorPath</key><string>/Users/philippliedl/Desktop/paititi website/tools/.retreat-watch.err.log</string>
+</dict>
+</plist>
