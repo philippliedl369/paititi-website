@@ -66,6 +66,11 @@ are idempotent and rewrite `<head>`, so they run in that order and at the end.
 `apply_analytics.py --check` verify without writing — **`npm run check` runs all
 four**, and a clean run is the cheapest thing you can do before deploying.
 
+**Those checks all ask the same narrow question: do the pages on disk match
+their source files?** They cannot see that a *source* has gone stale. The
+retreats are the case where that bites, because their real source is somebody
+else's website — see below.
+
 `npm run gen-retreats` and `npm run migrate-blog` each run that whole chain,
 ending in `apply_analytics.py`, and you should use the npm script rather than
 the bare generator. Calling `python3 tools/gen_retreats.py` on its own rebuilds
@@ -73,6 +78,37 @@ those pages from a template that has no `<head>` block, so the Google tag, the
 consent defaults and `conversions.js` come off all six retreat pages — or all
 24 blog pages — and nothing says so. Both generators now compare *without* that
 block, so `--check` stays honest instead of reporting permanent drift.
+
+**Retreat Guru does not tell us when it changes.** `/retreats` embeds a live
+Retreat Guru widget, so a new program appears in the *listing* by itself — but
+each `/retreats/<slug>` page is generated from a snapshot in
+`data/retreats.json`, and only `npm run gen-retreats` refreshes it. Until it
+runs, the widget's card has no page on this site to link to and sends the
+visitor straight out to Retreat Guru, and an edited description keeps showing
+the old words. Both happened between 31 Aug and 2 Sep with no symptom in the
+repo: `gen_retreats.py --check` compares the pages against the snapshot, and
+kept reporting them in step while the snapshot itself was a day behind.
+
+So there are two questions and two checks:
+
+```bash
+python3 tools/gen_retreats.py --check       # do the pages match the snapshot?
+npm run check-retreats                      # does the snapshot match Retreat Guru?
+```
+
+`npm run check` now runs both. `--check-live` names the programs and the exact
+fields that moved, and treats an unreachable feed as "not verified" rather than
+as drift, so it stays usable offline. A daily cloud routine runs it and emails
+Philipp when it finds anything; it is a nudge, not an auto-deploy — a Retreat
+Guru description goes live word for word as it was typed, so somebody reads it
+first.
+
+One trap the check now also catches: `IN_PERSON` in `gen_retreats.py` and the
+`cat=` list on the `/retreats` widget iframe are supposed to agree, and don't —
+`public-talks` and `parent-children-workshop` are missing from `cat=`. Every
+current program also carries `events`, which is the only reason nothing has
+disappeared. A program tagged *only* one of those would get a page that the
+listing never links.
 
 **A new page needs the Google tag.** `apply_analytics.py` puts the GA4 tag
 (`GT-MBL4BMP`) in the real `<head>` of all 80 pages. It has to be in the source
