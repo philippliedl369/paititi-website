@@ -14,9 +14,16 @@ from Retreat Guru's own program feed, so a link to a single retreat can be
 pasted into an email, a WhatsApp message or an ad, and arrives with that
 retreat's title, photo and dates in the preview card.
 
-    python3 tools/gen_retreats.py             # fetch, regenerate, rewire
-    python3 tools/gen_retreats.py --offline   # rebuild from data/retreats.json
-    python3 tools/gen_retreats.py --check     # report drift, change nothing
+    python3 tools/gen_retreats.py              # fetch, regenerate, rewire
+    python3 tools/gen_retreats.py --offline    # rebuild from data/retreats.json
+    python3 tools/gen_retreats.py --check      # do the pages match the snapshot?
+    python3 tools/gen_retreats.py --check-live # does the snapshot match Retreat Guru?
+
+The two checks answer different questions and you want both. `--check` is
+offline and compares the pages on disk against data/retreats.json;
+`--check-live` asks Retreat Guru. Only the second one notices that somebody
+added a program or edited a description over there — which is the way this
+falls out of date in practice.
 
 Re-run it whenever a program is added, retired or edited on Retreat Guru — the
 dates, prices and description here are a snapshot, and only a re-run refreshes
@@ -745,12 +752,98 @@ def destinations_block(programs):
     return '\n'.join(rows)
 
 
+# --------------------------------------------------------------------------
+# is the snapshot still true?
+# --------------------------------------------------------------------------
+
+# The fields a reader would notice going stale. `text_full` is the body,
+# `price_details` the contribution panel, `teacher_details` the "Guided by"
+# line — a co-facilitator added on Retreat Guru shows up there and nowhere
+# else. Ignored on purpose: `photo_details`, whose CDN URLs churn without the
+# picture changing, and anything we don't render.
+WATCHED = (
+    'title', 'slug', 'date', 'start', 'end', 'excerpt', 'text', 'text_full',
+    'address', 'location', 'prices', 'price_details', 'price_type',
+    'teacher_details', 'photo',
+)
+
+
+def check_live():
+    """Compare data/retreats.json against Retreat Guru and say what moved.
+
+    `--check` answers a narrower question — do the pages on disk match the
+    snapshot? — and answers it "yes" for as long as the snapshot itself is
+    behind. That is how a new program and a new co-facilitator both sat
+    unpublished while `npm run check` reported everything in step.
+
+    Exit 1 on drift, 0 when current. A fetch that fails is not drift: this
+    runs inside `npm run check`, which has to keep working on a train."""
+    if not SNAPSHOT.exists():
+        print('  no snapshot yet — run gen_retreats.py once')
+        return 1
+    try:
+        listing = fetch_json(FEED + '?ver=react')
+    except SystemExit as e:
+        print('  could not reach Retreat Guru (%s)' % str(e).strip().splitlines()[0][:60])
+        print('  snapshot NOT verified — re-run when you have a connection')
+        return 0
+
+    have = {p['ID']: p for p in json.loads(SNAPSHOT.read_text(encoding='utf-8'))['programs']}
+    live = {}
+    for item in listing:
+        if {c['slug'] for c in item.get('categories', [])} & IN_PERSON:
+            live[item['ID']] = item
+
+    drift = []
+    for i, item in sorted(live.items(), key=lambda kv: kv[1].get('start') or 0):
+        if i not in have:
+            drift.append('new on Retreat Guru: %s (%s, %s)'
+                         % (text(item.get('title')), i, item.get('date') or 'no date'))
+            continue
+        full = fetch_json('%s%s' % (FEED, i))
+        moved = [k for k in WATCHED
+                 if json.dumps(full.get(k), sort_keys=True)
+                 != json.dumps(have[i].get(k), sort_keys=True)]
+        if moved:
+            drift.append('edited on Retreat Guru: %s (%s) — %s'
+                         % (text(have[i].get('title')), i, ', '.join(moved)))
+    for i, p in have.items():
+        if i not in live:
+            drift.append('gone from Retreat Guru: %s (%s)' % (text(p.get('title')), i))
+
+    # A category the generator counts as in-person but the /retreats widget
+    # does not list: the page would exist and the listing would never link it.
+    listed = set()
+    m = re.search(r'[?&]cat=([^"&]+)', (ROOT / 'Retreats.dc.html').read_text(encoding='utf-8'))
+    if m:
+        listed = set(m.group(1).split(','))
+        for i, item in live.items():
+            cats = {c['slug'] for c in item.get('categories', [])}
+            if not (cats & listed):
+                drift.append('has a page but the /retreats widget will not list it: %s (%s) — '
+                             'tagged %s, none of them in the widget cat= list'
+                             % (text(item.get('title')), i, '/'.join(sorted(cats))))
+
+    if not drift:
+        print('  %d program(s) — snapshot matches Retreat Guru' % len(live))
+        return 0
+    print('  Retreat Guru is ahead of this repo:')
+    for d in drift:
+        print('    - %s' % d)
+    print('\n  fix with: npm run gen-retreats   (then git push && npx wrangler deploy)')
+    return 1
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--offline', action='store_true',
                     help='rebuild from data/retreats.json instead of fetching')
     ap.add_argument('--check', action='store_true', help='report drift, write nothing')
+    ap.add_argument('--check-live', action='store_true',
+                    help='ask Retreat Guru whether the snapshot is still current')
     args = ap.parse_args()
+    if args.check_live:
+        return check_live()
     check = args.check
 
     if args.offline or (check and SNAPSHOT.exists()):

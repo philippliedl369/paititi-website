@@ -15,7 +15,8 @@
     "gen-retreats": "python3 tools/gen_retreats.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py && python3 tools/apply_analytics.py",
     "head-meta": "python3 tools/apply_head_meta.py",
     "analytics": "python3 tools/apply_analytics.py",
-    "check": "python3 tools/apply_hreflang.py --check && python3 tools/apply_analytics.py --check && python3 tools/gen_retreats.py --check && python3 tools/migrate_blog.py --check"
+    "check": "python3 tools/apply_hreflang.py --check && python3 tools/apply_analytics.py --check && python3 tools/gen_retreats.py --check && python3 tools/migrate_blog.py --check && python3 tools/gen_retreats.py --check-live",
+    "check-retreats": "python3 tools/gen_retreats.py --check-live"
   },
   "engines": {
     "node": ">=20"
