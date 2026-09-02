@@ -37,12 +37,28 @@ def now():
     return datetime.now().astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
 
 
+APP = pathlib.Path.home() / 'Applications' / 'Paititi Watch.app'
+MSG_FILE = pathlib.Path('/tmp/paititi-watch-message.txt')
+
+
 def notify(message, title='paititi site'):
-    """A banner, and nothing that can fail loudly. osascript takes the text as
-    a quoted AppleScript string, so a stray double quote would be a syntax
-    error rather than a notification."""
+    """A banner, and nothing that can fail loudly.
+
+    Posted through Paititi Watch.app when it is built, because a notification
+    always shows the *posting* app's icon — straight osascript means Script
+    Editor's scroll, which is indistinguishable at a glance from the trading
+    hub's alerts. Falls back to osascript if the app isn't there, so a fresh
+    checkout still alerts; `bash tools/notifier/build.sh` creates it.
+
+    The message goes via /tmp rather than an argument: `open -a` will not
+    relaunch a running app and would drop it silently."""
     safe = message.replace('\\', '').replace('"', "'")[:230]
     try:
+        if APP.exists():
+            MSG_FILE.write_text(safe, encoding='utf-8')
+            subprocess.run(['/usr/bin/open', '-a', str(APP)],
+                           timeout=15, check=False, capture_output=True)
+            return
         subprocess.run(['/usr/bin/osascript', '-e',
                         'display notification "%s" with title "%s"' % (safe, title)],
                        timeout=10, check=False, capture_output=True)
