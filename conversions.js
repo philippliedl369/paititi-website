@@ -48,22 +48,24 @@
   'use strict';
 
   /* One conversion label per action, from Google Ads → Goals → Conversions.
+   * The name after each is what the action is called there, so a label can be
+   * matched back to a row in the UI without guessing.
    *
-   * `null` means the action has not been created in Ads yet: nothing is sent,
+   * `booking` is the action the Ads signup flow originally created under the
+   * name "Page view" — same label, renamed once it started counting register
+   * clicks instead.
+   *
+   * A `null` here means the action does not exist in Ads yet: nothing is sent,
    * nothing breaks, and it starts working the moment a label is pasted in.
    * Making up a label would not fail loudly — it would silently record
-   * nothing — so an empty slot is left empty on purpose.
-   *
-   * `booking` carries the one label that exists so far. It is the action the
-   * Ads signup flow created under the name "Page view"; it is Click-based and
-   * now fires on register clicks, so it needs renaming in the Ads UI to match
-   * what it actually counts.
+   * nothing — so an empty slot is left empty on purpose. All four are filled
+   * now; the guard in fire() stays for the next one.
    */
   var ACTIONS = {
-    booking: 'AW-18415578586/oQgjCKybuOscENrbnc1E',
-    donate: null,
-    contact: null,
-    subscribe: null,
+    booking:   'AW-18415578586/oQgjCKybuOscENrbnc1E',  // Booking started / Begin checkout
+    donate:    'AW-18415578586/nMO8CKH8uO4cENrbnc1E',  // Donation started
+    contact:   'AW-18415578586/NKdwCKS8re4cENrbnc1E',  // Contact form sent / Submit lead form
+    subscribe: 'AW-18415578586/aX66CNzlre4cENrbnc1E',  // Newsletter signup / Sign-up
   };
 
   function fire(name) {
