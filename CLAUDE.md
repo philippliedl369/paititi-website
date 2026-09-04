@@ -40,6 +40,17 @@ anything lying around uncommitted goes live too.
 
 `npx wrangler rollback` undoes the last deploy. Know this one by heart.
 
+**If a deploy fails with `KV namespace '6b42…' not found [code: 10041]`, you are
+logged into the wrong Cloudflare account.** The site lives in the
+`Philipp@paititi-institute.org` account; `npx wrangler whoami` prints every
+account the current login can reach, and if Paititi's is not among them nothing
+else will work either — an empty `wrangler kv namespace list` and an empty
+`wrangler deployments list --name paititi-institute` both exit 0 and look like
+"deleted" rather than "invisible". Fix it with `npx wrangler logout && npx
+wrangler login`. **Do not create a new namespace and paste its id into
+`wrangler.jsonc`** — that deploys cleanly and silently strands every newsletter
+address collected since 24 Aug in the namespace nobody is reading any more.
+
 `.assetsignore` decides what is *not* published. Read its comments before
 changing it: patterns are gitignore rules, so an unanchored `docs/` matches at
 any depth and once silently 404'd a linked PDF for a week. It is also what
