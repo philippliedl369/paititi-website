@@ -1,5 +1,19 @@
+# The Google tag needs four of these directives, and needs all four: gtag.js is
+# fetched from googletagmanager.com (script-src), it beacons hits to
+# google-analytics.com and — for Ads conversions — to googleadservices.com,
+# pagead2.googlesyndication.com/ccm and doubleclick.net (connect-src) — that
+# googlesyndication host is the one the Ads conversion beacon really uses and
+# is easy to miss, some of those hits still go
+# out as pixels (img-src, already open to https:), and the Ads conversion ping
+# can land in a hidden iframe (frame-src). Miss one and the failure is silent
+# in exactly the way that matters: the tag sits in the HTML looking installed,
+# the browser refuses it, and Google reports "0 tags found" with the conversion
+# actions stuck Inactive. That is what happened between 31 Aug and 4 Sep 2026 —
+# this policy was written before the tag existed and was not revisited when it
+# was added. cloudflareinsights.com is Cloudflare's own Web Analytics beacon,
+# injected by the platform, and was being blocked for the same reason.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://s3.amazonaws.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://paititi-institute.secure.retreat.guru https://*.retreat.guru; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.zeffy.com https://*.retreat.guru https://secure.jotformpro.com https://*.jotform.com https://*.jotformpro.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://s3.amazonaws.com https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://paititi-institute.secure.retreat.guru https://*.retreat.guru https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://www.google.com https://*.doubleclick.net https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cloudflareinsights.com; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.zeffy.com https://*.retreat.guru https://secure.jotformpro.com https://*.jotform.com https://*.jotformpro.com https://td.doubleclick.net https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
