@@ -46,6 +46,15 @@ rm -f "$APP/Contents/Resources/Assets.car"
 /usr/bin/defaults write "$APP/Contents/Info.plist" CFBundleName "Paititi Watch"
 /usr/bin/plutil -convert xml1 "$APP/Contents/Info.plist"
 
+# Re-sign, and note that this has to be the LAST thing that touches the bundle.
+# osacompile signs what it produced; every edit above — the icon, the deleted
+# catalogue, the Info.plist keys — invalidates that signature, and a broken
+# signature does not announce itself. The app still launches, `open` still
+# returns 0, and the notification is silently dropped. That is the whole
+# failure, and `codesign -v` is the only thing that shows it.
+/usr/bin/codesign --force --deep --sign - "$APP" 2>/dev/null
+/usr/bin/codesign -v "$APP" 2>/dev/null && echo "signature: ok"
+
 # The icon cache is keyed on the bundle's mtime; without this the old icon can
 # persist until logout.
 /usr/bin/touch "$APP"

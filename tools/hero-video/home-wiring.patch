@@ -1,0 +1,74 @@
+diff --git a/Home.dc.html b/Home.dc.html
+index 4c216cf..c22df76 100644
+--- a/Home.dc.html
++++ b/Home.dc.html
+@@ -30,6 +30,7 @@
+ <script src="/support.js"></script>
+ <script src="/anchor-scroll.js" defer></script>
+ <script src="/retreatguru-deeplink.js"></script>
++<script src="/hero-video.js" defer></script>
+ </head>
+ <body>
+ <x-dc>
+@@ -66,6 +67,15 @@
+   .hm-hero .pt-fluid{text-align:left}
+   .hm-hero .hm-lede p{font-size:19.2px}
+ 
++  /* The moving sky. hero-video.js layers a muted loop over the still on
++     desktops only (see data-video on the section and tools/hero-video/
++     README.md); the still underneath stays the LCP image and the design on
++     phones, under reduced motion and without JS. The video is sized by the
++     shared .pt-sec-bg > video rule and only needs to sit on top of the img
++     rather than below it, fading in once frames are flowing. */
++  .hm-hero .pt-sec-bg > video{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
++  .hm-hero .pt-sec-bg > video.is-on{opacity:1}
++
+   .hm-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+   /* A .pt-btn in a fluid cell fills the cell; hero buttons size to their label. */
+   .pt-fluid .hm-cta .pt-btn{width:auto;height:auto;min-height:56px}
+@@ -135,7 +145,7 @@
+ <dc-import name="SiteHeader" active="home" hint-size="100%,209px" sister="/es/"></dc-import>
+ <main>
+ 
+-  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:860px">
++  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:860px" data-video="/assets/video/home-hero.mp4">
+     <div class="pt-sec-bg">
+       <img src="/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp"
+            srcset="/assets/r/home/screenshot-2025-04-12-at-70237e280afpm-320w.webp 320w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-480w.webp 480w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-640w.webp 640w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-800w.webp 800w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1080w.webp 1080w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1280w.webp 1280w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1600w.webp 1600w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-2000w.webp 2000w, /assets/home/screenshot-2025-04-12-at-70237e280afpm.webp 2500w"
+diff --git a/Home.es.dc.html b/Home.es.dc.html
+index f319113..586ccc9 100644
+--- a/Home.es.dc.html
++++ b/Home.es.dc.html
+@@ -32,6 +32,7 @@
+ <script src="/support.js"></script>
+ <script src="/anchor-scroll.js" defer></script>
+ <script src="/retreatguru-deeplink.js"></script>
++<script src="/hero-video.js" defer></script>
+ </head>
+ <body>
+ <x-dc>
+@@ -68,6 +69,15 @@
+   .hm-hero .pt-fluid{text-align:left}
+   .hm-hero .hm-lede p{font-size:19.2px}
+ 
++  /* The moving sky. hero-video.js layers a muted loop over the still on
++     desktops only (see data-video on the section and tools/hero-video/
++     README.md); the still underneath stays the LCP image and the design on
++     phones, under reduced motion and without JS. The video is sized by the
++     shared .pt-sec-bg > video rule and only needs to sit on top of the img
++     rather than below it, fading in once frames are flowing. */
++  .hm-hero .pt-sec-bg > video{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
++  .hm-hero .pt-sec-bg > video.is-on{opacity:1}
++
+   .hm-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+   /* A .pt-btn in a fluid cell fills the cell; hero buttons size to their label. */
+   .pt-fluid .hm-cta .pt-btn{width:auto;height:auto;min-height:56px}
+@@ -137,7 +147,7 @@
+ <dc-import name="SiteHeader.es" active="home" hint-size="100%,209px" sister="/"></dc-import>
+ <main>
+ 
+-  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:860px">
++  <section class="pt-sec pt-sec-flat pt-hero hm-hero" style="--pt-hero-h:860px" data-video="/assets/video/home-hero.mp4">
+     <div class="pt-sec-bg">
+       <img src="/assets/home/screenshot-2025-04-12-at-70237e280afpm.webp"
+            srcset="/assets/r/home/screenshot-2025-04-12-at-70237e280afpm-320w.webp 320w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-480w.webp 480w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-640w.webp 640w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-800w.webp 800w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1080w.webp 1080w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1280w.webp 1280w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-1600w.webp 1600w, /assets/r/home/screenshot-2025-04-12-at-70237e280afpm-2000w.webp 2000w, /assets/home/screenshot-2025-04-12-at-70237e280afpm.webp 2500w"
