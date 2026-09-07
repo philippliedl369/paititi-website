@@ -12,8 +12,16 @@
 # this policy was written before the tag existed and was not revisited when it
 # was added. cloudflareinsights.com is Cloudflare's own Web Analytics beacon,
 # injected by the platform, and was being blocked for the same reason.
+#
+# Tag Assistant (Google's debugger, also what "Troubleshoot" in Google Ads
+# opens) needs a fifth: when it connects, the tag pulls a debug bootstrap and
+# a status badge from googletagmanager.com, and the badge's stylesheet is a
+# style-src load — googletagmanager.com has to be listed there too, or the
+# badge appears unstyled and Tag Assistant reports the block as a CSP issue.
+# tagmanager.google.com is the same allowance for Tag Manager's preview mode,
+# per Google's CSP guide, and costs nothing while there is no GTM container.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://s3.amazonaws.com https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://paititi-institute.secure.retreat.guru https://*.retreat.guru https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://www.google.com https://*.doubleclick.net https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cloudflareinsights.com; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.zeffy.com https://*.retreat.guru https://secure.jotformpro.com https://*.jotform.com https://*.jotformpro.com https://td.doubleclick.net https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://s3.amazonaws.com https://www.googletagmanager.com https://tagmanager.google.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.googletagmanager.com https://tagmanager.google.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://paititi-institute.secure.retreat.guru https://*.retreat.guru https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://www.google.com https://*.doubleclick.net https://pagead2.googlesyndication.com https://*.googlesyndication.com https://cloudflareinsights.com; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://www.zeffy.com https://*.retreat.guru https://secure.jotformpro.com https://*.jotform.com https://*.jotformpro.com https://td.doubleclick.net https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN

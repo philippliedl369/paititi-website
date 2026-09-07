@@ -157,6 +157,21 @@ re-render — so it delegates from `document`. Don't hardcode `value`/`currency`
 either; that belongs on the action in the Ads UI, where changing it is not a
 deploy.
 
+**Tag Assistant "couldn't connect" usually means the tester's browser, not
+the site.** Its handshake is window-to-window: Tag Assistant opens the page in
+a popup with `?gtm_debug=`, gtag.js pulls a debug bootstrap from
+googletagmanager.com, and that bootstrap answers the opener's pings by
+`postMessage`; the page never contacts tagassistant.google.com itself. An ad
+blocker, Ghostery, Privacy Badger or Firefox's strict tracking protection
+drops googletagmanager.com, so in *that* browser no tag loads and there is
+nothing to connect to — while the tag keeps counting every other visitor.
+`node tools/tag_assistant_probe.mjs <url>` plays Tag Assistant against the
+live page in a clean headless Chrome and prints what came back; a
+`CONTAINER_STARTING` for GT-MBL4BMP means the site side is fine. Verified
+7 Sep 2026. The one site-side trap it found: the debug badge's stylesheet is
+a `style-src` load, so googletagmanager.com has to be listed there as well as
+in `script-src` — `_headers` has the note.
+
 ## The silent failures
 
 None of these throw an error. All of them have shipped at least once.
