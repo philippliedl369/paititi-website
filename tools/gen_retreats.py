@@ -46,6 +46,9 @@ What it touches, all of it idempotent:
 Programs not on Retreat Guru — the Himalayan pilgrimage, which the Karuna
 Project runs and registers — are listed in data/retreats-extra.json and render
 through the same template.
+
+A program whose Retreat Guru copy is not fit to publish can be named in HOLD
+below: it stays in the snapshot and under --check-live, but generates no page.
 """
 import argparse
 import html as htmllib
@@ -79,6 +82,41 @@ IN_PERSON = {
     'transformation-retreats', 'embodying-true-nature-retreats',
     'peru-programs', 'us-mexico-programs',
 }
+
+# Passages in a program's Retreat Guru description that must not be published,
+# by Retreat Guru id. This is the one place this script removes *meaning* —
+# clean_body only ever drops markup — so it is deliberately narrow: an exact
+# string, and a loud failure if it stops matching.
+#
+# 1103, 7 Sep 2026: the structured fields are right — 25 Sep 2026, 5:30–7:30pm,
+# 418 Broad St, Nevada City (confirmed by Philipp) — but pasted into the middle
+# of the description is an earlier event's block: "Thursday, May 28",
+# "12pm – 2:00pm", "The Sacred Sanctuary, Boulder, Colorado" and a second,
+# contradicting "Sliding Scale: $15-30". Published as written it would tell a
+# reader the wrong day, the wrong time, the wrong state and the wrong price,
+# directly under the correct ones. The rest of the description is this event's
+# and stays. Drop this entry once Roman has fixed it on Retreat Guru.
+#
+# If the passage is no longer found the script STOPS rather than quietly
+# publishing: either Roman fixed it (delete the entry) or the wording moved
+# (update it). Silence here would be the same silent failure as everything
+# else in this repo's list.
+#
+# Matched as whole <p> elements keyed on their distinctive words, because the
+# runs of whitespace in them are non-breaking spaces, not spaces — an exact
+# literal copied out of the rendered page does not match the source.
+REDACT = {
+    1103: [
+        'Thursday, May 28',
+        '12pm &#8211; 2:00pm',
+        'The Sacred Sanctuary, Boulder, Colorado',
+        'Sliding Scale: $15-30',
+    ],
+}
+
+# A REDACT entry names the text inside a paragraph; this takes the paragraph
+# with it, so no empty <p><strong></strong></p> is left behind.
+PARA = re.compile(r'<p\b[^>]*>(?:(?!</p>).)*?%s(?:(?!</p>).)*?</p>\s*', re.S)
 
 LADDER = [320, 480, 640, 800, 1080, 1280, 1600, 2000]
 
@@ -150,15 +188,30 @@ TAG = re.compile(r'<(/?)([a-zA-Z][a-zA-Z0-9]*)((?:\s+[^\s=>]+(?:\s*=\s*(?:"[^"]*
 ATTR = re.compile(r'([^\s=]+)\s*=\s*"([^"]*)"|([^\s=]+)\s*=\s*\'([^\']*)\'')
 
 
-def clean_body(raw):
+def clean_body(raw, program_id=None):
     """Retreat Guru's rich text, reduced to what this site can style.
 
     Nothing here is rewritten for meaning — tags are dropped, attributes are
     dropped, headings are demoted one level so the page keeps a single h1, and
-    that is all."""
+    that is all. The one exception is an entry in REDACT, which removes a
+    named passage from one named program and says so."""
     if not raw:
         return ''
-    body = BLOCKED_TAGS.sub('', raw)
+    body = raw
+    for passage in REDACT.get(program_id, []):
+        pat = PARA.pattern % re.escape(passage)
+        new, n = re.subn(pat, '', body, flags=re.S)
+        if not n:
+            raise SystemExit(
+                '  program %s: REDACT expected a paragraph containing\n'
+                '    %r\n'
+                '  and the description no longer has one. Read it on Retreat Guru:\n'
+                '  if it is fixed, delete that entry in REDACT (tools/gen_retreats.py);\n'
+                '  if it only moved, update it. Refusing to generate rather than\n'
+                '  publish it unchecked.' % (program_id, passage))
+        body = new
+        print('    %s: redacted the paragraph with %r (see REDACT)' % (program_id, passage))
+    body = BLOCKED_TAGS.sub('', body)
 
     def one(m):
         close, name, attrs, self_close = m.group(1), m.group(2).lower(), m.group(3), m.group(4)
@@ -672,7 +725,7 @@ def render(p, others):
         kicker=esc(kicker), teachers_html=teachers_html,
         facts='\n'.join(facts),
         facts_cta=facts_cta,
-        body=clean_body(p.get('text_full') or p.get('text') or ''),
+        body=clean_body(p.get('text_full') or p.get('text') or '', p.get('ID')),
         video=video, gallery=gallery, more=more,
         register=htmllib.escape(register, quote=True),
         live_reg=' data-live="register"' if p.get('ID') else '',
