@@ -181,6 +181,11 @@ if (started.length) console.log('VERDICT: the site completes the Tag Assistant h
 else if (!ta.opened) console.log('VERDICT: the popup could not be opened — this probe is broken, not the site.');
 else console.log('VERDICT: the page never answered. The site side is at fault — look at the BLOCKED lines and CSP refusals above, and check the live headers for Cross-Origin-Opener-Policy or a redirect that drops ?gtm_debug.');
 
-chrome.kill('SIGKILL'); tls.close(); proxy.close();
-rmSync(dir, { recursive: true, force: true });
+tls.close(); proxy.close();
+// Chrome keeps writing its profile for a moment after the kill; removing the
+// directory underneath it fails with ENOTEMPTY, so wait for the exit first.
+const gone = new Promise((r) => chrome.once('exit', r));
+chrome.kill('SIGKILL');
+await gone;
+rmSync(dir, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
 process.exit(started.length ? 0 : 1);
