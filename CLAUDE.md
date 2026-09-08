@@ -148,14 +148,32 @@ JavaScript runs. Re-run it after adding a page; `--remove` takes it back out.
 **Google Ads conversions live in `conversions.js`,** loaded by that same block.
 It counts clicks through to Retreat Guru and Zeffy plus the two form
 submissions — the Ad Grant requires at least one conversion, and does not
-accept a bare page view as the only one. Three of its four label slots are
-still `null` until Roman creates those actions in Ads; a `null` slot sends
-nothing and breaks nothing. Two traps it is already written around, both of
-them in the list below: Google's own snippet expects an inline `onclick`, which
-the DC runtime strips, and a listener bound to an element does not survive the
-re-render — so it delegates from `document`. Don't hardcode `value`/`currency`
-either; that belongs on the action in the Ads UI, where changing it is not a
-deploy.
+accept a bare page view as the only one. All four label slots are filled; a
+`null` slot would send nothing and break nothing. Two traps it is already
+written around, both of them in the list below: Google's own snippet expects an
+inline `onclick`, which the DC runtime strips, and a listener bound to an
+element does not survive the re-render — so it delegates from `document`. Don't
+hardcode `value`/`currency` either; that belongs on the action in the Ads UI,
+where changing it is not a deploy.
+
+**All four were verified firing against the live site on 8 Sep 2026** by driving
+headless Chrome through the real pages. Two things that verification taught,
+both easy to get wrong:
+
+- **A donation completed inside the embedded Zeffy form on `/support` can never
+  be counted** — it is a cross-origin iframe. Only three elements fire `donate`:
+  the header announcement bar's Zeffy link, and the "Rather give on Zeffy"
+  anchor under each of the two embedded forms. "Click the donate button and
+  watch for a conversion" is therefore wrong advice for the embed.
+- **The Ads beacons carry `label=<slot label>` but no `tid=AW-…`.** Six requests
+  go out per conversion, across `googleadservices.com`,
+  `googleads.g.doubleclick.net`, `www.google.com` and the visitor's country
+  mirror. Match on `label=`; a check that greps for `tid=AW-` reports nothing
+  while the conversion is working perfectly.
+
+**"Misconfigured" in the Ads Goals summary means Google has not received that
+action yet**, not that the wiring is broken. It clears itself once the action
+fires once for real.
 
 **Tag Assistant "couldn't connect" usually means the tester's browser, not
 the site.** Its handshake is window-to-window: Tag Assistant opens the page in
