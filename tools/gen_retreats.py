@@ -88,15 +88,6 @@ IN_PERSON = {
 # clean_body only ever drops markup — so it is deliberately narrow: an exact
 # string, and a loud failure if it stops matching.
 #
-# 1103, 7 Sep 2026: the structured fields are right — 25 Sep 2026, 5:30–7:30pm,
-# 418 Broad St, Nevada City (confirmed by Philipp) — but pasted into the middle
-# of the description is an earlier event's block: "Thursday, May 28",
-# "12pm – 2:00pm", "The Sacred Sanctuary, Boulder, Colorado" and a second,
-# contradicting "Sliding Scale: $15-30". Published as written it would tell a
-# reader the wrong day, the wrong time, the wrong state and the wrong price,
-# directly under the correct ones. The rest of the description is this event's
-# and stays. Drop this entry once Roman has fixed it on Retreat Guru.
-#
 # If the passage is no longer found the script STOPS rather than quietly
 # publishing: either Roman fixed it (delete the entry) or the wording moved
 # (update it). Silence here would be the same silent failure as everything
@@ -105,13 +96,13 @@ IN_PERSON = {
 # Matched as whole <p> elements keyed on their distinctive words, because the
 # runs of whitespace in them are non-breaking spaces, not spaces — an exact
 # literal copied out of the rendered page does not match the source.
+#
+# The list is empty, and that is the healthy state. It was last used for 1103
+# (7 Sep 2026), whose description had an earlier Boulder, Colorado event's block
+# — wrong day, time, state and price — pasted in under the correct structured
+# fields. Roman cleared it at the source on 8 Sep and the entry came out that
+# day, which is the intended end of every entry here.
 REDACT = {
-    1103: [
-        'Thursday, May 28',
-        '12pm &#8211; 2:00pm',
-        'The Sacred Sanctuary, Boulder, Colorado',
-        'Sliding Scale: $15-30',
-    ],
 }
 
 # A REDACT entry names the text inside a paragraph; this takes the paragraph
