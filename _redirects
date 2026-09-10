@@ -21,6 +21,16 @@
 # Pilgrimage walks through. Its own page because it is a time-bound appeal
 # with its own story, not a fifth standing initiative. Added 9 Sep 2026.
 /support/nepal-emergency  /NepalEmergency.dc.html  200
+# A page whose link travels by WhatsApp needs to survive being retyped. The
+# trailing slash is the one that actually bit: a browser or chat client adds it
+# and the clean URL 404s, which reads as "it isn't live". Short aliases because
+# /nepal is what somebody types from memory.
+/support/nepal-emergency/  /support/nepal-emergency  301
+/nepal               /support/nepal-emergency  301
+/nepal/              /support/nepal-emergency  301
+/rasuwa              /support/nepal-emergency  301
+/nepal-emergency     /support/nepal-emergency  301
+/support/nepal       /support/nepal-emergency  301
 /the-institute       /about-us                 301
 /roman-hanis         /team                     301
 
@@ -154,6 +164,25 @@
 /education/peru-retreats-courses      /retreats   301
 /education/peru-retreats-courses/     /retreats   301
 /paititi-family                       /team       301
+
+# The clean URLs themselves with a trailing slash. Every one of these 404'd —
+# /retreats/ and /initiatives/ have since the migration — because Workers
+# Assets matches exactly and nothing normalised the slash. Browsers and chat
+# clients add it freely, and the result reads as "the page isn't live".
+# Exact-match rules on purpose: a /*/ splat would be dynamic, and the note at
+# the foot of this file explains what happened last time the dynamic rules ran
+# past 100. Found 10 Sep 2026, when Roman could not open the Nepal appeal.
+/support/            /support             301
+/retreats/           /retreats            301
+/initiatives/        /initiatives         301
+/about-us/           /about-us            301
+/team/               /team                301
+/contact/            /contact             301
+/blog/               /blog                301
+/press-media/        /press-media         301
+/beyond-ayahuasca/   /beyond-ayahuasca    301
+/discoverpaititi/    /discoverpaititi     301
+/distance-healing/   /distance-healing    301
 /paititi-family/                      /team       301
 /who/paititi-centers                  /about-us   301
 /who/paititi-centers/                 /about-us   301
