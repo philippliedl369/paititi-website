@@ -169,7 +169,21 @@
 <header class="pt-header" data-hidden="{{ hidden }}" data-solid="{{ solid }}">
   <sc-if value="{{ announceOpen }}" hint-placeholder-val="{{ true }}">
     <div class="pt-announce">
-      <a class="pt-announce-link" href="https://www.zeffy.com/en-US/donation-form/paititi-institute-ancestral-campus-for-yahua-tribe-children-in-the-amazon-rainforest" target="_blank" rel="noopener">🌿 Support the Growth of the Yahua Ancestral School and Living Wisdom Center</a>
+      <!-- The bar carries the Nepal emergency appeal for its duration (from
+           9 Sep 2026), displacing the standing Yahua appeal. To put that one
+           back when the emergency closes, this was the line:
+
+             🌿 Support the Growth of the Yahua Ancestral School and Living
+             Wisdom Center → https://www.zeffy.com/en-US/donation-form/
+             paititi-institute-ancestral-campus-for-yahua-tribe-children-in-
+             the-amazon-rainforest  (target=_blank rel=noopener)
+
+           The Nepal one points at our own page rather than straight out to
+           Zeffy, because the appeal needs its story before it asks for money —
+           and the page's own Zeffy links still fire the `donate` conversion.
+           The Spanish bar (SiteHeader.es.dc.html) deliberately still carries
+           the Yahua appeal: this page has no Spanish twin yet. -->
+      <a class="pt-announce-link" href="/support/nepal-emergency">🏔️ Emergency relief for families in Rasuwa, Nepal</a>
       <button class="pt-announce-x" onClick="{{ closeAnnounce }}" aria-label="Dismiss announcement">&times;</button>
     </div>
   </sc-if>

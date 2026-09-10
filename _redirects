@@ -17,6 +17,10 @@
 # Where the header's Support button lands: every initiative, with the open
 # Zeffy campaigns embedded. Added 28 Aug 2026.
 /support             /Support.dc.html          200
+# Emergency appeal for Rasuwa, Nepal — the Langtang district the Himalayan
+# Pilgrimage walks through. Its own page because it is a time-bound appeal
+# with its own story, not a fifth standing initiative. Added 9 Sep 2026.
+/support/nepal-emergency  /NepalEmergency.dc.html  200
 /the-institute       /about-us                 301
 /roman-hanis         /team                     301
 
@@ -180,6 +184,11 @@
 /distance-healing/SiteFooter.dc.html  /SiteFooter.dc.html  200
 /who/SiteHeader.dc.html             /SiteHeader.dc.html  200
 /who/SiteFooter.dc.html             /SiteFooter.dc.html  200
+# /support/ became a directory on 9 Sep 2026 with the Nepal emergency appeal —
+# the first page under it. Without these two the appeal renders with no header
+# and no footer, and nothing says so but a console line.
+/support/SiteHeader.dc.html         /SiteHeader.dc.html  200
+/support/SiteFooter.dc.html         /SiteFooter.dc.html  200
 
 # ---------------------------------------------------------------------------
 # Spanish site (/es/)
