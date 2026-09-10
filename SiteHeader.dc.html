@@ -79,6 +79,17 @@
     text-decoration:none;line-height:30px;white-space:nowrap}
   .pt-folder-panel a:hover{color:#fff;opacity:.78}
 
+  /* The Nepal emergency entry, in both the desktop panel and the mobile menu.
+     A dot rather than a colour: both menus are white on dark, and a second
+     colour in there would fight the palette and read as an error state. The
+     dot is a pseudo-element, so it needs no extra markup and vanishes with the
+     link when the appeal closes. Remove this rule then too. */
+  .pt-folder-panel a.pt-folder-urgent::before,
+  .pt-mobile a.pt-folder-urgent::before{
+    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:#E4A0A0;margin-right:8px;vertical-align:middle;
+    position:relative;top:-1px}
+
   /* Scoped to .pt-header: SiteFooter also defines .pt-social, and both
      components' helmet styles land in the same <head>, so an unscoped rule
      there would win on source order and re-show these icons on mobile. */
@@ -218,6 +229,12 @@
       <div class="pt-folder">
         <a href="/initiatives" data-active="{{ activeInitiatives }}">Initiatives</a>
         <div class="pt-folder-panel">
+          <!-- The Nepal appeal sits at the top of this list for its duration
+               and comes out when it closes (10 Sep 2026). It is a time-bound
+               emergency, not a standing initiative, so it is marked rather
+               than blended in — the announcement bar is dismissible and /support
+               is a click away, which left the page with no route from the nav. -->
+          <a class="pt-folder-urgent" href="/support/nepal-emergency">Nepal Emergency Appeal</a>
           <a href="/initiatives">Our Living Vision</a>
           <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
           <a href="/initiatives/qero-nation-emergency-food-supply">Q&rsquo;ero Initiative</a>
@@ -284,6 +301,7 @@
         <a href="/mentorship">Individual Mentorship &amp; Dreamwork</a>
         <a href="/distance-healing">Distance Healing</a>
         <span class="pt-mobile-group">Initiatives</span>
+        <a class="pt-folder-urgent" href="/support/nepal-emergency">Nepal Emergency Appeal</a>
         <a href="/initiatives">Our Living Vision</a>
         <a href="/initiatives/yagua-cultural-heritage-center-indigenous-school">Yahua Ancestral School</a>
         <a href="/initiatives/qero-nation-emergency-food-supply">Q&rsquo;ero Initiative</a>

@@ -127,7 +127,13 @@
   /* Portfolio grid: the three initiative pages, 28px apart. Was two 648px
      cards with 432px photos; three across, the photo drops to 300px so the
      row keeps the same proportions. */
-  .in-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;
+  /* Four across since 10 Sep 2026, when the Nepal emergency appeal joined the
+     three standing initiatives. Four columns rather than a second row on
+     purpose: this section is on the measured fluid grid (--pt-rows:19, the
+     cards in rows 5–17), and a second row would change its height and move
+     everything below it. The photos narrow; the row keeps its geometry. Back
+     to repeat(3,...) when the appeal closes and its card comes out. */
+  .in-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;
     max-width:1324px;margin:0 auto;padding:0 58px}
   .in-card{display:block;text-decoration:none;color:inherit}
   .in-card img{width:100%;height:300px;object-fit:cover;display:block}
@@ -326,6 +332,18 @@
       </div>
       <div style="grid-area:5 / 1 / 17 / 25">
         <div class="in-grid">
+          <!-- The Nepal emergency appeal, first because it is time-bound.
+               Remove this card and put .in-grid back to three columns when it
+               closes. Added 10 Sep 2026. -->
+          <a class="in-card" href="/support/nepal-emergency">
+            <img src="/assets/nepal/rasuwa-syafrubesi.webp"
+           srcset="/assets/r/nepal/rasuwa-syafrubesi-320w.webp 320w, /assets/r/nepal/rasuwa-syafrubesi-480w.webp 480w, /assets/r/nepal/rasuwa-syafrubesi-640w.webp 640w, /assets/r/nepal/rasuwa-syafrubesi-800w.webp 800w, /assets/r/nepal/rasuwa-syafrubesi-1080w.webp 1080w, /assets/r/nepal/rasuwa-syafrubesi-1280w.webp 1280w"
+           sizes="(max-width:640px) 90vw, (max-width:1180px) 672px, 300px"
+           width="2500"
+           height="1875"
+           decoding="async" alt="The Langtang Khola running past the hillside houses of Syafrubesi in Rasuwa, Nepal" loading="lazy">
+            <span>Emergency Relief for Nepal</span>
+          </a>
           <a class="in-card" href="/initiatives/yagua-cultural-heritage-center-indigenous-school">
             <img src="/assets/retreats/beyond-ayahuasca-01.webp"
            srcset="/assets/r/retreats/beyond-ayahuasca-01-320w.webp 320w, /assets/r/retreats/beyond-ayahuasca-01-480w.webp 480w, /assets/r/retreats/beyond-ayahuasca-01-640w.webp 640w, /assets/r/retreats/beyond-ayahuasca-01-800w.webp 800w, /assets/r/retreats/beyond-ayahuasca-01-1080w.webp 1080w, /assets/retreats/beyond-ayahuasca-01.webp 1099w"
