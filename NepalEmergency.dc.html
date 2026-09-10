@@ -147,12 +147,15 @@
   .ne-story .pt-prose a{color:#584364}
   .ne-cols{margin-top:44px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
 
-  /* The fundraiser film, once it exists. Same 16/9 embed shell the Q'ero page
-     uses for its short film. */
-  .ne-film{margin-top:44px;background:#fff;border-radius:48px 0;overflow:hidden;
-    box-shadow:0 10px 30px rgba(33,4,22,.08)}
-  .ne-film .pt-embed{aspect-ratio:16/9;background:#2A1736}
-  .ne-film-body{padding:32px 40px}
+  /* The fundraiser film. Shot vertical — it is a Short — so the player is
+     9/16 and the block is narrow and centred, not the 16/9 shell the Q'ero
+     page uses. In a 16/9 frame a vertical film is a sliver of picture between
+     two wide black bars. */
+  .ne-film{margin:44px auto 0;max-width:420px;background:#fff;border-radius:48px 0;
+    overflow:hidden;box-shadow:0 10px 30px rgba(33,4,22,.08)}
+  .ne-film .pt-embed{aspect-ratio:9/16;background:#2A1736}
+  .ne-film .pt-embed iframe{width:100%;height:100%;border:0;display:block}
+  .ne-film-body{padding:28px 32px}
   .pt-page main .ne-film-body p{font-weight:300;line-height:1.75;margin:0}
 
   /* ---- The form ----------------------------------------------------------
@@ -222,7 +225,9 @@
     .ne-story,.ne-give,.ne-how{padding:48px 0 56px}
     .ne-give-in{padding:0 20px}
     .ne-link-in{padding:0 20px}
-    .ne-film{border-radius:32px 0}
+    /* A 420px player is wider than a 390px phone once the section padding is
+       taken off. Let it shrink instead of overflowing. */
+    .ne-film{border-radius:32px 0;max-width:100%}
     .ne-film-body{padding:26px 24px}
   }
   /* The footer wave must match this page's final section colour. */
@@ -282,19 +287,19 @@
         </div>
       </div>
 
-      <!-- The fundraiser film. The Nepali videographer was still working on
-           it on 9 Sep 2026. Put the YouTube id in the src and delete this
-           comment; until then the whole block stays commented out rather than
-           rendering an empty player.
+      <!-- The fundraiser film, from the Paititi Institute channel (10 Sep
+           2026). youtube-nocookie.com, like every other embed on this site:
+           it is already in the CSP frame-src, and it sets no advertising
+           cookie before the visitor presses play, which matters on a page
+           that runs the consent banner. -->
       <div class="ne-film">
         <div class="pt-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="Emergency relief for families in Rasuwa, Nepal" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/qkFejPDjHVM" title="Emergency Relief for Families in Rasuwa, Nepal" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="ne-film-body">
-          <p>PLACEHOLDER — a line introducing the film.</p>
+          <p>Roman Hanis on the emergency in Rasuwa, and on the relief this campaign is carrying to families there.</p>
         </div>
       </div>
-      -->
 
       <!-- The hero photograph's attribution. CC BY 4.0 wants credit, a link to
            the licence and a note that changes were made (it was resized). It
