@@ -11,11 +11,13 @@
     "dev:cloudflare": "wrangler dev",
     "deploy:cloudflare": "wrangler deploy",
     "sync-assets": "python3 tools/sync_assets.py",
-    "migrate-blog": "python3 tools/migrate_blog.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py && python3 tools/apply_analytics.py",
-    "gen-retreats": "python3 tools/gen_retreats.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py && python3 tools/apply_analytics.py",
-    "head-meta": "python3 tools/apply_head_meta.py",
+    "migrate-blog": "python3 tools/migrate_blog.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py && python3 tools/apply_analytics.py && python3 tools/apply_crawl_nav.py && python3 tools/apply_schema.py",
+    "gen-retreats": "python3 tools/gen_retreats.py && python3 tools/apply_hreflang.py && python3 tools/apply_head_meta.py && python3 tools/apply_analytics.py && python3 tools/apply_crawl_nav.py && python3 tools/apply_schema.py",
+    "head-meta": "python3 tools/apply_head_meta.py && python3 tools/apply_schema.py",
     "analytics": "python3 tools/apply_analytics.py",
-    "check": "python3 tools/apply_hreflang.py --check && python3 tools/apply_analytics.py --check && python3 tools/gen_retreats.py --check && python3 tools/migrate_blog.py --check && python3 tools/gen_retreats.py --check-live",
+    "schema": "python3 tools/apply_schema.py",
+    "crawl-nav": "python3 tools/apply_crawl_nav.py",
+    "check": "python3 tools/apply_hreflang.py --check && python3 tools/apply_analytics.py --check && python3 tools/apply_crawl_nav.py --check && python3 tools/apply_schema.py --check && python3 tools/gen_retreats.py --check && python3 tools/migrate_blog.py --check && python3 tools/gen_retreats.py --check-live",
     "check-retreats": "python3 tools/gen_retreats.py --check-live"
   },
   "engines": {

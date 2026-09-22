@@ -66,16 +66,21 @@ Don't "fix" its absence.
 | `Retreat-*.dc.html`, `Course-*.dc.html` | `data/retreats*.json` → `npm run gen-retreats` |
 | `sitemap.xml`, the hreflang blocks, each page's `sister` prop | `tools/i18n_pairs.json` → `tools/apply_hreflang.py` |
 | `assets/r/**` and every `srcset`/`sizes` attribute | `tools/gen_responsive.py` |
+| every page's `<script type="application/ld+json">` in `<head>`, and `llms.txt` | `tools/apply_schema.py` |
+| the no-JavaScript link list inside each `<dc-import name="SiteFooter">` | `tools/apply_crawl_nav.py` (parsed from SiteHeader/SiteFooter) |
 
 Editing the output instead of the source works exactly until the next
 generator run erases it.
 
 **Pipeline order matters:** `migrate_blog.py` → `gen_responsive.py` →
-`apply_hreflang.py` → `apply_head_meta.py` → `apply_analytics.py`. The last two
-are idempotent and rewrite `<head>`, so they run in that order and at the end.
-`apply_hreflang.py --check`, `migrate_blog.py --check` and
-`apply_analytics.py --check` verify without writing — **`npm run check` runs all
-four**, and a clean run is the cheapest thing you can do before deploying.
+`apply_hreflang.py` → `apply_head_meta.py` → `apply_analytics.py` →
+`apply_crawl_nav.py` → `apply_schema.py`. The last four are idempotent and
+rewrite `<head>` or the footer import, so they run in that order and at the end.
+`apply_schema.py` is last because `apply_head_meta.py` inserts the preview tags
+in front of the first `<script>` in `<head>` and the schema block is a
+`<script>`. Every one of them takes `--check` and verifies without writing —
+**`npm run check` runs all of them**, and a clean run is the cheapest thing you
+can do before deploying.
 
 **Those checks all ask the same narrow question: do the pages on disk match
 their source files?** They cannot see that a *source* has gone stale. The
@@ -83,12 +88,15 @@ retreats are the case where that bites, because their real source is somebody
 else's website — see below.
 
 `npm run gen-retreats` and `npm run migrate-blog` each run that whole chain,
-ending in `apply_analytics.py`, and you should use the npm script rather than
-the bare generator. Calling `python3 tools/gen_retreats.py` on its own rebuilds
-those pages from a template that has no `<head>` block, so the Google tag, the
-consent defaults and `conversions.js` come off all six retreat pages — or all
-24 blog pages — and nothing says so. Both generators now compare *without* that
-block, so `--check` stays honest instead of reporting permanent drift.
+ending in `apply_schema.py`, and you should use the npm script rather than the
+bare generator. Calling `python3 tools/gen_retreats.py` on its own rebuilds
+those pages from a template that has none of the downstream blocks, so the
+Google tag, the consent defaults, `conversions.js`, the schema.org entity and
+the no-JavaScript navigation all come off all six retreat pages — or all 24 blog
+pages — and nothing says so. Both generators now compare *without* those blocks,
+so `--check` stays honest instead of reporting permanent drift. **Adding a new
+`<head>`-rewriting tool means adding it to that strip list in both generators**,
+or every generated page reports as drifting forever.
 
 `gen_retreats.py` generates **two** families of page off the one feed:
 `/retreats/<slug>` for the in-person programs (categories in `IN_PERSON`) and
@@ -153,6 +161,33 @@ HTML, not `<helmet>` and not behind a wrapper file — Google's "is the tag
 installed?" check reads the HTML as it arrives, the same way link-preview
 crawlers do, and reports *Not detected* for anything that only appears after
 JavaScript runs. Re-run it after adding a page; `--remove` takes it back out.
+
+**A new page also needs a canonical before it can be described.**
+`apply_schema.py` writes the schema.org entity graph — the Organization, the
+page, its breadcrumbs, and a `BlogPosting` on the articles — into the real
+`<head>`, and it reads the page's canonical to know what it is describing. A
+page not yet in `tools/i18n_pairs.json` has no canonical, so it is skipped and
+*named* in the output rather than silently passed over. That is why
+`LivingWisdomSchool` prints on every run; it is correct, and it will describe
+itself the day Roman releases it.
+
+**Never put an EIN in the schema.** 31-1796801 is **Empowerment WORKS'** number,
+not Paititi's — Paititi is fiscally sponsored and holds no 501(c)(3) of its own.
+Structured data is what an answer engine repeats without hedging, so a `taxID`
+there puts "Paititi Institute, EIN 31-1796801" in front of grant officers. It is
+modelled as a `funder` instead. `tools/apply_schema.py` says so at length; do
+not "complete" it.
+
+**The header and footer are invisible to anything that doesn't run JavaScript.**
+They are `<dc-import>`s, so the raw HTML of a page carried eight internal links
+where the nav has forty. `apply_crawl_nav.py` writes a plain link list *inside*
+the SiteFooter import: `<dc-import>` children are passed to the component as
+props, and neither component renders children, so the list stays in the source
+and is dropped from the rendered page. **If SiteHeader or SiteFooter ever starts
+rendering `children`, that list will appear on the live site** — it is a
+property of those two templates, not of the runtime. The list is parsed out of
+the two components, so it cannot drift from the real navigation; nothing in it
+is hand-kept.
 
 **Google Ads conversions live in `conversions.js`,** loaded by that same block.
 It counts clicks through to Retreat Guru and Zeffy plus the two form
@@ -307,10 +342,14 @@ From build-spec.md — do not relitigate:
    `python3 -m http.server 8000`. Never open `.dc.html` over `file://` — module
    fetches are blocked and the page won't render.
 2. Check the page at 1440px **and** on an emulated phone.
-3. If a title, description or social image changed: `npm run head-meta`.
+3. If a title, description or social image changed: `npm run head-meta` — which
+   now also re-runs `apply_schema.py`, because the schema quotes both.
 4. If anything was generated: re-run the pipeline in order.
-5. Both languages touched?
-6. `git push` **and** `npx wrangler deploy`.
+5. If the nav changed, or a page was added or renamed: `npm run crawl-nav`
+   (the no-JavaScript link list) and `npm run schema` (`llms.txt` and the
+   entity graph). `npm run check` catches both if you forget.
+6. Both languages touched?
+7. `git push` **and** `npx wrangler deploy`.
 
 ## Two people, one repo
 

@@ -70,8 +70,13 @@ missing secrets, provider names, product ids — may appear in it.
 
 Public pages are indexable; `noindex` remains only on the checkout pages
 (cart, order confirmation) and the two emailed Distance Healing payment
-pages. `docs/seo.md` lists the remaining launch-time SEO steps (GSC
-submission after the DNS switch).
+pages. Every page carries its title, description, canonical, hreflang and
+social card in the real `<head>` (`tools/apply_head_meta.py`) and a schema.org
+entity graph alongside them (`tools/apply_schema.py`), plus a link list that
+survives with JavaScript off (`tools/apply_crawl_nav.py`) — without which the
+nav is invisible to every crawler that does not render. `/llms.txt` and
+`robots.txt` are the AI-crawler side of the same job. `docs/seo.md` has the
+whole story, the traps, and the content work still open for Roman.
 
 ### The newsletter
 

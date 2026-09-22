@@ -1,3 +1,69 @@
+# Paititi Institute — https://paititi-institute.org
+#
+# Everything here is open to everything. The wildcard at the bottom already
+# says so, and on its own it would be enough: a crawler that finds no rule for
+# its own name falls back to `User-agent: *`, so naming the AI crawlers below
+# grants them nothing they did not already have.
+#
+# They are named anyway, for two reasons.
+#
+#   1. It records a decision. Two people publish this site, both with AI, and
+#      "should the AI crawlers be allowed?" is a question that will be asked
+#      again. The answer is yes, deliberately: Paititi's reach depends on being
+#      found, most of these organisations are Indigenous-led initiatives that
+#      almost nobody is searching for by name, and an answer engine that has
+#      read the site is the difference between being described accurately and
+#      being described from whatever a third party wrote years ago. Deleting a
+#      line below is a policy change, not a tidy-up.
+#   2. Some of these tokens are not crawlers at all. Google-Extended and
+#      Applebot-Extended control whether content already crawled for search may
+#      also be used for AI answers and model training; they fetch nothing
+#      themselves. A `Disallow` there removes the site from Gemini and Apple
+#      Intelligence answers while leaving ordinary search untouched, which is a
+#      failure nobody would ever connect back to this file.
+#
+# The distinction worth knowing if this is ever revisited: the *-SearchBot and
+# *-User agents fetch a page to answer a question somebody is asking right now,
+# and cite it. The bulk agents (GPTBot, ClaudeBot, CCBot, Bytespider) gather
+# training data and do not. Blocking the second group and keeping the first is
+# a coherent position; blocking both means the site cannot be cited at all.
+
+# ---- Answer engines: fetch to answer a live question, and cite the source ----
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: DuckAssistBot
+Allow: /
+
+# ---- Bulk crawlers: gather corpora, including for model training ----
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Applebot
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: Omgilibot
+User-agent: Timpibot
+User-agent: YouBot
+Allow: /
+
+# ---- Not crawlers: permission tokens for AI use of already-crawled pages ----
+# Google-Extended  -> Gemini apps and Vertex AI grounding
+# Applebot-Extended -> Apple Intelligence training
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# ---- Everything else ----
 User-agent: *
 Allow: /
 
