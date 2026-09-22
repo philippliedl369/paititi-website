@@ -43,3 +43,12 @@
 
 /SiteFooter.dc.html
   X-Robots-Tag: noindex
+
+# Internal drafts: reachable by anyone given the link, indexed by nobody. The
+# page carries its own <meta name="robots"> too — this header is the half that
+# still works for a crawler that reads the headers and never parses the body,
+# and for a link shared into a chat app. Nothing links to these pages, they are
+# not in sitemap.xml and not in llms.txt, so the header is the only thing
+# standing between an unfinished answer about ayahuasca and a search result.
+/faq-draft.html
+  X-Robots-Tag: noindex, nofollow
