@@ -63,7 +63,7 @@ Don't "fix" its absence.
 | File | Regenerate with |
 |---|---|
 | `Blog*.dc.html`, `BlogPost-*`, `BlogCategory-*` | `data/blog/*.json` → `tools/migrate_blog.py` |
-| `Retreat-*.dc.html` | `data/retreats*.json` → `npm run gen-retreats` |
+| `Retreat-*.dc.html`, `Course-*.dc.html` | `data/retreats*.json` → `npm run gen-retreats` |
 | `sitemap.xml`, the hreflang blocks, each page's `sister` prop | `tools/i18n_pairs.json` → `tools/apply_hreflang.py` |
 | `assets/r/**` and every `srcset`/`sizes` attribute | `tools/gen_responsive.py` |
 
@@ -90,10 +90,19 @@ consent defaults and `conversions.js` come off all six retreat pages — or all
 24 blog pages — and nothing says so. Both generators now compare *without* that
 block, so `--check` stays honest instead of reporting permanent drift.
 
+`gen_retreats.py` generates **two** families of page off the one feed:
+`/retreats/<slug>` for the in-person programs (categories in `IN_PERSON`) and
+`/online-courses/<slug>` for the self-paced courses (`ONLINE`). Everything that
+differs between them — URL, wording, JSON-LD type — is in the `FAMILIES` table
+at the top of the script, and nothing else branches. A program tagged as both
+stops the run rather than being published at two canonical URLs. The
+hand-written cards on `OnlineCourses*.dc.html` are *not* generated: they are
+Roman's summaries and link to the generated pages.
+
 **Retreat Guru does not tell us when it changes.** `/retreats` embeds a live
 Retreat Guru widget, so a new program appears in the *listing* by itself — but
-each `/retreats/<slug>` page is generated from a snapshot in
-`data/retreats.json`, and only `npm run gen-retreats` refreshes it. Until it
+each `/retreats/<slug>` and `/online-courses/<slug>` page is generated from a
+snapshot in `data/retreats.json`, and only `npm run gen-retreats` refreshes it. Until it
 runs, the widget's card has no page on this site to link to and sends the
 visitor straight out to Retreat Guru, and an edited description keeps showing
 the old words. Both happened between 31 Aug and 2 Sep with no symptom in the

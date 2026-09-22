@@ -1,18 +1,25 @@
 #!/usr/bin/env python3
-"""Give every retreat its own page, and its own shareable link.
+"""Give every retreat and every online course its own page, and its own
+shareable link.
 
 Until now the only URL for a program was /retreats — the listing. The Retreat
 Guru widget's cards link to "#/event/<id>/<slug>", a hash route *inside* the
 iframe, so clicking one changed nothing in the address bar: the same
 paititi-institute.org/retreats went to everybody, whichever retreat you meant.
+The four self-paced courses had the same problem in a milder form: an anchor
+partway down /online-courses is not a link to a course.
 
-This generates one page per program at
+This generates one page per program, in two families:
 
-    /retreats/<slug>
+    /retreats/<slug>          the in-person programs  (IN_PERSON categories)
+    /online-courses/<slug>    the self-paced courses  (ONLINE categories)
 
-from Retreat Guru's own program feed, so a link to a single retreat can be
-pasted into an email, a WhatsApp message or an ad, and arrives with that
-retreat's title, photo and dates in the preview card.
+from Retreat Guru's own program feed, so a link to a single retreat or course
+can be pasted into an email, a WhatsApp message or an ad, and arrives with that
+program's title, photo and dates in the preview card.
+
+Both families come off one template and one pipeline; everything that differs
+between them is in FAMILIES, below.
 
     python3 tools/gen_retreats.py              # fetch, regenerate, rewire
     python3 tools/gen_retreats.py --offline    # rebuild from data/retreats.json
@@ -33,22 +40,26 @@ stale page corrects itself rather than misleading anyone; see PAGE_JS below.)
 
 What it touches, all of it idempotent:
 
-    Retreat-<slug>.dc.html      one per program (removed when a program goes)
-    data/retreats.json          the snapshot --offline rebuilds from
+    Retreat-<slug>.dc.html      one per in-person program
+    Course-<slug>.dc.html       one per online course
+                                (both removed when the program goes)
+    data/retreats.json          the snapshot --offline rebuilds from, with the
+                                two families under `programs` and `courses`
     assets/retreats/rg/         each program's photo, mirrored + a size ladder
     _redirects                  the clean URLs, inside a marked block
     tools/i18n_pairs.json       the `english_only` rows, so the sitemap and the
                                 canonical tags come from the one place that
                                 already owns them (run apply_hreflang.py after)
     Retreats*.dc.html           the `pages=` list the widget links against
-    retreatguru-deeplink.js     the ?program=<id> map
+    retreatguru-deeplink.js     the ?program=<id> map, both families
 
 Programs not on Retreat Guru — the Himalayan pilgrimage, which the Karuna
 Project runs and registers — are listed in data/retreats-extra.json and render
-through the same template.
+through the same template. They join the retreat family.
 
-A program whose Retreat Guru copy is not fit to publish can be named in HOLD
-below: it stays in the snapshot and under --check-live, but generates no page.
+The hand-written course cards on OnlineCourses*.dc.html are NOT generated: they
+are Roman's summaries, and they link to the pages this script writes. Their
+wording is maintained by hand; only the href has to follow a slug change.
 """
 import argparse
 import html as htmllib
@@ -82,6 +93,16 @@ IN_PERSON = {
     'transformation-retreats', 'embodying-true-nature-retreats',
     'peru-programs', 'us-mexico-programs',
 }
+
+# The self-paced courses, which are the same feed in the same shape with no
+# dates and no venue. They get pages of their own under /online-courses/<slug>
+# out of the same template — see FAMILIES, below.
+#
+# `online-resources` is Retreat Guru's own slug for the category (its display
+# name is just "Online"). A program carrying it is never also in-person: the
+# two sets must stay disjoint, and main() stops if they ever overlap, because a
+# program in both would be written to two URLs with two canonicals.
+ONLINE = {'online-resources'}
 
 # Passages in a program's Retreat Guru description that must not be published,
 # by Retreat Guru id. This is the one place this script removes *meaning* —
@@ -133,20 +154,29 @@ def fetch_json(url):
     return json.loads(fetch(url).decode('utf-8'))
 
 
-def pull():
+def pull(listing=None):
     """The listing, then each program in full. Both endpoints are server-rendered
-    and open — Retreat Guru's /api/v1 needs a login, this does not."""
-    listing = fetch_json(FEED + '?ver=react')
-    programs = []
+    and open — Retreat Guru's /api/v1 needs a login, this does not.
+
+    Returns {family name: [program, …]}. One pass over one listing fills both
+    families, so a program can be seen to fall in neither (fine — Retreat Guru
+    has categories we do not publish) or in both (not fine — see main())."""
+    if listing is None:
+        listing = fetch_json(FEED + '?ver=react')
+    out = {name: [] for name in FAMILIES}
     for item in listing:
         cats = {c['slug'] for c in item.get('categories', [])}
-        if not (cats & IN_PERSON):
-            continue
-        full = fetch_json('%s%s' % (FEED, item['ID']))
-        programs.append(full)
-        print('    pulled %s (%s)' % (full['slug'], full['ID']))
-    programs.sort(key=lambda p: p.get('start') or 0)
-    return programs
+        for name, fam in FAMILIES.items():
+            if not (cats & fam['cats']):
+                continue
+            full = fetch_json('%s%s' % (FEED, item['ID']))
+            out[name].append(full)
+            print('    pulled %s %s (%s)' % (name, full['slug'], full['ID']))
+    # Courses are dateless, so `start` is None for all of them and this sort
+    # leaves them in the order Retreat Guru listed them.
+    for progs in out.values():
+        progs.sort(key=lambda p: p.get('start') or 0)
+    return out
 
 
 # --------------------------------------------------------------------------
@@ -537,7 +567,7 @@ PAGE = """<!DOCTYPE html>
     </div>
     <div class="rp-hero-in">
       <div>
-        <a class="rp-back" href="/retreats">&larr; All retreats &amp; events</a>
+        <a class="rp-back" href="{back_href}">&larr; {back_label}</a>
         <span class="rp-kicker">{kicker}</span>
         <h1>{title}</h1>
         {teachers_html}
@@ -589,8 +619,7 @@ PAGE = """<!DOCTYPE html>
   <section class="pt-sec rp-footnote">
     <div class="pt-sec-bg"></div>
     <div class="rp-in">
-      <p>Retreat fees sustain the Institute&rsquo;s conservation, Indigenous education and community
-      work &mdash; see <a href="/initiatives">where your participation goes</a>.</p>
+      <p>{footnote}</p>
     </div>
   </section>
 
@@ -609,17 +638,90 @@ def fact(term, value):
             % (term[0], (' data-live="%s"' % term[1]) if len(term) > 1 else '', value))
 
 
-def render(p, others):
+# --------------------------------------------------------------------------
+# the two families of page this script generates
+# --------------------------------------------------------------------------
+#
+# An in-person program and a self-paced online course differ in their wording
+# and their URL, not in their shape: both come from this feed, both carry a
+# photo, a body, a facilitator and a contribution, and both register on Retreat
+# Guru. So everything that differs sits in this table and the rest — the
+# template, the photo ladder, the social card, the REDACT guard, the live
+# refresh and every check — is shared. Adding a branch inside render() instead
+# is how the two drift apart.
+#
+# 'schema' picks the JSON-LD type. A course is deliberately NOT an Event: it has
+# no start date, and an Event without one is invalid structured data that Search
+# Console reports as an error rather than ignoring.
+FAMILIES = {
+    'retreat': {
+        'cats': IN_PERSON,
+        'base': '/retreats',
+        'file': 'Retreat-%s.dc.html',
+        'listing': 'Retreats.dc.html',
+        'widget_pages': ('Retreats.dc.html', 'Retreats.es.dc.html'),
+        'widget_class': 'rt-frame',
+        'date_label': 'Dates',
+        'back': 'All retreats &amp; events',
+        'more_heading': 'Other upcoming programs',
+        'kicker_from': ('retreat', 'breathwork-retreat', 'events', 'public-talks',
+                        'embodying-true-nature-retreats'),
+        'kicker': 'Program',
+        'cta_label': 'Apply &amp; register',
+        'facts_cta': 'Details &amp; registration',
+        'cta_heading': 'Join us',
+        'cta_note': ('Registration, full pricing and the application form are handled on '
+                     'Retreat Guru, our booking system.'),
+        # The line break is inside the string so the rendered page is unchanged
+        # from before this template grew a second family — a whitespace-only
+        # diff across every retreat page would bury the real one.
+        'footnote': ('Retreat fees sustain the Institute&rsquo;s conservation, Indigenous '
+                     'education and community\n      work &mdash; see '
+                     '<a href="/initiatives">where your participation goes</a>.'),
+        'photo': '/assets/retreats/coco-ceremony.webp',
+        'schema': 'Event',
+    },
+    'course': {
+        'cats': ONLINE,
+        'base': '/online-courses',
+        'file': 'Course-%s.dc.html',
+        'listing': 'OnlineCourses.dc.html',
+        'widget_pages': ('OnlineCourses.dc.html', 'OnlineCourses.es.dc.html'),
+        'widget_class': 'oc-frame',
+        'date_label': 'Availability',
+        'back': 'All online courses',
+        'more_heading': 'Other online courses',
+        'kicker_from': (),
+        'kicker': 'Online course',
+        'cta_label': 'Enroll on Retreat Guru',
+        'facts_cta': 'Details &amp; enrollment',
+        'cta_heading': 'Begin the course',
+        'cta_note': ('Enrollment, the sliding scale and the course materials are handled on '
+                     'Retreat Guru, our booking system. The course is ongoing &mdash; you can '
+                     'start at any time and go at your own pace.'),
+        'footnote': ('Every enrollment sustains the Institute&rsquo;s conservation, Indigenous '
+                     'education and community\n      work &mdash; see '
+                     '<a href="/initiatives">where your participation goes</a>.'),
+        'photo': '/assets/retreats/online-courses-01.webp',
+        'schema': 'Course',
+    },
+}
+
+
+def render(p, others, fam=FAMILIES['retreat']):
     slug = p['slug']
     title = text(p['title'])
-    url = '/retreats/' + slug
-    photo = p.get('_photo') or '/assets/retreats/coco-ceremony.webp'
+    url = fam['base'] + '/' + slug
+    photo = p.get('_photo') or fam['photo']
     srcset = p.get('_srcset') or ''
     desc = plain(p.get('excerpt') or p.get('text') or '', 300)
 
     facts = []
     if p.get('date'):
-        facts.append(fact(('Dates', 'date'), esc(p['date'])))
+        # A course's `date` is Retreat Guru's literal "Open Dates", which reads
+        # oddly under "Dates" and exactly right under "Availability". The value
+        # is still theirs — data-live keeps it refreshed from the feed.
+        facts.append(fact((fam['date_label'], 'date'), esc(p['date'])))
     where = text(p.get('location') or p.get('address') or '')
     if where:
         facts.append(fact(('Where',), esc(where)))
@@ -628,10 +730,9 @@ def render(p, others):
     if p.get('prices'):
         facts.append(fact(('Contribution', 'price'), esc(p['prices'])))
 
-    kicker_bits = [c['name'] for c in p.get('categories', []) if c['slug'] in
-                   ('retreat', 'breathwork-retreat', 'events', 'public-talks',
-                    'embodying-true-nature-retreats')]
-    kicker = text(kicker_bits[0]) if kicker_bits else 'Program'
+    kicker_bits = [c['name'] for c in p.get('categories', [])
+                   if c['slug'] in fam['kicker_from']]
+    kicker = text(kicker_bits[0]) if kicker_bits else fam['kicker']
 
     teachers_html = ''
     if p.get('teacher_list'):
@@ -639,11 +740,11 @@ def render(p, others):
 
     register = p.get('registration_link') or (RG + '/program/%s/' % slug)
     closed = p.get('registration_status') and p['registration_status'] != 'open'
-    cta_label = 'Registration closed' if closed else text(p.get('_cta') or 'Apply &amp; register')
+    cta_label = 'Registration closed' if closed else text(p.get('_cta') or fam['cta_label'])
     cta_label = htmllib.escape(htmllib.unescape(cta_label))
 
     facts_cta = ('<a class="pt-btn" href="#register">%s</a>'
-                 % ('Details &amp; registration' if not closed else 'Program details'))
+                 % (fam['facts_cta'] if not closed else 'Program details'))
 
     video = ''
     vid = ((p.get('marketplace') or {}).get('video') or {}).get('text') or ''
@@ -672,35 +773,61 @@ def render(p, others):
         cards = []
         for o in siblings:
             cards.append(
-                '        <a class="rp-card" href="/retreats/%s">\n'
+                '        <a class="rp-card" href="%s/%s">\n'
                 '          <img src="%s" alt="" loading="lazy" decoding="async">\n'
                 '          <div class="rp-card-body"><h3>%s</h3><p>%s</p></div>\n'
                 '        </a>'
-                % (o['slug'], o.get('_photo') or '/assets/retreats/coco-ceremony.webp',
+                % (fam['base'], o['slug'], o.get('_photo') or fam['photo'],
                    esc(o['title']), esc(o.get('date') or '')))
         more = ('\n  <section class="pt-sec rp-more">\n'
                 '    <div class="pt-sec-bg"></div>\n'
-                '    <div class="rp-in">\n      <h2>Other upcoming programs</h2>\n'
+                '    <div class="rp-in">\n      <h2>%s</h2>\n'
                 '      <div class="rp-cards">\n%s\n      </div>\n    </div>\n  </section>\n'
-                % '\n'.join(cards))
+                % (fam['more_heading'], '\n'.join(cards)))
 
-    jsonld = json.dumps({
+    org = {'@type': 'Organization', 'name': 'Paititi Institute', 'url': SITE}
+    offers = ({'offers': {'@type': 'Offer', 'url': register,
+                          'availability': 'https://schema.org/InStock' if not closed
+                          else 'https://schema.org/SoldOut'}} if register else {})
+    common = {
         '@context': 'https://schema.org',
-        '@type': 'Event',
+        '@type': fam['schema'],
         'name': title,
         'description': desc,
         'url': SITE + url,
         'image': SITE + (p.get('_card') or photo),
-        **({'startDate': p['_iso_start']} if p.get('_iso_start') else {}),
-        **({'endDate': p['_iso_end']} if p.get('_iso_end') else {}),
-        'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
-        **({'location': {'@type': 'Place', 'name': where,
-                         'address': where}} if where else {}),
-        'organizer': {'@type': 'Organization', 'name': 'Paititi Institute', 'url': SITE},
-        **({'offers': {'@type': 'Offer', 'url': register,
-                       'availability': 'https://schema.org/InStock' if not closed
-                       else 'https://schema.org/SoldOut'}} if register else {}),
-    }, ensure_ascii=False)
+    }
+    if fam['schema'] == 'Course':
+        # No price on the Offer on purpose: every one of these is a sliding
+        # scale or a suggested donation, and a single number would be a claim
+        # Retreat Guru does not make. `courseWorkload` is left off for the same
+        # reason — the feed does not carry the hours.
+        jsonld = json.dumps({
+            **common,
+            'provider': org,
+            'inLanguage': 'en',
+            'isAccessibleForFree': p.get('price_type') == 'suggested-donation',
+            'hasCourseInstance': {
+                '@type': 'CourseInstance',
+                'courseMode': 'Online',
+                **({'instructor': [{'@type': 'Person', 'name': t['name']}
+                                   for t in (p.get('teacher_details') or {}).get('teacher_objects', [])
+                                   if t.get('name')]}
+                   if (p.get('teacher_details') or {}).get('teacher_objects') else {}),
+            },
+            **offers,
+        }, ensure_ascii=False)
+    else:
+        jsonld = json.dumps({
+            **common,
+            **({'startDate': p['_iso_start']} if p.get('_iso_start') else {}),
+            **({'endDate': p['_iso_end']} if p.get('_iso_end') else {}),
+            'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+            **({'location': {'@type': 'Place', 'name': where,
+                             'address': where}} if where else {}),
+            'organizer': org,
+            **offers,
+        }, ensure_ascii=False)
 
     return PAGE.format(
         note=NOTE,
@@ -721,10 +848,9 @@ def render(p, others):
         register=htmllib.escape(register, quote=True),
         live_reg=' data-live="register"' if p.get('ID') else '',
         cta_label=cta_label,
-        cta_heading=esc(p.get('_cta_heading') or 'Join us'),
-        cta_note=esc(p.get('_cta_note') or
-                     'Registration, full pricing and the application form are handled on '
-                     'Retreat Guru, our booking system.'),
+        cta_heading=esc(p.get('_cta_heading') or fam['cta_heading']),
+        cta_note=esc(p.get('_cta_note') or fam['cta_note']),
+        back_href=fam['base'], back_label=fam['back'], footnote=fam['footnote'],
         jsonld=jsonld,
         page_js=(PAGE_JS % {'id': json.dumps(p.get('ID')), 'rg': RG}) if p.get('ID') else '',
     )
@@ -768,31 +894,44 @@ def block_sub(text_in, begin, end, body, label):
     return pat.sub(lambda _: new, text_in, count=1)
 
 
-def redirects_block(programs):
+def redirects_block(by_family):
     lines = [
-        '# One page per program, so a single retreat can be linked to on its own.',
-        '# Re-run tools/gen_retreats.py after adding or retiring a Retreat Guru',
-        '# program; it rewrites everything between these two markers.',
+        '# One page per program, so a single retreat or course can be linked to on',
+        '# its own. Re-run tools/gen_retreats.py after adding or retiring a Retreat',
+        '# Guru program; it rewrites everything between these two markers.',
     ]
-    for p in programs:
-        lines.append('/retreats/%-58s /Retreat-%s.dc.html 200' % (p['slug'], p['slug']))
-    lines += [
-        '# The DC runtime resolves <dc-import> as a sibling of the page URL.',
-        '/retreats/SiteHeader.dc.html   /SiteHeader.dc.html  200',
-        '/retreats/SiteFooter.dc.html   /SiteFooter.dc.html  200',
-    ]
+    for name in ('retreat', 'course'):
+        fam = FAMILIES[name]
+        # Pad the slug so the target column lines up the same for both
+        # families, whose prefixes are different lengths.
+        pad = 67 - len(fam['base'])
+        for p in by_family[name]:
+            lines.append('%s/%-*s /%s 200'
+                         % (fam['base'], pad, p['slug'], fam['file'] % p['slug']))
+        # The DC runtime resolves <dc-import> as a sibling of the page URL
+        # ("./SiteHeader.dc.html"), so every nested clean-URL directory needs
+        # these two. Without them the page renders with no header and no
+        # footer, and nothing says so but a line in the console.
+        lines += [
+            '# The DC runtime resolves <dc-import> as a sibling of the page URL.',
+            '%s/SiteHeader.dc.html   /SiteHeader.dc.html  200' % fam['base'],
+            '%s/SiteFooter.dc.html   /SiteFooter.dc.html  200' % fam['base'],
+        ]
     return '\n'.join(lines)
 
 
-def destinations_block(programs):
+def destinations_block(by_family):
     """retreatguru-deeplink.js maps Retreat Guru's ?program=<id> back onto our
     own pages. Now that each program has one, an id lands on that program rather
-    than on the listing."""
+    than on the listing — or, for a course, on the course itself rather than on
+    an anchor partway down /online-courses."""
     rows = []
-    for p in programs:
-        if not p.get('ID'):
-            continue
-        rows.append("    %d: '/retreats/%s'," % (p['ID'], p['slug']))
+    for name in ('retreat', 'course'):
+        fam = FAMILIES[name]
+        for p in by_family[name]:
+            if not p.get('ID'):
+                continue
+            rows.append("    %d: '%s/%s'," % (p['ID'], fam['base'], p['slug']))
     return '\n'.join(rows)
 
 
@@ -832,10 +971,15 @@ def check_live():
         print('  snapshot NOT verified — re-run when you have a connection')
         return 0
 
-    have = {p['ID']: p for p in json.loads(SNAPSHOT.read_text(encoding='utf-8'))['programs']}
+    snap = json.loads(SNAPSHOT.read_text(encoding='utf-8'))
+    # Both families, in one dict: every question below — new, edited, gone — is
+    # the same question for a course as for a retreat, and asking it of only
+    # half the feed is exactly how the online courses went unwatched.
+    have = {p['ID']: p for p in snap['programs'] + snap.get('courses', [])}
+    watched_cats = set().union(*(f['cats'] for f in FAMILIES.values()))
     live = {}
     for item in listing:
-        if {c['slug'] for c in item.get('categories', [])} & IN_PERSON:
+        if {c['slug'] for c in item.get('categories', [])} & watched_cats:
             live[item['ID']] = item
 
     drift = []
@@ -855,18 +999,25 @@ def check_live():
         if i not in live:
             drift.append('gone from Retreat Guru: %s (%s)' % (text(p.get('title')), i))
 
-    # A category the generator counts as in-person but the /retreats widget
-    # does not list: the page would exist and the listing would never link it.
-    listed = set()
-    m = re.search(r'[?&]cat=([^"&]+)', (ROOT / 'Retreats.dc.html').read_text(encoding='utf-8'))
-    if m:
+    # A category this script generates a page for but the matching widget does
+    # not list: the page would exist and the listing would never link it. Asked
+    # per family, against that family's own listing page — a course is not
+    # missing from /retreats, it was never meant to be there.
+    for name, fam in FAMILIES.items():
+        m = re.search(r'[?&]cat=([^"&]+)',
+                      (ROOT / fam['listing']).read_text(encoding='utf-8'))
+        if not m:
+            continue
         listed = set(m.group(1).split(','))
         for i, item in live.items():
             cats = {c['slug'] for c in item.get('categories', [])}
+            if not (cats & fam['cats']):
+                continue          # not this family's program
             if not (cats & listed):
-                drift.append('has a page but the /retreats widget will not list it: %s (%s) — '
+                drift.append('has a page but the %s widget will not list it: %s (%s) — '
                              'tagged %s, none of them in the widget cat= list'
-                             % (text(item.get('title')), i, '/'.join(sorted(cats))))
+                             % (fam['base'], text(item.get('title')), i,
+                                '/'.join(sorted(cats))))
 
     if not drift:
         print('  %d program(s) — snapshot matches Retreat Guru' % len(live))
@@ -893,15 +1044,26 @@ def main():
     if args.offline or (check and SNAPSHOT.exists()):
         if not SNAPSHOT.exists():
             sys.exit('  no snapshot at %s — run once without --offline' % SNAPSHOT)
-        programs = json.loads(SNAPSHOT.read_text(encoding='utf-8'))['programs']
-        print('  %d programs from the snapshot' % len(programs))
+        snap = json.loads(SNAPSHOT.read_text(encoding='utf-8'))
+        programs, courses = snap['programs'], snap.get('courses', [])
+        print('  %d programs, %d courses from the snapshot' % (len(programs), len(courses)))
     else:
         print('  fetching Retreat Guru programs…')
-        programs = pull()
+        pulled = pull()
+        programs, courses = pulled['retreat'], pulled['course']
+        # A program in both families would be written to two URLs, each
+        # claiming to be canonical. Retreat Guru allows the tagging, so say so
+        # loudly rather than publishing the contradiction.
+        both = ({p['ID'] for p in programs} & {c['ID'] for c in courses})
+        if both:
+            sys.exit('  program(s) %s are tagged both in-person and online on Retreat '
+                     'Guru.\n  Fix the categories there, or narrow IN_PERSON/ONLINE here.'
+                     % ', '.join(str(i) for i in sorted(both)))
         if not check:
             SNAPSHOT.parent.mkdir(parents=True, exist_ok=True)
             SNAPSHOT.write_text(
-                json.dumps({'source': FEED, 'programs': programs}, indent=2, ensure_ascii=False) + '\n',
+                json.dumps({'source': FEED, 'programs': programs, 'courses': courses},
+                           indent=2, ensure_ascii=False) + '\n',
                 encoding='utf-8')
 
     extras = []
@@ -911,10 +1073,11 @@ def main():
 
     all_programs = programs + extras
     all_programs.sort(key=lambda p: p.get('start') or 0)
+    by_family = {'retreat': all_programs, 'course': courses}
 
     changed = []
     from datetime import datetime, timezone
-    for p in all_programs:
+    for p in all_programs + courses:
         p['_photo'], p['_srcset'] = mirror_photo(
             p.get('photo') or ((p.get('photo_details') or {}).get('large') or {}).get('url'),
             p['slug'], check)
@@ -930,39 +1093,47 @@ def main():
             if p.get(field):
                 p[key] = datetime.fromtimestamp(p[field], timezone.utc).strftime('%Y-%m-%d')
 
-    # Pages
-    for p in all_programs:
-        write(ROOT / ('Retreat-%s.dc.html' % p['slug']), render(p, all_programs), check, changed)
+    # Pages. A page's "other programs" strip stays inside its own family: the
+    # three cards under a retreat are other retreats, and under a course they
+    # are other courses.
+    for name, fam in FAMILIES.items():
+        for p in by_family[name]:
+            write(ROOT / (fam['file'] % p['slug']),
+                  render(p, by_family[name], fam), check, changed)
 
-    # A program that has come off Retreat Guru should not leave a page behind.
-    live = {'Retreat-%s.dc.html' % p['slug'] for p in all_programs}
-    for stale in sorted(ROOT.glob('Retreat-*.dc.html')):
-        if stale.name not in live:
-            changed.append('%s (removed)' % stale.name)
-            if not check:
-                stale.unlink()
+        # A program that has come off Retreat Guru should not leave a page behind.
+        live = {fam['file'] % p['slug'] for p in by_family[name]}
+        for stale in sorted(ROOT.glob(fam['file'] % '*')):
+            if stale.name not in live:
+                changed.append('%s (removed)' % stale.name)
+                if not check:
+                    stale.unlink()
 
     # _redirects
     red = ROOT / '_redirects'
     write(red, block_sub(red.read_text(encoding='utf-8'), REDIR_BEGIN, REDIR_END,
-                         redirects_block(all_programs), '_redirects'), check, changed)
+                         redirects_block(by_family), '_redirects'), check, changed)
 
     # retreatguru-deeplink.js
     dl = ROOT / 'retreatguru-deeplink.js'
     write(dl, block_sub(dl.read_text(encoding='utf-8'), DEST_BEGIN, DEST_END,
-                        destinations_block(all_programs), 'retreatguru-deeplink.js'),
+                        destinations_block(by_family), 'retreatguru-deeplink.js'),
           check, changed)
 
     # The widget links its cards at these slugs; anything not here falls back to
-    # Retreat Guru's own program page rather than to a 404 on our side.
-    slugs = ','.join(p['slug'] for p in all_programs)
-    for page in ('Retreats.dc.html', 'Retreats.es.dc.html'):
-        path = ROOT / page
-        src = path.read_text(encoding='utf-8')
-        new = re.sub(r'(rbg-widget\.html\?[^"]*?)&amp;pages=[^"&]*', r'\1', src)
-        new = re.sub(r'(<iframe class="rt-frame"[^>]*?src="/rbg-widget\.html\?[^"]*?)"',
-                     lambda m: m.group(1) + '&amp;pages=' + slugs + '"', new, count=1)
-        write(path, new, check, changed)
+    # Retreat Guru's own program page rather than to a 404 on our side. Done for
+    # both widgets: a fifth online course would otherwise get a page here and a
+    # listing card that still sent the reader off to Retreat Guru, which is the
+    # exact failure the retreats widget had before `pages=` existed.
+    for name, fam in FAMILIES.items():
+        slugs = ','.join(p['slug'] for p in by_family[name])
+        for page in fam['widget_pages']:
+            path = ROOT / page
+            src = path.read_text(encoding='utf-8')
+            new = re.sub(r'(rbg-widget\.html\?[^"]*?)&amp;pages=[^"&]*', r'\1', src)
+            new = re.sub(r'(<iframe class="%s"[^>]*?src="/rbg-widget\.html\?[^"]*?)"' % fam['widget_class'],
+                         lambda m: m.group(1) + '&amp;pages=' + slugs + '"', new, count=1)
+            write(path, new, check, changed)
 
     # The sitemap and the canonical tags are owned by apply_hreflang.py, which
     # reads this table. These pages have no Spanish counterpart — Retreat Guru
@@ -978,10 +1149,12 @@ def main():
     if not m:
         raise SystemExit('  no "english_only" array in tools/i18n_pairs.json')
     pad = m.group(1)
+    mine = tuple(fam['file'].split('%s')[0] for fam in FAMILIES.values())   # Retreat-, Course-
     keep = [r for r in json.loads('[' + (m.group(0).split('[', 1)[1][:-1] or '') + ']')
-            if not r['file'].startswith('Retreat-')]
-    rows = keep + [{'file': 'Retreat-%s.dc.html' % p['slug'], 'en': '/retreats/' + p['slug']}
-                   for p in all_programs]
+            if not r['file'].startswith(mine)]
+    rows = keep + [{'file': fam['file'] % p['slug'],
+                    'en': '%s/%s' % (fam['base'], p['slug'])}
+                   for name, fam in FAMILIES.items() for p in by_family[name]]
     body = ''.join('\n%s  { "file": %s, "en": %s },'
                    % (pad, json.dumps(r['file']), json.dumps(r['en'])) for r in rows)
     block = '%s"english_only": [%s\n%s]' % (pad, body[:-1] if body else '', pad) if rows \
