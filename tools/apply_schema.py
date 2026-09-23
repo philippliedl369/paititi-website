@@ -446,6 +446,60 @@ def blog_index():
 BLOG = blog_index()
 
 
+# --------------------------------------------------------------------------
+# the FAQ
+# --------------------------------------------------------------------------
+
+# Each question on the FAQ page is an `<h3 id="…">` followed by the paragraphs
+# that answer it, up to the next question or the end of its section. That is
+# also exactly what a `Question` + `acceptedAnswer` pair is, so the markup is
+# read rather than a second copy of the answers being kept here. Roman edits
+# the page; this follows.
+FAQ_Q_RE = re.compile(
+    r'<h3 id="(?P<id>[^"]+)">(?P<q>.*?)</h3>(?P<a>.*?)'
+    r'(?=<h3 id="|</section>)', re.S)
+FAQ_P_RE = re.compile(r'<p>(.*?)</p>', re.S)
+
+
+def plain_text(html):
+    """Tag-free, entity-free text, as a schema.org value wants it."""
+    return re.sub(r'\s+', ' ', unescape(re.sub(r'<[^>]+>', ' ', html))).strip()
+
+
+def faq_page(facts, stem, page_id, html):
+    """A list of Question nodes, or None if this page is not the FAQ.
+
+    Only the paragraphs are taken as the answer. The ICEERS citation sits in a
+    `<div class="fq-source">` of its own and is deliberately left out: it is a
+    reference for a reader, and folding "Source: ICEERS…" into the answer text
+    would have an answer engine quote it as part of Paititi's own sentence.
+    """
+    if stem != 'FAQ':
+        return None
+    body = html[html.find('<main>'):]
+    out = []
+    for m in FAQ_Q_RE.finditer(body):
+        question = plain_text(m.group('q'))
+        answer_html = re.sub(r'<div class="fq-source">.*?</div>', '',
+                             m.group('a'), flags=re.S)
+        answer = ' '.join(plain_text(p) for p in FAQ_P_RE.findall(answer_html))
+        if not question or not answer:
+            continue
+        out.append({
+            '@type': 'Question',
+            '@id': '%s#%s' % (facts['url'], m.group('id')),
+            'name': question,
+            'url': '%s#%s' % (facts['url'], m.group('id')),
+            'acceptedAnswer': {'@type': 'Answer', 'text': answer},
+        })
+    if not out:
+        # The page exists but nothing parsed — a markup change, not an empty
+        # FAQ. Say so rather than silently shipping a FAQPage with no questions.
+        raise SystemExit('  FAQ page found but no <h3 id="…"> questions parsed '
+                         '— check the markup in %s' % stem)
+    return out
+
+
 def blog_posting(facts, stem, page_id):
     """A BlogPosting node, or None if this page is not a post."""
     if not stem.startswith('BlogPost-'):
@@ -521,6 +575,14 @@ def graph_for(path, html):
     if post:
         page['@type'] = 'WebPage'   # the article carries the detail
         nodes.append(post)
+
+    # The questions hang off the page node itself rather than sitting beside it:
+    # FAQPage is a kind of WebPage, and `mainEntity` is where a consumer looks
+    # for the Q&A pairs.
+    questions = faq_page(facts, stem, page_id, html)
+    if questions:
+        page['@type'] = 'FAQPage'
+        page['mainEntity'] = questions
 
     return {'@context': 'https://schema.org', '@graph': nodes}
 

@@ -35,6 +35,7 @@
     { "file": "InitiativeElders.dc.html", "en": "/initiatives/uniting-elders-and-children",                      "es": "/es/iniciativas/uniendo-mayores-y-ninos" },
     { "file": "InitiativeReserve.dc.html","en": "/initiatives/paititi-biocultural-reserve",                      "es": "/es/iniciativas/reserva-biocultural-paititi" },
 
+    { "file": "FAQ.dc.html",              "en": "/faq",                     "es": "/es/preguntas-frecuentes" },
     { "file": "Terms.dc.html",            "en": "/terms-conditions",        "es": "/es/terminos-y-condiciones" },
     { "file": "Privacy.dc.html",          "en": "/who/privacy-policy",      "es": "/es/politica-de-privacidad" },
 

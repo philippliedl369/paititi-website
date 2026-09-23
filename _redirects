@@ -135,6 +135,13 @@
 /cart                           /                           301
 /order-confirmed                /                           301
 
+# FAQ
+/faq   /FAQ.dc.html   200
+/faq/  /faq           301
+# The review draft Roman was sent on 21 Sep, now superseded by the real
+# page. The link is in a WhatsApp thread, so it redirects rather than 404s.
+/faq-draft.html  /faq  301
+
 # Legal
 /terms-conditions    /Terms.dc.html    200
 /terms-conditions/   /terms-conditions 301
@@ -271,6 +278,10 @@
 /es/iniciativas/qero-alimentos-de-emergencia    /InitiativeQero.es.dc.html  200
 /es/iniciativas/uniendo-mayores-y-ninos         /InitiativeElders.es.dc.html 200
 /es/iniciativas/reserva-biocultural-paititi     /InitiativeReserve.es.dc.html 200
+
+# Preguntas frecuentes
+/es/preguntas-frecuentes   /FAQ.es.dc.html          200
+/es/preguntas-frecuentes/  /es/preguntas-frecuentes 301
 
 # Legal
 /es/terminos-y-condiciones   /Terms.es.dc.html    200
