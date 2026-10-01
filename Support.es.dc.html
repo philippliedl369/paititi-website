@@ -102,7 +102,7 @@
     display:flex;flex-direction:column;justify-content:center;
   }
   .sp-hero-in{
-    width:100%;max-width:1000px;margin:0 auto;text-align:center;
+    width:100%;max-width:1240px;margin:0 auto;text-align:center;
     padding:calc(var(--pt-header-h-live,var(--pt-header-h,209px)) + 48px) 24px 64px;
   }
   .pt-page main .sp-hero h1{margin:0}
@@ -112,8 +112,11 @@
   }
   .pt-page main .sp-hero .sp-kicker{color:rgba(255,255,255,.82)}
   .pt-page main .sp-hero-lede{max-width:760px;margin:22px auto 0;font-size:19.2px;opacity:.94}
-  .sp-hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:36px}
-  .sp-hero-cta .pt-btn{min-height:56px}
+  /* The four hero buttons sit on one row above 1180px: 1240px of room and 24px
+     side padding (30px in .pt-btn) make them fit with a little to spare at
+     1181px. The h1 fits either way and the lede keeps its own 760px measure. */
+  .sp-hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:36px}
+  .sp-hero-cta .pt-btn{min-height:56px;padding:0 24px}
 
   .sp-in{max-width:1324px;margin:0 auto;padding:0 58px}
   .pt-page main .sp-lead{max-width:800px;margin:18px 0 0;font-size:19.2px}
