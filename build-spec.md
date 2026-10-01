@@ -498,8 +498,14 @@ button, "Sustain the whole vision", and the grid's lead now says the two
 initiatives without a campaign can be carried through this fund until theirs
 open. Its frame is 589px, not 541px: the form has two rows of frequencies.
 
-Open for Roman: does this fund replace the planned reserve-maintenance
-campaign? If it does, the reserve card flips to "Campaign open" → `#sustain`.
+**Settled (Roman, 1 Oct): it replaces the planned reserve-maintenance
+campaign.** So the reserve card is now "Campaign open" → `#sustain` ("Give
+to the reserve ↓"); its text says the guardianship is funded through Sustain
+Paititi. The grid's lead says three campaigns are open. The elders card says
+its campaign "comes next". The reserve page's "Support this work" button,
+which pointed at the Yahua page while the reserve had no campaign, now goes
+to `/support#sustain` (`/es/apoyar#sustain`). Only the elders-and-children
+campaign is still to come.
 
 ### One hand-off per initiative page (29 Aug 2026)
 
