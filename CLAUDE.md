@@ -205,10 +205,11 @@ headless Chrome through the real pages. Two things that verification taught,
 both easy to get wrong:
 
 - **A donation completed inside the embedded Zeffy form on `/support` can never
-  be counted** — it is a cross-origin iframe. Only three elements fire `donate`:
-  the header announcement bar's Zeffy link, and the "Rather give on Zeffy"
-  anchor under each of the two embedded forms. "Click the donate button and
-  watch for a conversion" is therefore wrong advice for the embed.
+  be counted** — it is a cross-origin iframe. Only plain links out to
+  zeffy.com fire `donate`: the "Rather give on Zeffy" anchor under each
+  embedded form on `/support` (four in English since 1 Oct 2026), and the one
+  on `/support/nepal-emergency`. "Click the donate button and watch for a
+  conversion" is therefore wrong advice for the embed.
 - **The Ads beacons carry `label=<slot label>` but no `tid=AW-…`.** Six requests
   go out per conversion, across `googleadservices.com`,
   `googleads.g.doubleclick.net`, `www.google.com` and the visitor's country

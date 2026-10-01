@@ -482,6 +482,25 @@ then stack.
 Still open for Roman: the announcement bar still names only the Yahua Center (it could
 say "Support our initiatives" and point at `/support`).
 
+### Sustain Paititi: the general fund (1 Oct 2026)
+
+Roman opened a fifth Zeffy campaign, **"Sustain Paititi Institute Vision"**
+(`zeffy.com/en-US/donation-form/sustain-paititi-institute-vision`): general
+operating support. It covers the reserve's guardianship, personnel and field
+operations, documentation, and the regenerative work, so it funds all four
+initiatives rather than being a fifth one.
+
+On `/support` and `/es/apoyar` it is the `#sustain` section, last among the
+forms and just before "How your gift travels". The copy is Roman's own Zeffy
+text, shortened; the Spanish is a translation. There is **no card**, because
+the grid is the four initiatives and `repeat(4,…)`. The hero has a fourth
+button, "Sustain the whole vision", and the grid's lead now says the two
+initiatives without a campaign can be carried through this fund until theirs
+open. Its frame is 589px, not 541px: the form has two rows of frequencies.
+
+Open for Roman: does this fund replace the planned reserve-maintenance
+campaign? If it does, the reserve card flips to "Campaign open" → `#sustain`.
+
 ### One hand-off per initiative page (29 Aug 2026)
 
 Philipp, reading the live site: the Yahua page had "a button on the top that leads us to
