@@ -131,7 +131,13 @@ as drift, so it stays usable offline.
 `tools/watch_retreats.py` asks the same question at 7am on Philipp's Mac and
 puts a notification on screen when the answer is "you're behind", logging every
 run to `tools/.retreat-watch.log` so a watcher that died is distinguishable
-from a quiet morning. Install it with the plist in `tools/launchd/`. It is a
+from a quiet morning. The banner says *what* moved — new, pulled before its
+date, edited (and how), or merely ended — and clicking it opens the full
+report, every edited field with its before and after. A program that vanishes
+while its date is still ahead is flagged **PULLED BEFORE IT HAPPENED**: ask
+before regenerating, because the run takes its page down. Rebuild the
+notifier with `bash tools/notifier/build.sh` after touching
+`notify.applescript`. Install it with the plist in `tools/launchd/`. It is a
 nudge, not an auto-deploy — a Retreat Guru description goes live word for word
 as it was typed, so somebody reads it first.
 

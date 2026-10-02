@@ -62,6 +62,7 @@ are Roman's summaries, and they link to the pages this script writes. Their
 wording is maintained by hand; only the href has to follow a slug change.
 """
 import argparse
+import difflib
 import html as htmllib
 import json
 import os
@@ -69,6 +70,8 @@ import pathlib
 import re
 import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # One wording for why the meta is in <head>, shared with the tool that puts
@@ -1009,6 +1012,149 @@ WATCHED = (
     'teacher_details', 'photo',
 )
 
+# One text at three lengths. An edit to the copy moves all three, so only the
+# longest that moved is diffed and the others are named beside it — otherwise
+# every rewrite would be reported three times over.
+BODY = ('text_full', 'text', 'excerpt')
+
+
+def day(ts, year=True):
+    """A feed timestamp as a calendar day. Retreat Guru stores midnight UTC."""
+    d = datetime.fromtimestamp(int(ts), timezone.utc)
+    return (d.strftime('%-d %b %Y' if year else '%-d %b')
+            + ('' if (d.hour, d.minute) == (0, 0) else d.strftime(' %H:%M')))
+
+
+def words(v):
+    """What a reader sees of an HTML field, as a list of words. Inline tags
+    close up, so "<em>Beyond Ayahuasca</em>," keeps its comma."""
+    v = re.sub(r'</?(?:em|strong|b|i|u|a|span)\b[^>]*>', '', v or '')
+    return text(re.sub(r'<[^>]+>', ' ', v)).split()
+
+
+def clip(s, n=90):
+    return s if len(s) <= n else s[:n - 1].rstrip() + '…'
+
+
+def run_of(ws, n=30):
+    s = ' '.join(ws[:n])
+    return s + (' … (+%d words)' % (len(ws) - n) if len(ws) > n else '')
+
+
+def short_title(p):
+    """For the banner: "Nevada city, Ca: DreamWork" → "Nevada city: DreamWork"."""
+    t = re.sub(r'^([^,:–]+), [A-Z][a-z]\s*[:–-]\s*', r'\1: ', text(p.get('title')))
+    return clip(t, 42)
+
+
+def when_short(p):
+    """"14 Nov" for a dated program, "online course" for a course."""
+    return day(p['start'], False) if p.get('start') else 'online course'
+
+
+def amounts(s):
+    """"$40.00 to $200.00 – We are offering…" → "$40–$200"."""
+    found = [a.replace('.00', '') for a in re.findall(r'\$[\d,]+(?:\.\d\d)?', text(s))]
+    return '–'.join(found) or clip(text(s), 30)
+
+
+def short(k, v):
+    """A short field's value as one readable line."""
+    if k in ('start', 'end'):
+        return day(v) if v else '(none)'
+    if k == 'photo':
+        return (v or '').rsplit('/', 1)[-1] or '(none)'
+    s = ' '.join(words(v)) if isinstance(v, str) else json.dumps(v)
+    return '"%s"' % clip(s) if s else '(empty)'
+
+
+def word_diff(old, new, hunks=3, ctx=5):
+    """The edits between two texts, each with a few words either side — enough
+    to find the sentence on Retreat Guru without opening the page."""
+    a, b = words(old), words(new)
+    if a == b:
+        return ['formatting only — the words are the same']
+    ops = [op for op in difflib.SequenceMatcher(a=a, b=b, autojunk=False).get_opcodes()
+           if op[0] != 'equal']
+    out = []
+    for tag, i1, i2, j1, j2 in ops[:hunks]:
+        lead = ('…' if i1 > ctx else '') + ' '.join(a[max(0, i1 - ctx):i1])
+        tail = ' '.join(a[i2:i2 + ctx]) + ('…' if i2 + ctx < len(a) else '')
+        if tag == 'delete':
+            out.append('removed: %s [%s] %s' % (lead, run_of(a[i1:i2]), tail))
+        elif tag == 'insert':
+            out.append('added:   %s [%s] %s' % (lead, run_of(b[j1:j2]), tail))
+        else:
+            out.append('was:     %s [%s] %s' % (lead, run_of(a[i1:i2]), tail))
+            out.append('now:     %s [%s] %s' % (lead, run_of(b[j1:j2]), tail))
+    if len(ops) > hunks:
+        out.append('…and %d more change(s) further down' % (len(ops) - hunks))
+    return out
+
+
+def describe_edit(old, new, moved):
+    """What each moved field said before and says now, as indented lines, and
+    a few words for the banner. Field names stay in the lines: `excerpt, text,
+    text_full` together is still the shape that means the copy was rewritten."""
+    lines, gist = [], []
+    for k in moved:
+        o, n = old.get(k), new.get(k)
+        if k in BODY:
+            if any(b in moved for b in BODY[:BODY.index(k)]):
+                continue          # already shown under the longer body field
+            also = [b for b in BODY if b in moved and b != k]
+            lines.append('%s%s:' % (k, ' (and %s)' % ', '.join(also) if also else ''))
+            lines += ['  ' + l for l in word_diff(o, n)]
+            gist.append('description reworded')
+        elif k == 'price_details':
+            lines.append('price_details:')
+            lines += ['  ' + l for l in word_diff(o, n)]
+            if 'prices' not in moved:
+                gist.append('price note')
+        elif k == 'teacher_details':
+            ot, nt = o or {}, n or {}
+            if text(ot.get('teacher_list')) != text(nt.get('teacher_list')):
+                lines.append('teacher_details: %s → %s' % (short(k, ot.get('teacher_list')),
+                                                           short(k, nt.get('teacher_list'))))
+                gist.append('facilitators')
+                continue
+            before = {t.get('name'): t for t in ot.get('teacher_objects', [])}
+            seen = False
+            for t in nt.get('teacher_objects', []):
+                was = before.get(t.get('name'), {})
+                if words(was.get('text')) != words(t.get('text')):
+                    lines.append("teacher_details: %s's bio" % text(t.get('name')))
+                    lines += ['  ' + l for l in word_diff(was.get('text'), t.get('text'))]
+                    seen = True
+            if seen:
+                gist.append('a bio')
+            else:
+                lines.append('teacher_details: nothing a reader sees (internal fields only)')
+        elif k in ('start', 'end') and 'date' in moved:
+            continue              # the date line already says it
+        else:
+            note = ''
+            if k == 'address':
+                if text(new.get('location')):
+                    note = '   (not shown — the page uses the location)'
+                else:
+                    gist.append('venue')
+            elif k == 'prices':
+                gist.append('price %s → %s' % (amounts(o), amounts(n)))
+            elif k == 'date':
+                gist.append('date %s → %s' % (when_short(old), when_short(new))
+                            if old.get('start') != new.get('start') else 'date wording')
+            elif k == 'photo':
+                gist.append('new photo')
+            elif k == 'title':
+                gist.append('renamed')
+            elif k == 'location':
+                gist.append('venue')
+            else:
+                gist.append(k)
+            lines.append('%s: %s → %s%s' % (k, short(k, o), short(k, n), note))
+    return lines, ', '.join(gist) or 'nothing a reader sees'
+
 
 def check_live():
     """Compare data/retreats.json against Retreat Guru and say what moved.
@@ -1041,22 +1187,53 @@ def check_live():
         if {c['slug'] for c in item.get('categories', [])} & watched_cats:
             live[item['ID']] = item
 
+    # Each entry is (headline, detail lines). The headline keeps its old shape
+    # so the log stays greppable; the detail is what moved, in words. `gist`
+    # collects the same news in a sentence short enough for a banner.
     drift = []
+    gist = {'new': [], 'early': [], 'edited': [], 'ended': [], 'unlisted': []}
     for i, item in sorted(live.items(), key=lambda kv: kv[1].get('start') or 0):
-        if i not in have:
-            drift.append('new on Retreat Guru: %s (%s, %s)'
-                         % (text(item.get('title')), i, item.get('date') or 'no date'))
-            continue
         full = fetch_json('%s%s' % (FEED, i))
+        if i not in have:
+            cats = {c['slug'] for c in item.get('categories', [])}
+            fam = next((f for f in FAMILIES.values() if cats & f['cats']), FAMILIES['retreat'])
+            detail = ['when:  %s' % (text(full.get('date')) or 'no date'),
+                      'where: %s' % (text(full.get('location') or full.get('address')) or '—'),
+                      'price: %s' % (clip(text(full.get('prices'))) or '—'),
+                      'page:  %s/%s (made by the next run)' % (fam['base'], full.get('slug')),
+                      'opens: %s' % (run_of(words(full.get('excerpt')), 40) or '—')]
+            drift.append(('new on Retreat Guru: %s (%s, %s)'
+                          % (text(item.get('title')), i, item.get('date') or 'no date'), detail))
+            gist['new'].append('%s (%s)' % (short_title(full), when_short(full)))
+            continue
         moved = [k for k in WATCHED
                  if json.dumps(full.get(k), sort_keys=True)
                  != json.dumps(have[i].get(k), sort_keys=True)]
         if moved:
-            drift.append('edited on Retreat Guru: %s (%s) — %s'
-                         % (text(have[i].get('title')), i, ', '.join(moved)))
+            detail, said = describe_edit(have[i], full, moved)
+            drift.append(('edited on Retreat Guru: %s (%s) — %s'
+                          % (text(have[i].get('title')), i, ', '.join(moved)), detail))
+            gist['edited'].append('%s — %s' % (short_title(have[i]), said))
+
+    # Gone is usually just over — Retreat Guru drops a program the day after it
+    # ends — but a program pulled while still in the future is news somebody
+    # should hear before a regenerate takes its page down.
     for i, p in have.items():
-        if i not in live:
-            drift.append('gone from Retreat Guru: %s (%s)' % (text(p.get('title')), i))
+        if i in live:
+            continue
+        when = p.get('end') or p.get('start')
+        if not when:
+            detail = ['an undated course, taken off Retreat Guru — its page comes down on the next run']
+            gist['early'].append(short_title(p))
+        elif time.time() < when + 86400:
+            detail = ['PULLED BEFORE IT HAPPENED — it was set for %s.' % text(p.get('date')),
+                      'Cancelled, or unpublished by mistake? Ask before regenerating:',
+                      'the next run takes its page down.']
+            gist['early'].append('%s (was %s)' % (short_title(p), day(p.get('start') or when, False)))
+        else:
+            detail = ['ended %s — routine; its page comes down on the next run' % day(when)]
+            gist['ended'].append(when)
+        drift.append(('gone from Retreat Guru: %s (%s)' % (text(p.get('title')), i), detail))
 
     # A category this script generates a page for but the matching widget does
     # not list: the page would exist and the listing would never link it. Asked
@@ -1073,19 +1250,46 @@ def check_live():
             if not (cats & fam['cats']):
                 continue          # not this family's program
             if not (cats & listed):
-                drift.append('has a page but the %s widget will not list it: %s (%s) — '
-                             'tagged %s, none of them in the widget cat= list'
-                             % (fam['base'], text(item.get('title')), i,
-                                '/'.join(sorted(cats))))
+                drift.append(('has a page but the %s widget will not list it: %s (%s) — '
+                              'tagged %s, none of them in the widget cat= list'
+                              % (fam['base'], text(item.get('title')), i,
+                                 '/'.join(sorted(cats))),
+                              ['a regenerate does not fix this — add a category to cat= by hand']))
+                gist['unlisted'].append(i)
 
     if not drift:
         print('  %d program(s) — snapshot matches Retreat Guru' % len(live))
         return 0
     print('  Retreat Guru is ahead of this repo:')
-    for d in drift:
-        print('    - %s' % d)
+    for headline, detail in drift:
+        print('    - %s' % headline)
+        for line in detail:
+            print('        %s' % line)
     print('\n  fix with: npm run gen-retreats   (then git push && npx wrangler deploy)')
+    # Last, and on one line: tools/watch_retreats.py puts this in the banner.
+    print('  summary: %s' % drift_summary(gist))
     return 1
+
+
+def drift_summary(g):
+    """The drift in one sentence, most important first: new and pulled programs
+    need somebody to read them, an edit needs a glance, expiry is routine."""
+    parts = []
+    if g['new']:
+        parts.append('New: ' + '; '.join(g['new']))
+    if g['early']:
+        parts.append('Pulled before its date: ' + '; '.join(g['early']))
+    if g['edited']:
+        parts.append('Edited: ' + '; '.join(g['edited']))
+    if g['unlisted']:
+        parts.append('%d missing from the widget list' % len(g['unlisted']))
+    if g['ended']:
+        lo, hi = min(g['ended']), max(g['ended'])
+        span = day(lo, False) if lo == hi else '%s – %s' % (day(lo, False), day(hi, False))
+        n = len(g['ended'])
+        parts.append('%d %s (%s)' % (n, 'program ended' if n == 1 else 'programs ended', span)
+                     + ('' if len(parts) else ' — routine, nothing new or edited'))
+    return '. '.join(parts) + '.'
 
 
 def main():

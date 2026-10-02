@@ -39,6 +39,11 @@ def now():
 
 APP = pathlib.Path.home() / 'Applications' / 'Paititi Watch.app'
 MSG_FILE = pathlib.Path('/tmp/paititi-watch-message.txt')
+# What a click on the banner opens: the check's full output, every change with
+# its before and after. Also in the log, but the log is every morning since
+# September; this is just today.
+REPORT = pathlib.Path('/tmp/paititi-watch-report.txt')
+CLICK = ' Click for the full report.'
 
 
 def notify(message, title='paititi site'):
@@ -51,8 +56,12 @@ def notify(message, title='paititi site'):
     checkout still alerts; `bash tools/notifier/build.sh` creates it.
 
     The message goes via /tmp rather than an argument: `open -a` will not
-    relaunch a running app and would drop it silently."""
-    safe = message.replace('\\', '').replace('"', "'")[:230]
+    relaunch a running app and would drop it silently. The app deletes it once
+    shown, which is how it tells a click on the banner (no message waiting:
+    open REPORT) from a launch by this script."""
+    safe = message.replace('\\', '').replace('"', "'")
+    if len(safe) > 230:
+        safe = safe[:229].rstrip() + '…'
     try:
         if APP.exists():
             MSG_FILE.write_text(safe, encoding='utf-8')
@@ -83,7 +92,11 @@ def behind_origin():
 
 def main():
     if '--test' in sys.argv:
-        notify('Test — this is what a Retreat Guru change looks like.')
+        REPORT.write_text('Test report, %s\n\nClicking the banner opened this. On a real '
+                          'morning it lists every change Retreat Guru made, with what each '
+                          'field said before and says now.\n' % now(), encoding='utf-8')
+        notify('Test — New: Peru: Sacred Valley (14 Nov). Edited: Amazon: 16-day '
+               'Immersion — price $3,800 → $4,200.' + CLICK)
         print('%s test notification sent' % now())
         return 0
 
@@ -104,12 +117,22 @@ def main():
     if proc.returncode == 0:
         return 0
 
-    programs = [l for l in out.splitlines() if l.strip().startswith('- ')]
-    msg = 'Retreat Guru changed %d program(s). Run: npm run gen-retreats' % len(programs)
+    # gen_retreats.py ends a drift report with a one-sentence `summary:` line —
+    # what is new, pulled, edited, ended — written to fit here. The count is
+    # the fallback for a report that somehow lacks it.
+    summary = next((l.strip()[len('summary:'):].strip() for l in out.splitlines()
+                    if l.strip().startswith('summary:')), None)
+    if not summary:
+        programs = [l for l in out.splitlines() if l.strip().startswith('- ')]
+        summary = 'Retreat Guru changed %d program(s).' % len(programs)
     n = behind_origin()
-    if n:
-        msg += ' (git pull first — %d behind)' % n
-    notify(msg)
+    tail = (' git pull first — %d behind.' % n if n else '') + CLICK
+    if len(summary) + len(tail) > 230:
+        summary = summary[:229 - len(tail)].rstrip() + '…'
+    REPORT.write_text('Retreat Guru check, %s\n\n%s\n%s\n'
+                      % (now(), out, '\n  (git pull first — origin is %d commit(s) ahead)' % n
+                         if n else ''), encoding='utf-8')
+    notify(summary + tail)
     return 1
 
 
