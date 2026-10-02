@@ -508,6 +508,16 @@ def blog_posting(facts, stem, page_id):
     post = BLOG.get((facts['lang'], slug))
     if not post:
         return None
+    # Only Roman's byline is Roman's @id. "Paititi Team" is the Organization
+    # itself, not a person called that; anyone else is a person in their own
+    # right — giving them Roman's @id would merge them into him.
+    byline = post.get('author') or 'Roman Hanis'
+    if byline == 'Roman Hanis':
+        author = {'@type': 'Person', '@id': SITE + '/team#roman-hanis', 'name': byline}
+    elif byline == 'Paititi Team':
+        author = {'@id': ORG_ID}
+    else:
+        author = {'@type': 'Person', 'name': byline}
     node = {
         '@type': 'BlogPosting',
         '@id': facts['url'] + '#article',
@@ -516,8 +526,7 @@ def blog_posting(facts, stem, page_id):
         'headline': post.get('title') or bare_title(facts['title'], facts['lang']),
         'url': facts['url'],
         'inLanguage': facts['lang'],
-        'author': {'@type': 'Person', '@id': SITE + '/team#roman-hanis',
-                   'name': post.get('author') or 'Roman Hanis'},
+        'author': author,
         'publisher': {'@id': ORG_ID},
     }
     if post.get('iso_date'):

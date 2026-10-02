@@ -554,6 +554,9 @@ def post_page(lang, post, prev_post, next_post, tr):
     if tr:
         _body_stats.append((slug, done, total))
     desc = tr.get('description', post['description'])
+    # A person's name stays as it is; a byline like "Paititi Team" is words,
+    # and es.json can translate it.
+    author = tr.get('author', post['author'])
 
     cats_line = ''.join(
         '<a href="%s">%s</a>' % (cat_href(lang, c['slug']),
@@ -580,7 +583,7 @@ def post_page(lang, post, prev_post, next_post, tr):
         team_href=lang['team_href'], more_entries=lang['more_entries'], brand=lang['brand'],
         title=title.replace('"', '&quot;'), description=desc,
         date=post['date'], iso_date=post['iso_date'], css=POST_CSS.strip(),
-        author=post['author'], cats_line=cats_line, body=body,
+        author=author, cats_line=cats_line, body=body,
         prev_link=link(next_post, lang['previous'], 'bp-prev'),
         next_link=link(prev_post, lang['next'], 'bp-next'))
     return lang['post_file'].format(slug=slug), page
@@ -593,16 +596,18 @@ def index_card(lang, card):
         # tree, so both trees point at the same outside URL.
         href, target = card['source_url'], ' target="_blank" rel="noopener"'
         title, excerpt = card['title'], card['excerpt']
+        author = card['author']
     else:
         tr = translations_for(lang, card['slug'])
         href, target = post_href(lang, card['slug']), ''
         title = tr.get('title', card['title'])
         excerpt = tr.get('excerpt', card['excerpt'])
+        author = tr.get('author', card['author'])
     excerpt_html = f'<div class="bl-excerpt">{excerpt}</div>'
     return f'''        <article class="bl-card">
           <a class="bl-image" href="{href}"{target}><img src="/{card['thumb']}" alt="" loading="lazy"></a>
           <div class="bl-text">
-            <p class="bl-meta"><span>{card['author']}</span><time datetime="{card['date']}">{card['date_display']}</time></p>
+            <p class="bl-meta"><span>{author}</span><time datetime="{card['date']}">{card['date_display']}</time></p>
             <h2 class="bl-title"><a href="{href}"{target}>{title}</a></h2>
             {excerpt_html}
             <a class="bl-more" href="{href}"{target}>{lang['read_more']}</a>
